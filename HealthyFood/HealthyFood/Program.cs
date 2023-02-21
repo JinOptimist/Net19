@@ -5,7 +5,7 @@ Console.WriteLine("Hello, World!");
 ﻿Console.WriteLine("Guess the number");
 
 var theNumber = 7;
-do{
+
 Console.WriteLine("What is you guess?");
 
 var userGuessString = Console.ReadLine();
@@ -26,11 +26,5 @@ else
 {
     Console.WriteLine("Looser");
 }
-while(userGuess == theNumber)
-{
-  {
-    Console.WriteLine("Win");
-    break;
-  }
-}
 
+Console.WriteLine($"Cool, you spend {attepmtCount} points");
