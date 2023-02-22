@@ -12,6 +12,7 @@ internal class Program
         {
             Console.Write(Swap_Letters_1(Words[i]) + " ");
         }
+      Console.ReadKey();
     }
 
     public static string Enter_Information()
@@ -20,7 +21,7 @@ internal class Program
         Console.OutputEncoding = Encoding.Unicode;
         Console.WriteLine("Введите предложение: ");
         string Str = Console.ReadLine();
-        Console.WriteLine("Результат замены: ");
+        Console.WriteLine("\nРезультат замены: ");
         return Str;
     }
 
