@@ -1,4 +1,4 @@
-﻿Game();;
+﻿Game();
 void Game()
 {
     bool good = false;
