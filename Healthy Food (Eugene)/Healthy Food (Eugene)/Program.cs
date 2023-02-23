@@ -1,17 +1,6 @@
 ﻿var counter = 0;
-var maxCounter = 1;
-Random random = new Random();
-var min = 0;
-var max = 100;
-int theNumber = random.Next(min, max);
-var range = max - min;
-var currentDistance = 1;
 
-while(currentDistance <= range) 
-{
-    currentDistance = currentDistance * 2;
-    maxCounter++;
-}
+
 
 
 while (counter < maxCounter)
