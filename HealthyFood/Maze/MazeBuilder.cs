@@ -1,15 +1,11 @@
 ﻿using Maze.MazeStuff;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maze
 {
     public class MazeBuilder
     {
         private MazeLevel _maze;
+        
         public MazeLevel Build(int width = 10, int height = 5)
         {
             _maze = new MazeLevel()
@@ -23,7 +19,7 @@ namespace Maze
             return _maze;
         }
 
-        public void BuildGround() {
+        private void BuildGround() {
 
         }
 
