@@ -1,4 +1,16 @@
-﻿Game();
+﻿
+using HealthyFood;
+using Test;
+
+MakeMinAndMaxNumbers makeMinAndMaxNumbers = new MakeMinAndMaxNumbers();
+makeMinAndMaxNumbers.Makeit();
+//var rule = makeMinAndMaxNumbers.Makeit();
+;
+//GameRule gameRule = new();
+Console.WriteLine("Записано значение" + makeMinAndMaxNumbers.rule.Min.ToString());
+
+
+Game();
 void Game()
 {
     bool good = false;
