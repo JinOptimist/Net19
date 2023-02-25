@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Healthy_Food__Eugene_
+﻿namespace Healthy_Food__Eugene_
 {
     public class GameRuleBuilder
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Healthy_Food__Eugene_
+﻿namespace Healthy_Food__Eugene_
 {
     public class GameManager
     {
@@ -60,5 +54,29 @@ namespace Healthy_Food__Eugene_
 
         public bool IsUserWinGame()
             => _rule.TheNumber == _lastUserGuess;
+
+        public void RunTurns()
+        {
+            bool isEndOfTheGame;
+            do
+            {
+                isEndOfTheGame = !OneTurn();
+
+            } while (!isEndOfTheGame);
+        }
+
+        public void CheckTurns()
+        {
+            if (IsUserWinGame())
+            {
+                Console.WriteLine("Win");
+            }
+            else
+            {
+                Console.WriteLine("Loos");
+            }
+
+            Console.WriteLine($"Cool, you spend {AttempCount} points");
+        }
     }
 }
