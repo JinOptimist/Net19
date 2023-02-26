@@ -19,7 +19,7 @@ public class StartGame
         Console.WriteLine($"Начнем! \nЯ загадала для тебя {significance} - значное число." +
             "\nПредлагай варианты, а я буду говорить количество быков (полное совпадение) и " +
             "коров (такая цифра есть, но стоит не на своем месте\n\nВведи число ");
-        Console.WriteLine(theNumber.ToString());
+        
         List<int> numberList = new List<int>();
         foreach (char x in theNumber.ToString())
         {
