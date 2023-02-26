@@ -3,9 +3,11 @@
     internal class BuilderNumber
     {
         int theNumberForGame;
+        int sign;
         string theNumberForGameString = "0000";
         public int BuidIt(int significance)
         {
+            sign = significance;
             string minStr = "100";
             string maxStr = "999";
 
@@ -28,7 +30,8 @@
        => new Rules()
 
        {
-           TheNumber = theNumberForGame
+           TheNumber = theNumberForGame,
+           Significance = sign
        };
     }
 }

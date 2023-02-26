@@ -18,7 +18,7 @@ namespace GameTwo
 
             var rule = builderNumber.Builder();
             StartGame startGame = new StartGame(rule);
-            startGame.Start(significance);
+            startGame.Start();
         }
     }
 }

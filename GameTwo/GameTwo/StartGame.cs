@@ -8,13 +8,14 @@ public class StartGame
     {
         _rule = rules;
     }
-    public void Start(int significance)
+    public void Start()
     {
         int attempt = 0;
         int bull = 0;
         int cow = 0;
         int turnUserNum = 0;
         int theNumber = _rule.TheNumber;
+        int significance = _rule.Significance;
         Console.Clear();
         Console.WriteLine($"Начнем! \nЯ загадала для тебя {significance} - значное число." +
             "\nПредлагай варианты, а я буду говорить количество быков (полное совпадение) и " +
