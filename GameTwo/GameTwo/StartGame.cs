@@ -20,20 +20,20 @@ public class StartGame
         Console.WriteLine($"Начнем! \nЯ загадала для тебя {significance} - значное число." +
             "\nПредлагай варианты, а я буду говорить количество быков (полное совпадение) и " +
             "коров (такая цифра есть, но стоит не на своем месте\n\nВведи число ");
-        
+
         List<int> numberList = new List<int>();
         foreach (char x in theNumber.ToString())
         {
             numberList.Add(Convert.ToInt32(x));
-           
+
         }
         while (turnUserNum != theNumber)
         {
             string turnStr = Console.ReadLine();
             bool isItNumber = int.TryParse(turnStr, out turnUserNum);
-            while (!isItNumber)
+            while (!isItNumber || turnStr.Length != 3)
             {
-                Console.WriteLine("Тебе нужно ввести число!");
+                Console.WriteLine($"Тебе нужно ввести {significance}-значное число!");
                 turnStr = Console.ReadLine();
                 isItNumber = int.TryParse(turnStr, out turnUserNum);
             }
@@ -53,14 +53,15 @@ public class StartGame
                 }
                 //Console.WriteLine("tyt");
                 if (numberListUsersNumber[i] == numberList[i]) bull++;
-                
+
             }
-            Console.WriteLine($"Быков: {bull}         Коров: {cow}") ;
+            Console.WriteLine($"Быков: {bull}         Коров: {cow}");
             attempt++;
             cow = 0;
             bull = 0;
         }
         Console.Clear();
         Console.WriteLine($"\n\n\n\n\nУра! Вы победили! Число угадано за {attempt} попыток!");
+        Console.ReadKey();
     }
 }

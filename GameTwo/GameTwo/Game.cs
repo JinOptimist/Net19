@@ -19,6 +19,22 @@ namespace GameTwo
             var rule = builderNumber.Builder();
             StartGame startGame = new StartGame(rule);
             startGame.Start();
+            Console.Clear();
+            Console.WriteLine("Хотите сыграть еще?\n1. Да\n2. Нет");
+            string playAgain = Console.ReadLine();
+            switch (playAgain)
+            {
+                case "1":
+                    start();
+                    break;
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Всего хорошего");
+                    break;
+                default:
+                    Console.WriteLine("Выберите один из 2 вариантов");
+                    break;
+            }
         }
     }
 }
