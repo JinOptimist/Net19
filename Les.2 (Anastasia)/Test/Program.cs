@@ -125,8 +125,6 @@ void Game()
             }
             else
             {
-                Console.Clear();
-
                 int attempt = (int)maxAttempt - attepmtCount;
                 Console.WriteLine("Не правильно");
                 resultGame = "Вы проиграли!";
