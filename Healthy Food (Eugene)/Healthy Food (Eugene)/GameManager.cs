@@ -65,7 +65,7 @@
             } while (!isEndOfTheGame);
         }
 
-        public void CheckTurns()
+        public void ShowResultOfGame()
         {
             if (IsUserWinGame())
             {
