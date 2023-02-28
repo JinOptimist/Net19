@@ -23,3 +23,4 @@ else
 }
 
 Console.WriteLine($"Cool, you spend {gameManager.AttempCount} points");
+
