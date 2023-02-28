@@ -1,6 +1,6 @@
 ﻿using HealthyFood;
 
-Console.WriteLine("GAME: Guess the number");
+Console.WriteLine("GAME: Guess the number 2");
 
 var gameRuleBuilder = new GameRuleBuilder();
 var rule = gameRuleBuilder.BuildAutoGameRule();
@@ -15,11 +15,11 @@ do
 
 if (gameManager.IsUserWinGame())
 {
-    Console.WriteLine("Win");
+    Console.WriteLine("Win 2");
 }
 else
 {
-    Console.WriteLine("Loos");
+    Console.WriteLine("Loos 2");
 }
 
 Console.WriteLine($"Cool, you spend {gameManager.AttempCount} points");
