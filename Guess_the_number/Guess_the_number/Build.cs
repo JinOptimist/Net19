@@ -9,14 +9,14 @@ namespace Guess_the_number
         int maxNumber;
         int number;
         int maxAttempt = 5;
-        
+
         Random rnd = new Random();
         public void InPutAndBuild()  //пользователь выбирает вариант игры + проверка на его ввод
         {
             int choice;
             while (true)
             {
-                Console.WriteLine("Зададим правила игры. Введите число с вариантом игры:" +
+                Console.WriteLine("Зададим правила игры. Введите число с вариантом игры:" + 
 "\n1. Рандомный выбор диапазона и количества попыток" +
 "\n2. Задать диапазон вручную с авторассчетом попыток");
                 var ruleStr = Console.ReadLine();
@@ -36,7 +36,7 @@ namespace Guess_the_number
             if (choice == 1) BuildRandom();
             else if (choice == 2) BuildWhithUser();
             SaveRules();
-            
+
 
         }
         private (int number, int maxAttempt) BuildRandom()

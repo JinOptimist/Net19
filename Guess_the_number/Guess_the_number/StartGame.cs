@@ -7,13 +7,13 @@ namespace Guess_the_number
         
         public void Start() //Воод данных и построение правил
         {
-            Build build = new Build();
-            build.InPutAndBuild();
-            var rule = build.SaveRules();
+            Build build = new Build();  //класс в ктором вводятся данные и по ним генериуются правила игры
+            build.InPutAndBuild();      //строятся правила
+            var rule = build.SaveRules(); //сохраняются правила
             Turn(rule);
             DoItAgain();
         }
-        private void Turn(Rules rule)
+        private void Turn(Rules rule) //ход игры
         {
             Console.WriteLine($"Кол-во попыток и максимальное колическо очков {rule.AttepmtCount}");
             int maxBonus = (int)rule.AttepmtCount;
@@ -81,7 +81,7 @@ namespace Guess_the_number
             Console.ReadKey();
             Console.Clear();
         }  //ход игры
-        private void DoItAgain()
+        private void DoItAgain() //хочет ли пользователь сыграть еще раз
         {
             int toContinue;
             bool toContonueBoalen;
@@ -104,7 +104,7 @@ namespace Guess_the_number
                 }
             }
             while (toContinue != 2);
-        } //хочет ли ползователь сыграть еще?
+        } 
     }
 }
 
