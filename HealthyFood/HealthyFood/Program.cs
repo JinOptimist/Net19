@@ -1,30 +1,26 @@
-﻿<<<<<<< HEAD
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-=======
-﻿Console.WriteLine("Guess the number");
+﻿using HealthyFood;
 
-var theNumber = 7;
+Console.WriteLine("GAME: Guess the number 2");
 
-Console.WriteLine("What is you guess?");
+var gameRuleBuilder = new GameRuleBuilder();
+var rule = gameRuleBuilder.BuildAutoGameRule();
 
-var userGuessString = Console.ReadLine();
-//var userGuess = Int32.Parse(userGuessString);
-int userGuess;
-var isItWasANumber = Int32.TryParse(userGuessString, out userGuess);
-if (!isItWasANumber)
+var gameManager = new GameManager(rule);
+
+bool isEndOfTheGame;
+do
 {
-    Console.WriteLine("You are bad persone. It was not a number");
-    return;
-}
+    isEndOfTheGame = !gameManager.OneTurn();
+} while (!isEndOfTheGame);
 
-if (userGuess == theNumber)
+if (gameManager.IsUserWinGame())
 {
-    Console.WriteLine("Win");
+    Console.WriteLine("Win 2");
 }
 else
 {
-    Console.WriteLine("Looser");
+    Console.WriteLine("Loos 2");
 }
 
-Console.WriteLine($"Cool, you spend {attepmtCount} points");
+Console.WriteLine($"Cool, you spend {gameManager.AttempCount} points");
+

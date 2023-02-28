@@ -1,7 +1,0 @@
-
-var day = DateTime.Now.DayOfWeek;
-var def = DayOfWeek.Monday;
-for (; def <= day; def++)
-{
-    Console.WriteLine(def.ToString());
-}

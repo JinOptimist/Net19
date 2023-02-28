@@ -6,3 +6,4 @@ for (int i = 0; i < CountWeeks; i++)
 {
     Console.WriteLine(Weeks[i]);
 }
+Console.ReadKey();
