@@ -49,7 +49,7 @@ namespace Guess_the_number
             maxAttempt = rnd.Next(4, 12);
             //theNumber = rnd.Next(minNumber, maxNumber);
             //int diapason = maxNumber - minNumber;
-            Console.WriteLine($"{minNumber} {maxNumber}");
+            //Console.WriteLine($"{minNumber} {maxNumber}");
             return (number, maxAttempt);
         } //рандомный выбор диапазона и генерация числа в нем
         private int BuildWhithUser()
@@ -87,7 +87,7 @@ namespace Guess_the_number
                 }
                 else
                 {
-                    int number = rnd.Next(minNumber, maxNumber);
+                    number = rnd.Next(minNumber, maxNumber);
                     int diapason = maxNumber - minNumber;
                     return number;
                 }
