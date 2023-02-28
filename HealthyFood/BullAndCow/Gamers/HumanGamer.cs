@@ -1,6 +1,6 @@
-﻿namespace BullAndCow
+﻿namespace BullAndCow.Gamers
 {
-    public class Gamer
+    public class HumanGamer : IGamer
     {
         public List<char> TryToGuess()
         {

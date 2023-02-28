@@ -1,12 +1,13 @@
-﻿namespace BullAndCow
+﻿namespace BullAndCow.Leaders
 {
-    public class Leader
+    public class StupidLeader : ILeader
     {
-        private List<char> _theSecretNumber = new List<char>() { '1', '4', '3', '7' };
+        private List<char> _theSecretNumber;
 
         public void BuildNumber()
         {
             //TODO randomize _theNumber;
+            _theSecretNumber = new List<char>() { '1', '4', '3', '7' };
         }
 
         public BullAndCowCount CheckGuess(List<char> guess)

@@ -1,11 +1,14 @@
-﻿namespace BullAndCow
+﻿using BullAndCow.Gamers;
+using BullAndCow.Leaders;
+
+namespace BullAndCow
 {
     public class GameManager
     {
-        private readonly Leader _leader;
-        private readonly Gamer _gamer;
+        private readonly ILeader _leader;
+        private readonly IGamer _gamer;
 
-        public GameManager(Leader leader, Gamer gamer)
+        public GameManager(ILeader leader, IGamer gamer)
         {
             _leader = leader;
             _gamer = gamer;
