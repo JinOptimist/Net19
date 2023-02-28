@@ -1,0 +1,15 @@
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).exe
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).deps.json
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).runtimeconfig.json
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).dll
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).pdb
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).csproj.AssemblyReference.cache
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).AssemblyInfoInputs.cache
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).AssemblyInfo.cs
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).dll
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\refint\Healthy Food (Eugene).dll
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).pdb
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).genruntimeconfig.cache
+C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\ref\Healthy Food (Eugene).dll
