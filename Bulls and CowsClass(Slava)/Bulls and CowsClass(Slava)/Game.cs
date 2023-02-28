@@ -28,7 +28,6 @@ namespace Bulls_and_CowsClass_Slava_
             IRuleBullsCows checkCows = new CheckCows(_Variables);
             checkForBulls.Check();
             checkCows.Check();
-
         }
     }
 }
