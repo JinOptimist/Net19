@@ -1,10 +1,5 @@
 ﻿using BullAndCow.Gamers;
 using BullAndCow.Leaders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BullAndCow
 {
@@ -12,45 +7,50 @@ namespace BullAndCow
     {
         public void Start()
         {
-            Console.WriteLine("What Leader do you want?");
-            Console.WriteLine("[S]tupid leader");
-            Console.WriteLine("[H]uman leader");
-            var leaderType = Console.ReadLine();
-            var leader = BuildLeader(leaderType);
-
-            Console.WriteLine("What Gamer do you want?");
-            Console.WriteLine("[H]uman gamer");
-            Console.WriteLine("[B]ot gamer");
-            var gamerType = Console.ReadLine();
-            var gamer = BuildGamer(gamerType);
+            var leader = BuildLeader();
+            var gamer = BuildGamer();
 
             var gameManger = new GameManager(leader, gamer);
             gameManger.StartGame();
         }
 
-        private IGamer BuildGamer(string gamerType)
+        private IGamer BuildGamer()
         {
+            Console.WriteLine("What Gamer do you want?");
+            Console.WriteLine("1) [H]uman gamer");
+            Console.WriteLine("2) [B]ot gamer");
+            var gamerType = Console.ReadLine();
+
             switch (gamerType)
             {
-                case "B":
-                    return new BotGamer();
+                case "1":
                 case "H":
                     return new HumanGamer();
+                case "2":
+                case "B":
+                    return new BotGamer();
             }
 
-            throw new Exception("Bad user");
+            throw new Exception($"Unknown gamer type: {gamerType}");
         }
 
-        private ILeader BuildLeader(string leaderType)
+        private ILeader BuildLeader()
         {
-            switch(leaderType) {
+            Console.WriteLine("What Leader do you want?");
+            Console.WriteLine("1) [S]tupid leader");
+            Console.WriteLine("2) [H]uman leader");
+            var leaderType = Console.ReadLine();
+
+            switch (leaderType) {
+                case "1":
                 case "S":
                     return new StupidLeader();
                 case "H":
+                case "2":
                     return new HumanLeader();
             }
 
-            throw new Exception("Bad user");
+            throw new Exception($"Unknown leader type: {leaderType}");
         }
     }
 }

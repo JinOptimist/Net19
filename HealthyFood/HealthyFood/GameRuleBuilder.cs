@@ -7,14 +7,16 @@ namespace HealthyFood
         public const int MIN_DEFUALT = 0;
         public const int MAX_DEFUALT = 100;
 
-        public GameRule BuildAutoGameRule()
-            => new GameRule
-            {
-                Min = MIN_DEFUALT,
-                Max = MAX_DEFUALT,
-                TheNumber = CalcTheNumber(MIN_DEFUALT, MAX_DEFUALT),
-                MaxAttempCount = CalcMaxAttemptCount(MIN_DEFUALT, MAX_DEFUALT)
-            };
+        public GameRule BuildAutoGameRule() 
+        {
+            var gameRule = new GameRule();
+            gameRule.Min = MIN_DEFUALT;
+            gameRule.Max = MAX_DEFUALT;
+            gameRule.TheNumber = CalcTheNumber(gameRule.Min, gameRule.Max);
+            gameRule.MaxAttempCount = CalcMaxAttemptCount(gameRule.Min, gameRule.Max);
+
+            return gameRule;
+        }
 
         private int CalcTheNumber(int min, int max)
         {
