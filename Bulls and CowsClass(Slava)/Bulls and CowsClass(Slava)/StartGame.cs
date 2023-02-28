@@ -17,15 +17,15 @@ namespace Bulls_and_CowsClass_Slava_
             while (true)
             {
                 ManagerGame managerGame = new ManagerGame();
-                Variables rule = managerGame.ruleGame();
+                Variables rule = managerGame.ruleGame();//Создаем константы и инициализируем их
 
                 OutputConsol outputConsole = new OutputConsol(rule);
-                outputConsole.outputConsol();
+                outputConsole.outputConsol();//Выводим на экран приветсвие
 
                 Game game = new Game(rule);
-                game.game();
+                game.game();// Основной код игры
 
-                outputConsole.OutputNumbers();
+                outputConsole.OutputNumbers();//Выводим количество коров и быков
                 outputConsole.OuptupBullsCows();
 
                 do

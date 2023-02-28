@@ -8,6 +8,7 @@ public class Program
     {
         StartGame startGame = new StartGame();
         startGame.BullCows();
+
     }
 
     
