@@ -16,7 +16,7 @@ namespace Bulls_and_CowsClass_Slava_
         int BULLS = 0;
         int COWS = 0;
 
-        public Rule ruleGame() => new Rule
+        public Variables ruleGame() => new Variables
         {
             RageRandomNumberComputer = RAGE_RANDOM_NAMBER_COMPUTER,
             RageRandomNumberClient = RAGE_RANDOM_NAMBER_CLIENT,

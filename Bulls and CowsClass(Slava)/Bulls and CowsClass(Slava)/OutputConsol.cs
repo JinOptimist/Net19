@@ -9,9 +9,9 @@ namespace Bulls_and_CowsClass_Slava_
 {
     public class OutputConsol
     {
-        private Rule _rule;
+        private Variables _rule;
 
-        public OutputConsol(Rule rule)
+        public OutputConsol(Variables rule)
         {
             _rule = rule;
         }
@@ -21,7 +21,7 @@ namespace Bulls_and_CowsClass_Slava_
             Console.WriteLine($"Helloy it is Game Bulls and Cows.\nWe guessed the number.\nConsisting of 4 numbers.Enter 4 Number between 0 to 10: ");
         }
 
-        public void outputNumbers()
+        public void OutputNumbers()
         {
             Console.Write("You Enter: ");
             for (int i = 0; i < _rule.RageRandomNumberClient; i++)
@@ -38,7 +38,7 @@ namespace Bulls_and_CowsClass_Slava_
             Console.WriteLine();
         }
 
-        public void ouptupBullsCows()
+        public void OuptupBullsCows()
         {
             Console.WriteLine();
             Console.WriteLine($"Bulls =[{_rule.Bulls}], Cows=[{_rule.Cows}]");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bulls_and_CowsClass_Slava_
 {
-    public class Rule
+    public class Variables
     {
         public int[] RandomNumberComputer { get; set; }
         public int[] RandomNumberClientInt { get; set; }

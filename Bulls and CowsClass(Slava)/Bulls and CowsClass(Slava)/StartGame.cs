@@ -17,7 +17,7 @@ namespace Bulls_and_CowsClass_Slava_
             while (true)
             {
                 ManagerGame managerGame = new ManagerGame();
-                Rule rule = managerGame.ruleGame();
+                Variables rule = managerGame.ruleGame();
 
                 OutputConsol outputConsole = new OutputConsol(rule);
                 outputConsole.outputConsol();
@@ -25,8 +25,8 @@ namespace Bulls_and_CowsClass_Slava_
                 Game game = new Game(rule);
                 game.game();
 
-                outputConsole.outputNumbers();
-                outputConsole.ouptupBullsCows();
+                outputConsole.OutputNumbers();
+                outputConsole.OuptupBullsCows();
 
                 do
                 {
