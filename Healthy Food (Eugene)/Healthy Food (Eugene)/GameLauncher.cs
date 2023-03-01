@@ -16,15 +16,14 @@ namespace Healthy_Food__Eugene_
             Console.WriteLine("[A]uto rule builder");
             Console.WriteLine("[H]uman Rule builder");
             var ruleType = Console.ReadLine();
+            var ruleBuild = BuildRule(ruleType);
+            var rule = ruleBuild.BuildGameRule();
+
 
             Console.WriteLine("Who should play?");
             Console.WriteLine("[B]ot");
             Console.WriteLine("[H]uman");
             var gameType = Console.ReadLine();
-
-
-            var ruleBuild = BuildRule(ruleType);
-            var rule = ruleBuild.BuildGameRule();
             var gameManager = BuildGame(gameType, rule);
 
             gameManager.RunTurns();
