@@ -1,6 +1,6 @@
-﻿namespace Healthy_Food__Eugene_
+﻿namespace Healthy_Food__Eugene_.TurnHandler
 {
-    public class GameManager
+    public class HumanGame : IGame
     {
         private GameRule _rule;
 
@@ -9,7 +9,7 @@
         private int _lastUserGuess;
 
 
-        public GameManager(GameRule rule)
+        public HumanGame(GameRule rule)
         {
             _rule = rule;
         }
@@ -23,7 +23,7 @@
                 var userGuessString = Console.ReadLine();
 
 
-                isItWasANumber = Int32.TryParse(userGuessString, out _lastUserGuess);
+                isItWasANumber = int.TryParse(userGuessString, out _lastUserGuess);
                 if (!isItWasANumber)
                 {
                     Console.WriteLine("It was not a number");

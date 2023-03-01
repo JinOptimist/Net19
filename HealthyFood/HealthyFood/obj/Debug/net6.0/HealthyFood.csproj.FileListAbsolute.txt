@@ -1,0 +1,15 @@
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\bin\Debug\net6.0\HealthyFood.exe
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\bin\Debug\net6.0\HealthyFood.deps.json
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\bin\Debug\net6.0\HealthyFood.runtimeconfig.json
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\bin\Debug\net6.0\HealthyFood.dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\bin\Debug\net6.0\HealthyFood.pdb
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.csproj.AssemblyReference.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.AssemblyInfoInputs.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.AssemblyInfo.cs
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.csproj.CoreCompileInputs.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\refint\HealthyFood.dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.pdb
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\HealthyFood.genruntimeconfig.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\HealthyFood\HealthyFood\obj\Debug\net6.0\ref\HealthyFood.dll

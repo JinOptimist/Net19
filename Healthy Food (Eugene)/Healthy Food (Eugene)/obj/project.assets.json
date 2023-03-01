@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\jeka4\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\Занятия\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\Healthy Food (Eugene).csproj",
+      "projectUniqueName": "C:\\Users\\jeka4\\OneDrive\\Documents\\TeachMeSkills\\.Net and C#\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\Healthy Food (Eugene).csproj",
       "projectName": "Healthy Food (Eugene)",
-      "projectPath": "C:\\Users\\User\\Documents\\Занятия\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\Healthy Food (Eugene).csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\Занятия\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\obj\\",
+      "projectPath": "C:\\Users\\jeka4\\OneDrive\\Documents\\TeachMeSkills\\.Net and C#\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\Healthy Food (Eugene).csproj",
+      "packagesPath": "C:\\Users\\jeka4\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jeka4\\OneDrive\\Documents\\TeachMeSkills\\.Net and C#\\Net19\\Healthy Food (Eugene)\\Healthy Food (Eugene)\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jeka4\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -13,3 +13,18 @@ C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food 
 C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).pdb
 C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).genruntimeconfig.cache
 C:\Users\User\Documents\Занятия\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\ref\Healthy Food (Eugene).dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).exe
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).deps.json
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).runtimeconfig.json
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\bin\Debug\net6.0\Healthy Food (Eugene).pdb
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).csproj.AssemblyReference.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).AssemblyInfoInputs.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).AssemblyInfo.cs
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).csproj.CoreCompileInputs.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\refint\Healthy Food (Eugene).dll
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).pdb
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\Healthy Food (Eugene).genruntimeconfig.cache
+C:\Users\jeka4\OneDrive\Documents\TeachMeSkills\.Net and C#\Net19\Healthy Food (Eugene)\Healthy Food (Eugene)\obj\Debug\net6.0\ref\Healthy Food (Eugene).dll
