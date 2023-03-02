@@ -13,5 +13,10 @@
         {
             Console.WriteLine($"Bull: {resultOfTry.Bull} Cow: {resultOfTry.Cow}");
         }
+
+        public void StartGame()
+        {
+            Console.WriteLine($"Game was started");
+        }
     }
 }

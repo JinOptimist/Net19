@@ -18,6 +18,7 @@ namespace BullAndCow
         public void StartGame()
         {
             _leader.BuildNumber();
+            _gamer.StartGame();
 
             BullAndCowCount answerFromLeader;
 
