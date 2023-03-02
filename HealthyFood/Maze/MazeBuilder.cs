@@ -23,6 +23,47 @@ namespace Maze
         private void BuildGround()
         {
             //Write code here
+            var random = new Random();
+
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+
+            var randomCell = _maze
+                .Cells
+                .First(cell => cell.X == randomX && cell.Y == randomY);
+            randomCell.CellType = CellType.Ground;
+
+            var nearCells = _maze
+                .Cells
+                .Where(cell =>
+                    cell.X == randomCell.X && Math.Abs(cell.Y - randomCell.Y) == 1
+                    || cell.Y == randomCell.Y && Math.Abs(cell.X - randomCell.X) == 1)
+                .ToList();
+
+            nearCells.ForEach(x => x.CellType = CellType.Ground);
+        }
+
+        private void Miner(MazeCell currentCell, List<MazeCell> wallToBreak)
+        {
+            var nearWalls = _maze
+                .Cells
+                .Where(cell =>
+                    cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
+                    || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
+                .Where(x => x.CellType == CellType.Wall)
+                .ToList();
+            wallToBreak.AddRange(nearWalls);
+
+            var random = new Random();
+            var randmoIndex = random.Next(0, nearWalls.Count);
+            var randomWall = wallToBreak[randmoIndex];
+            randomWall.CellType = CellType.Ground;
+
+            wallToBreak.Remove(randomWall);
+            if (wallToBreak.Count() > 0)
+            {
+                Miner(randomWall, wallToBreak);
+            }
         }
 
         private void BuildWall()
