@@ -5,7 +5,7 @@ namespace Maze
     public class MazeBuilder
     {
         private MazeLevel _maze;
-        
+
         public MazeLevel Build(int width = 10, int height = 5)
         {
             _maze = new MazeLevel()
@@ -15,12 +15,14 @@ namespace Maze
             };
 
             BuildWall();
+            BuildGround();
 
             return _maze;
         }
 
-        private void BuildGround() {
-
+        private void BuildGround()
+        {
+            //Write code here
         }
 
         private void BuildWall()
@@ -34,7 +36,6 @@ namespace Maze
                         X = x,
                         Y = y,
                         CellType = CellType.Wall,
-                        Level = _maze
                     };
 
                     _maze.Cells.Add(cell);
