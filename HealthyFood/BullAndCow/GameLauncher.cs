@@ -39,6 +39,7 @@ namespace BullAndCow
             Console.WriteLine("What Leader do you want?");
             Console.WriteLine("1) [S]tupid leader");
             Console.WriteLine("2) [H]uman leader");
+            Console.WriteLine("3) Suspicious Human leader");
             var leaderType = Console.ReadLine();
 
             switch (leaderType) {
@@ -48,6 +49,8 @@ namespace BullAndCow
                 case "H":
                 case "2":
                     return new HumanLeader();
+                case "3":
+                    return new SuspiciousHumanLeader();
             }
 
             throw new Exception($"Unknown leader type: {leaderType}");
