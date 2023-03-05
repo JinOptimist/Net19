@@ -40,7 +40,8 @@ namespace Maze
                     || cell.Y == randomCell.Y && Math.Abs(cell.X - randomCell.X) == 1)
                 .ToList();
 
-            nearCells.ForEach(x => x.CellType = CellType.Ground);
+            
+            Miner(randomCell, nearCells);
         }
 
         private void Miner(MazeCell currentCell, List<MazeCell> wallToBreak)
@@ -51,18 +52,46 @@ namespace Maze
                     cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
                     || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
                 .Where(x => x.CellType == CellType.Wall)
+                .Where(x => CircleDetector(x))
                 .ToList();
             wallToBreak.AddRange(nearWalls);
 
             var random = new Random();
-            var randmoIndex = random.Next(0, nearWalls.Count);
-            var randomWall = wallToBreak[randmoIndex];
+            var randomIndex = random.Next(0, nearWalls.Count);
+            var randomWall = wallToBreak[randomIndex];
             randomWall.CellType = CellType.Ground;
 
             wallToBreak.Remove(randomWall);
             if (wallToBreak.Count() > 0)
             {
                 Miner(randomWall, wallToBreak);
+            }
+        }
+
+        private bool CircleDetector(MazeCell nextCell)
+        {
+            var nearCells = _maze
+                .Cells
+                .Where(cell =>
+                    cell.X == nextCell.X && Math.Abs(cell.Y - nextCell.Y) == 1
+                    || cell.Y == nextCell.Y && Math.Abs(cell.X - nextCell.X) == 1)
+                .ToList();
+            var counterOfGround = 0;
+
+            foreach (var nearCell in nearCells)
+            {
+                if(nearCell.CellType == CellType.Ground)
+                {
+                    counterOfGround++;
+                }
+            }
+
+            if (counterOfGround < 2)
+            {
+                return true;
+            }else
+            {
+                return false;
             }
         }
 
