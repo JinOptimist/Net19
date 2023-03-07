@@ -22,7 +22,7 @@ namespace Maze
             switch (cellType)
             {
                 case CellType.Ground:
-                    return ".";
+                    return " ";
                 case CellType.Wall:
                     return "#";
                 case CellType.Exit:

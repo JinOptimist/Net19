@@ -10,3 +10,10 @@ var drawer = new MazeDrawer();
 
 MazeLevel maze = builder.Build();
 drawer.Draw(maze);
+
+
+var key = Console.ReadKey();
+if (key.Key == ConsoleKey.LeftArrow)
+{
+
+}

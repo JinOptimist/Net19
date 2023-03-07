@@ -1,10 +1,24 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
     public class MazeBuilder
     {
         private MazeLevel _maze;
+        private Random random;
+
+        public MazeBuilder(int? seed = null)
+        {
+            if (seed == null)
+            {
+                random = new Random();
+            }
+            else
+            {
+                random = new Random(seed.Value);
+            }
+        }
 
         public MazeLevel Build(int width = 10, int height = 5)
         {
@@ -23,15 +37,13 @@ namespace Maze
         private void BuildGround()
         {
             //Write code here
-            var random = new Random();
-
             var randomX = random.Next(_maze.Widht);
             var randomY = random.Next(_maze.Height);
 
             var randomCell = _maze
                 .Cells
                 .First(cell => cell.X == randomX && cell.Y == randomY);
-            randomCell.CellType = CellType.Ground;
+            //randomCell.CellType = CellType.Ground;
 
             var nearCells = _maze
                 .Cells
@@ -40,7 +52,7 @@ namespace Maze
                     || cell.Y == randomCell.Y && Math.Abs(cell.X - randomCell.X) == 1)
                 .ToList();
 
-            nearCells.ForEach(x => x.CellType = CellType.Ground);
+            //nearCells.ForEach(x => x.CellType = CellType.Ground);
         }
 
         private void Miner(MazeCell currentCell, List<MazeCell> wallToBreak)
@@ -57,7 +69,16 @@ namespace Maze
             var random = new Random();
             var randmoIndex = random.Next(0, nearWalls.Count);
             var randomWall = wallToBreak[randmoIndex];
-            randomWall.CellType = CellType.Ground;
+
+            _maze.Cells.Remove(randomWall);
+            var ground = new Ground()
+            {
+                X = randomWall.X,
+                Y = randomWall.Y
+            };
+            _maze.Cells.Add(ground);
+
+            //randomWall.CellType = CellType.Ground;
 
             wallToBreak.Remove(randomWall);
             if (wallToBreak.Count() > 0)
@@ -72,11 +93,10 @@ namespace Maze
             {
                 for (int x = 0; x < _maze.Widht; x++)
                 {
-                    var cell = new MazeCell()
+                    var cell = new Wall()
                     {
                         X = x,
                         Y = y,
-                        CellType = CellType.Wall,
                     };
 
                     _maze.Cells.Add(cell);

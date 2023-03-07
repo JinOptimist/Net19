@@ -2,17 +2,17 @@
 {
     public class UserGenerator
     {
+        private Random _random = new Random();
+
         public User BuildRandomUser()
         {
-            var random = new Random();
-
             var user = new User();
 
-            user.Height = random.Next(100, 200);
+            user.Height = _random.Next(100, 200);
             
-            var year = random.Next(1940, 2022);
-            var month = random.Next(1, 12);
-            var day = random.Next(1, 25);
+            var year = _random.Next(1940, 2022);
+            var month = _random.Next(1, 12);
+            var day = _random.Next(1, 25);
             user.Birthday = new DateTime(year, month, day);
 
             return user;

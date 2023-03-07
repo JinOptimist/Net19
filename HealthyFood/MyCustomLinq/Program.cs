@@ -10,7 +10,7 @@ var users = new UserGenerator().BuildRandomUsers();
 var adultUsers = users.Where(x => x.IsAdult);
 
 
-var ages = users.Select(user => user.Age);
+var ages = users.MySelect(user => user.Age);
 
 Console.WriteLine(string.Join('\n', ages));
 

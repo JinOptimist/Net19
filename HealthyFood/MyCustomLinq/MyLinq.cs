@@ -22,6 +22,14 @@ namespace MyCustomLinq
             return answer;
         }
 
+        public static IEnumerable<OutType> MySelect<InType, OutType>(this List<InType> models, Func<InType, OutType> conditionOfGoodModel)
+        {
+            foreach (var model in models)
+            {
+                yield return conditionOfGoodModel(model);
+            }
+        }
+
         //public List<User> WhereAdult(List<User> users)
         //{
         //    var answer = new List<User>();
