@@ -1,4 +1,7 @@
 ﻿
+using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
+
 namespace Maze.MazeStuff
 {
     public class MazeLevel
@@ -6,6 +9,19 @@ namespace Maze.MazeStuff
         public int Widht { get; set; }
         public int Height { get; set; }
 
-        public List<MazeCell> Cells { get; set; } = new List<MazeCell>();
+        public ICharacter Hero { get; set; }
+
+        public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
+
+        public void ReplaceToGround(BaseCell currentCell)
+        {
+            Cells.Remove(currentCell);
+            var ground = new Ground()
+            {
+                X = currentCell.X,
+                Y = currentCell.Y,
+            };
+            Cells.Add(ground);
+        }
     }
 }

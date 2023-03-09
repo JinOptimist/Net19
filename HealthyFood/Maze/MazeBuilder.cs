@@ -1,5 +1,6 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
 
 namespace Maze
 {
@@ -30,61 +31,65 @@ namespace Maze
 
             BuildWall();
             BuildGround();
+            BuildHero();
 
             return _maze;
         }
 
+        private void BuildHero()
+        {
+            var hero = new Hero()
+            {
+                X = 2,
+                Y = 1
+            };
+
+            _maze.Hero = hero;
+        }
+
         private void BuildGround()
         {
-            //Write code here
             var randomX = random.Next(_maze.Widht);
             var randomY = random.Next(_maze.Height);
 
             var randomCell = _maze
                 .Cells
                 .First(cell => cell.X == randomX && cell.Y == randomY);
-            //randomCell.CellType = CellType.Ground;
 
-            var nearCells = _maze
-                .Cells
-                .Where(cell =>
-                    cell.X == randomCell.X && Math.Abs(cell.Y - randomCell.Y) == 1
-                    || cell.Y == randomCell.Y && Math.Abs(cell.X - randomCell.X) == 1)
-                .ToList();
-
-            //nearCells.ForEach(x => x.CellType = CellType.Ground);
+            Miner(randomCell, new List<BaseCell>());
         }
 
-        private void Miner(MazeCell currentCell, List<MazeCell> wallToBreak)
+        private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
-            var nearWalls = _maze
-                .Cells
-                .Where(cell =>
-                    cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
-                    || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
-                .Where(x => x.CellType == CellType.Wall)
-                .ToList();
+            _maze.ReplaceToGround(currentCell);
+
+            var nearWalls = GetNearCellByType(currentCell, CellType.Wall);
             wallToBreak.AddRange(nearWalls);
 
+            wallToBreak = wallToBreak
+                .Where(wall => GetNearCellByType(wall, CellType.Ground).Count < 2)
+                .ToList();
+
             var random = new Random();
-            var randmoIndex = random.Next(0, nearWalls.Count);
+            var randmoIndex = random.Next(0, wallToBreak.Count);
             var randomWall = wallToBreak[randmoIndex];
-
-            _maze.Cells.Remove(randomWall);
-            var ground = new Ground()
-            {
-                X = randomWall.X,
-                Y = randomWall.Y
-            };
-            _maze.Cells.Add(ground);
-
-            //randomWall.CellType = CellType.Ground;
 
             wallToBreak.Remove(randomWall);
             if (wallToBreak.Count() > 0)
             {
                 Miner(randomWall, wallToBreak);
             }
+        }
+
+        private List<BaseCell> GetNearCellByType(BaseCell currentCell, CellType type)
+        {
+            return _maze
+               .Cells
+               .Where(cell =>
+                   cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
+                   || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
+               .Where(x => x.CellType == type)
+               .ToList();
         }
 
         private void BuildWall()

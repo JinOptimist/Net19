@@ -4,6 +4,7 @@
     {
         Wall = 1,
         Ground = 2,
-        Exit = 3
+        Exit = 3,
+        Hero = 4,
     }
 }

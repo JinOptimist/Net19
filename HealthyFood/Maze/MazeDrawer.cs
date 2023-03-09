@@ -6,6 +6,7 @@ namespace Maze
     {
         public void Draw(MazeLevel maze)
         {
+            Console.Clear();
             for (int y = 0; y < maze.Height; y++)
             {
                 for (int x = 0; x < maze.Widht; x++)
@@ -15,6 +16,11 @@ namespace Maze
                 }
                 Console.WriteLine();
             }
+
+            var hero = maze.Hero;
+            Console.SetCursorPosition(hero.X, hero.Y);
+            Console.Write(GetCellSymbol(hero.CellType));
+            Console.SetCursorPosition(hero.X, hero.Y);
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -22,11 +28,13 @@ namespace Maze
             switch (cellType)
             {
                 case CellType.Ground:
-                    return " ";
+                    return ".";
                 case CellType.Wall:
                     return "#";
                 case CellType.Exit:
                     return "E";
+                case CellType.Hero:
+                    return "@";
                 default:
                     throw new Exception("BAD");
             }
