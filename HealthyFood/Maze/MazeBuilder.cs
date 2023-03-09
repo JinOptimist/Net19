@@ -83,6 +83,11 @@ namespace Maze
                 .Where(wall => GetNearCellByType(wall, CellType.Ground).Count < 2)
                 .ToList();
 
+            if (!wallToBreak.Any())
+            {
+                return;
+            }
+
             var random = new Random();
             var randmoIndex = random.Next(0, wallToBreak.Count);
             var randomWall = wallToBreak[randmoIndex];
