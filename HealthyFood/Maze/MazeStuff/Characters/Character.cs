@@ -3,7 +3,7 @@
     public class Character : MazeCell, ICharacter
     {
         public string Name { get; set; } = "Conan-Barbarian";
-        public int Hp { get; set; } = 10;
+        public int Hp { get; set; } = 9;
 
         public override CellType CellType => CellType.Hero;
 

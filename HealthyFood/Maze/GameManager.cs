@@ -12,9 +12,9 @@ namespace Maze
         private MazeLevel _mazeLevel;
         public void StartGame()
         {
-            _mazeLevel = new MazeBuilder().Build();
+            _mazeLevel = new MazeBuilder().Build(20, 10, isShowMazeBuilding: true);
             var drawer = new MazeDrawer();
-            
+
             var isGameContinue = true;
             while (isGameContinue)
             {
@@ -71,7 +71,7 @@ namespace Maze
 
             if (destenationCell == null)
             {
-                Console.WriteLine("You can't go outside");
+                //Console.WriteLine("You can't go outside");
                 return;
             }
 
