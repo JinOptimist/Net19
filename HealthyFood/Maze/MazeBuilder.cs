@@ -40,7 +40,7 @@ namespace Maze
         private void BuildPileOfGold()
         {
             var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
-            for(int i = 0; i < listOfGround.Count/20; i++)
+            for(int i = 0; i < listOfGround.Count/40; i++)
             {
                 var randomCellNumber = random.Next(0, listOfGround.Count());
                 var randomCell = listOfGround[randomCellNumber];
