@@ -12,7 +12,7 @@ namespace Maze
         private MazeLevel _mazeLevel;
         public void StartGame()
         {
-            _mazeLevel = new MazeBuilder().Build(20, 10, isShowMazeBuilding: true);
+            _mazeLevel = new MazeBuilder().Build(10, 5, isShowMazeBuilding: true);
             var drawer = new MazeDrawer();
 
             var isGameContinue = true;

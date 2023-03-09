@@ -82,8 +82,10 @@ namespace Maze
         {
             if (_isShowMazeBuilding)
             {
+                _maze.Cells.OfType<Wall>().ToList().ForEach(x => x.ConsoleColor = ConsoleColor.Gray);
+                wallToBreak.ForEach(x => x.ConsoleColor = ConsoleColor.Blue);
                 new MazeDrawer().Draw(_maze);
-                Thread.Sleep(100);
+                Thread.Sleep(200);
             }
 
             _maze.ReplaceToGround(currentWall);
