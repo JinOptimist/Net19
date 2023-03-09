@@ -10,10 +10,11 @@ namespace Maze.MazeStuff
         public int Height { get; set; }
 
         public ICharacter Hero { get; set; }
+        public IBaseCell RandomTeleport { get; set; }
 
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
 
-        public void ReplaceToGround(BaseCell currentCell)
+        public void ReplaceToGround(BaseCell currentCell, CellType type)
         {
             Cells.Remove(currentCell);
             var ground = new Ground()

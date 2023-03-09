@@ -32,6 +32,7 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            BuildRandomTeleport();
 
             return _maze;
         }
@@ -58,7 +59,44 @@ namespace Maze
 
             Miner(randomCell, new List<BaseCell>());
         }
+        private void BuildRandomTeleport()
+        {
+            var teleport = new RandomTeleport()
+            {
+                X = 1,
+                Y = 1
+            };
+            _maze.RandomTeleport = teleport;
+            //var randomX = random.Next(3);
+            //var randomY = random.Next(5);
+            //Random rand = new Random();
+            //var hero = CellType.Hero;
+            //var teleport = CellType.RandomTelepot;
+            //var randomTeleport = new RandomTeleport()
+            //{
+            //    X = randomX,
+            //    Y = randomY
+            //};
 
+            //_maze.RandomTeleport = randomTeleport;
+        }
+
+        //private void BuildTeleport()
+        //{
+        //    for (int y = 0; y < _maze.Height; y++)
+        //    {
+        //        for (int x = 0; x < _maze.Widht; x++)
+        //        {
+        //            var teleport = new RandomTeleport()
+        //            {
+        //                X = x,
+        //                Y = y,
+        //            };
+
+        //            _maze.Cells.Add(teleport);
+        //        }
+        //    }
+        //}
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);
@@ -69,7 +107,7 @@ namespace Maze
             wallToBreak = wallToBreak
                 .Where(wall => GetNearCellByType(wall, CellType.Ground).Count < 2)
                 .ToList();
-
+            
             var random = new Random();
             var randmoIndex = random.Next(0, wallToBreak.Count);
             var randomWall = wallToBreak[randmoIndex];

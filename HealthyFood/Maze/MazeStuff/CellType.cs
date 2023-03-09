@@ -6,5 +6,6 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
+        RandomTelepot = 14,
     }
 }

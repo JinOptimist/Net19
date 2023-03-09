@@ -21,6 +21,7 @@ namespace Maze
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
+
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -35,6 +36,9 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.RandomTelepot:
+                    return "T"
+                        ;
                 default:
                     throw new Exception("BAD");
             }
