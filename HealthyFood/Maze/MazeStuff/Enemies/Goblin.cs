@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Maze.MazeStuff.Characters;
 
 namespace Maze.MazeStuff.Enemies
 {
-    internal class Goblin
+    public class Goblin : BaseEnemy
     {
+        public override CellType CellType => CellType.Goblin;
+
+        public override void TryMove()
+        {
+            
+        }
+
+        public override bool TryToStep(ICharacter character)
+        {
+            character.Hp--;
+
+            Hp--;
+
+            return false;
+        }
     }
 }
