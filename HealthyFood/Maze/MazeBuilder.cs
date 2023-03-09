@@ -1,5 +1,6 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
 
 namespace Maze
 {
@@ -28,63 +29,23 @@ namespace Maze
                 Height = height,
             };
 
+            var startX = random.Next(_maze.Widht);
+            var startY = random.Next(_maze.Height);
+
             BuildWall();
-            BuildGround();
+            BuildGround(startX, startY);
+            BuildHero(startX, startY);
 
             return _maze;
         }
 
-        private void BuildGround()
+        private void BuildGround(int startX, int startY)
         {
-            //Write code here
-            var randomX = random.Next(_maze.Widht);
-            var randomY = random.Next(_maze.Height);
-
             var randomCell = _maze
                 .Cells
-                .First(cell => cell.X == randomX && cell.Y == randomY);
-            //randomCell.CellType = CellType.Ground;
+                .First(cell => cell.X == startX && cell.Y == startY);
 
-            var nearCells = _maze
-                .Cells
-                .Where(cell =>
-                    cell.X == randomCell.X && Math.Abs(cell.Y - randomCell.Y) == 1
-                    || cell.Y == randomCell.Y && Math.Abs(cell.X - randomCell.X) == 1)
-                .ToList();
-
-            //nearCells.ForEach(x => x.CellType = CellType.Ground);
-        }
-
-        private void Miner(MazeCell currentCell, List<MazeCell> wallToBreak)
-        {
-            var nearWalls = _maze
-                .Cells
-                .Where(cell =>
-                    cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
-                    || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
-                .Where(x => x.CellType == CellType.Wall)
-                .ToList();
-            wallToBreak.AddRange(nearWalls);
-
-            var random = new Random();
-            var randmoIndex = random.Next(0, nearWalls.Count);
-            var randomWall = wallToBreak[randmoIndex];
-
-            _maze.Cells.Remove(randomWall);
-            var ground = new Ground()
-            {
-                X = randomWall.X,
-                Y = randomWall.Y
-            };
-            _maze.Cells.Add(ground);
-
-            //randomWall.CellType = CellType.Ground;
-
-            wallToBreak.Remove(randomWall);
-            if (wallToBreak.Count() > 0)
-            {
-                Miner(randomWall, wallToBreak);
-            }
+            Miner(randomCell, new List<MazeCell>());
         }
 
         private void BuildWall()
@@ -103,5 +64,49 @@ namespace Maze
                 }
             }
         }
+
+        private void BuildHero(int startX, int startY)
+        {
+            var character = new Character();
+            character.X = startX;
+            character.Y = startY;
+
+            _maze.Hero = character;
+        }
+
+        private void Miner(MazeCell currentWall, List<MazeCell> wallToBreak)
+        {
+            _maze.ReplaceToGround(currentWall);
+
+            var nearWalls = GetNear(currentWall, CellType.Wall);
+            wallToBreak.AddRange(nearWalls);
+
+            wallToBreak = wallToBreak
+                .Where(wall => GetNear(wall, CellType.Ground).Count() < 2)
+                .ToList();
+
+            var randmoIndex = random.Next(0, wallToBreak.Count);
+            var randomWall = wallToBreak[randmoIndex];
+
+            wallToBreak.Remove(randomWall);
+            if (wallToBreak.Count() > 0)
+            {
+                Miner(randomWall, wallToBreak);
+            }
+        }
+
+        private IEnumerable<MazeCell> GetNear(MazeCell currentCell, CellType cellType)
+        {
+            var nearCells = _maze
+               .Cells
+               .Where(cell =>
+                   cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
+                   || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
+               .Where(x => x.CellType == cellType);
+
+            return nearCells;
+        }
+
+
     }
 }

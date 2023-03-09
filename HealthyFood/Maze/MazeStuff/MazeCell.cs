@@ -2,7 +2,7 @@
 
 namespace Maze.MazeStuff
 {
-    public abstract class MazeCell
+    public abstract class MazeCell : IMazeCell
     {
         public int X { get; set; }
         public int Y { get; set; }
