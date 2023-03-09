@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -11,6 +12,8 @@ namespace Maze
             _maze = new MazeBuilder().Build();
 
             var drawer = new MazeDrawer();
+
+            
 
             while (true)
             {

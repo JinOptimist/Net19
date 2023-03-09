@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -17,6 +18,7 @@ namespace Maze
                 Console.WriteLine();
             }
 
+
             var hero = maze.Hero;
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
@@ -24,6 +26,10 @@ namespace Maze
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+
+            var hardtrap = new HardTrap();
+            Console.Write(GetCellSymbol(hardtrap.CellType));
+
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -38,6 +44,8 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.HardTrap:
+                    return "*";
                 default:
                     throw new Exception("BAD");
             }

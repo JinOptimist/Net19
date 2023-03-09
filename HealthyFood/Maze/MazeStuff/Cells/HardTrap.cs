@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Maze.MazeStuff.Characters;
+
 
 namespace Maze.MazeStuff.Cells
 {
-    internal class HardTrap
+    internal class HardTrap : BaseCell
     {
+        public override CellType CellType => CellType.HardTrap;
+
+       
+
+        public override bool TryToStep(ICharacter character)
+        {
+            return true;
+        }
     }
 }
