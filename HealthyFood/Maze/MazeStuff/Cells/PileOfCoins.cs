@@ -9,7 +9,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class PileOfCoins : BaseCell
     {
-        private Random random;
+        private Random random = new Random();
         public override CellType CellType => CellType.PileOfCoins;
 
         public override bool TryToStep(ICharacter character)

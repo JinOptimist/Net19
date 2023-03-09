@@ -40,10 +40,19 @@ namespace Maze
         private void BuildPileOfGold()
         {
             var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
-            var randomcellnumber = random.Next(0, listOfGround.Count());
-            var randomcell = listOfGround[randomcellnumber];
-
-
+            for(int i = 0; i < listOfGround.Count/20; i++)
+            {
+                var randomCellNumber = random.Next(0, listOfGround.Count());
+                var randomCell = listOfGround[randomCellNumber];
+                var pileOfCoins = new PileOfCoins()
+                {
+                    X = randomCell.X,
+                    Y = randomCell.Y,
+                };
+                _maze.ReplaceCell(pileOfCoins);
+                
+            }
+ 
         }
 
         private void BuildHero()
