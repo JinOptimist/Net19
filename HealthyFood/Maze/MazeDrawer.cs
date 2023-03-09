@@ -27,8 +27,7 @@ namespace Maze
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
 
-            var hardtrap = new HardTrap();
-            Console.Write(GetCellSymbol(hardtrap.CellType));
+            
 
         }
 
