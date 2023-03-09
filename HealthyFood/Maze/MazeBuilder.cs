@@ -1,6 +1,7 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Maze
 {
@@ -32,9 +33,15 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            //BuildGuardian();
 
             return _maze;
         }
+
+        //private void BuildGuardian()
+        //{
+            
+        //}
 
         private void BuildHero()
         {

@@ -22,6 +22,6 @@ namespace Maze.MazeStuff
                 Y = currentCell.Y,
             };
             Cells.Add(ground);
-        }
+        }       
     }
 }

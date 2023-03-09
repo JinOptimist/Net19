@@ -38,6 +38,9 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.Guardian:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return "&";
                 default:
                     throw new Exception("BAD");
             }
