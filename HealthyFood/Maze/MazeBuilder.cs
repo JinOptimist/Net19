@@ -39,10 +39,11 @@ namespace Maze
 
         private void BuildPileOfGold()
         {
-            var listOfGround = _maze.Cells.Where(x =>x.CellType == CellType.Ground).ToList();
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
             var randomcellnumber = random.Next(0, listOfGround.Count());
             var randomcell = listOfGround[randomcellnumber];
-            Console.WriteLine(String.Join('\n', listOfGround));
+
+
         }
 
         private void BuildHero()

@@ -38,6 +38,8 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.PileOfCoins:
+                    return "G";
                 default:
                     throw new Exception("BAD");
             }
