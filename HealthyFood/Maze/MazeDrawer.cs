@@ -12,13 +12,23 @@ namespace Maze
                 for (int x = 0; x < maze.Widht; x++)
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
-                    Console.Write(GetCellSymbol(cell.CellType));
+                    //if (GetCellSymbol(cell.CellType) == CellType.GoldWall).
+                    var makeCell = GetCellSymbol(cell.CellType);
+                    if (cell.CellType == CellType.GoldWall)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(makeCell);
+                        Console.ResetColor();
+                    }
+                    else Console.Write(makeCell);
                 }
                 Console.WriteLine();
             }
 
             var hero = maze.Hero;
+            
             Console.SetCursorPosition(hero.X, hero.Y);
+           
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
 
@@ -26,7 +36,7 @@ namespace Maze
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
         }
 
-        private string GetCellSymbol(CellType cellType)
+        private string GetCellSymbol(CellType cellType) 
         {
             switch (cellType)
             {
@@ -38,6 +48,9 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GoldWall:                   
+                    return "#";
+
                 default:
                     throw new Exception("BAD");
             }

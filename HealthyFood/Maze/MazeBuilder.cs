@@ -43,11 +43,13 @@ namespace Maze
             var searchWallList = _maze.Cells.Where(cell => cell.CellType == CellType.Wall).ToList();
             var indexOfsearchWallList = searchWallList.Count;
             int randomIndex = random.Next(0, indexOfsearchWallList);
-            var x = searchWallList[randomIndex].X;
-            var y = searchWallList[randomIndex].Y;
-            cr
-            _maze.ReplaceToGoldWall();
-
+            
+            GoldWall goldWall = new GoldWall();
+            goldWall.X = searchWallList[randomIndex].X;
+            goldWall.Y = searchWallList[randomIndex].Y;
+                    
+            _maze.ReplaceToGoldWall(goldWall);
+            Console.ResetColor();
         }
         private void BuildHero()
         {
