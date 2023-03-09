@@ -7,5 +7,6 @@
         Exit = 3,
         Hero = 4,
         GoldWall = 5,
+        Goblin = 18
     }
 }
