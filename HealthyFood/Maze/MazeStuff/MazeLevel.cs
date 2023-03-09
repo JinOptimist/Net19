@@ -10,8 +10,9 @@ namespace Maze.MazeStuff
         public int Height { get; set; }
 
         public ICharacter Hero { get; set; }
+        public int GoldMine  { get; set; }
 
-        public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
+    public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
 
         public void ReplaceToGround(BaseCell currentCell)
         {
@@ -22,6 +23,11 @@ namespace Maze.MazeStuff
                 Y = currentCell.Y,
             };
             Cells.Add(ground);
+        }
+        public void ReplaceToGoldWall(BaseCell currentCell)
+        {
+            
+            Cells.Add(goldWall);
         }
     }
 }

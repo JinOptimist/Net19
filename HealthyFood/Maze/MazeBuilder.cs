@@ -38,9 +38,16 @@ namespace Maze
         }
         private void BuildGoldMine()
         {
-            var randomX = random.Next(_maze.Widht);
-            var randomY = random.Next(_maze.Height);
-            var searchWall = _maze.Cells.Where(cell => cell.
+          
+           
+            var searchWallList = _maze.Cells.Where(cell => cell.CellType == CellType.Wall).ToList();
+            var indexOfsearchWallList = searchWallList.Count;
+            int randomIndex = random.Next(0, indexOfsearchWallList);
+            var x = searchWallList[randomIndex].X;
+            var y = searchWallList[randomIndex].Y;
+            cr
+            _maze.ReplaceToGoldWall();
+
         }
         private void BuildHero()
         {
