@@ -32,8 +32,21 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            BuildEasyTrap();
+
 
             return _maze;
+        }
+
+        private void BuildEasyTrap()
+        {
+            var cellsIncludingAllGround = _maze
+    .Cells
+     .Where(x => x.CellType == CellType.Ground)
+     .ToList();
+
+            var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
+            var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
         }
 
         private void BuildHero()
@@ -57,6 +70,7 @@ namespace Maze
                 .First(cell => cell.X == randomX && cell.Y == randomY);
 
             Miner(randomCell, new List<BaseCell>());
+            
         }
 
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
