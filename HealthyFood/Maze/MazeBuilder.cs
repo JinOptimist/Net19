@@ -40,7 +40,7 @@ namespace Maze
         {
             var randomX = random.Next(_maze.Widht);
             var randomY = random.Next(_maze.Height);
-
+            var searchWall = _maze.Cells.Where(cell => cell.
         }
         private void BuildHero()
         {
