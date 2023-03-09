@@ -2,7 +2,7 @@
 
 namespace Maze.MazeStuff.Cells
 {
-    public class Wall : MazeCell
+    public class Wall : BaseCell
     {
         public override CellType CellType => CellType.Wall;
 

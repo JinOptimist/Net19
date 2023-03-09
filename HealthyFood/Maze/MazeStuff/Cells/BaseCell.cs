@@ -1,8 +1,8 @@
 ﻿using Maze.MazeStuff.Characters;
 
-namespace Maze.MazeStuff
+namespace Maze.MazeStuff.Cells
 {
-    public abstract class MazeCell
+    public abstract class BaseCell : IBaseCell
     {
         public int X { get; set; }
         public int Y { get; set; }
