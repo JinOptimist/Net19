@@ -23,5 +23,12 @@ namespace Maze.MazeStuff
             };
             Cells.Add(ground);
         }
+
+        public void ReplaceCell(BaseCell newCell)
+        {
+            var oldCell = Cells.Single(oldCell => oldCell.X == newCell.X && oldCell.Y == newCell.Y);
+            Cells.Remove(oldCell);
+            Cells.Add(newCell);
+        }
     }
 }
