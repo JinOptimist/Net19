@@ -7,11 +7,10 @@ namespace Maze.MazeStuff.Cells
     {
         public override CellType CellType => CellType.HardTrap;
 
-       
-
         public override bool TryToStep(ICharacter character)
         {
-            return true;
+            character.Hp--;
+            return false;
         }
     }
 }
