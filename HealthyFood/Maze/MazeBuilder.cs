@@ -21,7 +21,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 10, int height = 5)
+        public MazeLevel Build(int width = 25, int height = 12)
         {
             _maze = new MazeLevel()
             {
@@ -32,8 +32,14 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            BuildPileOfGold();
 
             return _maze;
+        }
+
+        private void BuildPileOfGold()
+        {
+            var listOFGround = new List<BaseCell>().Where(x => x.CellType == CellType.Ground);  
         }
 
         private void BuildHero()

@@ -6,5 +6,6 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
+        PileOfCoins = 16,
     }
 }

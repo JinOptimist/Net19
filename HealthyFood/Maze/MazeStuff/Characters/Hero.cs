@@ -4,6 +4,7 @@
     {
         public string Name { get; set; } = "Conan-Barbarian";
         public int Hp { get; set; } = 9;
+        public int Coins { get; set; } = 10;
 
         public CellType CellType => CellType.Hero;
 
