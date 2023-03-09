@@ -20,10 +20,12 @@ namespace Maze.MazeStuff
             var ground = new Ground(currentCell.X, currentCell.Y, this);
             Cells.Add(ground);
         }
-        public void ReplaceToGoldWall(BaseCell currentCell)
+
+        public void ReplaceCell(BaseCell newCell)
         {
-            
-            Cells.Add(goldWall);
+            var oldCell = Cells.Single(oldCell => oldCell.X == newCell.X && oldCell.Y == newCell.Y);
+            Cells.Remove(oldCell);
+            Cells.Add(newCell);
         }
     }
 }
