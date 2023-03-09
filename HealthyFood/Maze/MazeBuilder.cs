@@ -32,10 +32,16 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            BuildGoldMine();
 
             return _maze;
         }
+        private void BuildGoldMine()
+        {
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
 
+        }
         private void BuildHero()
         {
             var hero = new Hero()
