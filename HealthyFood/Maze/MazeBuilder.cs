@@ -32,8 +32,28 @@ namespace Maze
             BuildWall();
             BuildGround();
             BuildHero();
+            BuildDeadEndTeleport();
 
             return _maze;
+        }
+
+        private void BuildDeadEndTeleport()
+        {
+            var firstTeleport = new DeadEndTeleport()
+            {
+                X = 0,
+                Y = 0,
+            };
+
+            _maze.Cells.Add(firstTeleport);
+
+            var secondTeleport = new DeadEndTeleport()
+            {
+                X = _maze.Widht - 1,
+                Y = _maze.Height - 1,
+            };
+
+            _maze.Cells.Add(secondTeleport);
         }
 
         private void BuildHero()

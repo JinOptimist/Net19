@@ -35,6 +35,8 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.DeadEndTeleport:
+                    return "O";
                 default:
                     throw new Exception("BAD");
             }
