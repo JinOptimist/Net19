@@ -6,6 +6,8 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
+        GreedyHealer = 5,
         Goblin = 18
+        
     }
 }

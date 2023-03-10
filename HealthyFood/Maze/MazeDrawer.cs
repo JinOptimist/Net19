@@ -24,6 +24,12 @@ namespace Maze
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+
+
+            var greedyHealer = maze.GreedyHealer;
+            Console.SetCursorPosition(greedyHealer.X, greedyHealer.Y);
+            Console.Write(GetCellSymbol(greedyHealer.CellType));
+
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -38,6 +44,8 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GreedyHealer:
+                    return "+";
                 default:
                     throw new Exception("BAD");
             }
