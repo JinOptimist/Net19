@@ -6,9 +6,10 @@ namespace Maze
 {
     public class MazeBuilder
     {
+
         private MazeLevel _maze;
         private Random random;
-
+        private int moneyFromWallCount = 0;
         public MazeBuilder(int? seed = null)
         {
             if (seed == null)
@@ -35,23 +36,37 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+
             BuildGoldMine();
 
             return _maze;
         }
+
+
+        /// <summary>
+        /// Make goldwall. When player try ro step in it, he takeы money, max = 3
+        /// </summary>
         private void BuildGoldMine()
         {
-          
-           
+
             var searchWallList = _maze.Cells.Where(cell => cell.CellType == CellType.Wall).ToList();
             var indexOfsearchWallList = searchWallList.Count;
             int randomIndex = random.Next(0, indexOfsearchWallList);
+            int xForGoldWall = searchWallList[randomIndex].X;
+            int yForGoldWall = searchWallList[randomIndex].Y;
+
             
-            GoldWall goldWall = new GoldWall(searchWallList[randomIndex].X, searchWallList[randomIndex].Y, _maze);
-                    
-            _maze.ReplaceCell(goldWall);
-            Console.ResetColor();
+            var cellIsOneGroundNearGoldWall = _maze.Cells.Single(cell => cell.X == xForGoldWall && cell.Y == yForGoldWall);
+            var countGroundNearGoldWall = GetNearCellByType(cellIsOneGroundNearGoldWall, CellType.Ground);
+            if (countGroundNearGoldWall.Count > 0)
+            {
+                GoldWall goldWall = new GoldWall(xForGoldWall, yForGoldWall, _maze);
+                _maze.ReplaceCell(goldWall);
+            }
+            else BuildGoldMine();
+
         }
+
         private void BuildHero(int startX, int startY)
         {
             var hero = new Hero(startX, startY, _maze);

@@ -16,7 +16,7 @@ namespace Maze.MazeStuff.Cells
         public MazeLevel Level { get; set; }
 
         public abstract CellType CellType { get; }
-
+       
         public abstract bool TryToStep(ICharacter character);
     }
 }

@@ -12,6 +12,7 @@ namespace Maze
                 for (int x = 0; x < maze.Widht; x++)
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
+                    
                     //if (GetCellSymbol(cell.CellType) == CellType.GoldWall).
                     var makeCell = GetCellSymbol(cell.CellType);
                     if (cell.CellType == CellType.GoldWall)
