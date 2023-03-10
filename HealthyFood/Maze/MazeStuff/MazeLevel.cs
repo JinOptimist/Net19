@@ -21,13 +21,6 @@ namespace Maze.MazeStuff
             Cells.Add(ground);
         }
 
-        //public void ReplaceToGreedyHealer(BaseCell currentCell)
-        //{
-        //    Cells.Remove(currentCell);
-        //    var greedyHealer = new GreedyHealer(currentCell.X, currentCell.Y, this);
-        //    Cells.Add(greedyHealer);
-        //}
-
         public void ReplaceCell(BaseCell newCell)
         {
             var oldCell = Cells.Single(oldCell => oldCell.X == newCell.X && oldCell.Y == newCell.Y);

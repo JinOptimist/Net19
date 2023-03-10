@@ -75,7 +75,7 @@ namespace Maze
                 _maze.Hero.Y = destinationHeroY;
             }
 
-            if (destinationGreedyHealer == destinationCell) 
+            if (destinationGreedyHealer == destinationCell && _maze.Hero.Coins > 0)
             {
                 _maze.Hero.Hp++;
                 _maze.Hero.Coins--;
