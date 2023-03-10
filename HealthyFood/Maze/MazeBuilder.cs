@@ -29,9 +29,12 @@ namespace Maze
                 Height = height,
             };
 
+            var startX = random.Next(_maze.Widht);
+            var startY = random.Next(_maze.Height);
+
             BuildWall();
-            BuildGround();
-            BuildHero();
+            BuildGround(startX, startY);
+            BuildHero(startX, startY);
             BuildPileOfGold();
 
             return _maze;
@@ -44,36 +47,24 @@ namespace Maze
             {
                 var randomCellNumber = random.Next(0, listOfGround.Count());
                 var randomCell = listOfGround[randomCellNumber];
-                var pileOfCoins = new PileOfCoins()
-                {
-                    X = randomCell.X,
-                    Y = randomCell.Y,
-                };
+                var pileOfCoins = new PileOfCoins(randomCell.X, randomCell.Y, _maze);
                 _maze.ReplaceCell(pileOfCoins);
                 
             }
  
         }
 
-        private void BuildHero()
+        private void BuildHero(int startX, int startY)
         {
-            var hero = new Hero()
-            {
-                X = 2,
-                Y = 1
-            };
-
+            var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
 
-        private void BuildGround()
+        private void BuildGround(int startX, int startY)
         {
-            var randomX = random.Next(_maze.Widht);
-            var randomY = random.Next(_maze.Height);
-
             var randomCell = _maze
                 .Cells
-                .First(cell => cell.X == randomX && cell.Y == randomY);
+                .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
         }
@@ -122,11 +113,7 @@ namespace Maze
             {
                 for (int x = 0; x < _maze.Widht; x++)
                 {
-                    var cell = new Wall()
-                    {
-                        X = x,
-                        Y = y,
-                    };
+                    var cell = new Wall(x, y, _maze);
 
                     _maze.Cells.Add(cell);
                 }
