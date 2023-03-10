@@ -10,6 +10,7 @@ namespace Maze.MazeStuff
         public int Height { get; set; }
 
         public ICharacter Hero { get; set; }
+        public ICharacter GreedyHealer { get; set; }
 
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
 
@@ -19,6 +20,13 @@ namespace Maze.MazeStuff
             var ground = new Ground(currentCell.X, currentCell.Y, this);
             Cells.Add(ground);
         }
+
+        //public void ReplaceToGreedyHealer(BaseCell currentCell)
+        //{
+        //    Cells.Remove(currentCell);
+        //    var greedyHealer = new GreedyHealer(currentCell.X, currentCell.Y, this);
+        //    Cells.Add(greedyHealer);
+        //}
 
         public void ReplaceCell(BaseCell newCell)
         {
