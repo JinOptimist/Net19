@@ -7,7 +7,7 @@ namespace Maze.MazeStuff.Cells
         CellType CellType { get; }
         int X { get; set; }
         int Y { get; set; }
-
+      
         bool TryToStep(ICharacter character);
     }
 }

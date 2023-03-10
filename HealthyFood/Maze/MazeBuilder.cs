@@ -38,7 +38,7 @@ namespace Maze
             BuildHero(startX, startY);
 
             BuildGoldMine();
-
+            BuildGoldMine();
             return _maze;
         }
 
@@ -55,14 +55,18 @@ namespace Maze
             int xForGoldWall = searchWallList[randomIndex].X;
             int yForGoldWall = searchWallList[randomIndex].Y;
 
-            
+
             var cellIsOneGroundNearGoldWall = _maze.Cells.Single(cell => cell.X == xForGoldWall && cell.Y == yForGoldWall);
+
             var countGroundNearGoldWall = GetNearCellByType(cellIsOneGroundNearGoldWall, CellType.Ground);
+            GoldWall goldWall = new GoldWall(xForGoldWall, yForGoldWall, _maze);
+            //Wall wall = new Wall(xForGoldWall, yForGoldWall, _maze);
+
             if (countGroundNearGoldWall.Count > 0)
             {
-                GoldWall goldWall = new GoldWall(xForGoldWall, yForGoldWall, _maze);
                 _maze.ReplaceCell(goldWall);
             }
+
             else BuildGoldMine();
 
         }

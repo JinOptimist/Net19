@@ -10,7 +10,7 @@ namespace Maze.MazeStuff.Cells
             Y = y;
             Level = level;
         }
-
+       
         public int X { get; set; }
         public int Y { get; set; }
         public MazeLevel Level { get; set; }

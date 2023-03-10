@@ -10,7 +10,7 @@ namespace Maze.MazeStuff
         public int Height { get; set; }
 
         public ICharacter Hero { get; set; }
-        public int GoldMine  { get; set; }
+        //public int GoldMine  { get; set; }
 
     public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
 
