@@ -1,6 +1,7 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using Maze.MazeStuff.Enemies;
 
 namespace Maze
 {
@@ -35,8 +36,19 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGonlins();
 
             return _maze;
+        }
+
+        private void BuildGonlins(int startGoblinHp = 3, int goblinCount = 4)
+        {
+            var grounds = _maze.Cells.OfType<Ground>().Take(goblinCount);
+            foreach (var ground in grounds)
+            {
+                var goblin = new Goblin(startGoblinHp, ground.X, ground.Y, _maze);
+                _maze.Enemies.Add(goblin);
+            }
         }
 
         private void BuildHero(int startX, int startY)

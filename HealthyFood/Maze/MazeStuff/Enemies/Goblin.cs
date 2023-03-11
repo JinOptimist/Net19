@@ -1,4 +1,6 @@
-﻿using Maze.MazeStuff.Characters;
+﻿using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze.MazeStuff.Enemies
 {
@@ -6,13 +8,27 @@ namespace Maze.MazeStuff.Enemies
     {
         public override CellType CellType => CellType.Goblin;
         
-        public Goblin(int x, int y, MazeLevel level) : base(x, y, level)
+        public Goblin(int hp, int x, int y, MazeLevel level) : base(x, y, level)
         {
+            Hp = hp;
         }
 
-        public override void TryMove()
+        public override void EndTurnActivity()
         {
-            
+            var nearGrounds = GetNearCellByType(this, CellType.Ground);
+            var randomCell = GetRandom(nearGrounds);
+            if (randomCell.TryToStep(this))
+            {
+                X = randomCell.X;
+                Y = randomCell.Y;
+            }
+        }
+
+        private BaseCell GetRandom(List<BaseCell> nearGrounds)
+        {
+            var random = new Random();
+            var index = random.Next(nearGrounds.Count);
+            return nearGrounds[index];
         }
 
         public override bool TryToStep(ICharacter character)
@@ -21,7 +37,24 @@ namespace Maze.MazeStuff.Enemies
 
             Hp--;
 
+            if (Hp <= 0)
+            {
+                Level.Enemies.Remove(this);
+                character.Experience++;
+            }
+
             return false;
+        }
+
+        private List<BaseCell> GetNearCellByType(BaseCell currentCell, CellType type)
+        {
+            return Level
+               .Cells
+               .Where(cell =>
+                   cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
+                   || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
+               .Where(x => x.CellType == type)
+               .ToList();
         }
     }
 }
