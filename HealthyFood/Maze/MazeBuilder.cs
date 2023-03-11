@@ -48,8 +48,6 @@ namespace Maze
             _maze.Hero = hero;
         }
 
-      
-
         private void BuildGround()
         {
             var randomX = random.Next(_maze.Widht);
@@ -66,12 +64,11 @@ namespace Maze
         {
             var hardtrap = new HardTrap()
             {
-                X = 7,
-                Y = 4
+                X = random.Next(_maze.Widht),
+                Y = random.Next(_maze.Height)
             };
 
             _maze.ReplaceCell(hardtrap);
-
         }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {

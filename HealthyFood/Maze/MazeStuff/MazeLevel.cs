@@ -8,14 +8,9 @@ namespace Maze.MazeStuff
     {
         public int Widht { get; set; }
         public int Height { get; set; }
-
         public ICharacter Hero { get; set; }
-
-
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
         
-
-
         public void ReplaceToGround(BaseCell currentCell)
         {
             Cells.Remove(currentCell);
