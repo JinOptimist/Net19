@@ -3,13 +3,13 @@
 
 namespace Maze.MazeStuff.Cells
 {
-    internal class HardTrap : BaseCell
+    public class HardTrap : BaseCell
     {
         public override CellType CellType => CellType.HardTrap;
 
         public override bool TryToStep(ICharacter character)
         {
-            character.Hp--;
+            character.Hp= character.Hp-2;
             return false;
         }
     }

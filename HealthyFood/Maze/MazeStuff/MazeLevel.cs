@@ -11,7 +11,10 @@ namespace Maze.MazeStuff
 
         public ICharacter Hero { get; set; }
 
+
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
+        
+
 
         public void ReplaceToGround(BaseCell currentCell)
         {

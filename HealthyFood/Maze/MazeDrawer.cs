@@ -28,6 +28,7 @@ namespace Maze
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
 
             
+            
 
         }
 

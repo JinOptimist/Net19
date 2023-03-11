@@ -69,6 +69,9 @@ namespace Maze
                 X = 7,
                 Y = 4
             };
+
+            _maze.ReplaceCell(hardtrap);
+
         }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
