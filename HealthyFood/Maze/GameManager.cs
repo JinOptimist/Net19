@@ -41,9 +41,7 @@ namespace Maze
             var destinationHeroX = _maze.Hero.X;
             var destinationHeroY = _maze.Hero.Y;
 
-            var destinationGreedyHealerX = _maze.GreedyHealer.X;
-            var destinationGreedyHealerY = _maze.GreedyHealer.Y;
-
+            
             switch (direction)
             {
                 case Direction.Left:
@@ -61,9 +59,7 @@ namespace Maze
             }
 
             var destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
-            var destinationGreedyHealer = _maze.Cells.SingleOrDefault(cell => cell.X == destinationGreedyHealerX && cell.Y == destinationGreedyHealerY);
-
-
+            
             if (destinationCell == null)
             {
                 return;
@@ -74,13 +70,7 @@ namespace Maze
                 _maze.Hero.X = destinationHeroX;
                 _maze.Hero.Y = destinationHeroY;
             }
-
-            if (destinationGreedyHealer == destinationCell && _maze.Hero.Coins > 0)
-            {
-                _maze.Hero.Hp++;
-                _maze.Hero.Coins--;
-            }//If the hero steps on the healer +Hp,-Coins
-
+            
         }
     }
 }
