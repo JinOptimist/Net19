@@ -35,6 +35,7 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGoodHealer();
 
             return _maze;
         }
@@ -45,6 +46,19 @@ namespace Maze
             _maze.Hero = hero;
         }
 
+        private void BuildGoodHealer()
+        {
+            var changedifficile = 15;
+            var listofground = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
+            foreach (var cell in listofground) 
+            {
+                var randomcellNum = random.Next(0, listofground.Count/ changedifficile);
+                var randomcell = listofground[randomcellNum];
+                var goodhealer = new GoodHealer(randomcell.X, randomcell.Y, _maze);
+                _maze.ReplaceCell(goodhealer);
+            }
+
+        }
         private void BuildGround(int startX, int startY)
         {
             var randomCell = _maze

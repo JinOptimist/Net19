@@ -38,6 +38,8 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GoodHealer:
+                    return "+";
                 default:
                     throw new Exception("BAD");
             }

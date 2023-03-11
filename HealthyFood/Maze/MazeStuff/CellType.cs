@@ -6,6 +6,7 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
-        Goblin = 18
+        Goblin = 18,
+        GoodHealer = 19,
     }
 }
