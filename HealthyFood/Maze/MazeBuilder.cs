@@ -35,8 +35,18 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGreedlyGuardian();
 
             return _maze;
+        }
+
+        private void BuildGreedlyGuardian()
+        {
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var greedlyGuardian = new GreedlyGuardian(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(greedlyGuardian);
         }
 
         private void BuildHero(int startX, int startY)
