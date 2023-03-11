@@ -7,5 +7,6 @@
         Exit = 3,
         Hero = 4,
         Guardian = 17,
+        Goblin = 18,
     }
 }
