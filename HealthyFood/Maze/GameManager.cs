@@ -8,8 +8,7 @@ namespace Maze
 
         public void Start()
         {
-            _maze = new MazeBuilder().Build();
-           
+            _maze = new MazeBuilder().Build();           
 
             var drawer = new MazeDrawer();
 

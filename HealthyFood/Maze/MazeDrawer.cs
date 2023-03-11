@@ -37,7 +37,7 @@ namespace Maze
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
         }
 
-        private string GetCellSymbol(CellType cellType) 
+        private string GetCellSymbol(CellType cellType)
         {
             switch (cellType)
             {

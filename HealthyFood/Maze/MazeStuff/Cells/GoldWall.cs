@@ -12,9 +12,6 @@ namespace Maze.MazeStuff.Cells
         MazeLevel _level;
         public GoldWall(int x, int y, MazeLevel level) : base(x, y, level)
         {
-            _x = x; 
-            _y = y; 
-            _level = level;
         }
 
         public override CellType CellType => CellType.GoldWall;
@@ -27,7 +24,7 @@ namespace Maze.MazeStuff.Cells
             maxMoney--;
             if (maxMoney < 1)
             {
-                Wall wall = new Wall(_x, _y, _level);
+                Wall wall = new Wall(X, Y, Level);
                 _level.ReplaceCell(wall);
             }
             return false;

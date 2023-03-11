@@ -9,7 +9,7 @@ namespace Maze
 
         private MazeLevel _maze;
         private Random random;
-        private int moneyFromWallCount = 0;
+        
         public MazeBuilder(int? seed = null)
         {
             if (seed == null)
