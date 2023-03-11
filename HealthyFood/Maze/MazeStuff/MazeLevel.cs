@@ -26,6 +26,5 @@ namespace Maze.MazeStuff
             Cells.Remove(oldCell);
             Cells.Add(newCell);
         }
-
     }
 }
