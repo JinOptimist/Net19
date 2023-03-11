@@ -1,5 +1,4 @@
 ﻿using Maze.MazeStuff;
-using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -17,10 +16,12 @@ namespace Maze
                 }
                 Console.WriteLine();
             }
+
             var hero = maze.Hero;
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
+
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
         }
