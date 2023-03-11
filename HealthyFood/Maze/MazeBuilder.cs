@@ -48,14 +48,14 @@ namespace Maze
 
         private void BuildGoodHealer()
         {
-            var changedifficile = 15;
-            var listofground = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
-            foreach (var cell in listofground) 
+            var changeDifficile = 15;
+            var listOfGround = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
+            foreach (var cell in listOfGround) 
             {
-                var randomcellNum = random.Next(0, listofground.Count/ changedifficile);
-                var randomcell = listofground[randomcellNum];
-                var goodhealer = new GoodHealer(randomcell.X, randomcell.Y, _maze);
-                _maze.ReplaceCell(goodhealer);
+                var randomCellNum = random.Next(0, listOfGround.Count/ changeDifficile);
+                var randomCell = listOfGround[randomCellNum];
+                var goodHealer = new GoodHealer(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(goodHealer);
             }
 
         }

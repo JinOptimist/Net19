@@ -9,7 +9,6 @@ namespace Maze.MazeStuff.Cells
 {
     public class GoodHealer : BaseCell
     {
-        private Random Random = new Random();
         public GoodHealer(int x, int y, MazeLevel level) : base(x, y, level)
         {
         }
