@@ -5,7 +5,8 @@
         public Hero(int x, int y, MazeLevel level) : base(x, y, level)
         {
             Name = "Conan-Barbarian";
-            Hp = 9;
+            Hp = 20;
+            Coins = 10;
         }
 
         public override CellType CellType => CellType.Hero;

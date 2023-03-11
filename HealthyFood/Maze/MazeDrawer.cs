@@ -13,6 +13,7 @@ namespace Maze
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
                     Console.Write(GetCellSymbol(cell.CellType));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
