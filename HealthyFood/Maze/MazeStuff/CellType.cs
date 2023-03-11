@@ -6,7 +6,7 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
-        Guardian = 17,
+        GreedlyGuardian = 17,
         Goblin = 18,
     }
 }
