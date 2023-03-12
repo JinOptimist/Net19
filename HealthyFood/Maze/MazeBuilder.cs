@@ -67,12 +67,9 @@ namespace Maze
 
         private void BuildHardTrap()
         {
-            var hardtrap = new HardTrap()
-            {
-                X = random.Next(_maze.Widht),
-                Y = random.Next(_maze.Height)
-            };
-
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+            var hardtrap = new HardTrap(randomX, randomY, _maze);
             _maze.ReplaceCell(hardtrap);
         }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)

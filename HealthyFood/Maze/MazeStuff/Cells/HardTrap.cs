@@ -5,12 +5,17 @@ namespace Maze.MazeStuff.Cells
 {
     public class HardTrap : BaseCell
     {
+        public HardTrap(int x, int y, MazeLevel level) : base(x, y, level)
+        {
+        }
+
         public override CellType CellType => CellType.HardTrap;
 
         public override bool TryToStep(ICharacter character)
         {
+            if (character.Hp>0)
             character.Hp= character.Hp-2;
-            return false;
+            return true;
         }
     }
 }
