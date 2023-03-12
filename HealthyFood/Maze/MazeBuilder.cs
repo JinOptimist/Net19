@@ -69,22 +69,6 @@ namespace Maze
 
         }
 
-        //private void BuildTeleport()
-        //{
-        //    for (int y = 0; y < _maze.Height; y++)
-        //    {
-        //        for (int x = 0; x < _maze.Widht; x++)
-        //        {
-        //            var teleport = new RandomTeleport()
-        //            {
-        //                X = x,
-        //                Y = y,
-        //            };
-
-        //            _maze.Cells.Add(teleport);
-        //        }
-        //    }
-        //}
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);

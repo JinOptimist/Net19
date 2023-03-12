@@ -18,11 +18,11 @@ namespace Maze.MazeStuff.Cells
 
         public override bool TryToStep(ICharacter character)
         {
-            var hero = new Hero();
-            var ground = CellType.Ground;
+            var ground = new Ground();
             Random random = new Random();
-            hero.X = random.Next();
-            hero.Y = random.Next();
+            character.X = random.Next(ground.X);
+            character.Y = random.Next(ground.Y);
+            
             return false;
         }
     }
