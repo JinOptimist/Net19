@@ -5,6 +5,15 @@ namespace Maze.MazeStuff.Cells
 {
     public class RandomTeleport : BaseCell
     {
+        private MazeLevel maze;
+
+        public RandomTeleport(int x, int y, MazeLevel maze)
+        {
+            X = x;
+            Y = y;
+            this.maze = maze;
+        }
+
         public override CellType CellType => CellType.RandomTelepot;
 
         public override bool TryToStep(ICharacter character)
@@ -14,7 +23,7 @@ namespace Maze.MazeStuff.Cells
             Random random = new Random();
             hero.X = random.Next();
             hero.Y = random.Next();
-            return true;
+            return false;
         }
     }
 }

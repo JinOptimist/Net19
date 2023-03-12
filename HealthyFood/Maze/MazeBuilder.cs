@@ -61,24 +61,12 @@ namespace Maze
         }
         private void BuildRandomTeleport()
         {
-            var teleport = new RandomTeleport()
-            {
-                X = 1,
-                Y = 1
-            };
-            _maze.RandomTeleport = teleport;
-            //var randomX = random.Next(3);
-            //var randomY = random.Next(5);
-            //Random rand = new Random();
-            //var hero = CellType.Hero;
-            //var teleport = CellType.RandomTelepot;
-            //var randomTeleport = new RandomTeleport()
-            //{
-            //    X = randomX,
-            //    Y = randomY
-            //};
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var teleport = new RandomTeleport(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(teleport);
 
-            //_maze.RandomTeleport = randomTeleport;
         }
 
         //private void BuildTeleport()
