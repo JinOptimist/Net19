@@ -1,5 +1,6 @@
 ﻿using System;
 using Maze.MazeStuff.Characters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze.MazeStuff.Cells
 {
@@ -7,18 +8,17 @@ namespace Maze.MazeStuff.Cells
     {
         private MazeLevel maze;
 
-        public RandomTeleport(int x, int y, MazeLevel maze)
+        public RandomTeleport(int x, int y, MazeLevel maze) : base(x,y, maze)
         {
-            X = x;
-            Y = y;
-            this.maze = maze;
+
         }
 
         public override CellType CellType => CellType.RandomTelepot;
 
         public override bool TryToStep(ICharacter character)
         {
-            var ground = new Ground();
+            var ground = new Ground(X, Y, maze);
+            
             Random random = new Random();
             character.X = random.Next(ground.X);
             character.Y = random.Next(ground.Y);
