@@ -57,7 +57,6 @@ namespace Maze
                 var goodHealer = new GoodHealer(randomCell.X, randomCell.Y, _maze);
                 _maze.ReplaceCell(goodHealer);
             }
-
         }
         private void BuildGround(int startX, int startY)
         {

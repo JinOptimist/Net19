@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -24,6 +25,10 @@ namespace Maze
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+            var mazecountwall = maze.Cells.Where(x => x.CellType == CellType.Wall).Count();
+            var mazecountground = maze.Cells.Where(x => x.CellType == CellType.Ground).Count();
+            var mazecountgoodhealer = maze.Cells.Where(x => x.CellType == CellType.GoodHealer).Count();
+            Console.WriteLine($"Ground Cell = {mazecountground} \nWall Cell = {mazecountwall} \nGood Healer = {mazecountgoodhealer}");
         }
 
         private string GetCellSymbol(CellType cellType)
