@@ -20,7 +20,7 @@ namespace Maze.MazeStuff.Cells
         public override bool TryToStep(ICharacter character)
         {
             var randomAmountOfCoins = random.Next(2, 10);
-            character.Coins = character.Coins + randomAmountOfCoins;
+            character.Coins += randomAmountOfCoins;
             this.Level.ReplaceToGround(this);
             return true;
         }

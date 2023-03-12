@@ -21,7 +21,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 25, int height = 12)
+        public MazeLevel Build(int width = 10, int height = 5)
         {
             _maze = new MazeLevel()
             {
@@ -42,8 +42,9 @@ namespace Maze
 
         private void BuildPileOfGold()
         {
+            int pileOfGoldFrequency = 20;
             var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
-            for(int i = 0; i < listOfGround.Count/40; i++)
+            for(int i = 0; i < listOfGround.Count/pileOfGoldFrequency; i++)
             {
                 var randomCellNumber = random.Next(0, listOfGround.Count());
                 var randomCell = listOfGround[randomCellNumber];
