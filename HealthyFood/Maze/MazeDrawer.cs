@@ -13,6 +13,7 @@ namespace Maze
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
                     Console.Write(GetCellSymbol(cell.CellType));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
@@ -40,6 +41,9 @@ namespace Maze
                     return "@";
                 case CellType.HardTrap:
                     return "*";
+                case CellType.GreedlyGuardian:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return "&";
                 default:
                     throw new Exception("BAD");
             }

@@ -6,6 +6,8 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
-        HardTrap = 13
+        HardTrap = 13,
+        GreedlyGuardian = 17,
+        Goblin = 18
     }
 }
