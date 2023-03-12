@@ -7,5 +7,7 @@
         Exit = 3,
         Hero = 4,
         RandomTelepot = 14,
+        GreedlyGuardian = 17,
+        Goblin = 18,
     }
 }

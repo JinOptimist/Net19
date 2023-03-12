@@ -29,33 +29,38 @@ namespace Maze
                 Height = height,
             };
 
+            var startX = random.Next(_maze.Widht);
+            var startY = random.Next(_maze.Height);
+
             BuildWall();
-            BuildGround();
-            BuildHero();
+            BuildGround(startX, startY);
+            BuildHero(startX, startY);
+            BuildGreedlyGuardian();
             BuildRandomTeleport();
 
             return _maze;
         }
 
-        private void BuildHero()
+        private void BuildGreedlyGuardian()
         {
-            var hero = new Hero()
-            {
-                X = 2,
-                Y = 1
-            };
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var greedlyGuardian = new GreedlyGuardian(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(greedlyGuardian);
+        }
 
+        private void BuildHero(int startX, int startY)
+        {
+            var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
 
-        private void BuildGround()
+        private void BuildGround(int startX, int startY)
         {
-            var randomX = random.Next(_maze.Widht);
-            var randomY = random.Next(_maze.Height);
-
             var randomCell = _maze
                 .Cells
-                .First(cell => cell.X == randomX && cell.Y == randomY);
+                .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
         }
@@ -79,7 +84,12 @@ namespace Maze
             wallToBreak = wallToBreak
                 .Where(wall => GetNearCellByType(wall, CellType.Ground).Count < 2)
                 .ToList();
-            
+
+            if (!wallToBreak.Any())
+            {
+                return;
+            }
+
             var random = new Random();
             var randmoIndex = random.Next(0, wallToBreak.Count);
             var randomWall = wallToBreak[randmoIndex];
@@ -108,11 +118,7 @@ namespace Maze
             {
                 for (int x = 0; x < _maze.Widht; x++)
                 {
-                    var cell = new Wall()
-                    {
-                        X = x,
-                        Y = y,
-                    };
+                    var cell = new Wall(x, y, _maze);
 
                     _maze.Cells.Add(cell);
                 }

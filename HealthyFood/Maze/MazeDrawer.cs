@@ -13,6 +13,7 @@ namespace Maze
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
                     Console.Write(GetCellSymbol(cell.CellType));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
@@ -22,6 +23,8 @@ namespace Maze
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
 
+            Console.SetCursorPosition(0, maze.Height + 2);
+            Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -39,6 +42,9 @@ namespace Maze
                 case CellType.RandomTelepot:
                     return "T"
                         ;
+                case CellType.GreedlyGuardian:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return "&";
                 default:
                     throw new Exception("BAD");
             }
