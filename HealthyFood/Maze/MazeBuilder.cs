@@ -22,7 +22,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 25, int height = 12)
+        public MazeLevel Build(int width = 10, int height = 5)
         {
             _maze = new MazeLevel()
             {
@@ -60,14 +60,14 @@ namespace Maze
 
         private void BuildGreedyHealer()
         {
-            var chekWall = _maze.Cells.Where(cell=>cell.CellType==CellType.Wall).ToList();
-            var maxIndexGreedyHealer = chekWall.Count;
+            var wall = _maze.Cells.Where(cell=>cell.CellType==CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = wall.Count;
             int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
-            var positionGreedyHealer = chekWall[indexGreedyHealer];
-            _maze.Cells.Remove(positionGreedyHealer);
+            var positionGreedyHealer = wall[indexGreedyHealer];
             var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
-            _maze.GreedyHealer= greedyHealer;
-            _maze.Cells.Add(greedyHealer);
+            _maze.ReplaceCell(greedyHealer);
+            _maze.GreedyHealer = greedyHealer;
+
         }//I find all the walls, choose a random one, delete it and put my healer there 
 
 
