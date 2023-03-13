@@ -1,17 +1,17 @@
 ﻿namespace Maze.MazeStuff.Characters
 {
-    public class Hero : ICharacter
+    public class Hero : BaseCharacter
     {
-        public string Name { get; set; } = "Conan-Barbarian";
-        public int Hp { get; set; } = 9;
+        public Hero(int x, int y, MazeLevel level) : base(x, y, level)
+        {
+            Name = "Conan-Barbarian";
+            Hp = 9;
+            Coins = 10;
+        }
 
-        public CellType CellType => CellType.Hero;
-
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Coins { get; set; }
-
-        public bool TryToStep(ICharacter character)
+        public override CellType CellType => CellType.Hero;
+        
+        public override bool TryToStep(ICharacter character)
         {
             throw new NotImplementedException();
         }

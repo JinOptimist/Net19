@@ -11,6 +11,3 @@ var sortedUserByName = usersMan
     .ThenBy(x => x.Age)
     .ThenBy(x => x.Height);
 
-
-
-// 2) OrderBy + ThenBy
