@@ -53,7 +53,11 @@ namespace Maze
             var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
             var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
             var easyTrap = new EasyTrap(randomEasyTrap.X, randomEasyTrap.Y, _maze);
-            _maze.ReplaceCell(easyTrap);
+            if (cellsIncludingAllGround.Count > 0)
+            {
+                _maze.ReplaceCell(easyTrap);
+            }
+            
         }
 
         private void BuildHero()
