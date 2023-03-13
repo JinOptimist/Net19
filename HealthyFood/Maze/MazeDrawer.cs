@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -47,6 +48,8 @@ namespace Maze
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";
+                case CellType.GoodHealer:
+                    return "+";
                 default:
                     throw new Exception("BAD");
             }

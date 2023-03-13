@@ -9,6 +9,7 @@
         GreedyHealer = 11,
         HardTrap = 13,
         GreedlyGuardian = 17,
-        Goblin = 18
+        Goblin = 18,
+        GoodHealer = 19,
     }
 }

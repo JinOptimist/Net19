@@ -40,6 +40,7 @@ namespace Maze
 
             BuildGreedlyGuardian();
             BuildHardTrap();
+            BuildGoodHealer();
 
             return _maze;
         }
@@ -71,6 +72,18 @@ namespace Maze
 
         }//I find all the walls, choose a random one, delete it and put my healer there 
 
+        private void BuildGoodHealer()
+        {
+            var changeDifficile = 15;
+            var listOfGround = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
+            foreach (var cell in listOfGround) 
+            {
+                var randomCellNum = random.Next(0, listOfGround.Count/ changeDifficile);
+                var randomCell = listOfGround[randomCellNum];
+                var goodHealer = new GoodHealer(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(goodHealer);
+            }
+        }
         private void BuildGround(int startX, int startY)
         {
             var randomCell = _maze
