@@ -1,6 +1,7 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze
 {
@@ -35,6 +36,8 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGreedyHealer();
+
             BuildGreedlyGuardian();
             BuildHardTrap();
 
@@ -55,6 +58,18 @@ namespace Maze
             var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
+
+        private void BuildGreedyHealer()
+        {
+            var wall = _maze.Cells.Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = wall.Count;
+            int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
+            var positionGreedyHealer = wall[indexGreedyHealer];
+            var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
+            _maze.ReplaceCell(greedyHealer);
+            _maze.GreedyHealer = greedyHealer;
+
+        }//I find all the walls, choose a random one, delete it and put my healer there 
 
         private void BuildGround(int startX, int startY)
         {

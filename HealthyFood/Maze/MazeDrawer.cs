@@ -39,6 +39,9 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GreedyHealer:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    return "H";
                 case CellType.HardTrap:
                     return "*";
                 case CellType.GreedlyGuardian:
