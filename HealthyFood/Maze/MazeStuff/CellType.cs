@@ -8,6 +8,7 @@
         Hero = 4,
         GreedyHealer = 11,
         HardTrap = 13,
+        PileOfCoins = 16,
         GreedlyGuardian = 17,
         Goblin = 18,
         GoodHealer = 19,

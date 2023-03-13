@@ -50,6 +50,8 @@ namespace Maze
                     return "&";
                 case CellType.GoodHealer:
                     return "+";
+                case CellType.PileOfCoins:
+                    return "G";
                 default:
                     throw new Exception("BAD");
             }

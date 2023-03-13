@@ -37,7 +37,7 @@ namespace Maze
             BuildGround(startX, startY);
             BuildHero(startX, startY);
             BuildGreedyHealer();
-
+            BuildPileOfGold();
             BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
@@ -52,6 +52,19 @@ namespace Maze
             var randomGroundCell = listOfGround[randomGroundCellIndex];
             var greedlyGuardian = new GreedlyGuardian(randomGroundCell.X, randomGroundCell.Y, _maze);
             _maze.ReplaceCell(greedlyGuardian);
+        }
+
+        private void BuildPileOfGold()
+        {
+            int pileOfGoldFrequency = 20;
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            for(int i = 0; i < listOfGround.Count/pileOfGoldFrequency; i++)
+            {
+                var randomCellNumber = random.Next(0, listOfGround.Count());
+                var randomCell = listOfGround[randomCellNumber];
+                var pileOfCoins = new PileOfCoins(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(pileOfCoins);
+            }
         }
 
         private void BuildHero(int startX, int startY)
