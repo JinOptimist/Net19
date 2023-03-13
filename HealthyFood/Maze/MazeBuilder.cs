@@ -37,7 +37,7 @@ namespace Maze
             BuildGround(startX, startY);
             BuildHero(startX, startY);
             BuildGreedyHealer();
-          
+
             BuildGreedlyGuardian();
 
             return _maze;
@@ -54,13 +54,13 @@ namespace Maze
 
         private void BuildHero(int startX, int startY)
         {
-             var hero = new Hero(startX, startY, _maze);
+            var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
 
         private void BuildGreedyHealer()
         {
-            var wall = _maze.Cells.Where(cell=>cell.CellType==CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var wall = _maze.Cells.Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
             var maxIndexGreedyHealer = wall.Count;
             int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
             var positionGreedyHealer = wall[indexGreedyHealer];
@@ -69,7 +69,6 @@ namespace Maze
             _maze.GreedyHealer = greedyHealer;
 
         }//I find all the walls, choose a random one, delete it and put my healer there 
-
 
         private void BuildGround(int startX, int startY)
         {
