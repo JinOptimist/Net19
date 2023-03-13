@@ -33,7 +33,7 @@ namespace Maze
             var startX = random.Next(_maze.Widht);
             var startY = random.Next(_maze.Height);
 
-            BuildWall();
+            BuildWall(startX, startY);
             BuildGround(startX, startY);
             BuildHero(startX, startY);
             BuildGreedyHealer();
@@ -151,8 +151,10 @@ namespace Maze
                .ToList();
         }
 
-        private void BuildWall()
+        private void BuildWall(int startX,int startY)
         {
+            var wall = new Wall(startX, startY, _maze);
+            _maze.SteppingOnWall = wall;
             for (int y = 0; y < _maze.Height; y++)
             {
                 for (int x = 0; x < _maze.Widht; x++)

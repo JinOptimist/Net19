@@ -23,9 +23,10 @@ namespace Maze
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
-
+            var steppingOnWall = maze.SteppingOnWall;
+            var greedyHealer= maze.GreedyHealer;
             Console.SetCursorPosition(0, maze.Height + 2);
-            Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+            Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}\nHardness Wall: {steppingOnWall.Hardness}\nGreedyHealer Coins: {greedyHealer.Coins}");
         }
 
         private string GetCellSymbol(CellType cellType)

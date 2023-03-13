@@ -6,14 +6,25 @@ namespace Maze.MazeStuff.Cells
     {
         public Wall(int x, int y, MazeLevel level) : base(x, y, level)
         {
+            Hardness = 5;
         }
 
         public override CellType CellType => CellType.Wall;
 
         public override bool TryToStep(ICharacter character)
         {
-            character.Hp--;
-            return false;
+            if (Hardness > 0)
+            {
+                Level.SteppingOnWall = this;
+                Hardness--;
+                return false;
+            }
+            else
+            {
+                Level.ReplaceToGround(this);
+            }
+
+            return true;
         }
     }
 }

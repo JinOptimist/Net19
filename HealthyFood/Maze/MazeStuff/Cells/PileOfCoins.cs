@@ -9,6 +9,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class PileOfCoins : BaseCell
     {
+
         private Random random = new Random();
 
         public PileOfCoins(int x, int y, MazeLevel level) : base(x, y, level)

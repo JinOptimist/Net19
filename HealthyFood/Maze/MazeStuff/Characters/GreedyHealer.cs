@@ -16,13 +16,19 @@ namespace Maze.MazeStuff.Characters
 
         public override bool TryToStep(ICharacter character)
         {
-            if (character.Coins > 0)
+            if (Coins > 0)
             {
                 character.Hp++;
                 character.Coins--;
-                return false;
+                Coins--;
+                return true;
             }
-            return true;
+            else
+            {
+                Level.ReplaceToGround(this);
+            }
+
+            return false;
         }
     }
 }
