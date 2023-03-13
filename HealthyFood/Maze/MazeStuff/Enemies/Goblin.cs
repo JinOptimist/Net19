@@ -15,7 +15,7 @@ namespace Maze.MazeStuff.Enemies
 
         public override void EndTurnActivity()
         {
-            var nearGrounds = GetNearCellByType(this, CellType.Ground);
+            var nearGrounds = GetNearCellNotType(this, CellType.Wall);
             var randomCell = GetRandom(nearGrounds);
             if (randomCell.TryToStep(this))
             {
@@ -46,14 +46,14 @@ namespace Maze.MazeStuff.Enemies
             return false;
         }
 
-        private List<BaseCell> GetNearCellByType(BaseCell currentCell, CellType type)
+        private List<BaseCell> GetNearCellNotType(BaseCell currentCell, CellType type)
         {
             return Level
                .Cells
                .Where(cell =>
                    cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
                    || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
-               .Where(x => x.CellType == type)
+               .Where(x => x.CellType != type)
                .ToList();
         }
     }

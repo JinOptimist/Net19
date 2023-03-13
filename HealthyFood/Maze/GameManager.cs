@@ -50,6 +50,9 @@ namespace Maze
             var destinationHeroX = _maze.Hero.X;
             var destinationHeroY = _maze.Hero.Y;
 
+            var destinationGreedyHealerX = _maze.GreedyHealer.X;
+            var destinationGreedyHealerY = _maze.GreedyHealer.Y;
+
             switch (direction)
             {
                 case Direction.Left:
@@ -78,6 +81,8 @@ namespace Maze
                 destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
             }
             
+            var greedyHealerCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationGreedyHealerX && cell.Y == destinationGreedyHealerY);
+
             if (destinationCell == null)
             {
                 return;

@@ -5,7 +5,7 @@
         public Hero(int x, int y, MazeLevel level) : base(x, y, level)
         {
             Name = "Conan-Barbarian";
-            Hp = 20;
+            Hp = 9;
             Coins = 10;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -45,9 +46,18 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GreedyHealer:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    return "H";
+                case CellType.HardTrap:
+                    return "*";
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";
+                case CellType.GoodHealer:
+                    return "+";
+                case CellType.PileOfCoins:
+                    return "G";
                 case CellType.Goblin:
                     return "g";
                 default:
