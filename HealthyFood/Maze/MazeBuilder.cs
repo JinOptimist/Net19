@@ -40,7 +40,7 @@ namespace Maze
             BuildPileOfGold();
             BuildHardTrap();
             BuildGoodHealer();
-            BuildHero();
+            GreedlyGuardian();
             BuildEasyTrap();
 
 
@@ -60,7 +60,7 @@ namespace Maze
             
         }
 
-        private void BuildHero()
+        private void GreedlyGuardian()
         {
             var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
             var randomGroundCellIndex = random.Next(0, listOfGround.Count);
