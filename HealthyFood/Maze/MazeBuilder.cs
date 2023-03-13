@@ -37,8 +37,10 @@ namespace Maze
             BuildGround(startX, startY);
             BuildHero(startX, startY);
             BuildGreedyHealer();
-          
+            BuildPileOfGold();
             BuildGreedlyGuardian();
+            BuildHardTrap();
+            BuildGoodHealer();
 
             return _maze;
         }
@@ -52,9 +54,22 @@ namespace Maze
             _maze.ReplaceCell(greedlyGuardian);
         }
 
+        private void BuildPileOfGold()
+        {
+            int pileOfGoldFrequency = 20;
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            for(int i = 0; i < listOfGround.Count/pileOfGoldFrequency; i++)
+            {
+                var randomCellNumber = random.Next(0, listOfGround.Count());
+                var randomCell = listOfGround[randomCellNumber];
+                var pileOfCoins = new PileOfCoins(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(pileOfCoins);
+            }
+        }
+
         private void BuildHero(int startX, int startY)
         {
-             var hero = new Hero(startX, startY, _maze);
+            var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
 
@@ -70,7 +85,18 @@ namespace Maze
 
         }//I find all the ground, choose a random one, delete it and put my healer there 
 
-
+        private void BuildGoodHealer()
+        {
+            var changeDifficile = 15;
+            var listOfGround = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
+            foreach (var cell in listOfGround) 
+            {
+                var randomCellNum = random.Next(0, listOfGround.Count/ changeDifficile);
+                var randomCell = listOfGround[randomCellNum];
+                var goodHealer = new GoodHealer(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(goodHealer);
+            }
+        }
         private void BuildGround(int startX, int startY)
         {
             var randomCell = _maze
@@ -80,6 +106,13 @@ namespace Maze
             Miner(randomCell, new List<BaseCell>());
         }
 
+        private void BuildHardTrap()
+        {
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+            var hardtrap = new HardTrap(randomX, randomY, _maze);
+            _maze.ReplaceCell(hardtrap);
+        }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);

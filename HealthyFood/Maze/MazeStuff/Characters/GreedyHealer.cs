@@ -16,7 +16,13 @@ namespace Maze.MazeStuff.Characters
 
         public override bool TryToStep(ICharacter character)
         {
-            return false;
+            if (character.Coins > 0)
+            {
+                character.Hp++;
+                character.Coins--;
+                return false;
+            }
+            return true;
         }
     }
 }

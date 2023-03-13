@@ -70,7 +70,6 @@ namespace Maze
                 _maze.Hero.X = destinationHeroX;
                 _maze.Hero.Y = destinationHeroY;
             }
-            
         }
     }
 }
