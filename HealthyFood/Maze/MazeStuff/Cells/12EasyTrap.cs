@@ -9,7 +9,13 @@ namespace Maze.MazeStuff.Cells
 {
     public class EasyTrap : BaseCell
     {
-        
+        private BaseCell randomEasyTrap;
+
+        public EasyTrap(BaseCell randomEasyTrap)
+        {
+            this.randomEasyTrap = randomEasyTrap;
+        }
+
         public override CellType CellType => CellType.EasyTrap;
 
         public override bool TryToStep(ICharacter Hero)
