@@ -14,6 +14,7 @@ namespace Maze
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
                     Console.Write(GetCellSymbol(cell.CellType));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
@@ -39,6 +40,14 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
+                case CellType.GreedyHealer:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    return "H";
+                case CellType.HardTrap:
+                    return "*";
+                case CellType.GreedlyGuardian:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return "&";
                 case CellType.GoodHealer:
                     return "+";
                 default:

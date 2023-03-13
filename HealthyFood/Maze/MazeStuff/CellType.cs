@@ -6,6 +6,9 @@
         Ground = 2,
         Exit = 3,
         Hero = 4,
+        GreedyHealer = 11,
+        HardTrap = 13,
+        GreedlyGuardian = 17,
         Goblin = 18,
         GoodHealer = 19,
     }

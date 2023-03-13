@@ -1,6 +1,7 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze
 {
@@ -35,9 +36,22 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGreedyHealer();
+
+            BuildGreedlyGuardian();
+            BuildHardTrap();
             BuildGoodHealer();
 
             return _maze;
+        }
+
+        private void BuildGreedlyGuardian()
+        {
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var greedlyGuardian = new GreedlyGuardian(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(greedlyGuardian);
         }
 
         private void BuildHero(int startX, int startY)
@@ -45,6 +59,18 @@ namespace Maze
             var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
+
+        private void BuildGreedyHealer()
+        {
+            var wall = _maze.Cells.Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = wall.Count;
+            int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
+            var positionGreedyHealer = wall[indexGreedyHealer];
+            var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
+            _maze.ReplaceCell(greedyHealer);
+            _maze.GreedyHealer = greedyHealer;
+
+        }//I find all the walls, choose a random one, delete it and put my healer there 
 
         private void BuildGoodHealer()
         {
@@ -67,6 +93,13 @@ namespace Maze
             Miner(randomCell, new List<BaseCell>());
         }
 
+        private void BuildHardTrap()
+        {
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+            var hardtrap = new HardTrap(randomX, randomY, _maze);
+            _maze.ReplaceCell(hardtrap);
+        }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);
