@@ -36,6 +36,7 @@ namespace Maze
             BuildGround(startX, startY);
             BuildHero(startX, startY);
             BuildGreedlyGuardian();
+            BuildHardTrap();
 
             return _maze;
         }
@@ -64,6 +65,13 @@ namespace Maze
             Miner(randomCell, new List<BaseCell>());
         }
 
+        private void BuildHardTrap()
+        {
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+            var hardtrap = new HardTrap(randomX, randomY, _maze);
+            _maze.ReplaceCell(hardtrap);
+        }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);
