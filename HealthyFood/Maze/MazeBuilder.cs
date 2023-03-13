@@ -22,7 +22,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 25, int height = 12)
+        public MazeLevel Build(int width = 10, int height = 5)
         {
             _maze = new MazeLevel()
             {
@@ -36,7 +36,8 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
-                      
+            BuildGreedyHealer();
+          
             BuildGreedlyGuardian();
 
             return _maze;
@@ -57,7 +58,19 @@ namespace Maze
             _maze.Hero = hero;
         }
 
-        
+        private void BuildGreedyHealer()
+        {
+            var grounds = _maze.Cells.Where(cell=>cell.CellType==CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = grounds.Count;
+            int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
+            var positionGreedyHealer = grounds[indexGreedyHealer];
+            var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
+            _maze.ReplaceCell(greedyHealer);
+            _maze.GreedyHealer = greedyHealer;
+
+        }//I find all the ground, choose a random one, delete it and put my healer there 
+
+
         private void BuildGround(int startX, int startY)
         {
             var randomCell = _maze
