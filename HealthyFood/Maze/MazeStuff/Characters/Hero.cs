@@ -7,7 +7,6 @@
             Name = "Conan-Barbarian";
             Hp = 9;
             Coins = 10;
-            
         }
 
         public override CellType CellType => CellType.Hero;
