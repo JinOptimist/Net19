@@ -42,6 +42,8 @@ namespace Maze
                 case CellType.GreedyHealer:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     return "H";
+                case CellType.HardTrap:
+                    return "*";
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";

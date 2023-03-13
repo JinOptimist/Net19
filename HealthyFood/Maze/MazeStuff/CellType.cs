@@ -7,7 +7,8 @@
         Exit = 3,
         Hero = 4,
         GreedyHealer = 11,
+        HardTrap = 13,
         GreedlyGuardian = 17,
-        Goblin = 18,
+        Goblin = 18
     }
 }
