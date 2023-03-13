@@ -46,7 +46,7 @@ namespace Maze
             var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
             var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
             var easyTrap = new EasyTrap(randomEasyTrap);
-            _maze.ReplaceToGround(easyTrap);
+           // _maze.ReplaceToGround(easyTrap);
 
 
         }
