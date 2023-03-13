@@ -42,15 +42,11 @@ namespace Maze
         {
             
 
-            var cellsIncludingAllGround = _maze
-    .Cells
-     .Where(x => x.CellType == CellType.Ground)
-     .ToList();
-
+            var cellsIncludingAllGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
             var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
             var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
             var easyTrap = new EasyTrap(randomEasyTrap);
-            _maze.Cells.Add(easyTrap);
+            _maze.ReplaceToGround(easyTrap);
 
 
         }

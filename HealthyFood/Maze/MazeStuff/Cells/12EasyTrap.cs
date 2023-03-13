@@ -11,6 +11,10 @@ namespace Maze.MazeStuff.Cells
     {
         private BaseCell randomEasyTrap;
 
+        public EasyTrap()
+        {
+        }
+
         public EasyTrap(BaseCell randomEasyTrap)
         {
             this.randomEasyTrap = randomEasyTrap;
