@@ -43,7 +43,6 @@ namespace Maze
             BuildGoodHealer();
             BuildEasyTrap();
 
-
             return _maze;
         }
 
@@ -56,8 +55,7 @@ namespace Maze
             if (cellsIncludingAllGround.Count > 0)
             {
                 _maze.ReplaceCell(easyTrap);
-            }
-            
+            }       
         }
 
         private void BuildGreedlyGuardian()

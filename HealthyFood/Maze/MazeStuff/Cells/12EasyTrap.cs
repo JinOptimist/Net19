@@ -22,8 +22,6 @@ namespace Maze.MazeStuff.Cells
             Hero.Hp--;
             this.Level.ReplaceToGround(this);
                 return true;
-
         }
     }
 }
-
