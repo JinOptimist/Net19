@@ -38,10 +38,8 @@ namespace Maze
             BuildHero(startX, startY);
             BuildGreedyHealer();
             BuildPileOfGold();
-            BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
-            BuildGround();
             BuildHero();
             BuildEasyTrap();
 
@@ -50,16 +48,12 @@ namespace Maze
         }
 
         private void BuildEasyTrap()
-        {
-            
-
+        {            
             var cellsIncludingAllGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
             var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
             var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
-            var easyTrap = new EasyTrap(randomEasyTrap);
-           // _maze.ReplaceToGround(easyTrap);
-
-
+            var easyTrap = new EasyTrap(randomEasyTrap.X, randomEasyTrap.Y, _maze);
+            _maze.ReplaceCell(easyTrap);
         }
 
         private void BuildHero()

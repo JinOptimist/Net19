@@ -9,15 +9,8 @@ namespace Maze.MazeStuff.Cells
 {
     public class EasyTrap : BaseCell
     {
-        private BaseCell randomEasyTrap;
-
-        public EasyTrap()
+        public EasyTrap(int x, int y, MazeLevel level) : base(x, y, level)
         {
-        }
-
-        public EasyTrap(BaseCell randomEasyTrap)
-        {
-            this.randomEasyTrap = randomEasyTrap;
         }
 
         public override CellType CellType => CellType.EasyTrap;
@@ -25,7 +18,9 @@ namespace Maze.MazeStuff.Cells
         public override bool TryToStep(ICharacter Hero)
         {
             Hero.Hp--;
+            this.Level.ReplaceToGround(this);
             return true;
+
         }
     }
 }
