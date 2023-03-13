@@ -38,9 +38,9 @@ namespace Maze
             BuildHero(startX, startY);
             BuildGreedyHealer();
             BuildPileOfGold();
+            BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
-            GreedlyGuardian();
             BuildEasyTrap();
 
 
@@ -60,7 +60,7 @@ namespace Maze
             
         }
 
-        private void GreedlyGuardian()
+        private void BuildGreedlyGuardian()
         {
             var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
             var randomGroundCellIndex = random.Next(0, listOfGround.Count);
@@ -119,7 +119,6 @@ namespace Maze
                 .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
-
         }
 
         private void BuildHardTrap()
