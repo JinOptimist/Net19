@@ -1,6 +1,8 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using System;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze
 {
@@ -29,9 +31,12 @@ namespace Maze
                 Height = height,
             };
 
+            var startX = random.Next(_maze.Widht);
+            var startY = random.Next(_maze.Height);
+
             BuildWall();
-            BuildGround();
-            BuildHero();
+            BuildGround(startX, startY);
+            BuildHero(startX, startY);
             BuildDeadEndTeleport();
 
             return _maze;
@@ -39,42 +44,30 @@ namespace Maze
 
         private void BuildDeadEndTeleport()
         {
-            var firstTeleport = new DeadEndTeleport()
-            {
-                X = 0,
-                Y = 0,
-            };
+            var firstCell = _maze
+                .Cells
+                .First(cell => cell.X == 0 && cell.Y == 0);
+            _maze.ReplaceCellByType(firstCell, CellType.DeadEndTeleport);
+            MinerForDeadEndTeleport(firstCell, new List<BaseCell>());
 
-            _maze.Cells.Add(firstTeleport);
-
-            var secondTeleport = new DeadEndTeleport()
-            {
-                X = _maze.Widht - 1,
-                Y = _maze.Height - 1,
-            };
-
-            _maze.Cells.Add(secondTeleport);
+            var LastCell = _maze
+                .Cells
+                .First(cell => cell.X == _maze.Widht - 1 && cell.Y == _maze.Height - 1);
+            _maze.ReplaceCellByType(LastCell, CellType.DeadEndTeleport);
+            MinerForDeadEndTeleport(LastCell, new List<BaseCell>());
         }
 
-        private void BuildHero()
+        private void BuildHero(int startX, int startY)
         {
-            var hero = new Hero()
-            {
-                X = 2,
-                Y = 1
-            };
-
+            var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
         }
 
-        private void BuildGround()
+        private void BuildGround(int startX, int startY)
         {
-            var randomX = random.Next(_maze.Widht);
-            var randomY = random.Next(_maze.Height);
-
             var randomCell = _maze
                 .Cells
-                .First(cell => cell.X == randomX && cell.Y == randomY);
+                .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
         }
@@ -89,6 +82,11 @@ namespace Maze
             wallToBreak = wallToBreak
                 .Where(wall => GetNearCellByType(wall, CellType.Ground).Count < 2)
                 .ToList();
+
+            if (!wallToBreak.Any())
+            {
+                return;
+            }
 
             var random = new Random();
             var randmoIndex = random.Next(0, wallToBreak.Count);
@@ -112,20 +110,58 @@ namespace Maze
                .ToList();
         }
 
+        private List<BaseCell> GetNearCell(BaseCell currentCell)
+        {
+            return _maze
+               .Cells
+               .Where(cell =>
+                   cell.X == currentCell.X && Math.Abs(cell.Y - currentCell.Y) == 1
+                   || cell.Y == currentCell.Y && Math.Abs(cell.X - currentCell.X) == 1)
+               .ToList();
+        }
+
         private void BuildWall()
         {
             for (int y = 0; y < _maze.Height; y++)
             {
                 for (int x = 0; x < _maze.Widht; x++)
                 {
-                    var cell = new Wall()
-                    {
-                        X = x,
-                        Y = y,
-                    };
+                    var cell = new Wall(x, y, _maze);
 
                     _maze.Cells.Add(cell);
                 }
+            }
+        }
+
+        private void MinerForDeadEndTeleport(BaseCell currentCell, List<BaseCell> wallToBreak)
+        {
+            var nearWalls = GetNearCellByType(currentCell, CellType.Wall);
+            wallToBreak.AddRange(nearWalls);
+
+            if (wallToBreak.Count == 1)
+            {
+                return;
+            }
+
+            var random = new Random();
+            int randmoIndex;
+
+            if (wallToBreak.Count == 2)
+            {
+                randmoIndex = random.Next(0, wallToBreak.Count - 1);
+                var randomWall = wallToBreak[randmoIndex];
+                wallToBreak.Remove(randomWall);
+
+                _maze.ReplaceCellByType(randomWall, CellType.Ground);
+            }
+            else
+            {
+                var nearCells = GetNearCell(currentCell);
+                randmoIndex = random.Next(0, nearCells.Count - 1);
+                var randomCell = nearCells[randmoIndex];
+                nearCells.Remove(randomCell);
+
+                _maze.ReplaceCellByType(randomCell, CellType.Wall);
             }
         }
     }
