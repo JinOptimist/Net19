@@ -8,8 +8,7 @@ namespace Maze
     public class MazeBuilder
     {
         private MazeLevel _maze;
-        private Random random;
-
+        private Random random;        
         public MazeBuilder(int? seed = null)
         {
             if (seed == null)
@@ -44,6 +43,8 @@ namespace Maze
             BuildEasyTrap();
             BuildGonlins();
 
+            BuildGoldMine();
+            BuildGoldMine();
             return _maze;
         }
 
@@ -79,6 +80,35 @@ namespace Maze
                 var pileOfCoins = new PileOfCoins(randomCell.X, randomCell.Y, _maze);
                 _maze.ReplaceCell(pileOfCoins);
             }
+        }
+
+
+        /// <summary>
+        /// Make goldwall. When player try ro step in it, he takeы money, max = 3
+        /// </summary>
+        private void BuildGoldMine()
+        {
+
+            var searchWallList = _maze.Cells.Where(cell => cell.CellType == CellType.Wall).ToList();
+            var indexOfsearchWallList = searchWallList.Count;
+            int randomIndex = random.Next(0, indexOfsearchWallList);
+            int xForGoldWall = searchWallList[randomIndex].X;
+            int yForGoldWall = searchWallList[randomIndex].Y;
+
+
+            var cellIsOneGroundNearGoldWall = _maze.Cells.Single(cell => cell.X == xForGoldWall && cell.Y == yForGoldWall);
+
+            var countGroundNearGoldWall = GetNearCellByType(cellIsOneGroundNearGoldWall, CellType.Ground);
+            GoldWall goldWall = new GoldWall(xForGoldWall, yForGoldWall, _maze);
+            //Wall wall = new Wall(xForGoldWall, yForGoldWall, _maze);
+
+            if (countGroundNearGoldWall.Count > 0)
+            {
+                _maze.ReplaceCell(goldWall);
+            }
+
+            else BuildGoldMine();
+
         }
 
         private void BuildGonlins(int startGoblinHp = 3, int goblinCount = 4)
