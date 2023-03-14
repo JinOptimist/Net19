@@ -4,7 +4,7 @@ namespace Maze.MazeStuff.Characters
 {
     public abstract class BaseCharacter : BaseCell, ICharacter, IBaseCharacter
     {
-        public BaseCharacter(int x, int y, MazeLevel level) : base(x, y, level)
+        public BaseCharacter(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 

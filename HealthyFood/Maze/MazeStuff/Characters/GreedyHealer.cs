@@ -5,7 +5,7 @@ namespace Maze.MazeStuff.Characters
 {
     public class GreedyHealer : BaseCharacter
     {
-        public GreedyHealer(int x, int y, MazeLevel level) : base(x, y, level)
+        public GreedyHealer(int x, int y, IMazeLevel level) : base(x, y, level)
         {
             Name = "GreedyHealer";
             Hp = 10;
