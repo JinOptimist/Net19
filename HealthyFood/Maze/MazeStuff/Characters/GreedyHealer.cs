@@ -24,5 +24,10 @@ namespace Maze.MazeStuff.Characters
             }
             return false;
         }
+
+        public override void UpdateVisibleCells()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

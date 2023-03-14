@@ -11,5 +11,8 @@ namespace Maze.MazeStuff.Characters
         public string Name { get; set; }
         public int Hp { get; set; }
         public int Coins { get; set; }
+        public List<BaseCell> VisibleCells { get; set; } = new List<BaseCell>();
+        public int Radius { get; set; }
+        public abstract void UpdateVisibleCells();
     }
 }

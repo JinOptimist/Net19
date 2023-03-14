@@ -35,12 +35,12 @@ namespace Maze
 
             BuildWall();
             BuildGround(startX, startY);
-            BuildHero(startX, startY);
             BuildGreedyHealer();
             BuildPileOfGold();
             BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
+            BuildHero(startX, startY);
 
             return _maze;
         }
@@ -71,6 +71,7 @@ namespace Maze
         {
             var hero = new Hero(startX, startY, _maze);
             _maze.Hero = hero;
+            hero.UpdateVisibleCells();
         }
 
         private void BuildGreedyHealer()

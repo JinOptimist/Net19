@@ -23,5 +23,10 @@ namespace Maze.MazeStuff.Enemies
 
             return false;
         }
+
+        public override void UpdateVisibleCells()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

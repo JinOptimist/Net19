@@ -12,6 +12,5 @@
         GreedlyGuardian = 17,
         Goblin = 18,
         GoodHealer = 19,
-        UnknownCell = 27,
     }
 }

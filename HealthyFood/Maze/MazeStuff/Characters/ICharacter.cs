@@ -7,5 +7,8 @@ namespace Maze.MazeStuff.Characters
         string Name { get; set; }
         int Hp { get; set; }
         int Coins { get; set; }
+        int Radius { get; set; }
+        List<BaseCell> VisibleCells { get; set; }
+        void UpdateVisibleCells();
     }
 }
