@@ -8,8 +8,7 @@ namespace Maze
     {
 
         private MazeLevel _maze;
-        private Random random;
-        
+        private Random random;        
         public MazeBuilder(int? seed = null)
         {
             if (seed == null)
