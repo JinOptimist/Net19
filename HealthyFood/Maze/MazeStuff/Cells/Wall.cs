@@ -4,9 +4,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class Wall : BaseCell
     {
-       
-
-        public Wall(int x, int y, IMazeLevel level) : base(x, y, level)
+      public Wall(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
