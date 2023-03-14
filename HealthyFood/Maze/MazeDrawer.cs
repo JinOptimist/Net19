@@ -1,5 +1,6 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
 
 namespace Maze
 {
@@ -8,25 +9,38 @@ namespace Maze
         public void Draw(MazeLevel maze)
         {
             Console.Clear();
+            var hero = maze.Hero;
             for (int y = 0; y < maze.Height; y++)
             {
                 for (int x = 0; x < maze.Widht; x++)
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
-                    var makeCell = GetCellSymbol(cell.CellType);
-                    Console.Write(makeCell);
+                    if(isItVisibleCell(cell, hero))
+                    {
+                        Console.Write(GetCellSymbol(cell.CellType));
+                    }
+                    else
+                    {
+                        Console.Write("?");
+                    }
                     Console.ResetColor();
                 }
                 Console.WriteLine();
             }
 
-            var hero = maze.Hero;
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+        }
+
+        private bool isItVisibleCell(BaseCell cell, ICharacter hero)
+        {
+            int radius = 4;
+            var distance = Math.Pow(cell.X - hero.X, 2) + Math.Pow(cell.Y - hero.Y, 2);
+            return distance < Math.Pow(radius, 2);
         }
 
         private string GetCellSymbol(CellType cellType)

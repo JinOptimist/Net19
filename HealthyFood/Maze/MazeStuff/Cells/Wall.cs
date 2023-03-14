@@ -8,6 +8,10 @@ namespace Maze.MazeStuff.Cells
         {
         }
 
+        public Wall(int x, int y, IMazeLevel level) : base(x, y, level)
+        {
+        }
+
         public override CellType CellType => CellType.Wall;
 
         public override bool TryToStep(ICharacter character)
