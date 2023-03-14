@@ -7,5 +7,12 @@
         Exit = 3,
         Hero = 4,
         DeadEndTeleport = 15,
+        GreedyHealer = 11,
+        HardTrap = 13,
+        PileOfCoins = 16,
+        GreedlyGuardian = 17,
+        Goblin = 18,
+        GoodHealer = 19,
+        EasyTrap = 12,
     }
 }

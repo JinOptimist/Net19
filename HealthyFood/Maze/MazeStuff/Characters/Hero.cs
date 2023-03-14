@@ -13,7 +13,7 @@ namespace Maze.MazeStuff.Characters
         }
 
         public override CellType CellType => CellType.Hero;
-
+        
         public override bool TryToStep(ICharacter character)
         {
             throw new NotImplementedException();
