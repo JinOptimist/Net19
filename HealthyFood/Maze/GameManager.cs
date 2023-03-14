@@ -41,6 +41,7 @@ namespace Maze
             var destinationHeroX = _maze.Hero.X;
             var destinationHeroY = _maze.Hero.Y;
 
+            
             switch (direction)
             {
                 case Direction.Left:
@@ -58,7 +59,7 @@ namespace Maze
             }
 
             var destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
-
+            
             if (destinationCell == null)
             {
                 return;
