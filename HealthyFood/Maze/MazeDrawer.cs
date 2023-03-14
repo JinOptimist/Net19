@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
 
 namespace Maze
 {
@@ -12,8 +13,6 @@ namespace Maze
                 for (int x = 0; x < maze.Widht; x++)
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
-                    
-                    //if (GetCellSymbol(cell.CellType) == CellType.GoldWall).
                     var makeCell = GetCellSymbol(cell.CellType);
                     if (cell.CellType == CellType.GoldWall)
                     {
@@ -27,9 +26,7 @@ namespace Maze
             }
 
             var hero = maze.Hero;
-            
             Console.SetCursorPosition(hero.X, hero.Y);
-           
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
 
@@ -49,9 +46,22 @@ namespace Maze
                     return "E";
                 case CellType.Hero:
                     return "@";
-                case CellType.GoldWall:                   
+                case CellType.GreedyHealer:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    return "H";
+                case CellType.HardTrap:
+                    return "*";
+                case CellType.GreedlyGuardian:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return "&";
+                case CellType.GoodHealer:
+                    return "+";
+                case CellType.PileOfCoins:
+                    return "G";
+                case CellType.EasyTrap:
+                    return "X";
+                case CellType.GoldWall:
                     return "#";
-
                 default:
                     throw new Exception("BAD");
             }

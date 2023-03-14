@@ -1,12 +1,12 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze
 {
     public class MazeBuilder
     {
-
         private MazeLevel _maze;
         private Random random;        
         public MazeBuilder(int? seed = null)
@@ -35,10 +35,50 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
+            BuildGreedyHealer();
+            BuildPileOfGold();
+            BuildGreedlyGuardian();
+            BuildHardTrap();
+            BuildGoodHealer();
+            BuildEasyTrap();
 
             BuildGoldMine();
             BuildGoldMine();
             return _maze;
+        }
+
+        private void BuildEasyTrap()
+        {            
+            var cellsIncludingAllGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
+            var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
+            var easyTrap = new EasyTrap(randomEasyTrap.X, randomEasyTrap.Y, _maze);
+            if (cellsIncludingAllGround.Count > 0)
+            {
+                _maze.ReplaceCell(easyTrap);
+            }       
+        }
+
+        private void BuildGreedlyGuardian()
+        {
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var greedlyGuardian = new GreedlyGuardian(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(greedlyGuardian);
+        }
+
+        private void BuildPileOfGold()
+        {
+            int pileOfGoldFrequency = 20;
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            for(int i = 0; i < listOfGround.Count/pileOfGoldFrequency; i++)
+            {
+                var randomCellNumber = random.Next(0, listOfGround.Count());
+                var randomCell = listOfGround[randomCellNumber];
+                var pileOfCoins = new PileOfCoins(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(pileOfCoins);
+            }
         }
 
 
@@ -76,6 +116,30 @@ namespace Maze
             _maze.Hero = hero;
         }
 
+        private void BuildGreedyHealer()
+        {
+            var grounds = _maze.Cells.Where(cell=>cell.CellType==CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = grounds.Count;
+            int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
+            var positionGreedyHealer = grounds[indexGreedyHealer];
+            var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
+            _maze.ReplaceCell(greedyHealer);
+            _maze.GreedyHealer = greedyHealer;
+
+        }//I find all the ground, choose a random one, delete it and put my healer there 
+
+        private void BuildGoodHealer()
+        {
+            var changeDifficile = 15;
+            var listOfGround = _maze.Cells.Where(x=> x.CellType == CellType.Ground).ToList();
+            foreach (var cell in listOfGround) 
+            {
+                var randomCellNum = random.Next(0, listOfGround.Count/ changeDifficile);
+                var randomCell = listOfGround[randomCellNum];
+                var goodHealer = new GoodHealer(randomCell.X, randomCell.Y, _maze);
+                _maze.ReplaceCell(goodHealer);
+            }
+        }
         private void BuildGround(int startX, int startY)
         {
             var randomCell = _maze
@@ -85,6 +149,13 @@ namespace Maze
             Miner(randomCell, new List<BaseCell>());
         }
 
+        private void BuildHardTrap()
+        {
+            var randomX = random.Next(_maze.Widht);
+            var randomY = random.Next(_maze.Height);
+            var hardtrap = new HardTrap(randomX, randomY, _maze);
+            _maze.ReplaceCell(hardtrap);
+        }
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)
         {
             _maze.ReplaceToGround(currentCell);
