@@ -66,6 +66,8 @@ namespace Maze
                     return "H";
                 case CellType.HardTrap:
                     return "*";
+                case CellType.RandomTelepot:
+                    return "T";
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";
