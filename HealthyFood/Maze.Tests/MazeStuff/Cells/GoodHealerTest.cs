@@ -8,15 +8,22 @@ namespace Maze.Tests.MazeStuff.Cells
 {
     public class GoodHealerTest
     {
+        private Mock<IMazeLevel> _mazeMock;
+        private Mock<ICharacter> _heroMock;
+
+        [SetUp]
+        public void SetupTest()
+        {
+            _mazeMock= new Mock<IMazeLevel>();
+            _heroMock= new Mock<ICharacter>();
+        }
+
         [Test]
         public void TryToStep_CellIsStepable()
         {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
+            var goodHealer = new GoodHealer(1, 1, _mazeMock.Object);
 
-            var goodHealer = new GoodHealer(1, 1, mazeMock.Object);
-
-            var isStepPosible = goodHealer.TryToStep(heroMock.Object);
+            var isStepPosible = goodHealer.TryToStep(_heroMock.Object);
 
             Assert.AreEqual(true, isStepPosible, "Good Healer must be stepable");
         }
@@ -28,30 +35,25 @@ namespace Maze.Tests.MazeStuff.Cells
         [TestCase(4, 5)]
         public void TryToStep_HeroHpChanges(int hpBeforeTrap, int hpAfterTrap)
         {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
+            _heroMock.SetupProperty(x => x.Hp);
 
-            heroMock.SetupProperty(x => x.Hp);
+            _heroMock.Object.Hp = hpBeforeTrap;
 
-            heroMock.Object.Hp = hpBeforeTrap;
+            var goodHealer = new GoodHealer(1, 1, _mazeMock.Object);
 
-            var goodHealer = new GoodHealer(1, 1, mazeMock.Object);
+            goodHealer.TryToStep(_heroMock.Object);
 
-            goodHealer.TryToStep(heroMock.Object);
-
-            Assert.AreEqual(hpAfterTrap, heroMock.Object.Hp);
+            Assert.AreEqual(hpAfterTrap, _heroMock.Object.Hp);
         }
 
         [Test]
         public void TryToStep_CellReplaceToGround()
         {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
-            var goodHealer = new GoodHealer(1, 1, mazeMock.Object);
+            var goodHealer = new GoodHealer(1, 1, _mazeMock.Object);
 
-            goodHealer.TryToStep(heroMock.Object);
+            goodHealer.TryToStep(_heroMock.Object);
 
-            mazeMock.Verify(x => x.ReplaceToGround(goodHealer), Times.Once());
+            _mazeMock.Verify(x => x.ReplaceToGround(goodHealer), Times.Once());
         }
     }
 }
