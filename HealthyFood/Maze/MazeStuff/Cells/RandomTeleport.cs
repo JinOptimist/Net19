@@ -17,13 +17,11 @@ namespace Maze.MazeStuff.Cells
 
         public override bool TryToStep(ICharacter character)
         {
-            
             var allGround = Level.Cells.Where(x => x.CellType == CellType.Ground).ToList();
             var randomIndexGround = _random.Next(allGround.Count);
             var randomGround = allGround[randomIndexGround];
             character.X = randomGround.X;
             character.Y = randomGround.Y;
-
 
             return false;
         }
