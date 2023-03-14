@@ -9,47 +9,23 @@ namespace Maze.Tests.Enemies
 {
     public class GoblinTest
     {
-        private Mock<IMazeLevel> _mazeMock;
-        private Mock<ICharacter> _heroMock;
-        //private Goblin _goblin;
-        private int hp = 0;
-
-        [SetUp]
-        public void InIt()
-        {
-
-            _mazeMock = new Mock<IMazeLevel>();
-            _heroMock = new Mock<ICharacter>();
-            //_goblin = new Goblin(hp, 1, 1, _mazeMock.Object);
-        }
-
         [Test]
-        [TestCase(10, 9)]
-        [TestCase(1, 0)]
-        public void TryToStepHpGoblinChange(int hp, int hpAfterOneMove)
+        [TestCase(10, 9, 0)]
+        [TestCase(1, 0, 1)]
+        [TestCase(-1, -2, 1)]
+        public void TryToStepHpGoblinHpChangeAndHeroExpChange(int hp, int hpAfterOneMove, int expOfHero)
         {
-
-            _mazeMock.Setup(x => x.Enemies).Returns(new List<BaseEnemy>());
-            _heroMock.SetupProperty(x => x.Hp);
-            _heroMock.Object.Hp = 9;
-            var goblin = new Goblin(hp, 1, 1, _mazeMock.Object);
-            goblin.TryToStep(_heroMock.Object);
+            var mazeMock = new Mock<IMazeLevel>();
+            var heroMock = new Mock<ICharacter>();
+            mazeMock.Setup(x => x.Enemies).Returns(new List<BaseEnemy>());
+            heroMock.SetupProperty(x => x.Hp);
+            heroMock.Object.Hp = 9;
+            heroMock.SetupProperty(x => x.Experience);
+            heroMock.Object.Experience = 0;
+            var goblin = new Goblin(hp, 1, 1, mazeMock.Object);
+            goblin.TryToStep(heroMock.Object);
             Assert.AreEqual(hpAfterOneMove, goblin.Hp);
+            Assert.AreEqual(expOfHero, heroMock.Object.Experience);
         }
-
-        [Test]
-        [TestCase(10, 0)]
-        [TestCase(1, 1)]
-        [TestCase(-1, 1)]
-        public void TryToStepExpHero(int hp, int expOfHero)
-        {
-            _mazeMock.Setup(x => x.Enemies).Returns(new List<BaseEnemy>());
-            _heroMock.SetupProperty(x => x.Experience);
-            _heroMock.Object.Experience = 0;
-            var goblin = new Goblin(hp, 1, 1, _mazeMock.Object);
-            goblin.TryToStep(_heroMock.Object);
-            Assert.AreEqual(expOfHero, _heroMock.Object.Experience);
-        }
-
     }
 }
