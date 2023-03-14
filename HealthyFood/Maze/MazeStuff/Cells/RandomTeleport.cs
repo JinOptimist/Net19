@@ -6,8 +6,8 @@ namespace Maze.MazeStuff.Cells
 {
     public class RandomTeleport : BaseCell
     {
-        private MazeLevel maze;
 
+        private Random _random = new Random();
         public RandomTeleport(int x, int y, MazeLevel maze) : base(x,y, maze)
         {
 
@@ -17,12 +17,14 @@ namespace Maze.MazeStuff.Cells
 
         public override bool TryToStep(ICharacter character)
         {
-            var ground = new Ground(X, Y, maze);
             
-            Random random = new Random();
-            character.X = random.Next(ground.X);
-            character.Y = random.Next(ground.Y);
-            
+            var allGround = Level.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            var randomIndexGround = _random.Next(allGround.Count);
+            var randomGround = allGround[randomIndexGround];
+            character.X = randomGround.X;
+            character.Y = randomGround.Y;
+
+
             return false;
         }
     }
