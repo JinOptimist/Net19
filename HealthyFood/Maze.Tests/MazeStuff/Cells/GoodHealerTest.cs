@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Maze.Tests.MazeStuff.Cells
 {
-    internal class GoodHealerTest
+    public class GoodHealerTest
     {
         [Test]
         public void TryToStep_CellIsStepable()
