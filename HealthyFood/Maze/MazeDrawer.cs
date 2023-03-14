@@ -6,6 +6,7 @@ namespace Maze
 {
     public class MazeDrawer
     {
+        public const int RADIUS = 4;
         public void Draw(MazeLevel maze)
         {
             Console.Clear();
@@ -15,7 +16,7 @@ namespace Maze
                 for (int x = 0; x < maze.Widht; x++)
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
-                    if(isItVisibleCell(cell, hero))
+                    if (isItVisibleCell(cell, hero))
                     {
                         Console.Write(GetCellSymbol(cell.CellType));
                     }
@@ -38,9 +39,8 @@ namespace Maze
 
         private bool isItVisibleCell(BaseCell cell, ICharacter hero)
         {
-            int radius = 4;
             var distance = Math.Pow(cell.X - hero.X, 2) + Math.Pow(cell.Y - hero.Y, 2);
-            return distance < Math.Pow(radius, 2);
+            return distance < Math.Pow(RADIUS, 2);
         }
 
         private string GetCellSymbol(CellType cellType)
