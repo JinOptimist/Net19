@@ -1,4 +1,5 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Characters;
 
 namespace Maze
 {
@@ -22,6 +23,7 @@ namespace Maze
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
+            SetRadiusOfVisibility(hero, maze);
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
@@ -42,8 +44,29 @@ namespace Maze
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";
+                case CellType.UnknownCell:
+                    return "?";
                 default:
                     throw new Exception("BAD");
+            }
+        }
+        private void SetRadiusOfVisibility(ICharacter hero, MazeLevel maze)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
+                    if (Math.Abs(hero.X - cell.X) == x && Math.Abs(hero.Y - cell.Y) == y)
+                    {
+                        cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
+                        Console.Write(GetCellSymbol(cell.CellType));
+                    }
+                    else
+                    {
+                        Console.Write(GetCellSymbol(CellType.UnknownCell));
+                    }
+                }
             }
         }
     }

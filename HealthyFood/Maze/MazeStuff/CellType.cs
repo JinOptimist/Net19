@@ -8,5 +8,6 @@
         Hero = 4,
         GreedlyGuardian = 17,
         Goblin = 18,
+        UnknownCell = 27,
     }
 }
