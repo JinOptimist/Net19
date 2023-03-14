@@ -20,9 +20,9 @@ namespace Maze.MazeStuff.Characters
             {
                 character.Hp++;
                 character.Coins--;
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

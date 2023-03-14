@@ -12,5 +12,6 @@
         GreedlyGuardian = 17,
         Goblin = 18,
         GoodHealer = 19,
+        EasyTrap = 12,
     }
 }

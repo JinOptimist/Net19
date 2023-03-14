@@ -41,9 +41,22 @@ namespace Maze
             BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
+            BuildEasyTrap();
             BuildGonlins();
 
             return _maze;
+        }
+
+        private void BuildEasyTrap()
+        {            
+            var cellsIncludingAllGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
+            var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
+            var easyTrap = new EasyTrap(randomEasyTrap.X, randomEasyTrap.Y, _maze);
+            if (cellsIncludingAllGround.Count > 0)
+            {
+                _maze.ReplaceCell(easyTrap);
+            }       
         }
 
         private void BuildGreedlyGuardian()
@@ -86,15 +99,15 @@ namespace Maze
 
         private void BuildGreedyHealer()
         {
-            var wall = _maze.Cells.Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
-            var maxIndexGreedyHealer = wall.Count;
+            var grounds = _maze.Cells.Where(cell=>cell.CellType==CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count > 1).ToList();
+            var maxIndexGreedyHealer = grounds.Count;
             int indexGreedyHealer = random.Next(0, maxIndexGreedyHealer);
-            var positionGreedyHealer = wall[indexGreedyHealer];
+            var positionGreedyHealer = grounds[indexGreedyHealer];
             var greedyHealer = new GreedyHealer(positionGreedyHealer.X, positionGreedyHealer.Y, _maze);
             _maze.ReplaceCell(greedyHealer);
             _maze.GreedyHealer = greedyHealer;
 
-        }//I find all the walls, choose a random one, delete it and put my healer there 
+        }//I find all the ground, choose a random one, delete it and put my healer there 
 
         private void BuildGoodHealer()
         {

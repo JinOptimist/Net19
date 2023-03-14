@@ -50,9 +50,7 @@ namespace Maze
             var destinationHeroX = _maze.Hero.X;
             var destinationHeroY = _maze.Hero.Y;
 
-            var destinationGreedyHealerX = _maze.GreedyHealer.X;
-            var destinationGreedyHealerY = _maze.GreedyHealer.Y;
-
+            
             switch (direction)
             {
                 case Direction.Left:

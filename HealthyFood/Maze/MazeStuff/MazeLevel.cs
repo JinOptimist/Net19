@@ -1,11 +1,10 @@
-﻿
-using Maze.MazeStuff.Cells;
+﻿using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
 using Maze.MazeStuff.Enemies;
 
 namespace Maze.MazeStuff
 {
-    public class MazeLevel
+    public class MazeLevel : IMazeLevel
     {
         public int Widht { get; set; }
         public int Height { get; set; }

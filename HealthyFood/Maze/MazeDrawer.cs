@@ -60,6 +60,8 @@ namespace Maze
                     return "G";
                 case CellType.Goblin:
                     return "g";
+                case CellType.EasyTrap:
+                    return "X";
                 default:
                     throw new Exception($"Unknown cell type {cellType}");
             }

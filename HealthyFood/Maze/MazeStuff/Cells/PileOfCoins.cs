@@ -11,7 +11,7 @@ namespace Maze.MazeStuff.Cells
     {
         private Random random = new Random();
 
-        public PileOfCoins(int x, int y, MazeLevel level) : base(x, y, level)
+        public PileOfCoins(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 

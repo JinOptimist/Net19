@@ -5,7 +5,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class HardTrap : BaseCell
     {
-        public HardTrap(int x, int y, MazeLevel level) : base(x, y, level)
+        public HardTrap(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
@@ -13,8 +13,10 @@ namespace Maze.MazeStuff.Cells
 
         public override bool TryToStep(ICharacter character)
         {
-            if (character.Hp>0)
-            character.Hp= character.Hp-2;
+            if (character.Hp > 0)
+            {
+                character.Hp -= 2;
+            }
             return true;
         }
     }
