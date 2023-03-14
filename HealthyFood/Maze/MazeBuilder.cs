@@ -41,7 +41,7 @@ namespace Maze
             BuildHardTrap();
             BuildGoodHealer();
             BuildEasyTrap();
-            BuildGonlins();
+            BuildGoblins();
 
             BuildGoldMine();
             BuildGoldMine();
@@ -111,7 +111,7 @@ namespace Maze
 
         }
 
-        private void BuildGonlins(int startGoblinHp = 3, int goblinCount = 4)
+        private void BuildGoblins(int startGoblinHp = 3, int goblinCount = 4)
         {
             var grounds = _maze.Cells.OfType<Ground>().Take(goblinCount);
             foreach (var ground in grounds)

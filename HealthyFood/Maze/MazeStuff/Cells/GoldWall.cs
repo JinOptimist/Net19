@@ -7,7 +7,7 @@ namespace Maze.MazeStuff.Cells
     public class GoldWall : BaseCell
     {
         public int maxMoney { get; private set; } = 3;       
-        public GoldWall(int x, int y, MazeLevel level) : base(x, y, level)
+        public GoldWall(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
@@ -22,7 +22,7 @@ namespace Maze.MazeStuff.Cells
             
             if (maxMoney < 1)
             {
-                Wall wall = new Wall(X, Y, Level);
+                var wall = new Wall(X, Y, Level);
                 Level.ReplaceCell(wall);
             }
             return false;
