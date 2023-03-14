@@ -8,7 +8,7 @@ namespace Maze.MazeStuff.Enemies
     {
         public override CellType CellType => CellType.Goblin;
         
-        public Goblin(int hp, int x, int y, MazeLevel level) : base(x, y, level)
+        public Goblin(int hp, int x, int y, IMazeLevel level) : base(x, y, level)
         {
             Hp = hp;
         }
