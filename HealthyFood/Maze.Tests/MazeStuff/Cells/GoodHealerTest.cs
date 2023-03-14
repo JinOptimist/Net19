@@ -18,7 +18,7 @@ namespace Maze.Tests.MazeStuff.Cells
 
             var isStepPosible = goodHealer.TryToStep(heroMock.Object);
 
-            Assert.AreEqual(true, isStepPosible, "Hard trap must be stepable");
+            Assert.AreEqual(true, isStepPosible, "Good Healer must be stepable");
         }
 
 
@@ -47,7 +47,7 @@ namespace Maze.Tests.MazeStuff.Cells
         {
             var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
-            var goodHealer = new PileOfCoins(1, 1, mazeMock.Object);
+            var goodHealer = new GoodHealer(1, 1, mazeMock.Object);
 
             goodHealer.TryToStep(heroMock.Object);
 
