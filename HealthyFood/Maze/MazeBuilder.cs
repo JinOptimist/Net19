@@ -41,8 +41,21 @@ namespace Maze
             BuildGreedlyGuardian();
             BuildHardTrap();
             BuildGoodHealer();
+            BuildEasyTrap();
 
             return _maze;
+        }
+
+        private void BuildEasyTrap()
+        {            
+            var cellsIncludingAllGround = _maze.Cells.Where(x => x.CellType == CellType.Ground).ToList();
+            var randomIndexForEasyTrap = random.Next(0, cellsIncludingAllGround.Count());
+            var randomEasyTrap = cellsIncludingAllGround[randomIndexForEasyTrap];
+            var easyTrap = new EasyTrap(randomEasyTrap.X, randomEasyTrap.Y, _maze);
+            if (cellsIncludingAllGround.Count > 0)
+            {
+                _maze.ReplaceCell(easyTrap);
+            }       
         }
 
         private void BuildGreedlyGuardian()

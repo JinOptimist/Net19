@@ -52,6 +52,8 @@ namespace Maze
                     return "+";
                 case CellType.PileOfCoins:
                     return "G";
+                case CellType.EasyTrap:
+                    return "X";
                 default:
                     throw new Exception("BAD");
             }
