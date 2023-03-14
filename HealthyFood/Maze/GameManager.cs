@@ -1,4 +1,6 @@
 ﻿using Maze.MazeStuff;
+using Maze.MazeStuff.Cells;
+using Maze.MazeStuff.Characters;
 
 namespace Maze
 {
@@ -8,7 +10,7 @@ namespace Maze
 
         public void Start()
         {
-            _maze = new MazeBuilder().Build();
+            _maze = new MazeBuilder().Build();           
 
             var drawer = new MazeDrawer();
 
@@ -33,7 +35,14 @@ namespace Maze
                         Move(Direction.Down);
                         break;
                 }
+
+                EnemyMove();
             }
+        }
+
+        private void EnemyMove()
+        {
+            _maze.Enemies.ForEach(x => x.EndTurnActivity());
         }
 
         private void Move(Direction direction)
@@ -57,8 +66,26 @@ namespace Maze
                     break;
             }
 
-            var destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
+            BaseCell destinationCell;
+
+            var enemyOnTheDestinationCell = _maze.Enemies.FirstOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
+            if (enemyOnTheDestinationCell != null)
+            {
+                destinationCell = enemyOnTheDestinationCell;
+            }
+            else
+            {
+                destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
+            }
             
+            var greedyHealerCell = _maze.Cells
+                .SingleOrDefault(cell => cell.X == _maze.GreedyHealer.X 
+                    && cell.Y == _maze.GreedyHealer.Y);
+            if (greedyHealerCell != null)
+            {
+                destinationCell = greedyHealerCell;
+            }
+
             if (destinationCell == null)
             {
                 return;

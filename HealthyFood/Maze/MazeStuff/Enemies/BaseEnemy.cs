@@ -8,6 +8,6 @@ namespace Maze.MazeStuff.Enemies
         {
         }
 
-        public abstract void TryMove();
+        public abstract void EndTurnActivity();
     }
 }
