@@ -14,13 +14,8 @@ namespace Maze
                 {
                     var cell = maze.Cells.Single(cell => cell.X == x && cell.Y == y);
                     var makeCell = GetCellSymbol(cell.CellType);
-                    if (cell.CellType == CellType.GoldWall)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(makeCell);
-                        Console.ResetColor();
-                    }
-                    else Console.Write(makeCell);
+                    Console.Write(makeCell);
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
@@ -61,6 +56,7 @@ namespace Maze
                 case CellType.EasyTrap:
                     return "X";
                 case CellType.GoldWall:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     return "#";
                 default:
                     throw new Exception("BAD");
