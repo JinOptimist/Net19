@@ -38,6 +38,7 @@ namespace Maze
             BuildGreedyHealer();
             BuildPileOfGold();
             BuildGreedlyGuardian();
+            BuildRandomTeleport();
             BuildHardTrap();
             BuildGoodHealer();
             BuildEasyTrap();
@@ -158,6 +159,14 @@ namespace Maze
                 .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
+        }
+        private void BuildRandomTeleport()
+        {
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var teleport = new RandomTeleport(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(teleport);
         }
 
         private void BuildHardTrap()
