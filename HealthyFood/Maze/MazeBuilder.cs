@@ -216,8 +216,6 @@ namespace Maze
 
         private void BuildWall(int startX,int startY)
         {
-            var wall = new Wall(startX, startY, _maze);
-            _maze.SteppingOnWall = wall;
             for (int y = 0; y < _maze.Height; y++)
             {
                 for (int x = 0; x < _maze.Widht; x++)

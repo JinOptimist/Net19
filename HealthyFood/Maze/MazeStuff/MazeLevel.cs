@@ -11,8 +11,7 @@ namespace Maze.MazeStuff
 
         public ICharacter Hero { get; set; }
         public ICharacter GreedyHealer { get; set; }
-        public BaseCell SteppingOnWall { get; set; }
-
+        
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
 
         public List<BaseEnemy> Enemies { get; set; } = new List<BaseEnemy>();
