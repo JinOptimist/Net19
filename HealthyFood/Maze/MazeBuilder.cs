@@ -71,7 +71,6 @@ namespace Maze
             var randomGroundCell = listOfGround[randomGroundCellIndex];
             var teleport = new RandomTeleport(randomGroundCell.X, randomGroundCell.Y, _maze);
             _maze.ReplaceCell(teleport);
-
         }
 
         private void Miner(BaseCell currentCell, List<BaseCell> wallToBreak)

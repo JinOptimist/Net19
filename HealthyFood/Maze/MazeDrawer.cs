@@ -40,8 +40,7 @@ namespace Maze
                 case CellType.Hero:
                     return "@";
                 case CellType.RandomTelepot:
-                    return "T"
-                        ;
+                    return "T";
                 case CellType.GreedlyGuardian:
                     Console.ForegroundColor = ConsoleColor.Red;
                     return "&";
