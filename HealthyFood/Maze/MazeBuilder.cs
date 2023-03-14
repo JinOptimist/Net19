@@ -1,7 +1,7 @@
 ﻿using Maze.MazeStuff;
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
-using static System.Net.Mime.MediaTypeNames;
+using Maze.MazeStuff.Enemies;
 
 namespace Maze
 {
@@ -41,6 +41,7 @@ namespace Maze
             BuildHardTrap();
             BuildGoodHealer();
             BuildEasyTrap();
+            BuildGonlins();
 
             BuildGoldMine();
             BuildGoldMine();
@@ -108,6 +109,16 @@ namespace Maze
 
             else BuildGoldMine();
 
+        }
+
+        private void BuildGonlins(int startGoblinHp = 3, int goblinCount = 4)
+        {
+            var grounds = _maze.Cells.OfType<Ground>().Take(goblinCount);
+            foreach (var ground in grounds)
+            {
+                var goblin = new Goblin(startGoblinHp, ground.X, ground.Y, _maze);
+                _maze.Enemies.Add(goblin);
+            }
         }
 
         private void BuildHero(int startX, int startY)

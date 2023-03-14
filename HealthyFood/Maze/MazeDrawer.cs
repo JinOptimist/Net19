@@ -20,13 +20,19 @@ namespace Maze
                 Console.WriteLine();
             }
 
+            foreach (var enemy in maze.Enemies)
+            {
+                Console.SetCursorPosition(enemy.X, enemy.Y);
+                Console.Write(GetCellSymbol(enemy.CellType));
+            }
+
             var hero = maze.Hero;
             Console.SetCursorPosition(hero.X, hero.Y);
             Console.Write(GetCellSymbol(hero.CellType));
             Console.SetCursorPosition(hero.X, hero.Y);
 
             Console.SetCursorPosition(0, maze.Height + 2);
-            Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins}");
+            Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins} Exp: {hero.Experience}");
         }
 
         private string GetCellSymbol(CellType cellType)
@@ -53,13 +59,15 @@ namespace Maze
                     return "+";
                 case CellType.PileOfCoins:
                     return "G";
+                case CellType.Goblin:
+                    return "g";
                 case CellType.EasyTrap:
                     return "X";
                 case CellType.GoldWall:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     return "#";
                 default:
-                    throw new Exception("BAD");
+                    throw new Exception($"Unknown cell type {cellType}");
             }
         }
     }
