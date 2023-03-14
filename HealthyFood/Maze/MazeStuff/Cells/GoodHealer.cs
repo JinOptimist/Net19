@@ -9,7 +9,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class GoodHealer : BaseCell
     {
-        public GoodHealer(int x, int y, MazeLevel level) : base(x, y, level)
+        public GoodHealer(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
