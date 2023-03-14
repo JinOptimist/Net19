@@ -41,6 +41,19 @@ namespace Maze
 
             Console.SetCursorPosition(0, maze.Height + 2);
             Console.WriteLine($"Hero HP: {hero.Hp} Coins: {hero.Coins} Exp: {hero.Experience}");
+
+            WriteStatistics(maze);
+        }
+
+        private void WriteStatistics(MazeLevel maze)
+        {
+            var types = maze.Cells.Select(x => x.CellType).Distinct().ToList();
+
+            foreach(var type in types)
+            {
+                var countOfCurrentType = maze.Cells.Count(x => x.CellType == type);
+                Console.WriteLine($"{type.ToString()} : {countOfCurrentType}");
+            }
         }
 
         private bool isItVisibleCell(BaseCell cell, ICharacter hero)
