@@ -21,7 +21,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 10, int height = 5)
+        public MazeLevel Build(int width = 20, int height = 10)
         {
             _maze = new MazeLevel()
             {
