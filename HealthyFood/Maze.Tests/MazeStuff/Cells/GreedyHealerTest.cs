@@ -34,9 +34,16 @@ namespace Maze.Tests.MazeStuff.Cells
         {
             var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
-            var greedyHealer = new GreedyHealer(1, 1, mazeMock.Object);
+            var greedyHealerRich = new GreedyHealer(1, 1, mazeMock.Object);
+            var greedyHealer = new GreedyHealer(2, 3, mazeMock.Object);
+            heroMock.SetupProperty(x => x.Hp);
+            heroMock.SetupProperty(x => x.Coins);
+            greedyHealerRich.Coins = -5;
+            greedyHealer.Coins = -1;
+            var isStepPosibleRich = greedyHealerRich.TryToStep(heroMock.Object);
             var isStepPosible = greedyHealer.TryToStep(heroMock.Object);
-            Assert.AreEqual(false, isStepPosible, "Salam");
+            Assert.AreEqual(false, isStepPosibleRich, "You're have money");
+            Assert.AreEqual(false, isStepPosible, "You're not have money");
         }
     }
 }
