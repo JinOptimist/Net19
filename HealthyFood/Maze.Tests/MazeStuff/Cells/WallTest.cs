@@ -24,10 +24,10 @@ namespace Maze
             var Wall = new Wall(1, 1, mazeMock.Object);
 
             //Step 2 Action
-            var isSteImposible = Wall.TryToStep(heroMock.Object);
+            var isStepImposible = Wall.TryToStep(heroMock.Object);
 
             //Step 3 Assert
-            Assert.AreEqual(false, isSteImposible, "Wall must be unstepable");
+            Assert.AreEqual(false, isStepImposible, "Wall must be unstepable");
         }
 
 
