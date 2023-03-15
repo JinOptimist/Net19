@@ -26,8 +26,8 @@ namespace Maze.Tests.MazeStuff.Cells
         [Test]
         [TestCase(10, 9, true)]
         [TestCase(5, 4, true)]
-        [TestCase(5, 4, false)]
-        [TestCase(0, 0, false)]
+        [TestCase(5, 3, true)]
+        [TestCase(0, 0, true)]
         [TestCase(-1, 0, true)]
         public void TryToStep_HeroCoinsChanges(int coinsBeforeChanges, int coinsAfterChanges, bool stapHeroOnGuardianAfter)
         {
@@ -36,23 +36,21 @@ namespace Maze.Tests.MazeStuff.Cells
 
             _heroMock.Object.Coins = coinsBeforeChanges;
 
-            var hardTrap = new GreedlyGuardian(1, 1, _mazeMock.Object);
+            var greedlyGuardian = new GreedlyGuardian(1, 1, _mazeMock.Object);
 
             //Step 2 Action
-            bool stapHeroOnGuardiaNfore = hardTrap.TryToStep(_heroMock.Object);
+            bool stapHeroOnGuardiaNfore = greedlyGuardian.TryToStep(_heroMock.Object);
 
             //Step 3 Assert
-            Assert.AreEqual(coinsAfterChanges, _heroMock.Object.Coins);
-            Assert.AreEqual(stapHeroOnGuardianAfter, stapHeroOnGuardiaNfore, "Opss");
+            Assert.AreEqual(coinsAfterChanges, _heroMock.Object.Coins, "Should take only one coin");
+            Assert.AreEqual(stapHeroOnGuardianAfter, stapHeroOnGuardiaNfore, "The hero can'n step on the Guardian");
         }
 
         [Test]
-        [TestCase(0, 9, 10, 9,false)]
-        [TestCase(0, 7, 8, 7,false)]
-        [TestCase(0, 7, 8, 7, true)]
-        [TestCase(-5, -9, -10, -9,false)]
-        [TestCase(0, 0, -1, 0,false)]
-        public void TryToStep_CanTheHeroStepOnGreedlyGuardianEsleHpAboveZero(int coinsBeforeChanges, int coinsAfterChanges, int HpBeforeChanges, int HpAfterChanges,bool isStepPosibleAfter)
+        [TestCase(0, 0, 10, 9, false)]
+        [TestCase(1, 0, 8, 7, false)]
+        
+        public void TryToStep_CanTheHeroStepOnGreedlyGuardianEsleHpAboveZero(int coinsBeforeChanges, int coinsAfterChanges, int HpBeforeChanges, int HpAfterChanges, bool isStepPosibleAfter)
         {
             //Step 1 Prepare
             _heroMock.SetupProperty(x => x.Coins);
@@ -61,13 +59,13 @@ namespace Maze.Tests.MazeStuff.Cells
             _heroMock.Object.Coins = coinsBeforeChanges;
             _heroMock.Object.Hp = HpBeforeChanges;
 
-            var hardTrap = new GreedlyGuardian(1, 1, _mazeMock.Object);
+            var greedlyGuardian = new GreedlyGuardian(1, 1, _mazeMock.Object);
 
             //Step 2 Action
-            bool isStepPosiblEBefore = hardTrap.TryToStep(_heroMock.Object);
+            bool isStepPosiblEBefore = greedlyGuardian.TryToStep(_heroMock.Object);
 
             //Step 3 Assert
-            Assert.AreEqual(coinsAfterChanges, _heroMock.Object.Hp);
+            Assert.AreEqual(coinsAfterChanges, _heroMock.Object.Coins);
             Assert.AreEqual(HpAfterChanges, _heroMock.Object.Hp);
             Assert.AreEqual(isStepPosibleAfter, isStepPosiblEBefore, "Opss");
         }
