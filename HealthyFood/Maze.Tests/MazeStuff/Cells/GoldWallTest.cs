@@ -9,36 +9,34 @@ namespace Maze.Tests.MazeStuff.Cells
 {
 	public class GoldWallTest
 	{
-        private int MaxMoney = 3;
+        private int maxMoney;
         [Test]
-        //[TestCase(5,6,3,2)]
-        public void TryToStep_CoinWall(int coinBefore, int coinafter)
+        [TestCase(1,2,3,2,1)]
+        public void TryToStep_CoinWall(int coinBefore, int coinafter, int currentMoney)
         {
-            //Step 1 Prepare
             var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
-            var currentCash = 3;
+
+            maxMoney = currentMoney;
             heroMock.SetupProperty(x => x.Coins);
-
             heroMock.Object.Coins = coinafter;
-            var hardTrap = new HardTrap(1, 1, mazeMock.Object);
-            Assert.AreEqual(coinBefore, heroMock.Object.Coins);
+            var replace = new Wall(1, 1, mazeMock.Object);
+            var stepCellsWall = new GoldWall(1, 1, mazeMock.Object);
+            
+            Assert.AreEqual(replace, heroMock.Object.Coins);
 
-            ////Step 2 Action
-            //hardTrap.TryToStep(heroMock.Object);
-
-            ////Step 3 Assert
-            //Assert.AreEqual(coinafter, heroMock.Object.Hp);
+           
         }
-        //[Test]
-        //public void TryToPossiblestep_Goldwall()
-        //{
-        //    var mazeMock = new Mock<IMazeLevel>();
-        //    var heroMock = new Mock<ICharacter>();
-        //    var goldWall = new GoldWall(1, 1, mazeMock.Object);
-        //    var isStepPosible = goldWall.TryToStep(heroMock.Object);
-        //    Assert.AreEqual(false, isStepPosible, "puk");
-        //}
+        [Test]
+        public void TryToPossiblestep_Goldwall(int coinBefore, int coinafter)
+        {
+            var mazeMock = new Mock<IMazeLevel>();
+            var heroMock = new Mock<ICharacter>();
+            var goldWall = new GoldWall(1, 1, mazeMock.Object);
+            var isStepPosible = goldWall.TryToStep(heroMock.Object);
+            
+            Assert.AreEqual(true, isStepPosible, "puk");
+        }
     }
 }
 
