@@ -4,24 +4,25 @@ using Maze.MazeStuff.Characters;
 using Maze.MazeStuff.Enemies;
 using Moq;
 using NUnit.Framework;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Maze.Tests.Enemies
 {
     public class GoblinTest
     {
-
-
         private Mock<IMazeLevel> _maze;
+
         [SetUp]
         public void InPut()
         {
             _maze = new Mock<IMazeLevel>();
         }
+
         [Test]
         [TestCase(10, 9, 0, 8)]
         [TestCase(1, 0, 1, 8)]
         [TestCase(-1, -2, 1, 8)]
-        public void TryToStepHpGoblinHpChangeAndHeroExpChange(int hpGoblin, int hpGoblinAfterMove, int expOfHero, int hpHeroAfterOneMove)
+        public void TryToStep_HpGoblinHpChangeAndHeroExpChange(int hpGoblin, int hpGoblinAfterMove, int expOfHero, int hpHeroAfterOneMove)
         {
             //var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
@@ -40,20 +41,29 @@ namespace Maze.Tests.Enemies
 
         }
 
-        //[Test]
-        //[TestCase(2, 2)]
-        //[TestCase(4, 7)]
-        //public void EndTurnActivityTest(int x, int y)
-        //{
-        //    _maze.Setup(x => x.Cells).Returns(new List<BaseCell>());
-
-        //    var goblin = new Goblin(1, 1, 1, _maze.Object);
-            
+        [Test]
+        [TestCase(2, 2)]
+        [TestCase(4, 7)]
+        public void EndTurnActivityTest(int initianlGoblinX, int initianlGoblinY)
+        {
+            var cells = new List<BaseCell>();
            
-        //    goblin.EndTurnActivity();
-        //    Assert.AreNotEqual(x, goblin.X);
-        //    Assert.AreNotEqual(y, goblin.Y);
-        //}
+            _maze.Setup(x => x.Cells).Returns(cells);
+
+            var ground = new Ground(initianlGoblinX, initianlGoblinY + 1, _maze.Object);
+            cells.Add(ground);
+
+            var goblinHp = 1;
+            var goblin = new Goblin(goblinHp, initianlGoblinX, initianlGoblinY, _maze.Object);
+
+            goblin.EndTurnActivity();
+
+            //Assert.AreEqual(1, goblin.X);
+            //Assert.AreEqual(2, goblin.Y);
+
+            Assert.IsTrue(goblin.X != initianlGoblinX || goblin.Y != initianlGoblinY);
+
+        }
     }
 }
 
