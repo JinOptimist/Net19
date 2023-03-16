@@ -5,7 +5,8 @@ using Maze.MazeStuff.Enemies;
 
 namespace Maze
 {
-    public class MazeBuilder
+
+    public class MazeBuilder : IMazeBuilder
     {
         private MazeLevel _maze;
         private Random random;        
