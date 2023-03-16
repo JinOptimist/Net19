@@ -24,18 +24,6 @@ namespace Maze.Tests.MazeStuff.Cells
             var stepCellsWall = new GoldWall(1, 1, mazeMock.Object);
             
             Assert.AreEqual(replace, heroMock.Object.Coins);
-
-           
-        }
-        [Test]
-        public void TryToPossiblestep_Goldwall(int coinBefore, int coinafter)
-        {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
-            var goldWall = new GoldWall(1, 1, mazeMock.Object);
-            var isStepPosible = goldWall.TryToStep(heroMock.Object);
-            
-            Assert.AreEqual(true, isStepPosible, "puk");
         }
     }
 }
