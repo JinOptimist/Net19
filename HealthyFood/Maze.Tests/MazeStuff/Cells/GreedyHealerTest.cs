@@ -13,34 +13,33 @@ namespace Maze.Tests.MazeStuff.Cells
 {
     public class GreedyHealerTest
     {
+        private Mock<IMazeLevel> _mazeMock;
+        private Mock<ICharacter> _heroMock;
+        [SetUp]
+        public void In()
+        {
+            _mazeMock = new Mock<IMazeLevel>();
+            _heroMock = new Mock<ICharacter>();
+
+        }
         [Test]
         [TestCase(10,11,5,4)]
         [TestCase(5, 6, 4, 3)]
         public void TryToStep_GreedyHealerTest(int hpAfter, int hpBefore, int coinsAfter, int coinsBefore)
         {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
-            heroMock.SetupProperty(x => x.Hp);
-            heroMock.SetupProperty(x => x.Coins);
-            heroMock.Object.Hp = hpAfter;
-            heroMock.Object.Coins = coinsAfter;
-            var greedyHealer = new GreedyHealer(1, 1, mazeMock.Object);
-            var isStepPosible = greedyHealer.TryToStep(heroMock.Object);
-            Assert.AreEqual(hpBefore, heroMock.Object.Hp);
-            Assert.AreEqual(coinsBefore, heroMock.Object.Coins);
+            _heroMock.SetupProperty(x => x.Hp);
+            _heroMock.SetupProperty(x => x.Coins);
+            _heroMock.Object.Hp = hpAfter;
+            _heroMock.Object.Coins = coinsAfter;
+            var greedyHealer = new GreedyHealer(1, 1, _mazeMock.Object);
+            Assert.AreEqual(hpBefore, _heroMock.Object.Hp);
+            Assert.AreEqual(coinsBefore, _heroMock.Object.Coins);
         }
         [Test]
-        [TestCase(11,2)]
-        public void TryToPossibleStep_GreedyHealerTest(int hpBefore, int coinsBefore)
+        public void TryToPossibleStep_GreedyHealerTest()
         {
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
-            var greedyHealer = new GreedyHealer(1, 1, mazeMock.Object);
-            heroMock.SetupProperty(x => x.Hp);
-            heroMock.SetupProperty(x => x.Coins);
-            heroMock.Object.Hp = hpBefore;
-            heroMock.Object.Coins = coinsBefore;
-            var isStepPosible = greedyHealer.TryToStep(heroMock.Object);
+            var greedyHealer = new GreedyHealer(1, 1, _mazeMock.Object);
+            var isStepPosible = greedyHealer.TryToStep(_heroMock.Object);
             Assert.AreEqual(false, isStepPosible, "You're not have money");
         }
     }
