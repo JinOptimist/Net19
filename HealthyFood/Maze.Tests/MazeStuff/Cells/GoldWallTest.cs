@@ -9,21 +9,21 @@ namespace Maze.Tests.MazeStuff.Cells
 {
 	public class GoldWallTest
 	{
-        private int maxMoney;
         [Test]
-        [TestCase(1,2,3,2,1)]
-        public void TryToStep_CoinWall(int coinBefore, int coinafter, int currentMoney)
+        [TestCase(1,2)]
+        [TestCase(5,6)]
+        public void TryToStep_CoinWall(int coinsBefore, int coinsfter)
         {
             var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
-
-            maxMoney = currentMoney;
+           
             heroMock.SetupProperty(x => x.Coins);
-            heroMock.Object.Coins = coinafter;
-            var replace = new Wall(1, 1, mazeMock.Object);
-            var stepCellsWall = new GoldWall(1, 1, mazeMock.Object);
-            
-            Assert.AreEqual(replace, heroMock.Object.Coins);
+            heroMock.Object.Coins = coinsBefore;
+            var goldmin = new GoldWall(1, 1, mazeMock.Object);
+
+            goldmin.TryToStep(heroMock.Object);
+           
+            Assert.AreEqual(coinsfter, heroMock.Object.Coins);
         }
     }
 }
