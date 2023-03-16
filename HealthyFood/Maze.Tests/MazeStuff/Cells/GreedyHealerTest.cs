@@ -25,7 +25,7 @@ namespace Maze.Tests.MazeStuff.Cells
         [Test]
         [TestCase(10,11,5,4)]
         [TestCase(5, 6, 4, 3)]
-        public void TryToStep_GreedyHealerTest(int hpAfter, int hpBefore, int coinsAfter, int coinsBefore)
+        public void TryToStep_AddHpLoseCoins(int hpAfter, int hpBefore, int coinsAfter, int coinsBefore)
         {
             _heroMock.SetupProperty(x => x.Hp);
             _heroMock.SetupProperty(x => x.Coins);
@@ -36,7 +36,7 @@ namespace Maze.Tests.MazeStuff.Cells
             Assert.AreEqual(coinsBefore, _heroMock.Object.Coins);
         }
         [Test]
-        public void TryToPossibleStep_GreedyHealerTest()
+        public void TryToStep_PosibleStep()
         {
             var greedyHealer = new GreedyHealer(1, 1, _mazeMock.Object);
             var isStepPosible = greedyHealer.TryToStep(_heroMock.Object);
