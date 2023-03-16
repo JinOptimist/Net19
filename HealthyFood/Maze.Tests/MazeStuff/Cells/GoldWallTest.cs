@@ -12,7 +12,7 @@ namespace Maze.Tests.MazeStuff.Cells
         [Test]
         [TestCase(1,2)]
         [TestCase(5,6)]
-        public void TryToStep_CoinWall(int coinsBefore, int coinsfter)
+        public void TryToStep_GoldWall(int coinsBefore, int coinsafter)
         {
             var mazeMock = new Mock<IMazeLevel>();
             var heroMock = new Mock<ICharacter>();
@@ -23,7 +23,7 @@ namespace Maze.Tests.MazeStuff.Cells
 
             goldmin.TryToStep(heroMock.Object);
            
-            Assert.AreEqual(coinsfter, heroMock.Object.Coins);
+            Assert.AreEqual(coinsafter, heroMock.Object.Coins);
         }
     }
 }
