@@ -8,65 +8,123 @@ namespace Maze.Tests.MazeStuff.Cells
 {
     public class RandomTeleportTest
     {
+        private Mock<ICharacter> _heroMock;
+        private Mock<IMazeLevel> _mazeMock;
+
+        [SetUp]
+        public void SetUpTest()
+        {
+            _heroMock = new Mock<ICharacter>();
+            _mazeMock = new Mock<IMazeLevel>();
+        }
+
         [Test]
         public void TryToStep_CellIsStepable()
         {
             //Step 1 Prepare
-            var mazeMock = new Mock<IMazeLevel>();
-            var heroMock = new Mock<ICharacter>();
+            var cells = new List<BaseCell>();
+            var wall = new Wall(3, 6, _mazeMock.Object);
+            var ground = new Ground(2, 5, _mazeMock.Object);
+            cells.Add(wall);
+            cells.Add(ground);
 
-            var randomTeleport = new RandomTeleport(1, 1, mazeMock.Object);
+            _mazeMock.Setup(x => x.Cells).Returns(cells);
+            var randomTeleport = new RandomTeleport(1, 3, _mazeMock.Object);
 
             //Step 2 Action
-            var isStepPosible = randomTeleport.TryToStep(heroMock.Object);
+            var isStepPosible = randomTeleport.TryToStep(_heroMock.Object);
 
             //Step 3 Assert
             Assert.AreEqual(false, isStepPosible, "Random teleport must be unstepable");
         }
 
         [Test]
-        [TestCase(5, 7)]
+        [TestCase(5, 7)] 
+        [TestCase(2, 5)] /*Negative case: the coordinates of the hero match the coordinates of the only cell of the ground*/
         public void TryToStep_HeroCoordinationsChanges(int XBeforeTeleport, int YBeforeTeleport)
         {
             //Step 1 Prepare
-            //var mazeMock = new Mock<IMazeLevel>();
-            //mazeMock.SetupProperty(x => x.Cells);
-            var mazeBuilderMock = new MazeBuilder();
-            var maze = mazeBuilderMock.Build(10,5);
+            _heroMock.SetupProperty(x => x.X);
+            _heroMock.SetupProperty(x => x.Y);
 
-            var heroMock = new Mock<ICharacter>();
+            _heroMock.Object.X = XBeforeTeleport;
+            _heroMock.Object.Y = YBeforeTeleport;
 
-            heroMock.SetupProperty(x => x.X);
-            heroMock.SetupProperty(x => x.Y);
+            var cells = new List<BaseCell>();
+            var wall = new Wall(3, 6, _mazeMock.Object);
+            var ground = new Ground(2, 5, _mazeMock.Object);
+            cells.Add(wall);
+            cells.Add(ground);
 
-            heroMock.Object.X = XBeforeTeleport;
-            heroMock.Object.Y = YBeforeTeleport;
+            _mazeMock.Setup(x => x.Cells).Returns(cells);
 
-            var randomTeleport = new RandomTeleport(1, 1, maze);
+            var randomTeleport = new RandomTeleport(1, 8, _mazeMock.Object);
 
             //Step 2 Action
-            randomTeleport.TryToStep(heroMock.Object);
+            var isCoordinatesChanges = randomTeleport.TryToStep(_heroMock.Object);
 
             //Step 3 Assert
-            Assert.IsTrue(XBeforeTeleport != heroMock.Object.X || YBeforeTeleport != heroMock.Object.Y);
+            Assert.IsTrue(XBeforeTeleport != _heroMock.Object.X || YBeforeTeleport != _heroMock.Object.Y);
         }
 
-        //[Test]
-        //public void TryToStep_HeroGoToGround()
-        //{
-        //    var mazeBuilderMock = new MazeBuilder();
-        //    var maze = mazeBuilderMock.Build(10, 5);
-        //    //var mazeMock = new Mock<IMazeLevel>();
-        //    var heroMock = new Mock<ICharacter>();
+        [Test]
+        [TestCase(2, 6)]
+        [TestCase(3, 5)]
+        [TestCase(2, 5)] /*Negative case: the coordinates of the hero match the coordinates of the only cell of the ground*/
+        public void TryToStep_HeroGoToGround(int XBeforeTeleport, int YBeforeTeleport)
+        {
+            //Step 1 Prepare
+            _heroMock.SetupProperty(x => x.X);
+            _heroMock.SetupProperty(x => x.Y);
 
-        //    var randomTeleport = new RandomTeleport(1, 1, maze);
+            _heroMock.Object.X = XBeforeTeleport;
+            _heroMock.Object.Y = YBeforeTeleport;
 
-        //    //Step 2 Action
-        //    randomTeleport.TryToStep(heroMock.Object);
+            var cells = new List<BaseCell>();
+            var wall = new Wall(3, 6, _mazeMock.Object);
+            var ground = new Ground(2, 5, _mazeMock.Object);
+            cells.Add(wall);
+            cells.Add(ground);
 
+            _mazeMock.Setup(x => x.Cells).Returns(cells);
 
-        //    //Step 3 Assert
-        //    Assert.
-        //}
+            var randomTeleport = new RandomTeleport(1, 8, _mazeMock.Object);
+
+            //Step 2 Action
+            randomTeleport.TryToStep(_heroMock.Object);
+
+            //Step 3 Assert
+            Assert.IsTrue((_heroMock.Object.X != XBeforeTeleport || _heroMock.Object.Y != YBeforeTeleport) 
+                && (_heroMock.Object.X == ground.X || _heroMock.Object.Y == ground.Y));
+        }
+
+        [Test]
+        [TestCase(2, 6)]
+        [TestCase(3, 5)]
+        public void TryToStep_HeroDoNotGoToWall(int XBeforeTeleport, int YBeforeTeleport)
+        {
+            //Step 1 Prepare
+            _heroMock.SetupProperty(x => x.X);
+            _heroMock.SetupProperty(x => x.Y);
+
+            _heroMock.Object.X = XBeforeTeleport;
+            _heroMock.Object.Y = YBeforeTeleport;
+
+            var cells = new List<BaseCell>();
+            var wall = new Wall(3, 6, _mazeMock.Object);
+            var ground = new Ground(2, 5, _mazeMock.Object);
+            cells.Add(wall);
+            cells.Add(ground);
+
+            _mazeMock.Setup(x => x.Cells).Returns(cells);
+
+            var randomTeleport = new RandomTeleport(1, 8, _mazeMock.Object);
+
+            //Step 2 Action
+            randomTeleport.TryToStep(_heroMock.Object);
+
+            //Step 3 Assert
+            Assert.IsTrue((_heroMock.Object.X != wall.X || _heroMock.Object.Y != wall.Y));
+        }
     }
 }

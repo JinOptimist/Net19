@@ -4,7 +4,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class Ground : BaseCell
     {
-        public Ground(int x, int y, MazeLevel level) : base(x, y, level)
+        public Ground(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
