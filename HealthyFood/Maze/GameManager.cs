@@ -78,14 +78,6 @@ namespace Maze
             {
                 destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
             }
-            
-            var greedyHealerCell = _maze.Cells
-                .SingleOrDefault(cell => cell.X == _maze.GreedyHealer.X 
-                    && cell.Y == _maze.GreedyHealer.Y);
-            if (greedyHealerCell != null)
-            {
-                destinationCell = greedyHealerCell;
-            }
 
             if (destinationCell == null)
             {
