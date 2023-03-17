@@ -5,7 +5,7 @@ namespace Maze.MazeStuff.Cells
 {
     public class GreedlyGuardian : BaseCell
     {
-        public GreedlyGuardian(int x, int y, MazeLevel level) : base(x, y, level)
+        public GreedlyGuardian(int x, int y, IMazeLevel level) : base(x, y, level)
         {
         }
 
