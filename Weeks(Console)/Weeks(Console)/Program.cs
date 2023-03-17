@@ -1,9 +1,0 @@
-﻿string[] Weeks = new string[7] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-int CountWeeks = Convert.ToInt32(DateTime.Now.DayOfWeek);
-if (CountWeeks == 0)
-    CountWeeks = 7;
-for (int i = 0; i < CountWeeks; i++)
-{
-    Console.WriteLine(Weeks[i]);
-}
-Console.ReadKey();
