@@ -1,10 +1,10 @@
-﻿
-using Maze.MazeStuff.Cells;
+﻿using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
+using Maze.MazeStuff.Enemies;
 
 namespace Maze.MazeStuff
 {
-    public class MazeLevel
+    public class MazeLevel : IMazeLevel
     {
         public int Widht { get; set; }
         public int Height { get; set; }
@@ -13,6 +13,8 @@ namespace Maze.MazeStuff
         public ICharacter GreedyHealer { get; set; }
 
         public List<BaseCell> Cells { get; set; } = new List<BaseCell>();
+
+        public List<BaseEnemy> Enemies { get; set; } = new List<BaseEnemy>();
 
         public void ReplaceToGround(BaseCell currentCell)
         {

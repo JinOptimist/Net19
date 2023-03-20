@@ -20,6 +20,8 @@ namespace MyCustomLinq.Models
             }
         }
 
+        public Permission Permission { get; set; } = Permission.WriteNews | Permission.ReadNews;
+
         public DateTime Birthday { get; set; }
 
         public bool IsAdult
@@ -28,6 +30,24 @@ namespace MyCustomLinq.Models
             {
                 return Age >= 18;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("1");
+            sb.Append("2");
+            sb.Append("3");
+
+            sb.ToString();
+
+            return base.Equals(obj);
         }
     }
 }

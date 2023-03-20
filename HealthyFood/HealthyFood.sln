@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze", "Maze\Maze.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BullAndCow", "BullAndCow\BullAndCow.csproj", "{E91D56B7-BEA0-4F69-A4B0-D26411DDED6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomLinq", "MyCustomLinq\MyCustomLinq.csproj", "{40F16D08-DFBE-4B10-9977-46AEA51D63C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCustomLinq", "MyCustomLinq\MyCustomLinq.csproj", "{40F16D08-DFBE-4B10-9977-46AEA51D63C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maze.Tests", "Maze.Tests\Maze.Tests.csproj", "{5D227CBC-A490-426C-A003-E9F0E91E9118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{40F16D08-DFBE-4B10-9977-46AEA51D63C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40F16D08-DFBE-4B10-9977-46AEA51D63C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40F16D08-DFBE-4B10-9977-46AEA51D63C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D227CBC-A490-426C-A003-E9F0E91E9118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D227CBC-A490-426C-A003-E9F0E91E9118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D227CBC-A490-426C-A003-E9F0E91E9118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D227CBC-A490-426C-A003-E9F0E91E9118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

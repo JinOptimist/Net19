@@ -2,15 +2,14 @@
 using Maze.MazeStuff.Cells;
 using Maze.MazeStuff.Characters;
 using System;
-using static System.Net.Mime.MediaTypeNames;
+using Maze.MazeStuff.Enemies;
 
 namespace Maze
 {
     public class MazeBuilder
     {
         private MazeLevel _maze;
-        private Random random;
-
+        private Random random;        
         public MazeBuilder(int? seed = null)
         {
             if (seed == null)
@@ -23,7 +22,7 @@ namespace Maze
             }
         }
 
-        public MazeLevel Build(int width = 10, int height = 5)
+        public MazeLevel Build(int width = 20, int height = 10)
         {
             _maze = new MazeLevel()
             {
@@ -41,10 +40,14 @@ namespace Maze
             BuildGreedyHealer();
             BuildPileOfGold();
             BuildGreedlyGuardian();
+            BuildRandomTeleport();
             BuildHardTrap();
             BuildGoodHealer();
             BuildEasyTrap();
+            BuildGonlins();
 
+            BuildGoldMine();
+            BuildGoldMine();
             return _maze;
         }
 
@@ -98,6 +101,45 @@ namespace Maze
             }
         }
 
+
+        /// <summary>
+        /// Make goldwall. When player try ro step in it, he takeы money, max = 3
+        /// </summary>
+        private void BuildGoldMine()
+        {
+
+            var searchWallList = _maze.Cells.Where(cell => cell.CellType == CellType.Wall).ToList();
+            var indexOfsearchWallList = searchWallList.Count;
+            int randomIndex = random.Next(0, indexOfsearchWallList);
+            int xForGoldWall = searchWallList[randomIndex].X;
+            int yForGoldWall = searchWallList[randomIndex].Y;
+
+
+            var cellIsOneGroundNearGoldWall = _maze.Cells.Single(cell => cell.X == xForGoldWall && cell.Y == yForGoldWall);
+
+            var countGroundNearGoldWall = GetNearCellByType(cellIsOneGroundNearGoldWall, CellType.Ground);
+            GoldWall goldWall = new GoldWall(xForGoldWall, yForGoldWall, _maze);
+            //Wall wall = new Wall(xForGoldWall, yForGoldWall, _maze);
+
+            if (countGroundNearGoldWall.Count > 0)
+            {
+                _maze.ReplaceCell(goldWall);
+            }
+
+            else BuildGoldMine();
+
+        }
+
+        private void BuildGonlins(int startGoblinHp = 3, int goblinCount = 4)
+        {
+            var grounds = _maze.Cells.OfType<Ground>().Take(goblinCount);
+            foreach (var ground in grounds)
+            {
+                var goblin = new Goblin(startGoblinHp, ground.X, ground.Y, _maze);
+                _maze.Enemies.Add(goblin);
+            }
+        }
+
         private void BuildHero(int startX, int startY)
         {
             var hero = new Hero(startX, startY, _maze);
@@ -136,6 +178,14 @@ namespace Maze
                 .First(cell => cell.X == startX && cell.Y == startY);
 
             Miner(randomCell, new List<BaseCell>());
+        }
+        private void BuildRandomTeleport()
+        {
+            var listOfGround = _maze.Cells.Where(x => x.CellType == CellType.Ground && GetNearCellByType(x, CellType.Ground).Count > 1).ToList();
+            var randomGroundCellIndex = random.Next(0, listOfGround.Count);
+            var randomGroundCell = listOfGround[randomGroundCellIndex];
+            var teleport = new RandomTeleport(randomGroundCell.X, randomGroundCell.Y, _maze);
+            _maze.ReplaceCell(teleport);
         }
 
         private void BuildHardTrap()
