@@ -27,7 +27,7 @@ namespace Maze.MazeStuff
             Cells.Add(newCell);
         }
 
-        public void ReplaceCellByType(BaseCell currentCell, CellType cellType)
+        public void ReplaceCellByType(BaseCell currentCell, CellType cellType, BaseCell linkCell = null)
         {
             BaseCell cell;
             Cells.Remove(currentCell);
@@ -37,8 +37,8 @@ namespace Maze.MazeStuff
                 case CellType.Ground:
                     cell = new Ground(currentCell.X, currentCell.Y, this);
                     break;
-                case CellType.DeadEndTeleport:
-                    cell = new DeadEndTeleport(currentCell.X, currentCell.Y, this);
+                case CellType.TwoWayTeleport:
+                    cell = new TwoWayTeleport(currentCell.X, currentCell.Y, this, linkCell);
                     break;
                 case CellType.Wall:
                     cell = new Wall(currentCell.X, currentCell.Y, this);

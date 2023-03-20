@@ -37,24 +37,19 @@ namespace Maze
             BuildWall();
             BuildGround(startX, startY);
             BuildHero(startX, startY);
-            BuildDeadEndTeleport();
+            BuildTwoWayTeleport();
 
             return _maze;
         }
 
-        private void BuildDeadEndTeleport()
+        private void BuildTwoWayTeleport()
         {
-            var firstCell = _maze
-                .Cells
-                .First(cell => cell.X == 0 && cell.Y == 0);
-            _maze.ReplaceCellByType(firstCell, CellType.DeadEndTeleport);
-            MinerForDeadEndTeleport(firstCell, new List<BaseCell>());
+            var firstCell = _maze.Cells.Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count == 1).First();
+            var secondCell = _maze.Cells.Where(cell => cell.X != firstCell.X && cell.Y != firstCell.Y)
+                                                    .Where(cell => cell.CellType == CellType.Ground && GetNearCellByType(cell, CellType.Ground).Count == 1).First();
 
-            var LastCell = _maze
-                .Cells
-                .First(cell => cell.X == _maze.Widht - 1 && cell.Y == _maze.Height - 1);
-            _maze.ReplaceCellByType(LastCell, CellType.DeadEndTeleport);
-            MinerForDeadEndTeleport(LastCell, new List<BaseCell>());
+            _maze.ReplaceCellByType(firstCell, CellType.TwoWayTeleport, secondCell);
+            _maze.ReplaceCellByType(secondCell, CellType.TwoWayTeleport, firstCell);
         }
 
         private void BuildHero(int startX, int startY)
@@ -130,38 +125,6 @@ namespace Maze
 
                     _maze.Cells.Add(cell);
                 }
-            }
-        }
-
-        private void MinerForDeadEndTeleport(BaseCell currentCell, List<BaseCell> wallToBreak)
-        {
-            var nearWalls = GetNearCellByType(currentCell, CellType.Wall);
-            wallToBreak.AddRange(nearWalls);
-
-            if (wallToBreak.Count == 1)
-            {
-                return;
-            }
-
-            var random = new Random();
-            int randmoIndex;
-
-            if (wallToBreak.Count == 2)
-            {
-                randmoIndex = random.Next(0, wallToBreak.Count - 1);
-                var randomWall = wallToBreak[randmoIndex];
-                wallToBreak.Remove(randomWall);
-
-                _maze.ReplaceCellByType(randomWall, CellType.Ground);
-            }
-            else
-            {
-                var nearCells = GetNearCell(currentCell);
-                randmoIndex = random.Next(0, nearCells.Count - 1);
-                var randomCell = nearCells[randmoIndex];
-                nearCells.Remove(randomCell);
-
-                _maze.ReplaceCellByType(randomCell, CellType.Wall);
             }
         }
     }
