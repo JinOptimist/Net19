@@ -1,6 +1,5 @@
 ﻿using HealthyFoodWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Xml.Linq;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -17,8 +16,9 @@ namespace HealthyFoodWeb.Controllers
             var model = new ProfileViewModel()
             {
                 Name = name,
+                Operator = MathOperationEnum.Plus
             };
-
+            
             if (name == "admin")
             {
                 model.Coins = 1000;

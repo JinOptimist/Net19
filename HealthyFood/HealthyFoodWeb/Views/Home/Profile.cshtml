@@ -8,6 +8,7 @@
 </div>
 <div>
     <form action="/Home/UpdateName" method="post">
+        @Html.DropDownListFor(x=>x.Operator, Html.GetEnumSelectList(typeof(MathOperationEnum)))
         My name is @Html.TextBoxFor(x=>x.ActualName)
         I have @Html.TextBoxFor(x=>x.Coins)
         <button type="submit">Remember me</button>
