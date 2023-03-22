@@ -11,12 +11,15 @@ namespace HealthyFoodWeb.Controllers
             return View();
         }
 
-        public IActionResult Profile(string name = "Ivan")
+        public IActionResult Profile(string name = "Ivan",int kalkulatedNumberOne = 0, int kalkulatedNumberTwo = 0,int kalkulatedResult = 0)
         {
             var model = new ProfileViewModel()
             {
                 Name = name,
-                Operator = MathOperationEnum.Plus
+                Operator = MathOperationEnum.Plus,
+                KalkulatedNumberOne = kalkulatedNumberOne,
+                KalkulatedNumberTwo = kalkulatedNumberTwo,
+                KalkulatedResult = kalkulatedResult,
             };
             
             if (name == "admin")
@@ -28,6 +31,8 @@ namespace HealthyFoodWeb.Controllers
                 model.Coins = 10;
             }
 
+            model.KalkulatedResult = model.KalkulatedNumberOne + model.KalkulatedNumberTwo;
+
             return View(model);
         }
 
@@ -36,5 +41,15 @@ namespace HealthyFoodWeb.Controllers
         {
             return RedirectToAction("Profile", new { name = model.ActualName });
         }
+
+        [HttpPost]
+        public IActionResult kalkulated(ProfileViewModel model)
+        {
+            return RedirectToAction("Profile", new { kalkulatedNumberOne = model.KalkulatedNumberOne,
+                kalkulatedNumberTwo = model.KalkulatedNumberTwo,
+                kalkulatedResult = model.KalkulatedResult});
+        }
+     
+        
     }
 }

@@ -13,4 +13,16 @@
         I have @Html.TextBoxFor(x=>x.Coins)
         <button type="submit">Remember me</button>
     </form>
+    <div>
+        Kalkulated!
+    </div>
+    <form action="/Home/kalkulated" method="post">
+        Enter first number @Html.TextBoxFor(x=>x.KalkulatedNumberOne)
+         + Enter second number @Html.TextBoxFor(x=>x.KalkulatedNumberTwo) 
+         <button type="submit">Calculation resultat</button>
+        = @Model.KalkulatedResult
+    </form>
+
+
+    
 </div>
