@@ -1,0 +1,283 @@
+body{
+  background-image: url('Desktop\image.png');
+}
+.left-menu {
+    display: flex;
+    flex-direction: column; /* размещаем элементы к колонку */
+    width: 250px;
+    min-height: 100vh; /* на всю высоту экрана */
+    position: fixed; /* чтобы меню было фиксированным */
+    top: 0; /* прижимаем к верхнему */
+    left: 0; /* .. и нижнему краю */
+    background-color: #62d09e;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+  }
+  
+  /* Свойства для контента */
+  .content {
+    padding-left: 280px; /* отступ от бокового меню 240px + 40px */
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center; /* центрируем логотип с текстом */
+    color: #fff;
+    font-size: 26px;
+    text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
+    border: 3px solid #0060899e;
+    padding: 10px;
+  }
+.buttom-gamearcade {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gamearcade:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gamevictory {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gamevictory:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gameracing {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gameracing:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gametraining {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gametraining:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gamecards {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gamecards:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gametests {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gametests:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-gameadventurn {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #9cd451 !important;
+  color: #4c5c61 !important;
+  border: 3px solid #0060899e !important;
+  border-radius: 5px !important;
+  font-size: 22px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-gameadventurn:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.topnav {
+  background-color: #62d09e;
+  overflow: hidden;
+  padding-left: 240px;
+  display: flex;
+  top: 0; 
+    align-items: center; /* центрируем логотип с текстом */
+    color: #fff;
+    font-size: 26px;
+    text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    font-weight: bold;
+    border: 3px solid #0060899e;
+    
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 20px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.buttom-backhome {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #62d09e !important;
+  color: #4c5c61 !important;
+  font-size: 18px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-backhome:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-profile {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #62d09e !important;
+  color: #4c5c61 !important;
+  font-size: 18px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-profile:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-all-gamescatalog {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #62d09e !important;
+  color: #4c5c61 !important;
+  font-size: 18px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-all-gamescatalog:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+.buttom-search {
+  display: inline-block !important;
+  text-decoration: none !important;
+  background-color: #62d09e !important;
+  color: #4c5c61 !important;
+    font-size: 18px !important;
+  padding: 15px 40px !important; 
+  transition: all 0.8s ease !important;
+}
+.buttom-search:hover{
+  text-decoration: none !important; 
+  background-color: #0060899e !important;
+  color: #ffeded !important;
+  border-color: #0060899e !important;
+}
+form {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+.d1 {background: #A3D0C3;}
+.d1 input {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7BA7AB;
+  border-radius: 5px;
+  outline: none;
+  background: #F9F0DA;
+  color: #9E9C9C;
+}
+.d1 button {
+  position: absolute; 
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+.d1 button:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #F9F0DA;
+}
