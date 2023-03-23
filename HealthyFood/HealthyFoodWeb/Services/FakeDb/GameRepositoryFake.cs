@@ -2,11 +2,11 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.FakeDbModels;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.FakeDb
 {
     public class GameRepositoryFake : IGameRepository
     {
-        public static List<IGameModel> FakeDbGames = 
+        public static List<IGameModel> FakeDbGames =
             new List<IGameModel>() {
                 new GameModel{
                     Id = 1,
