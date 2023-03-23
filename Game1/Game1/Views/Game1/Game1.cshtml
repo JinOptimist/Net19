@@ -1,0 +1,24 @@
+﻿@model Game1ViewModel
+
+<div>
+    Добро положаловать в суперпупер примитивный калькулятор, который может складывать, вычитать и умножать и делить два числа
+
+</div>
+
+<div>
+    Введите первое число
+    <form method="post" action='DoIt'>
+        <div>
+            @Html.TextBoxFor(x=>x.FirstNumber)
+            Введите второе число @Html.TextBoxFor(x=>x.SecondNumber)
+        </div>
+        <div>
+            Выберите тип действия
+            @Html.DropDownListFor(x => x.TypeOfWork, Html.GetEnumSelectList(typeof(TypeOfWork)))
+        </div>
+        <div>
+            Результат @Model.Result
+            <button type="submit">CALC</button>
+        </div>
+    </form>
+</div>
