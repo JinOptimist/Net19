@@ -6,5 +6,7 @@
         public int Coins { get; set; }
 
         public string ActualName { get; set; }
+
+        public MathOperationEnum Operator { get; set; }
     }
 }
