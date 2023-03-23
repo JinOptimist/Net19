@@ -1,7 +1,18 @@
+using Data.Interface.Repositories;
+using HealthyFoodWeb.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<IRecomendateGameService>(
+    diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
+
+builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
+
 
 var app = builder.Build();
 
