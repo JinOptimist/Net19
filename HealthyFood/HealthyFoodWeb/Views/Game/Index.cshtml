@@ -1,12 +1,26 @@
-﻿@model List<GameViewModel>
+﻿@model GameIndexViewModel
 
 <div class="games">
-
-    @foreach (var gameViewModel in Model)
-    {
-        <div class="game">
-            Game Name @gameViewModel.GameName
-        </div>
-    }
-
+    <div class="cheap">
+        <h1>Cheap</h1>
+        @foreach (var gameViewModel in Model.CheapGames)
+        {
+            <div class="game">
+                Game Name @gameViewModel.Name
+            </div>
+        }
+    </div>
+    <div class="rich">
+        <h1>Rich</h1>
+        @foreach (var gameViewModel in Model.RichGames)
+        {
+            <div class="game">
+                Game Name @gameViewModel.Name
+            </div>
+        }
+    </div>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/game.css" />
+}

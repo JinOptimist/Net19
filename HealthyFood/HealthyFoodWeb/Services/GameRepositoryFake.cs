@@ -6,9 +6,8 @@ namespace HealthyFoodWeb.Services
 {
     public class GameRepositoryFake : IGameRepository
     {
-        public List<IGameModel> GetAll()
-        {
-            return new List<IGameModel>() {
+        public static List<IGameModel> FakeDbGames = 
+            new List<IGameModel>() {
                 new GameModel{
                     Id = 1,
                     Name = "Half-Life",
@@ -26,6 +25,10 @@ namespace HealthyFoodWeb.Services
                     Price = 1
                 },
             };
+
+        public List<IGameModel> GetAll()
+        {
+            return FakeDbGames;
         }
 
         public IGameModel GetGameById(string name)
@@ -35,7 +38,9 @@ namespace HealthyFoodWeb.Services
 
         public void SaveGame(IGameModel game)
         {
-            throw new NotImplementedException();
+            var maxExistedId = FakeDbGames.Max(x => x.Id);
+            game.Id = maxExistedId + 1;
+            FakeDbGames.Add(game);
         }
     }
 }

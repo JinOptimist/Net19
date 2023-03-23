@@ -1,0 +1,7 @@
+.games {
+    display: flex;
+}
+
+.rich {
+    border: 3px red dotted;
+}

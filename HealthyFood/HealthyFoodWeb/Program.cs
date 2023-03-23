@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IRecomendateGameService>(
+builder.Services.AddScoped<IGameService>(
     diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
 
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());

@@ -6,32 +6,54 @@ namespace HealthyFoodWeb.Controllers
 {
     public class GameController : Controller
     {
-        private IRecomendateGameService _recomendateGameService;
+        private IGameService _gameService;
 
-        public GameController(IRecomendateGameService recomendateGameService)
+        public GameController(IGameService gameService)
         {
-            _recomendateGameService = recomendateGameService;
+            _gameService = gameService;
         }
 
         public IActionResult Index()
         {
-            var viewModels = _recomendateGameService
+            var viewModel = new GameIndexViewModel();
+            viewModel.CheapGames = _gameService
                 .GetAllCheapGames()
                 .Select(x => new GameViewModel
                 {
-                    GameName = x.Name,
+                    Name = x.Name,
                 })
                 .ToList();
 
-            return View(viewModels);
+            viewModel.RichGames = _gameService
+                .GetAllRichGames()
+                .Select(x => new GameViewModel
+                {
+                    Name = x.Name,
+                })
+                .ToList();
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult CreateGame()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateGame(GameViewModel viewModel)
+        {
+            _gameService.CreateGame(viewModel);
+            return View();
         }
 
         public IActionResult RecomendateGame()
         {
-            var bestGameName = _recomendateGameService.GetTheBestGameName();
+            var bestGameName = _gameService.GetTheBestGameName();
             var recomendateGameViewModel = new GameViewModel
             {
-                GameName = bestGameName,
+                Name = bestGameName,
             };
             return View(recomendateGameViewModel);
         }
