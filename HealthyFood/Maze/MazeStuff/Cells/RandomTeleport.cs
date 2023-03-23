@@ -8,7 +8,7 @@ namespace Maze.MazeStuff.Cells
     {
 
         private Random _random = new Random();
-        public RandomTeleport(int x, int y, MazeLevel maze) : base(x,y, maze)
+        public RandomTeleport(int x, int y, IMazeLevel maze) : base(x,y, maze)
         {
 
         }

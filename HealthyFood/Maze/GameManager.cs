@@ -10,7 +10,7 @@ namespace Maze
 
         public void Start()
         {
-            _maze = new MazeBuilder().Build();           
+            _maze = new MazeBuilder().Build();
 
             var drawer = new MazeDrawer();
 
@@ -50,7 +50,6 @@ namespace Maze
             var destinationHeroX = _maze.Hero.X;
             var destinationHeroY = _maze.Hero.Y;
 
-            
             switch (direction)
             {
                 case Direction.Left:
@@ -77,14 +76,6 @@ namespace Maze
             else
             {
                 destinationCell = _maze.Cells.SingleOrDefault(cell => cell.X == destinationHeroX && cell.Y == destinationHeroY);
-            }
-            
-            var greedyHealerCell = _maze.Cells
-                .SingleOrDefault(cell => cell.X == _maze.GreedyHealer.X 
-                    && cell.Y == _maze.GreedyHealer.Y);
-            if (greedyHealerCell != null)
-            {
-                destinationCell = greedyHealerCell;
             }
 
             if (destinationCell == null)
