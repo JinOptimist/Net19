@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCustomLinq", "MyCustomLin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.Tests", "Maze.Tests\Maze.Tests.csproj", "{5D227CBC-A490-426C-A003-E9F0E91E9118}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyFoodWeb", "HealthyFoodWeb\HealthyFoodWeb.csproj", "{4CD7697A-9AE4-4FB3-A08E-56B551CFB9A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyFoodWeb", "HealthyFoodWeb\HealthyFoodWeb.csproj", "{4CD7697A-9AE4-4FB3-A08E-56B551CFB9A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,4 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Wiki\Style\**" />
+    <Content Remove="Views\Wiki\Style\**" />
+    <EmbeddedResource Remove="Views\Wiki\Style\**" />
+    <None Remove="Views\Wiki\Style\**" />
+  </ItemGroup>
+
 </Project>
