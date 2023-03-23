@@ -48,5 +48,10 @@ namespace HealthyFoodWeb.Services
 
             return _gameRepository.GetAll().First().Name;
         }
+
+        public void Remove(string name)
+        {
+            _gameRepository.RemoveByName(name);
+        }
     }
 }

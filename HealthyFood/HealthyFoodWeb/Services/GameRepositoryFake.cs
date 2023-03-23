@@ -31,9 +31,14 @@ namespace HealthyFoodWeb.Services
             return FakeDbGames;
         }
 
-        public IGameModel GetGameById(string name)
+        public IGameModel GetGameByName(string name)
         {
-            throw new NotImplementedException();
+            return FakeDbGames.FirstOrDefault(x => x.Name == name);
+        }
+
+        public void RemoveByName(string name)
+        {
+            FakeDbGames.Remove(GetGameByName(name));
         }
 
         public void SaveGame(IGameModel game)

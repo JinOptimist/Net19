@@ -4,10 +4,12 @@ namespace Data.Interface.Repositories
 {
     public interface IGameRepository
     {
-        IGameModel GetGameById(string name);
+        IGameModel GetGameByName(string name);
 
         List<IGameModel> GetAll();
 
         void SaveGame(IGameModel game);
+
+        void RemoveByName(string name);
     }
 }

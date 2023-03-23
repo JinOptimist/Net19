@@ -12,5 +12,7 @@ namespace HealthyFoodWeb.Services
         List<IGameModel> GetAllCheapGames();
 
         List<IGameModel> GetAllRichGames();
+
+        void Remove(string name);
     }
 }

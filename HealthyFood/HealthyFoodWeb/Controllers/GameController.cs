@@ -45,7 +45,13 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult CreateGame(GameViewModel viewModel)
         {
             _gameService.CreateGame(viewModel);
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(string name)
+        {
+            _gameService.Remove(name);
+            return RedirectToAction("Index");
         }
 
         public IActionResult RecomendateGame()
