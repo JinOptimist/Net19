@@ -1,0 +1,15 @@
+﻿@model GameViewModel
+
+<div>
+    <form method="post">
+        <div>
+            Name: @Html.TextBoxFor(x => x.Name)
+        </div>
+        <div>
+            Price: @Html.TextBoxFor(x => x.Price)
+        </div>
+        <div>
+            <input type="submit" value="Create game" />
+        </div>
+    </form>
+</div>
