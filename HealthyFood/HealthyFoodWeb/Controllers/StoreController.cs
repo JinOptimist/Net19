@@ -8,5 +8,12 @@ namespace HealthyFoodWeb.Controllers
         {
             return View();
         }
+
+
+        public IActionResult CartPage()
+        {
+            return View();
+        }
+
     }
 }
