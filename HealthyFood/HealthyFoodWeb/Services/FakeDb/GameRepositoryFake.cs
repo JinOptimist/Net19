@@ -8,7 +8,8 @@ namespace HealthyFoodWeb.Services.FakeDb
     {
         public static List<IGameModel> FakeDbGames =
             new List<IGameModel>() {
-                new GameModel{
+                new GameModel
+                {
                     Id = 1,
                     Name = "Half-Life",
                     Price = 10},

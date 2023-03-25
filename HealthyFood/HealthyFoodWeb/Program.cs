@@ -1,11 +1,17 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.FakeDb;
+using HealthyFoodWeb.Services.WikiServices;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<BlockInformationServices>(x => new BlockInformationServices(x.GetService<WikiRepositoryBAA>()));
+builder.Services.AddScoped<WikiRepositoryBAA>(x => new WikiRepositoryBAA());
 
 
 builder.Services.AddScoped<IGameService>(
