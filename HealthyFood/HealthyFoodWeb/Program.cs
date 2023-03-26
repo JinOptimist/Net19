@@ -14,6 +14,11 @@ builder.Services.AddScoped<IGameService>(
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
 
 
+builder.Services.AddScoped<ICartService>(
+    diContainer => new ListCartService(diContainer.GetService<ICartRepository>()));
+
+builder.Services.AddScoped<ICartRepository>(x => new CartRepositoryFake());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
