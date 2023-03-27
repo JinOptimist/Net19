@@ -1,0 +1,10 @@
+﻿@model GameFruitVeiwModel
+@{
+    Layout = "_Layout_Game";
+}
+@foreach(var catalog in Model.catalog)
+{
+    <div>
+        @catalog
+    </div>
+}

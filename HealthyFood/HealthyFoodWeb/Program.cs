@@ -13,6 +13,9 @@ builder.Services.AddScoped<IGameService>(
 
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
 
+builder.Services.AddScoped<IGameCatalogService>(
+    x => new GameCatalogService(x.GetServices<ICatalogRepositories>()));
+builder.Services.AddScoped(x => new CatalogOfGameFrit());
 
 var app = builder.Build();
 
