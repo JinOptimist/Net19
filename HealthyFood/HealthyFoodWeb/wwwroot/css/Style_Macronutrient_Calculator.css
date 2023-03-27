@@ -1,0 +1,69 @@
+﻿.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: black;
+}
+
+.main-menu {
+    width: 400px;
+    background-color: lightgray;
+    border: 1px;
+    margin: 5px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.center-block {
+    display: flex;
+}
+
+.start-text {
+    margin-inline: 30pt;
+}
+
+.gallery {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 30px;
+}
+
+.gallery img {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    max-height: 250px;
+    min-height: 250px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.calculations {
+    margin-inline: 30pt;
+}
+
+.data1 {
+    display: flex;
+    align-items: center;
+}
+
+.input-parameters {
+    height: 850px;
+    background-color: yellowgreen;
+    border: 1px;
+    margin-inline: 30pt;
+    padding: 15px;
+    border-radius: 5px;
+    width: 350px;
+}
+
+.comments {
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+}
+
+.suggestions {
+    margin-inline: 30pt;
+}
