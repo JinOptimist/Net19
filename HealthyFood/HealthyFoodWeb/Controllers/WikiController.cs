@@ -1,4 +1,6 @@
-﻿using HealthyFoodWeb.Models.ModelsWiki;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.FakeDbModels;
+using HealthyFoodWeb.Models.ModelsWiki;
 using HealthyFoodWeb.Services.WikiServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,12 +9,13 @@ namespace HealthyFoodWeb.Controllers
 {
     public class WikiController : Controller
     {
-        private BlockInformationServices _blockInformationServices;
+        private IPageRecomendateServis _blockInformationServices;
 
-        public WikiController(BlockInformationServices blockInformationServices)
+        public WikiController(IPageRecomendateServis blockInformationServices)
         {
             _blockInformationServices = blockInformationServices;
         }
+        
 
         public IActionResult Main()
         {
@@ -22,13 +25,14 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult BiologicallyActiveAdditives()
         {
-            var title = _blockInformationServices.BlockInformation();
-            var blockInformationModels = new BlockInformationModels()
+            var blocks = _blockInformationServices.GetTitles();
+            var pageModel = new PageModelBAA();
+            foreach (IBlockModelBAA block in blocks)
             {
-                Title = title,
-            };
+                pageModel.BlocksList.Add(block);
+            }
 
-            return View(blockInformationModels);
+            return View(pageModel);
         } 
     }
 }
