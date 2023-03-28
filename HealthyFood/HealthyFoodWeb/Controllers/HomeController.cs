@@ -37,4 +37,6 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("Profile", new { name = model.ActualName });
         }
     }
+
+    
 }
