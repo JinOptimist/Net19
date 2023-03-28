@@ -2,10 +2,8 @@
 
 namespace Data.Fake.Models
 {
-    public class GameModel : IGameModel
+    public class GameModel : BaseDbModel, IGameDbModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public decimal Price { get; set; }

@@ -1,9 +1,11 @@
 ﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services.IServices
 {
     public interface IUserService
     {
-        List<IUserModel> GetUserModels();
+        void AddUser(UserViewModel viewModel);
+        List<IUserDbModel> GetUserModels();
     }
 }

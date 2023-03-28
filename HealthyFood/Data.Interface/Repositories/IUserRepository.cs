@@ -2,11 +2,9 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<IUserDbModel>
     {
-        IUserModel GetByName(string name);
-        List<IUserModel> GetAll();
+        IUserDbModel GetByName(string name);
         void RemoveByName(string name);
-        void Add(IUserModel model);
     }
 }

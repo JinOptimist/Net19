@@ -2,10 +2,8 @@
 
 namespace Data.Fake.Models
 {
-    internal class UserDbModel : IUserModel
+    public class UserDbModel : BaseDbModel, IUserDbModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string AvatarUrl { get; set; }

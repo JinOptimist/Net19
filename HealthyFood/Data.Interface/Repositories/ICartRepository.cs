@@ -2,10 +2,9 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface ICartRepository
+    public interface ICartRepository : IBaseRepository<ICartDbModel>
     {
-        ICartModel GetByName(string name);
-        List<ICartModel> GetAll();
+        ICartDbModel GetByName(string name);
         void RemoveByName(string name);
     }
 }

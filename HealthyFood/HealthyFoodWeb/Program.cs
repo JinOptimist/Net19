@@ -17,9 +17,9 @@ builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 
 
-builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
-builder.Services.AddScoped<ICartRepository>(x => new CartRepositoryFake());
-builder.Services.AddScoped<IUserRepository>(x => new UserRepository());
+builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
+builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
+builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 
 var app = builder.Build();
 

@@ -4,10 +4,11 @@ using Data.Fake.Models;
 
 namespace Data.Fake.Repositories
 {
-    public class CartRepositoryFake : ICartRepository
+    public class CartRepositoryFake : BaseRepository<ICartDbModel>, ICartRepository
     {
-        public static List<ICartModel> FakeDbCart =
-            new List<ICartModel>() {
+        public CartRepositoryFake()
+        {
+            FakeDbModels = new List<ICartDbModel>() {
                 new CartModel{
                     Id = 1,
                     Name = "Salat",
@@ -21,20 +22,16 @@ namespace Data.Fake.Repositories
                 },
 
             };
-
-        public List<ICartModel> GetAll()
-        {
-            return FakeDbCart;
         }
 
-        public ICartModel GetByName(string name)
+        public ICartDbModel GetByName(string name)
         {
-            return FakeDbCart.FirstOrDefault(x => x.Name == name);
+            return FakeDbModels.FirstOrDefault(x => x.Name == name);
         }
 
         public void RemoveByName(string name)
         {
-            FakeDbCart.Remove(GetByName(name));
+            FakeDbModels.Remove(GetByName(name));
         }
 
     }

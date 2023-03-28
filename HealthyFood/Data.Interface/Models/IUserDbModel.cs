@@ -1,8 +1,7 @@
 ﻿namespace Data.Interface.Models
 {
-    public interface IUserModel
+    public interface IUserDbModel : IDbModel
     {
-        int Id { get; set; }
         string Name { get; }
         string AvatarUrl { get; }
     }

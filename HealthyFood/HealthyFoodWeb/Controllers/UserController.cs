@@ -37,7 +37,8 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult AddUser(UserViewModel viewModel)
         {
-            return View();
+            _userService.AddUser(viewModel);
+            return RedirectToAction("Index");
         }
     }
 }

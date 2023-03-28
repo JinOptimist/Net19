@@ -24,10 +24,10 @@ namespace HealthyFoodWeb.Services
                 Price = viewModel.Price,
             };
 
-            _gameRepository.AddGame(dbGameModel);
+            _gameRepository.Add(dbGameModel);
         }
 
-        public List<IGameModel> GetAllCheapGames()
+        public List<IGameDbModel> GetAllCheapGames()
         {
             return _gameRepository
                 .GetAll()
@@ -35,7 +35,7 @@ namespace HealthyFoodWeb.Services
                 .ToList();
         }
 
-        public List<IGameModel> GetAllRichGames()
+        public List<IGameDbModel> GetAllRichGames()
         {
             return _gameRepository
                  .GetAll()

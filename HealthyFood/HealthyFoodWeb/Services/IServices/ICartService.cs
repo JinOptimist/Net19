@@ -5,7 +5,7 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface ICartService
     {
-        List<ICartModel> GetAllProduct();
+        List<ICartDbModel> GetAllProduct();
 
         void DeleteFromCart(string name);
     }
