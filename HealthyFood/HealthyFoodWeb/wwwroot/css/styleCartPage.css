@@ -1,0 +1,65 @@
+﻿.text {
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.order-list {
+    display: flex;
+    width: 100px;
+    height: 140px;
+    margin: 10px;
+}
+
+.image-order {
+    display: contents;
+    max-width: 100px;
+    max-height: 200px;
+}
+
+.order-description {
+    display: table-cell;
+    min-width: 300px;
+    margin-left: 5px;
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.order-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-number {
+    margin: 7px;
+}
+
+.order-price {
+    margin: 60px;
+}
+
+.form-total-cost {
+    display: flex;
+    margin-top: 20px;
+}
+
+.total-text {
+    display: flex;
+    align-items: flex-end;
+}
+
+.total-price {
+    font: 455 45px/1 Roboto;
+    margin-left: 10px;
+}
+
+.order-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.order-button-content {
+    display: flex;
+    justify-content: flex-end;
+}
