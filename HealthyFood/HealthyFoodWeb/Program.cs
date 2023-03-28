@@ -1,6 +1,7 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.FakeDb;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,9 @@ builder.Services.AddScoped<IGameService>(
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
 
 builder.Services.AddScoped<IGameCatalogService>(
-    x => new GameCatalogService(x.GetServices<ICatalogRepositories>()));
-builder.Services.AddScoped(x => new CatalogOfGameFrit());
+    x => new GameCatalogService(x.GetService<ICatalogRepositories>()));
+
+builder.Services.AddScoped<ICatalogRepositories>(x => new CatalogOfGameFrit());
 
 var app = builder.Build();
 
