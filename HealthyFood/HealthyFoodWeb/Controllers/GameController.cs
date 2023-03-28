@@ -21,6 +21,7 @@ namespace HealthyFoodWeb.Controllers
                 .Select(x => new GameViewModel
                 {
                     Name = x.Name,
+                    CoverUrl = x.CoverUrl,
                 })
                 .ToList();
 
@@ -29,6 +30,7 @@ namespace HealthyFoodWeb.Controllers
                 .Select(x => new GameViewModel
                 {
                     Name = x.Name,
+                    CoverUrl = x.CoverUrl,
                 })
                 .ToList();
 
