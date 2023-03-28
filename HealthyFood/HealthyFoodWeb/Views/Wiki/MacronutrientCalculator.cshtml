@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WikiMCImgViewModel
+
+@{
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
 }
@@ -31,6 +33,28 @@
                     Превышение или уменьшение нормы ведет к нарушению баланса в организме, болезням, расстройствам пищевого поведения, вызванным нехваткой полезных веществ. Поэтому знать «свои цифры» и вести расчет БЖУ важно для всех, кто заботится не только и своём питании, но и здоровье в целом.
                 </p>
             </div>
+
+            <div class="gallery">
+                 <div class="year">
+                   <h1>New</h1>
+                  @foreach (var wikiMCImgViewModel in Model.ImgByYear)
+        {
+            <div class="img-container">
+               <img src ="@wikiMCImgViewModel.ImgPath">
+            </div>
+        }
+    </div>
+    <div class="type">
+        <h1>Proteins</h1>
+        @foreach (var WikiMCImgViewModel in Model.ImgByType)
+        {
+            <div class="img-container">
+                <img src ="@WikiMCImgViewModel.ImgPath">
+            </div>
+        }
+    </div>
+</div>
+
             <div class="gallery">
                 <div class="image-container">
                     <img src="https://avatars.dzeninfra.ru/get-zen_doc/41204/pub_5b00259fad0f222dd299aae7_5b005a50a936f4e52e30b616/scale_1200">

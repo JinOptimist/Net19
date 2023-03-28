@@ -1,35 +1,35 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.FakeDbModels;
-using HealthyFoodWeb.Models.WikiModels;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
-    public class WikiMCImgService : IWikiMCImgService
+    public class WikiMCService : IWikiMCService
     {
         public const int CURRENT_YEAR = 2023;
         public const string CURRENT_TYPE = "proteins";
 
-        private IWiki_MC_Img_Repository _wikiMCRepository;
+        private IWikiMCRepository _wikiMCRepository;
 
-        public WikiMCImgService(IWiki_MC_Img_Repository wikiMCRepository)
+        public WikiMCService(IWikiMCRepository wikiMCRepository)
         {
             _wikiMCRepository = wikiMCRepository;
         }
 
-        public void AddImg(MacronutrientCalculatorIMGViewModel viewModel)
+        public void AddImg(WikiMCViewModel viewModel)
         {
-            var dbWikiMCImg = new Wiki_MC_Img_Model()
+            var dbWikiMCImg = new WikiMCModel()
             {
                 Type = viewModel.Type,
-                Path = viewModel.Path,
+                Path = viewModel.ImgPath,
                 Year = viewModel.Year,
             };
 
             _wikiMCRepository.SaveImg(dbWikiMCImg);
         }
 
-        public List<IWiki_MC_Img_Model> GetAllImgByYear()
+        public List<IWikiMCModel> GetAllImgByYear()
         {
             return _wikiMCRepository
                 .GetAll()
@@ -37,7 +37,7 @@ namespace HealthyFoodWeb.Services
                 ToList();
         }
       
-        public List<IWiki_MC_Img_Model> GetAllImgByType()
+        public List<IWikiMCModel> GetAllImgByType()
         {
             return _wikiMCRepository
                 .GetAll()

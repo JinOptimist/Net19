@@ -13,10 +13,10 @@ builder.Services.AddScoped<IGameService>(
 
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
 
-builder.Services.AddScoped<IWikiMCImgService>(
-    diContainer => new WikiMCImgService(diContainer.GetService<IWiki_MC_Img_Repository>()));
+builder.Services.AddScoped<IWikiMCService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMCRepository>()));
 
-builder.Services.AddScoped<IWiki_MC_Img_Repository>(x => new Wiki_MC_Img_Repository_Fake());
+builder.Services.AddScoped<IWikiMCRepository>(x => new WikiMCRepositoryFake());
 
 
 var app = builder.Build();

@@ -1,6 +1,8 @@
-﻿namespace Data.Interface.Models
+﻿using Data.Interface.Models;
+
+namespace HealthyFoodWeb.FakeDbModels
 {
-    public interface IWiki_MC_Img_Model
+    public class WikiMCModel : IWikiMCModel
     {
         public int Id { get; set; }
         public int Year { get; set; }
