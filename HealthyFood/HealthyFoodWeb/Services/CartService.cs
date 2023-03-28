@@ -1,15 +1,14 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
-using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    public class ListCartService : ICartService
+    public class CartService : ICartService
     {
         private ICartRepository _cartRepository;
 
-        public ListCartService(ICartRepository cartRepositoryFake)
+        public CartService(ICartRepository cartRepositoryFake)
         {
             _cartRepository = cartRepositoryFake;
         }

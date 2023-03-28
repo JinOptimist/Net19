@@ -1,8 +1,8 @@
-﻿using Data.Interface.Models;
+﻿using Data.Fake.Models;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
 
-namespace HealthyFoodWeb.Services.FakeDb
+namespace Data.Fake.Repositories
 {
     public class GameRepositoryFake : IGameRepository
     {
@@ -45,7 +45,7 @@ namespace HealthyFoodWeb.Services.FakeDb
             FakeDbGames.Remove(GetGameByName(name));
         }
 
-        public void SaveGame(IGameModel game)
+        public void AddGame(IGameModel game)
         {
             var maxExistedId = FakeDbGames.Max(x => x.Id);
             game.Id = maxExistedId + 1;

@@ -8,7 +8,7 @@ namespace Data.Interface.Repositories
 
         List<IGameModel> GetAll();
 
-        void SaveGame(IGameModel game);
+        void AddGame(IGameModel game);
 
         void RemoveByName(string name);
     }

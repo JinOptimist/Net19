@@ -1,6 +1,7 @@
+using Data.Fake.Repositories;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Services;
-using HealthyFoodWeb.Services.FakeDb;
+using HealthyFoodWeb.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,14 +11,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IGameService>(
     diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
+builder.Services.AddScoped<ICartService>(
+    diContainer => new CartService(diContainer.GetService<ICartRepository>()));
+builder.Services.AddScoped<IUserService>(
+    diContainer => new UserService(diContainer.GetService<IUserRepository>()));
+
 
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
-
-
-builder.Services.AddScoped<ICartService>(
-    diContainer => new ListCartService(diContainer.GetService<ICartRepository>()));
-
 builder.Services.AddScoped<ICartRepository>(x => new CartRepositoryFake());
+builder.Services.AddScoped<IUserRepository>(x => new UserRepository());
 
 var app = builder.Build();
 

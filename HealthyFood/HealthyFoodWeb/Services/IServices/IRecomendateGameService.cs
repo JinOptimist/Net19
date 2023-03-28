@@ -1,7 +1,7 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.IServices
 {
     public interface IGameService
     {

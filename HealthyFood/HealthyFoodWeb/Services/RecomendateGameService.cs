@@ -1,7 +1,8 @@
-﻿using Data.Interface.Models;
+﻿using Data.Fake.Models;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
@@ -23,7 +24,7 @@ namespace HealthyFoodWeb.Services
                 Price = viewModel.Price,
             };
 
-            _gameRepository.SaveGame(dbGameModel);
+            _gameRepository.AddGame(dbGameModel);
         }
 
         public List<IGameModel> GetAllCheapGames()

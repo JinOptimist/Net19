@@ -1,8 +1,8 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
+using Data.Fake.Models;
 
-namespace HealthyFoodWeb.Services
+namespace Data.Fake.Repositories
 {
     public class CartRepositoryFake : ICartRepository
     {
