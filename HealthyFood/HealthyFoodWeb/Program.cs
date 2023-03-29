@@ -13,6 +13,10 @@ builder.Services.AddScoped<IGameService>(
 
 builder.Services.AddScoped<IGameRepository>(x => new GameRepositoryFake());
 
+builder.Services.AddScoped<ProductRepositoryFake>(
+    diContainer => new RatingProductService(diContainer.GetService<RatingProductService>()));
+
+
 
 var app = builder.Build();
 
