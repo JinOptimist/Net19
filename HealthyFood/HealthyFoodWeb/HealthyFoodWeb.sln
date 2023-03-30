@@ -3,11 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1704.3
 MinimumVisualStudioVersion = 10.0.40219.1
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyFoodWeb", "HealthyFoodWeb.csproj", "{BAB174A3-0BDA-4377-A983-9B17C6484903}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Interface", "..\Data.Interface\Data.Interface.csproj", "{44E3EE8A-DE67-40CB-95F5-CE3FBD5A18A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Fake", "..\Data.Fake\Data.Fake.csproj", "{2D882252-88E7-4386-B6E9-1BFDFDD57532}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyFoodWeb", "HealthyFoodWeb.csproj", "{B57841C0-1CED-4057-91C0-6E38B773A98D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Sql", "..\Data.Sql\Data.Sql.csproj", "{58EE7B00-907E-4464-B08C-282167A04FAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Interface", "..\Data.Interface\Data.Interface.csproj", "{4DE28469-B95F-44AA-A72F-37941D924417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Fake", "..\Data.Fake\Data.Fake.csproj", "{ADDB3E0A-99BB-40AD-A85D-F06475EF87B5}"
+>>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,7 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< Updated upstream
 		{BAB174A3-0BDA-4377-A983-9B17C6484903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAB174A3-0BDA-4377-A983-9B17C6484903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB174A3-0BDA-4377-A983-9B17C6484903}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,11 +38,33 @@ Global
 		{2D882252-88E7-4386-B6E9-1BFDFDD57532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D882252-88E7-4386-B6E9-1BFDFDD57532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D882252-88E7-4386-B6E9-1BFDFDD57532}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{B57841C0-1CED-4057-91C0-6E38B773A98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B57841C0-1CED-4057-91C0-6E38B773A98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B57841C0-1CED-4057-91C0-6E38B773A98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B57841C0-1CED-4057-91C0-6E38B773A98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58EE7B00-907E-4464-B08C-282167A04FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58EE7B00-907E-4464-B08C-282167A04FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58EE7B00-907E-4464-B08C-282167A04FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58EE7B00-907E-4464-B08C-282167A04FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE28469-B95F-44AA-A72F-37941D924417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE28469-B95F-44AA-A72F-37941D924417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE28469-B95F-44AA-A72F-37941D924417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE28469-B95F-44AA-A72F-37941D924417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDB3E0A-99BB-40AD-A85D-F06475EF87B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDB3E0A-99BB-40AD-A85D-F06475EF87B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDB3E0A-99BB-40AD-A85D-F06475EF87B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDB3E0A-99BB-40AD-A85D-F06475EF87B5}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+<<<<<<< Updated upstream
 		SolutionGuid = {0FE77ED3-ED62-4101-BF88-877675C5844A}
+=======
+		SolutionGuid = {0BC360BF-A98A-4BDE-8F19-BA7310852EA2}
+>>>>>>> Stashed changes
 	EndGlobalSection
 EndGlobal

@@ -17,9 +17,16 @@ builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 
 
-builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
+//builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
+<<<<<<< Updated upstream
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
+=======
+//builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
+builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IGameRepository>(x => new GameRepositories(x.GetService<WebContext>()));
+
+>>>>>>> Stashed changes
 
 var app = builder.Build();
 
