@@ -8,6 +8,7 @@ namespace Data.Sql
         public DbSet<UserDbModel> Users { get; set; }
 
         public DbSet<CartModel> Carts { get; set; }
+        public DbSet<HealthyProductDbModel> HealthyProducts { get; set; }   
 
         public WebContext() { }
 
