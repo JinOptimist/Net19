@@ -18,7 +18,7 @@ namespace HealthyFoodWeb.Services
 
         public void CreateGame(GameViewModel viewModel)
         {
-            var dbGameModel = new GameModel()
+            var dbGameModel = new GameDbModel()
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
