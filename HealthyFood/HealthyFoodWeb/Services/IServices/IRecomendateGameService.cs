@@ -1,7 +1,7 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.IServices
 {
     public interface IGameService
     {
@@ -9,9 +9,9 @@ namespace HealthyFoodWeb.Services
 
         void CreateGame(GameViewModel viewModel);
 
-        List<IGameModel> GetAllCheapGames();
+        List<IGameDbModel> GetAllCheapGames();
 
-        List<IGameModel> GetAllRichGames();
+        List<IGameDbModel> GetAllRichGames();
 
         void Remove(string name);
     }

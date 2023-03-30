@@ -1,9 +1,9 @@
 ﻿namespace Data.Interface.Models
 {
-    public interface IGameModel
+    public interface IGameDbModel : IDbModel
     {
-        int Id { get; set; }
         string Name { get; }
+        string CoverUrl { get; }
         decimal Price { get; }
     }
 }

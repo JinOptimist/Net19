@@ -1,0 +1,18 @@
+﻿@model List<UserViewModel>
+
+<div>
+    <a href="/User/AddUser">Add user</a>
+</div>
+<div>
+    @foreach (var viewModel in Model)
+    {
+        <div class="user">
+            @viewModel.Name
+            <img src="@viewModel.AvatarUrl" />
+        </div>
+    }
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/user.css" />
+}
