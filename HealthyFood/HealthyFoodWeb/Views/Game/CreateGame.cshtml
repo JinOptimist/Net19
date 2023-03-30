@@ -9,7 +9,13 @@
             Price: @Html.TextBoxFor(x => x.Price)
         </div>
         <div>
+            Scren<div class="cover">
+            <img scr="@Html.TextBoxFor(x => x.CoverUrl)"/>
+        <div>
             <input type="submit" value="Create game" />
         </div>
     </form>
 </div>
+@section Styles{
+    <link rel="stylesheet" href="~/css/game.css" />
+}
