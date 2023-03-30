@@ -1,5 +1,4 @@
-﻿using Data.Interface.Models;
-using Data.Sql.Models;
+﻿using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql
@@ -10,7 +9,7 @@ namespace Data.Sql
 
         public DbSet<CartModel> Carts { get; set; }
 
-        public WebContext(){}
+        public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)
