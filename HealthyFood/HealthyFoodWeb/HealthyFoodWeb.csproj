@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Data.Fake\Data.Fake.csproj" />
     <ProjectReference Include="..\Data.Interface\Data.Interface.csproj" />
+    <ProjectReference Include="..\Data.Sql\Data.Sql.csproj" />
   </ItemGroup>
 
 </Project>

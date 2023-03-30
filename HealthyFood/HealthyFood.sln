@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyFoodWeb", "HealthyFo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Interface", "Data.Interface\Data.Interface.csproj", "{A85C6D5C-CB2F-4EF2-99B4-4A7DB2C56DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Fake", "Data.Fake\Data.Fake.csproj", "{8266D98D-D556-4761-9D93-D16A47F32193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Fake", "Data.Fake\Data.Fake.csproj", "{8266D98D-D556-4761-9D93-D16A47F32193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Sql", "Data.Sql\Data.Sql.csproj", "{9817BD90-E7F3-4B76-8331-1BA865A73E6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{8266D98D-D556-4761-9D93-D16A47F32193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8266D98D-D556-4761-9D93-D16A47F32193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8266D98D-D556-4761-9D93-D16A47F32193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9817BD90-E7F3-4B76-8331-1BA865A73E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9817BD90-E7F3-4B76-8331-1BA865A73E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9817BD90-E7F3-4B76-8331-1BA865A73E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9817BD90-E7F3-4B76-8331-1BA865A73E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
