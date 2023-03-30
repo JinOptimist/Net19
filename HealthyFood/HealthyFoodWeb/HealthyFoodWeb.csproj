@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Services\FakeDb\" />
+	  <ProjectReference Include="..\Data.Sql\Data.Sql.csproj" />
   </ItemGroup>
 
 </Project>
