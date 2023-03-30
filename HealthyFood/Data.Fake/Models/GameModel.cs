@@ -2,7 +2,7 @@
 
 namespace Data.Fake.Models
 {
-    public class GameDbModel : BaseDbModel, IGameDbModel
+    public class GameModel : BaseDbModel, IGameDbModel
     {
         public string Name { get; set; }
 
