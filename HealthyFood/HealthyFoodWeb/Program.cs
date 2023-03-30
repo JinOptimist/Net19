@@ -9,18 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IGameService>(
+builder.Services.AddSingleton<IGameService>(
     diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
-builder.Services.AddScoped<ICartService>(
+builder.Services.AddSingleton<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>()));
-builder.Services.AddScoped<IUserService>(
+builder.Services.AddSingleton<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-
+builder.Services.AddSingleton<IGameCatalogService>(
+     diContainer => new GameCatalogService(diContainer.GetService<ICatalogRepository>()));
 
 builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-
+builder.Services.AddSingleton<ICatalogRepository>(x => new CatalogRepositoryFake());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

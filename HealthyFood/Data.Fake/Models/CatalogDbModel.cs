@@ -1,13 +1,14 @@
 ﻿
 
+using Data.Fake.Models;
 using Data.Interface.Models;
 
 namespace HealthyFoodWeb.FakeDbModels
 
 {
-    public class Catalog : ICatalog
+    public class CatalogDbModel : BaseDbModel, ICatalogDbModel
     {
-       public int Id { get; set; }
+      
        public string NameCategory { get; set; }
 
     }

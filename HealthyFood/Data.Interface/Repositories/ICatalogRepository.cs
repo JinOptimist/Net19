@@ -2,8 +2,8 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface ICatalogRepositories
+    public interface ICatalogRepository : IBaseRepository<ICatalogDbModel>
     {
-        List<ICatalog> GetCatalog();
+    
     }
 }

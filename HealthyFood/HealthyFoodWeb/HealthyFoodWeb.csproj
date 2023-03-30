@@ -12,4 +12,8 @@
     <ProjectReference Include="..\HealthyFood\HealthyFood.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\FakeDb\" />
+  </ItemGroup>
+
 </Project>

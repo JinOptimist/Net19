@@ -1,20 +1,33 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using HealthyFoodWeb.FakeDbModels;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
     public class GameCatalogService : IGameCatalogService
     {
-        private ICatalogRepositories _ICatalogRepositories;
+        private ICatalogRepository _catalogRepository;
 
-        public GameCatalogService(ICatalogRepositories iCatalogRepositories)
+        public GameCatalogService(ICatalogRepository catalogRepositories)
         {
-            _ICatalogRepositories = iCatalogRepositories;
+            _catalogRepository = catalogRepositories;
         }
 
-        public List<ICatalog> GetCatalog()
+        public List<ICatalogDbModel> GetCatalog()
         {
-            return _ICatalogRepositories.GetCatalog();
+            return _catalogRepository.GetAll();
+        }
+     
+        public void AddCategory(GameCatalogVeiwModel viewModel)
+        {
+
+            var catalogDbModel = new CatalogDbModel
+            {
+                NameCategory = viewModel.NameCategory
+            };
+            _catalogRepository.Add(catalogDbModel);
         }
     }
 }
+

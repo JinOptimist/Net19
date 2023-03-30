@@ -1,8 +1,8 @@
-﻿@model GameFruitVeiwModel
+﻿@model List<GameCatalogVeiwModel>
 @{
     Layout = "_Layout_Game";
 }
-@foreach(var catalog in Model.catalog)
+@foreach(var catalog in Model)
 {
     <div>
         @catalog.NameCategory

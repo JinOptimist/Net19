@@ -2,9 +2,9 @@
 
 namespace Data.Interface.Models
 {
-    public interface ICatalog
+    public interface ICatalogDbModel : IDbModel
     {
-        int Id { get; set; }
+        
         string NameCategory { get; }
 
     }
