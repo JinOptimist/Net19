@@ -33,7 +33,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetAllImgByType()
                 .Select(x => new WikiMCViewModel
                 {
-                    ImgPath = x.Path,
+                    ImgPath = x.ImgUrl,
                 })
                 .ToList();
 
@@ -41,14 +41,11 @@ namespace HealthyFoodWeb.Controllers
                 .GetAllImgByYear()
                 .Select(x => new WikiMCViewModel
                 {
-                    ImgPath = x.Path,
+                    ImgPath = x.ImgUrl,
                 })
                 .ToList();
 
             return View(viewModel);
         }
-
     }
-
-    
 }

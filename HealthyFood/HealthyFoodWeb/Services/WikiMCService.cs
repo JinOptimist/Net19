@@ -1,7 +1,8 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services.IServices;
+using Data.Fake.Models;
 
 namespace HealthyFoodWeb.Services
 {
@@ -19,17 +20,16 @@ namespace HealthyFoodWeb.Services
 
         public void AddImg(WikiMCViewModel viewModel)
         {
-            var dbWikiMCImg = new WikiMCModel()
+            var wikiMCDbModel = new WikiMCDbModel()
             {
                 Type = viewModel.Type,
-                Path = viewModel.ImgPath,
+                ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
             };
-
-            _wikiMCRepository.SaveImg(dbWikiMCImg);
+            _wikiMCRepository.Add(wikiMCDbModel);
         }
 
-        public List<IWikiMCModel> GetAllImgByYear()
+        public List<IWikiMCDbModel> GetAllImgByYear()
         {
             return _wikiMCRepository
                 .GetAll()
@@ -37,7 +37,7 @@ namespace HealthyFoodWeb.Services
                 ToList();
         }
       
-        public List<IWikiMCModel> GetAllImgByType()
+        public List<IWikiMCDbModel> GetAllImgByType()
         {
             return _wikiMCRepository
                 .GetAll()

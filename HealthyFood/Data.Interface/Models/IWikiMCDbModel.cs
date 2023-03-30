@@ -1,10 +1,9 @@
 ﻿namespace Data.Interface.Models
 {
-    public interface IWikiMCModel
+    public interface IWikiMCDbModel : IDbModel
     {
-        public int Id { get; set; }
         public int Year { get; set; }
-        public string Path { get; set; }
+        public string ImgUrl { get; set; }
         public string Type { get; set; }
     }
 }
