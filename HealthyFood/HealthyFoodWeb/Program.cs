@@ -1,5 +1,6 @@
 using Data.Fake.Repositories;
 using Data.Interface.Repositories;
+using Data.Sql;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 
@@ -15,6 +16,9 @@ builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
+
+var dataSqlStartup = new Startup();
+dataSqlStartup.RegisterDbContext(builder.Services);
 
 
 builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
