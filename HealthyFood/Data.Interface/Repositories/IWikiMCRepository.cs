@@ -4,9 +4,9 @@ namespace Data.Interface.Repositories
 {
     public interface IWikiMCRepository : IBaseRepository<IWikiMCDbModel>
     {
-        IWikiMCDbModel GetImgByYear(int year);
-        IWikiMCDbModel GetImgByType(string type);
-        void RemoveByYear(int year);
-        void RemoveByType(string type);
+        IEnumerable<IWikiMCDbModel> GetAllImgByYear(int year);
+        IEnumerable<IWikiMCDbModel> GetAllImgByType(string type);
+        void RemoveAllImgByYear(int year);
+        void RemoveAllImgByType(string type);
     }
 }

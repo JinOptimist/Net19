@@ -7,9 +7,9 @@ namespace HealthyFoodWeb.Services
     {
         void AddImg(WikiMCViewModel viewModel);
 
-        List<IWikiMCDbModel> GetAllImgByYear();
+        IEnumerable<IWikiMCDbModel> GetAllImgByYear();
 
-        List<IWikiMCDbModel> GetAllImgByType();
+        IEnumerable<IWikiMCDbModel> GetAllImgByType();
 
         void RemoveByType(string type);
 

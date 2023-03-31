@@ -29,7 +29,7 @@ namespace HealthyFoodWeb.Services
             _wikiMCRepository.Add(wikiMCDbModel);
         }
 
-        public List<IWikiMCDbModel> GetAllImgByYear()
+        public IEnumerable<IWikiMCDbModel> GetAllImgByYear()
         {
             return _wikiMCRepository
                 .GetAll()
@@ -37,7 +37,7 @@ namespace HealthyFoodWeb.Services
                 ToList();
         }
       
-        public List<IWikiMCDbModel> GetAllImgByType()
+        public IEnumerable<IWikiMCDbModel> GetAllImgByType()
         {
             return _wikiMCRepository
                 .GetAll()
@@ -47,12 +47,12 @@ namespace HealthyFoodWeb.Services
 
         public void RemoveByType(string type)
         {
-            _wikiMCRepository.RemoveByType(type);
+            _wikiMCRepository.RemoveAllImgByType(type);
         }
 
         public void RemoveByYear(int year)
         {
-            _wikiMCRepository.RemoveByYear(year);
+            _wikiMCRepository.RemoveAllImgByYear(year);
         }
     }
 }

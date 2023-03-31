@@ -29,7 +29,7 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult MacronutrientCalculator()
         {
             var viewModel = new WikiMCImgViewModel();
-            viewModel.ImgByType = _wikiMCImgService
+            viewModel.AllImgByType = _wikiMCImgService
                 .GetAllImgByType()
                 .Select(x => new WikiMCViewModel
                 {
@@ -37,7 +37,7 @@ namespace HealthyFoodWeb.Controllers
                 })
                 .ToList();
 
-            viewModel.ImgByYear = _wikiMCImgService
+            viewModel.AllImgByYear = _wikiMCImgService
                 .GetAllImgByYear()
                 .Select(x => new WikiMCViewModel
                 {

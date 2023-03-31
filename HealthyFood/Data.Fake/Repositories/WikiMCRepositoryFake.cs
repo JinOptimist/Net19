@@ -42,24 +42,26 @@ namespace Data.Fake.Repositories
                  };
         }
 
-        public IWikiMCDbModel GetImgByYear(int year)
+        public IEnumerable<IWikiMCDbModel> GetAllImgByYear(int year)
         {
-            return (IWikiMCDbModel)FakeDbModels.Where(x => x.Year == year);
+            return FakeDbModels.Where(x => x.Year == year);
         }
 
-        public IWikiMCDbModel GetImgByType(string type)
+        public IEnumerable<IWikiMCDbModel> GetAllImgByType(string type)
         {
-            return (IWikiMCDbModel)FakeDbModels.Where(x => x.Type == type);
+            return FakeDbModels.Where(x => x.Type == type);
         }
 
-        public void RemoveByType(string type)
+        public void RemoveAllImgByType(string type)
         {
-            FakeDbModels.Remove(GetImgByType(type));
+            var removedType = FakeDbModels.Where(x => x.Type == type).ToList();
+            removedType.ForEach(x => FakeDbModels.Remove(x));
         }
 
-        public void RemoveByYear(int year)
+        public void RemoveAllImgByYear(int year)
         {
-            FakeDbModels.Remove(GetImgByYear(year));
+            var removedYear = FakeDbModels.Where(x => x.Year == year).ToList();
+            removedYear.ForEach(x => FakeDbModels.Remove(x));
         }
     }
 }
