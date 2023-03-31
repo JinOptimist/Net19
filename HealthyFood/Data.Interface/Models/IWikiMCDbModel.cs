@@ -6,6 +6,6 @@ namespace Data.Interface.Models
     {
         public int Year { get; set; }
         public string ImgUrl { get; set; }
-        public ImgTypeModel ImgType { get; set; }
+        public ImgTypeDbModel ImgType { get; set; }
     }
 }

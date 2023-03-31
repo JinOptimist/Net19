@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Fake.Models
 {
-    public enum ImgTypeModel
+    public enum ImgTypeDbModel
     {
         proteins = 1,
         fats = 2,

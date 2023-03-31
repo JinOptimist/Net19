@@ -9,7 +9,6 @@ namespace HealthyFoodWeb.Services
     public class WikiMCService : IWikiMCService
     {
         public const int CURRENT_YEAR = 2023;
-        public const string CURRENT_TYPE = "proteins";
 
         private IWikiMCRepository _wikiMCRepository;
 
@@ -22,7 +21,7 @@ namespace HealthyFoodWeb.Services
         {
             var wikiMCDbModel = new WikiMCDbModel()
             {
-                Type = viewModel.Type,
+                ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
             };
@@ -41,11 +40,11 @@ namespace HealthyFoodWeb.Services
         {
             return _wikiMCRepository
                 .GetAll()
-                .Where(x => x.Type == CURRENT_TYPE)
+                .Where(x => x.ImgType == ImgTypeDbModel.proteins)
                 .ToList();
         }
 
-        public void RemoveByType(string type)
+        public void RemoveByType(ImgTypeDbModel type)
         {
             _wikiMCRepository.RemoveAllImgByType(type);
         }

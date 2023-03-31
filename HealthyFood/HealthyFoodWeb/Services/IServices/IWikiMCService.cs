@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Fake.Models;
+using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
@@ -11,7 +12,7 @@ namespace HealthyFoodWeb.Services
 
         IEnumerable<IWikiMCDbModel> GetAllImgByType();
 
-        void RemoveByType(string type);
+        void RemoveByType(ImgTypeDbModel type);
 
         void RemoveByYear(int  year);
     }
