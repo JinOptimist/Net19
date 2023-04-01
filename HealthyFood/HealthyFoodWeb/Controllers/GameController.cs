@@ -1,5 +1,5 @@
 ﻿using HealthyFoodWeb.Models;
-using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
@@ -21,6 +21,7 @@ namespace HealthyFoodWeb.Controllers
                 .Select(x => new GameViewModel
                 {
                     Name = x.Name,
+                    CoverUrl = x.CoverUrl,
                 })
                 .ToList();
 
@@ -29,6 +30,7 @@ namespace HealthyFoodWeb.Controllers
                 .Select(x => new GameViewModel
                 {
                     Name = x.Name,
+                    CoverUrl = x.CoverUrl,
                 })
                 .ToList();
 
