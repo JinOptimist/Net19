@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IPageRecomendateServis>(x => new PageRecomendateServis(x.GetService<WikiRepositoryBAA>()));
+builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<WikiRepositoryBAA>()));
 builder.Services.AddScoped<WikiRepositoryBAA>(x => new WikiRepositoryBAA());
 
 

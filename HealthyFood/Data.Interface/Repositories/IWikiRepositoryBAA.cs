@@ -4,6 +4,10 @@ namespace HealthyFoodWeb.Services.FakeDb
 {
     public interface IWikiRepositoryBAA
     {
-        List<IBlockModelBAA> GetTitles();
+        List<IBlockModelBAA> GetBlocks();
+        void CreateBlock(IBlockModelBAA block);
+        void RemoveBlock(int id);
+        IBlockModelBAA GetBlockId(int id);
+        
     }
 }

@@ -2,7 +2,8 @@
 {
     public interface IBlockModelBAA
     {
-        string Text { get; }
         string Title { get; }
+        string Text { get; }
+        int Id { get; set; }
     }
 }

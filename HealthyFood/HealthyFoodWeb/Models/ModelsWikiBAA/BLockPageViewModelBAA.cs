@@ -1,11 +1,13 @@
 ﻿using Data.Interface.Models;
 
-namespace HealthyFoodWeb.FakeDbModels
+namespace HealthyFoodWeb.Models.ModelsWikiBAA
 {
-    public class BlockModelBAA : IBlockModelBAA
+    public class BLockPageViewModelBAA
     {
         public string Title { get; set; }
         public string Text { get; set; }
         public int Id { get; set; }
+
     }
 }
+

@@ -1,21 +1,22 @@
-﻿using Data.Interface.Models;
-using HealthyFoodWeb.FakeDbModels;
+﻿using HealthyFoodWeb.FakeDbModels;
 using HealthyFoodWeb.Models.ModelsWiki;
+using Data.Interface.Models;
+using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using HealthyFoodWeb.Models.ModelsWikiBAA;
 
 namespace HealthyFoodWeb.Controllers
 {
     public class WikiController : Controller
     {
-        private IPageRecomendateServis _blockInformationServices;
+        private IWikiBAAIPageRecomendateServices _blockInformationServices;
 
-        public WikiController(IPageRecomendateServis blockInformationServices)
+        public WikiController(IWikiBAAIPageRecomendateServices blockInformationServices)
         {
             _blockInformationServices = blockInformationServices;
         }
-        
+
 
         public IActionResult Main()
         {
@@ -25,14 +26,36 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult BiologicallyActiveAdditives()
         {
-            var blocks = _blockInformationServices.GetTitles();
-            var pageModel = new PageModelBAA();
-            foreach (IBlockModelBAA block in blocks)
-            {
-                pageModel.BlocksList.Add(block);
-            }
+            var PageViewModel = new PageViewModelBAA();
 
-            return View(pageModel);
-        } 
+            PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(x => new BLockPageViewModelBAA
+            {
+                Text = x.Text,
+                Title = x.Title,
+                Id=x.Id
+            }).ToList();
+
+            return View(PageViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBlockInformatoin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateBlockInformatoin(BLockPageViewModelBAA block)
+        {
+            _blockInformationServices.CreateBlock(block);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        
+        public IActionResult Remove(int id)
+        {
+            _blockInformationServices.Remove(id);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
     }
 }
