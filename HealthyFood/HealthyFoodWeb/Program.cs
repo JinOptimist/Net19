@@ -20,6 +20,10 @@ builder.Services.AddSingleton<IUserService>(
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<ICatalogRepository>()));
 
+
+builder.Services.AddScoped<IGameFruitConnectTwoService>(
+     diContainer => new GameFruitConnectTwoService(diContainer.GetService<ISimilarGameRepository>()));
+
 var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
@@ -29,6 +33,7 @@ builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ICatalogRepository>(x => new CatalogRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 
 var app = builder.Build();
 
