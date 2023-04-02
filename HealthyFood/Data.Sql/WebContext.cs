@@ -9,6 +9,7 @@ namespace Data.Sql
 
         public DbSet<CartModel> Carts { get; set; }
 
+        public DbSet<CatalogDbModel> CatalogDbModels { get; set; }
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)

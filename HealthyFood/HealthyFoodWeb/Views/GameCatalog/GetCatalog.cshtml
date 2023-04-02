@@ -1,0 +1,78 @@
+﻿@model List<GameCatalogVeiwModel>
+@{
+    Layout = "_Layout_GameCatalog";
+}
+
+
+@*@foreach(var catalog in Model)
+    {
+    <div>
+    @catalog.NameCategory
+    </div>
+    }*@
+
+
+
+<title>Catalog</title>
+<div class="all">
+    <div class="left-menu">
+        <div class="logo">HearlyFood Games Catalog&#127918;</div>
+        <a href="http://hearlyfood/game/arcade" class="buttom-gamearcade" target="_blank">
+            &#127906;Аркады
+        </a>
+        <a href="http://hearlyfood/game/victory" class="buttom-gamevictory" target="_blank">
+            &#128106;Викторины
+        </a>
+        <a href="http://hearlyfood/game/racing" class="buttom-gameracing" target="_blank">
+            &#128664;Гонки
+        </a>
+        <a href="http://hearlyfood/game/training" class="buttom-gametraining" target="_blank">
+            &#128214;Обучающие
+        </a>
+        <a href="http://hearlyfood/game/cards" class="buttom-gamecards" target="_blank">
+            &#127183;Карточные
+        </a>
+        <a href="http://hearlyfood/game/tests" class="buttom-gametests" target="_blank">
+            &#128214;Тесты
+        </a>
+        <a href="http://hearlyfood/game/adventurn" class="buttom-gameadventurn" target="_blank">
+            &#127939;Приключения
+        </a>
+    </div>
+
+    <div class="centre">
+        <div class="topnav">
+            <a href="/Home/Index"> Домой</a>
+            <a href="/Home/Profile">Профиль</a>
+            <a href="/Game/Index">Все игры</a>
+            <a href="http://hearlyfood/game/search" class="buttom-search" target="_blank">Поиск</a>
+            <div class="d1">
+                <form>
+                    <input type="text" placeholder="Искать здесь...">
+                    <button type="submit"></button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <div>
+                Популярные игры
+            </div>
+            <div>
+                <a href="/Game/CreateGame">Create game</a>
+            </div>
+            <div>
+                <a href="/Game/CreateGame">Create game</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/css/Catalog.css" />
+}
