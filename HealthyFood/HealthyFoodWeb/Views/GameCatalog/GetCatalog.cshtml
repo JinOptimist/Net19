@@ -1,6 +1,6 @@
 ﻿@model List<GameCatalogVeiwModel>
 @{
-    Layout = "_Layout_Game";
+    Layout = "_Layout_GameCatalog";
 }
 
 
@@ -42,9 +42,9 @@
 
     <div class="centre">
         <div class="topnav">
-            <a href="http://hearlyfood/game/home" class="buttom-backhome" target="_blank">Домой</a>
-            <a href="http://hearlyfood/game/profile" class="buttom-profile" target="_blank">Профиль</a>
-            <a href="http://hearlyfood/game/gamescatalog" class="buttom-all-gamescatalog" target="_blank">Все игры</a>
+            <a href="/Home/Index"> Домой</a>
+            <a href="/Home/Profile">Профиль</a>
+            <a href="/Game/Index">Все игры</a>
             <a href="http://hearlyfood/game/search" class="buttom-search" target="_blank">Поиск</a>
             <div class="d1">
                 <form>
@@ -56,6 +56,9 @@
         </div>
 
         <div class="footer">
+            <div>
+                Популярные игры
+            </div>
             <div>
                 <a href="/Game/CreateGame">Create game</a>
             </div>
