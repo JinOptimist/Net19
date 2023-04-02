@@ -1,11 +1,9 @@
 ﻿using Data.Interface.Models;
 
-namespace HealthyFoodWeb.FakeDbModels
+namespace Data.Fake.Models
 {
-    public class GameModel : IGameModel
+    public class CartModel : BaseDbModel, ICartDbModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public decimal Price { get; set; }
