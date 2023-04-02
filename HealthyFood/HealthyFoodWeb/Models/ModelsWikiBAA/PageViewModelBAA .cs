@@ -1,4 +1,4 @@
-﻿using HealthyFoodWeb.FakeDbModels;
+﻿using Data.Fake.Models;
 using Data.Interface.Models;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 

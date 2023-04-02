@@ -1,7 +1,7 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 
-namespace HealthyFoodWeb.Services.WikiServices
+namespace HealthyFoodWeb.Services.IServices
 {
     public interface IWikiBAAIPageRecomendateServices
     {

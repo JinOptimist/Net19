@@ -3,9 +3,7 @@ using Data.Interface.Repositories;
 using Data.Sql;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
-using HealthyFoodWeb.Services.FakeDb;
 using HealthyFoodWeb.Services.WikiServices;
-using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +13,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<WikiRepositoryBAA>()));
-builder.Services.AddScoped<WikiRepositoryBAA>(x => new WikiRepositoryBAA());
+builder.Services.AddSingleton<WikiRepositoryBAA>(x => new WikiRepositoryBAA());
 
 
 builder.Services.AddScoped<IGameService>(

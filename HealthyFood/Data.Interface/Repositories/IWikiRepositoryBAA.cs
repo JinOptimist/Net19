@@ -1,10 +1,9 @@
 ﻿using Data.Interface.Models;
 
-namespace HealthyFoodWeb.Services.FakeDb
+namespace Data.Interface.Repositories
 {
-    public interface IWikiRepositoryBAA
+    public interface IWikiRepositoryBAA : IBaseRepository<IBlockModelBAA>
     {
-        List<IBlockModelBAA> GetBlocks();
         void CreateBlock(IBlockModelBAA block);
         void RemoveBlock(int id);
         IBlockModelBAA GetBlockId(int id);

@@ -1,9 +1,8 @@
 ﻿namespace Data.Interface.Models
 {
-    public interface IBlockModelBAA
+    public interface IBlockModelBAA : IDbModel
     {
         string Title { get; }
         string Text { get; }
-        int Id { get; set; }
     }
 }

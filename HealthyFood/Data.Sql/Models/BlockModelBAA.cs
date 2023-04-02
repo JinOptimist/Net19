@@ -1,11 +1,10 @@
 ﻿using Data.Interface.Models;
 
-namespace HealthyFoodWeb.FakeDbModels
+namespace Data.Sql.Models
 {
-    public class BlockModelBAA : IBlockModelBAA
+    public class BlockModelBAA : BaseDbModel, IBlockModelBAA
     {
         public string Title { get; set; }
         public string Text { get; set; }
-        public int Id { get; set; }
     }
 }

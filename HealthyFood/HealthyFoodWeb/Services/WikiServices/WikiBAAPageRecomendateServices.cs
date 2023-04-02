@@ -1,7 +1,8 @@
 ﻿using Data.Interface.Models;
-using HealthyFoodWeb.FakeDbModels;
+using Data.Fake.Models;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
-using HealthyFoodWeb.Services.FakeDb;
+using Data.Interface.Repositories;
+using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -20,19 +21,19 @@ namespace HealthyFoodWeb.Services.WikiServices
             {
                 Title = block.Title,
                 Text = block.Text,
-                Id= block.Id
+                Id = block.Id
             };
-             _wikiRepositoryBAA.CreateBlock(dbBlockBAA);                       
+            _wikiRepositoryBAA.Add(dbBlockBAA);
         }
 
         public List<IBlockModelBAA> GetBlocks()
         {
-            return _wikiRepositoryBAA.GetBlocks();
+            return _wikiRepositoryBAA.GetAll().ToList();
         }
 
         public void Remove(int id)
         {
-             _wikiRepositoryBAA.RemoveBlock(id);
+            _wikiRepositoryBAA.RemoveBlock(id);
         }
     }
 }
