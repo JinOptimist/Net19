@@ -1,0 +1,15 @@
+﻿@model GetFruitConnectTwoViewModel
+
+<div>
+    <form method="post">
+        <div>
+           Введите название игры: @Html.TextBoxFor(x => x.NameOfSimilarGame)
+        </div>
+        <div>
+           Укажите ссылку на игру: @Html.TextBoxFor(x => x.Url)
+        </div>
+        <div>
+            <input type="submit" value="Create game" />
+        </div>
+    </form>
+</div>

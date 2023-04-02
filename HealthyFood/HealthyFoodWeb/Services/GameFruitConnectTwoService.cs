@@ -16,17 +16,21 @@ namespace HealthyFoodWeb.Services
         {
             return _similarGameRepository.GetAll().ToList();
         }
+
+      
         public void AddGame(ISimilarGamesDbModel model)
         {
             var dbmodel = new SimilarGamesDbModel()
             {
-                SimilarGames = model.SimilarGames
+                SimilarGames = model.SimilarGames,
+                Url = model.Url
             };
 
             _similarGameRepository.Add(dbmodel);
         }
 
     }
+ 
     //public class GameCatalogService : IGameCatalogService
     //{
     //    private ICatalogRepository _catalogRepository;

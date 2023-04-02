@@ -24,7 +24,7 @@ namespace Data.Sql.Repositories
 
         public IEnumerable<ISimilarGamesDbModel> GetAll()
         {
-            return _webContext.SimilarGamesDbModels.ToList();
+           return _webContext.SimilarGamesDbModels.ToList();
         }
 
         public void Remove(int id)
