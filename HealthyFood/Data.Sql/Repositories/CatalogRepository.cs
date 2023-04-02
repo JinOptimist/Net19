@@ -4,28 +4,35 @@ using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.Models;
 
-namespace Data.Fake.Repositories
+namespace Data.Sql.Repositories
 {
     public class CatalogRepository : ICatalogRepository
     {
+        private WebContext _webContext;
+
+        public CatalogRepository(WebContext webContext)
+        {
+            _webContext = webContext;
+        }
         public void Add(ICatalogDbModel model)
         {
-            throw new NotImplementedException();
+            _webContext.CatalogDbModels.Add((CatalogDbModel)model);
+            _webContext.SaveChanges();
         }
 
         public ICatalogDbModel Get(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<ICatalogDbModel> GetAll()
-        {
-            throw new NotImplementedException();
+           return _webContext.CatalogDbModels.FirstOrDefault(x => x.Id == id);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var categoryForRemoveId = _webContext.CatalogDbModels.FirstOrDefault(x => x.Id == id);
+            _webContext.Remove(categoryForRemoveId);
+        }
+        IEnumerable <ICatalogDbModel> IBaseRepository<ICatalogDbModel>.GetAll()
+        {
+           return _webContext.CatalogDbModels.ToList();
         }
     }
 

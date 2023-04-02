@@ -1,6 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-
+using HealthyFoodWeb.FakeDbModels;
 using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
@@ -16,7 +16,7 @@ namespace HealthyFoodWeb.Services
 
         public List<ICatalogDbModel> GetCatalog()
         {
-            return _catalogRepository.GetAll();
+            return _catalogRepository.GetAll().ToList();
         }
      
         public void AddCategory(GameCatalogVeiwModel viewModel)
