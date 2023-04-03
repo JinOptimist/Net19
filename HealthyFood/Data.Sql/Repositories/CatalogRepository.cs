@@ -18,6 +18,7 @@ namespace Data.Sql.Repositories
         {
             _webContext.CatalogDbModels.Add((CatalogDbModel)model);
             _webContext.SaveChanges();
+           
         }
 
         public ICatalogDbModel Get(int id)
@@ -32,7 +33,8 @@ namespace Data.Sql.Repositories
         }
         IEnumerable <ICatalogDbModel> IBaseRepository<ICatalogDbModel>.GetAll()
         {
-           return _webContext.CatalogDbModels.ToList();
+            
+            return _webContext.CatalogDbModels.ToList();
         }
     }
 
