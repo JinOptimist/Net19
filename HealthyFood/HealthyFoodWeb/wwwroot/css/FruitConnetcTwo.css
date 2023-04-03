@@ -20,8 +20,18 @@
 
 .similar-game {
     height: 200px;
+    text-align: center
 }
-
+    .similar-game img {
+        max-width: 220px;
+        max-height: 200px;      
+        display: block;
+        margin: 0 auto;
+    }
+/*.name-game {
+    display: block;
+    margin: 0 auto;
+}*/
 .Img-Button {
     margin: 10px 25px 0px 50px;
     width: 300px;
@@ -76,11 +86,7 @@
     align-items: center;
 }
 
-.similar-game img {
-    max-width: 220px;
-    max-height: 200px;
-    margin: 15px;
-}
+
 
 ul {
     margin: 0;

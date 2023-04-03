@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
@@ -6,7 +7,8 @@ namespace HealthyFoodWeb.Services
     {
         public List<ISimilarGamesDbModel> GetSimilarGameList();
 
-        public void AddGame(ISimilarGamesDbModel model);
-       
+        public void AddGame(GetFruitConnectTwoViewModel model);
+        public void RemoveGame(int id);
+        public void RemoveGame(string name);
     }
 }

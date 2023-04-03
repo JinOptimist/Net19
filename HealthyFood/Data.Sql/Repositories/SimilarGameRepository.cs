@@ -15,6 +15,7 @@ namespace Data.Sql.Repositories
         public void Add(ISimilarGamesDbModel model)
         {
             _webContext.SimilarGamesDbModels.Add((SimilarGamesDbModel)model);
+            _webContext.SaveChanges();
         }
 
         public ISimilarGamesDbModel Get(int id)
@@ -31,6 +32,12 @@ namespace Data.Sql.Repositories
         {
            var gameForRemove = _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.Id == id);
             _webContext.SimilarGamesDbModels.Remove(gameForRemove); 
+        }
+        public void Remove(string name)
+        {
+            var gameForRemove = _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.SimilarGames == name);
+            _webContext.SimilarGamesDbModels.Remove(gameForRemove);
+            _webContext.SaveChanges();
         }
     }
 }

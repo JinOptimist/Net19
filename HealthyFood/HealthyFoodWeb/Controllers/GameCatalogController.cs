@@ -10,7 +10,7 @@ namespace HealthyFoodWeb.Controllers
     {
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
-
+    
         public GameCatalogController(IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService)
         {
             _gameCatalogService = gameCatalog;
@@ -53,10 +53,12 @@ namespace HealthyFoodWeb.Controllers
                 .Select(dbModel => new GetFruitConnectTwoViewModel
                 {
                     NameOfSimilarGame = dbModel.SimilarGames,
-                    Url = dbModel.Url
+                    Url = dbModel.Url,
+                    LinkForPicture = dbModel.LinkForPicture,
+                    Id = dbModel.Id
                 })
                 .ToList();
-
+          
             return View(viewModels);
         }
         [HttpGet]
@@ -65,10 +67,20 @@ namespace HealthyFoodWeb.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddGame(GetFruitConnectTwoViewModel getFruitConnectTwoViewModel)
+        public IActionResult AddGame(GetFruitConnectTwoViewModel viewModel)
         {
-
-            return View();
+            _gameFruitConnectTwoService.AddGame(viewModel);
+            return RedirectToAction("GetFruitConnectTwo");
+        }
+        //public IActionResult Remove(int id)
+        //{
+        //    _gameFruitConnectTwoService.RemoveGame(id);
+        //    return RedirectToAction("GetFruitConnectTwo");
+        //}
+        public IActionResult Remove(string name)
+        {
+            _gameFruitConnectTwoService.RemoveGame(name);
+            return RedirectToAction("GetFruitConnectTwo");
         }
     }
 }

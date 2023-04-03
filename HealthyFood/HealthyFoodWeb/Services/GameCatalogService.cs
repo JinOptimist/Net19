@@ -1,6 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
+using Data.Sql.Models;
 using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services

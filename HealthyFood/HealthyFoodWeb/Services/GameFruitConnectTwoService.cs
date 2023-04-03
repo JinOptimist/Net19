@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.Models;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
@@ -14,23 +15,33 @@ namespace HealthyFoodWeb.Services
 
         public List<ISimilarGamesDbModel> GetSimilarGameList()
         {
+           
             return _similarGameRepository.GetAll().ToList();
         }
 
       
-        public void AddGame(ISimilarGamesDbModel model)
+        public void AddGame(GetFruitConnectTwoViewModel model)
         {
             var dbmodel = new SimilarGamesDbModel()
             {
-                SimilarGames = model.SimilarGames,
-                Url = model.Url
+                SimilarGames = model.NameOfSimilarGame,
+                Url = model.Url,
+                LinkForPicture = model.LinkForPicture
             };
 
             _similarGameRepository.Add(dbmodel);
         }
-
+        public void RemoveGame(int id)
+        {
+            _similarGameRepository.Remove(id);
+        }
+        public void RemoveGame(string name)
+        {
+            _similarGameRepository.Remove(name);
+        }
     }
- 
+   
+
     //public class GameCatalogService : IGameCatalogService
     //{
     //    private ICatalogRepository _catalogRepository;

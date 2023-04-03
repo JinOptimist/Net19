@@ -6,7 +6,7 @@ using HealthyFoodWeb.FakeDbModels;
 
 namespace Data.Fake.Repositories
 {
-    public class CatalogRepositoryFake : BaseRepository<ICatalogDbModel>, ICatalogRepository
+    public class CatalogRepositoryFake : BaseRepository<ICatalogDbModel>
     {
         public CatalogRepositoryFake()
         {
