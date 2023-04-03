@@ -4,9 +4,9 @@ using Data.Interface.Repositories;
 
 namespace Data.Fake.Repositories
 {
-    public class WikiRepositoryBAA : BaseRepository<IBlockModelBAA>, IWikiRepositoryBAA
+    public class WikiRepositoryBAAFake : BaseRepository<IBlockModelBAA>, IWikiRepositoryBAA
     {
-        public WikiRepositoryBAA()
+        public WikiRepositoryBAAFake()
         {
             FakeDbModels =
                 new List<IBlockModelBAA>(){

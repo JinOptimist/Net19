@@ -12,8 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<WikiRepositoryBAA>()));
-builder.Services.AddSingleton<WikiRepositoryBAA>(x => new WikiRepositoryBAA());
+builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiRepositoryBAA>()));
+builder.Services.AddScoped<IWikiRepositoryBAA>(x =>new WikiRepositoryBAA(x.GetService<WebContext>()));
 
 
 builder.Services.AddScoped<IGameService>(

@@ -1,4 +1,5 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.Models;
+using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql
@@ -8,6 +9,8 @@ namespace Data.Sql
         public DbSet<UserDbModel> Users { get; set; }
 
         public DbSet<CartModel> Carts { get; set; }
+
+        public DbSet<BlockModelBAA> Blocks { get; set; }
 
         public WebContext() { }
 

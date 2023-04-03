@@ -12,6 +12,7 @@ namespace HealthyFoodWeb.Controllers
     {
         private IWikiBAAIPageRecomendateServices _blockInformationServices;
 
+
         public WikiController(IWikiBAAIPageRecomendateServices blockInformationServices)
         {
             _blockInformationServices = blockInformationServices;

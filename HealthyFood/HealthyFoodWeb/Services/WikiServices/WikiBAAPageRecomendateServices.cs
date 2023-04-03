@@ -1,8 +1,8 @@
 ﻿using Data.Interface.Models;
-using Data.Fake.Models;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
+using Data.Sql.Models;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
