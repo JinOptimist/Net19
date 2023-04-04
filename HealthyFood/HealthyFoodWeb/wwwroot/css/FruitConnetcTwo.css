@@ -1,0 +1,110 @@
+﻿.Catalog {
+    width: 250px;
+    border: 1px #4CAF50 solid;
+    border-width: thick;
+    min-height: 700px;
+}
+
+.centr {
+    display: flex;
+    height: 100%;
+    padding: 15px;
+}
+
+.Name-catalog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40;
+}
+
+.similar-game {
+    height: 200px;
+    text-align: center
+}
+    .similar-game img {
+        max-width: 220px;
+        max-height: 200px;      
+        display: block;
+        margin: 0 auto;
+    }
+/*.name-game {
+    display: block;
+    margin: 0 auto;
+}*/
+.Img-Button {
+    margin: 10px 25px 0px 50px;
+    width: 300px;
+}
+
+    .Img-Button img {
+        max-width: 300;
+        max-height: 500;
+    }
+
+.Info {
+    margin: 10px 15px 0px 0px;
+    width: 550px;
+}
+
+.Img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myButton {
+    box-shadow: 4px 3px 3px 0px #3dc21b;
+    background-color: #44c767;
+    border-radius: 28px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;   
+    font-size: 17px;
+    padding: 16px 5px;
+    text-decoration: none;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .myButton:hover {
+        background-color: #56cc16;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }
+
+
+.Button-container {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+ul {
+    margin: 0;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+li {
+    margin-block-start: 0px;
+    margin-block-end: 0;
+    margin-inline-start: 15px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+p, ul {
+    font-family: "Calibri";
+}
