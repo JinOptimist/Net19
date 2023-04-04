@@ -1,6 +1,5 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
@@ -13,23 +12,23 @@ namespace Data.Sql.Repositories
             _webContext = webContext;
         }
 
-        public void Add(IUserDbModel model)
+        public void Add(User model)
         {
-            _webContext.Users.Add((UserDbModel)model);
+            _webContext.Users.Add((User)model);
             _webContext.SaveChanges();
         }
 
-        public IUserDbModel Get(int id)
+        public User Get(int id)
         {
             return _webContext.Users.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<IUserDbModel> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return _webContext.Users.ToList();
         }
 
-        public IUserDbModel GetByName(string name)
+        public User GetByName(string name)
         {
             return _webContext.Users.FirstOrDefault(x => x.Name == name);
         }

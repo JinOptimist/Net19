@@ -6,6 +6,6 @@ namespace HealthyFoodWeb.Services.IServices
     public interface IUserService
     {
         void AddUser(UserViewModel viewModel);
-        List<IUserDbModel> GetUserModels();
+        List<User> GetUserModels();
     }
 }

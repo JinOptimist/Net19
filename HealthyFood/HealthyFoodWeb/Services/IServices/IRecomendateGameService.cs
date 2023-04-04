@@ -9,9 +9,9 @@ namespace HealthyFoodWeb.Services.IServices
 
         void CreateGame(GameViewModel viewModel);
 
-        List<IGameDbModel> GetAllCheapGames();
+        List<Game> GetAllCheapGames();
 
-        List<IGameDbModel> GetAllRichGames();
+        List<Game> GetAllRichGames();
 
         void Remove(string name);
     }

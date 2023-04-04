@@ -1,8 +1,6 @@
-﻿using Data.Interface.Models;
-
-namespace Data.Fake.Models
+﻿namespace Data.Interface.Models
 {
-    public class GameModel : BaseDbModel, IGameDbModel
+    public class Game : BaseModel
     {
         public string Name { get; set; }
 
