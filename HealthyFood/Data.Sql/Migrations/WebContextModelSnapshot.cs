@@ -42,7 +42,6 @@ namespace Data.Sql.Migrations
                 });
 
             modelBuilder.Entity("Data.Sql.Models.HealthyProductDbModel", b =>
-            modelBuilder.Entity("Data.Sql.Models.CatalogDbModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +56,24 @@ namespace Data.Sql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Name");
+                    b.Property<string>("NameCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HealthyProductDbModel");
+                });
+
+            modelBuilder.Entity("Data.Sql.Models.CatalogDbModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NameCategory")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,7 +105,6 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HealthyProducts");
                     b.ToTable("SimilarGamesDbModels");
                 });
 
