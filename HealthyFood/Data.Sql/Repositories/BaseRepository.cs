@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
-    public class BaseRepository<SomeModel> : IBaseRepository<SomeModel> where SomeModel : BaseModel
+    public abstract class BaseRepository<SomeModel> : IBaseRepository<SomeModel> where SomeModel : BaseModel
     {
         protected WebContext _webContext;
         protected DbSet<SomeModel> _dbSet;
