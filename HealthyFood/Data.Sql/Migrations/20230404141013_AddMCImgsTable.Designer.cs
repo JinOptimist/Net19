@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230404141013_AddMCImgsTable")]
+    partial class AddMCImgsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace Data.Sql.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
+            modelBuilder.Entity("Data.Sql.Models.CartModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +44,7 @@ namespace Data.Sql.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
+            modelBuilder.Entity("Data.Sql.Models.CatalogDbModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,16 +52,16 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameCategory")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCategories");
+                    b.ToTable("CatalogDbModels");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
+            modelBuilder.Entity("Data.Sql.Models.SimilarGamesDbModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +73,7 @@ namespace Data.Sql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("SimilarGames")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -80,10 +83,10 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SimilarGames");
+                    b.ToTable("SimilarGamesDbModels");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.User", b =>
+            modelBuilder.Entity("Data.Sql.Models.UserDbModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +107,7 @@ namespace Data.Sql.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
+            modelBuilder.Entity("Data.Sql.Models.WikiMCDbModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +127,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WikiMcImages");
+                    b.ToTable("MacronutrientCalculatorImgs");
                 });
 #pragma warning restore 612, 618
         }

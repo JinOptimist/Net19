@@ -25,8 +25,7 @@ namespace HealthyFoodWeb.Controllers
                .Select(dbModel =>
                    new GameCatalogVeiwModel
                    {
-                       NameCategory = dbModel.NameCategory
-
+                       NameCategory = dbModel.Name
                    })
                .ToList();
 
@@ -52,7 +51,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetSimilarGameList()
                 .Select(dbModel => new GetFruitConnectTwoViewModel
                 {
-                    NameOfSimilarGame = dbModel.SimilarGames,
+                    NameOfSimilarGame = dbModel.Name,
                     Url = dbModel.Url,
                     LinkForPicture = dbModel.LinkForPicture,
                     Id = dbModel.Id

@@ -1,31 +1,27 @@
-﻿
-
-using Data.Interface.Models;
-using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
+﻿using Data.Interface.Models;
 
 namespace Data.Fake.Repositories
 {
-    public class CatalogRepositoryFake : BaseRepository<ICatalogDbModel>
+    public class CatalogRepositoryFake : BaseRepository<GameCategory>
     {
         public CatalogRepositoryFake()
         {
             FakeDbModels
-                = new List<ICatalogDbModel>(){
-                    new CatalogDbModel()
+                = new List<GameCategory>(){
+                    new GameCategory()
                     {
                         Id = 1,
-                        NameCategory = "Ходилки"
+                        Name = "Ходилки"
                     },
 
-                    new CatalogDbModel()
+                    new GameCategory()
                     {
-                        NameCategory = "Бродилки"
+                        Name = "Бродилки"
                     },
 
-                     new CatalogDbModel()
+                     new GameCategory()
                     {
-                        NameCategory = "Три в ряд"
+                        Name = "Три в ряд"
                     }
                 };
         }

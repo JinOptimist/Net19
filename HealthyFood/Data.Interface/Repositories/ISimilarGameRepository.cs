@@ -3,9 +3,7 @@ using Data.Interface.Models;
 
 namespace Data.Interface.Repositories
 {
-    public interface ISimilarGameRepository : IBaseRepository<ISimilarGamesDbModel>
+    public interface ISimilarGameRepository : IBaseRepository<SimilarGame>
     {
-        public void Remove(string name);
-      
     }
 }

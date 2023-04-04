@@ -1,6 +1,5 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
@@ -12,32 +11,31 @@ namespace Data.Sql.Repositories
         {
             _webContext = webContext;
         }
-        public void Add(ISimilarGamesDbModel model)
+        public void Add(SimilarGame model)
         {
-            _webContext.SimilarGamesDbModels.Add((SimilarGamesDbModel)model);
+            _webContext.SimilarGames.Add((SimilarGame)model);
             _webContext.SaveChanges();
         }
 
-        public ISimilarGamesDbModel Get(int id)
+        public SimilarGame Get(int id)
         {
-           return _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.Id == id);
+           return _webContext.SimilarGames.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<ISimilarGamesDbModel> GetAll()
+        public IEnumerable<SimilarGame> GetAll()
         {
-           return _webContext.SimilarGamesDbModels.ToList();
+           return _webContext.SimilarGames.ToList();
         }
 
         public void Remove(int id)
         {
-           var gameForRemove = _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.Id == id);
-            _webContext.SimilarGamesDbModels.Remove(gameForRemove);
-            _webContext.SaveChanges();
+           var gameForRemove = _webContext.SimilarGames.FirstOrDefault(x => x.Id == id);
+            _webContext.SimilarGames.Remove(gameForRemove); 
         }
         public void Remove(string name)
         {
-            var gameForRemove = _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.SimilarGames == name);
-            _webContext.SimilarGamesDbModels.Remove(gameForRemove);
+            var gameForRemove = _webContext.SimilarGames.FirstOrDefault(x => x.Name == name);
+            _webContext.SimilarGames.Remove(gameForRemove);
             _webContext.SaveChanges();
         }
     }

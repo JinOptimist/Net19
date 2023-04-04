@@ -18,7 +18,7 @@ namespace HealthyFoodWeb.Services
             _cartRepository.RemoveByName(name);
         }
 
-        public List<ICartDbModel> GetAllProduct()
+        public List<Cart> GetAllProduct()
         {
             return _cartRepository.GetAll().ToList();
         }
