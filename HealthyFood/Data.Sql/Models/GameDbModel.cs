@@ -2,7 +2,7 @@
 
 namespace Data.Sql.Models
 {
-    public class GameModel : BaseDbModel, IGameDbModel
+    public class GameDbModel : BaseDbModel, IGameDbModel
     {
         public string Name { get; set; }
 
