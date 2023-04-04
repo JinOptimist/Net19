@@ -26,7 +26,7 @@ builder.Services.AddSingleton<IGameRepository>(x => new GameRepositoryFake());
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
-
+builder.Services.AddScoped<IHealthyProductRepository>(x => new HealthyProductRepository(x.GetService<WebContext>()));
 
 var app = builder.Build();
 
