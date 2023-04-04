@@ -1,0 +1,62 @@
+﻿.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: black;
+}
+
+.center-block {
+    display: flex;
+}
+
+.start-text {
+    margin-inline: 30pt;
+}
+
+.gallery {
+    margin-inline: 30px;
+}
+
+.gallery img {
+    max-width: 350px;
+    max-height: 225px;
+    min-height: 225px;
+    min-width: 350px;
+    margin: 10px;
+}
+.new-img {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.calculations {
+    margin-inline: 30pt;
+}
+
+.data1 {
+    display: flex;
+    align-items: center;
+}
+
+.input-parameters {
+    height: auto;
+    background-color: yellowgreen;
+    border: 1px;
+    margin-inline: 30pt;
+    padding: 15px;
+    border-radius: 5px;
+    width: auto;
+}
+
+.comments {
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+.suggestions {
+    margin-inline: 30pt;
+}

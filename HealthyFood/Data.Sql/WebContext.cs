@@ -12,7 +12,10 @@ namespace Data.Sql
         public DbSet<CatalogDbModel> CatalogDbModels { get; set; }
 
         public DbSet<SimilarGamesDbModel> SimilarGamesDbModels { get; set; }
-        public WebContext() { }
+
+		public DbSet<WikiMCDbModel> MacronutrientCalculatorImgs { get; set; }
+
+		public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)

@@ -17,6 +17,8 @@ builder.Services.AddSingleton<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>()));
 builder.Services.AddSingleton<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
+builder.Services.AddScoped<IWikiMCService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMCRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<ICatalogRepository>()));
 
@@ -34,6 +36,8 @@ builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ICatalogRepository>(x => new CatalogRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
+builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
+builder.Services.AddScoped<IWikiMCRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
 
 var app = builder.Build();
 
