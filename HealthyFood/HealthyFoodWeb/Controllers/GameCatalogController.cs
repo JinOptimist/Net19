@@ -76,6 +76,7 @@ namespace HealthyFoodWeb.Controllers
             _gameFruitConnectTwoService.RemoveGame(id);
             return RedirectToAction("GetFruitConnectTwo");
         }
+       
         public IActionResult Donate()
         {
 
