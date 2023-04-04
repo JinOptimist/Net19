@@ -1,8 +1,8 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Models;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
-using Data.Fake.Models;
 
 namespace HealthyFoodWeb.Services
 {
@@ -40,11 +40,11 @@ namespace HealthyFoodWeb.Services
         {
             return _wikiMCRepository
                 .GetAll()
-                .Where(x => x.ImgType == ImgTypeDbModel.proteins)
+                .Where(x => x.ImgType == ImgTypeEnum.proteins)
                 .ToList();
         }
 
-        public void RemoveByType(ImgTypeDbModel type)
+        public void RemoveByType(ImgTypeEnum type)
         {
             _wikiMCRepository.RemoveAllImgByType(type);
         }

@@ -1,5 +1,4 @@
 ﻿using Data.Interface.Models;
-using static Data.Interface.Models.IWikiMCDbModel;
 
 namespace Data.Fake.Models
 {
@@ -9,6 +8,6 @@ namespace Data.Fake.Models
 
         public string ImgUrl { get; set; }
 
-        public ImgTypeDbModel ImgType { get; set; }
+        public ImgTypeEnum ImgType { get; set; }
     }
 }

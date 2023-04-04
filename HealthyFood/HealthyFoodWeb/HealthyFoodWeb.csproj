@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\FakeDb\**" />
+    <Content Remove="Services\FakeDb\**" />
+    <EmbeddedResource Remove="Services\FakeDb\**" />
+    <None Remove="Services\FakeDb\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Data.Fake\Data.Fake.csproj" />
     <ProjectReference Include="..\Data.Interface\Data.Interface.csproj" />
     <ProjectReference Include="..\HealthyFood\HealthyFood.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\FakeDb\" />
 	  <ProjectReference Include="..\Data.Sql\Data.Sql.csproj" />
   </ItemGroup>
 

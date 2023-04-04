@@ -1,7 +1,7 @@
 ﻿using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -47,5 +47,18 @@ namespace HealthyFoodWeb.Controllers
 
             return View(viewModel);
         }
-    }
+
+		[HttpGet]
+		public IActionResult AddImg()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddImg(WikiMCViewModel viewModel)
+		{
+			_wikiMCImgService.AddImg(viewModel);
+			return RedirectToAction("MacronutrientCalculator");
+		}
+	}
 }

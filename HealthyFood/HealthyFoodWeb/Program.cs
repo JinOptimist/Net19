@@ -37,7 +37,7 @@ builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService
 builder.Services.AddScoped<ICatalogRepository>(x => new CatalogRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-builder.Services.AddSingleton<IWikiMCRepository>(x => new WikiMCRepositoryFake());
+builder.Services.AddScoped<IWikiMCRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
 
 var app = builder.Build();
 
