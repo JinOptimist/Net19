@@ -1,15 +1,19 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql
 {
     public class WebContext : DbContext
     {
-        public DbSet<UserDbModel> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        public DbSet<CartModel> Carts { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
-        public DbSet<GameDbModel> Games { get; set; }
+        public DbSet<GameCategory> GameCategories { get; set; }
+
+        public DbSet<SimilarGame> SimilarGames { get; set; }
+
+		public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
         public WebContext() { }
 

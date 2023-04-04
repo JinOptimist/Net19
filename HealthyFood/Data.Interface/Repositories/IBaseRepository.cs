@@ -2,7 +2,7 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IBaseRepository<DbModel> where DbModel : IDbModel
+    public interface IBaseRepository<DbModel> where DbModel : BaseModel
     {
         void Add(DbModel model);
         DbModel Get(int id);

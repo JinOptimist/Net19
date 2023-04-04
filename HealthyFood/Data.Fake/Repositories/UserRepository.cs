@@ -1,32 +1,26 @@
-﻿using Data.Fake.Models;
-using Data.Interface.Models;
+﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Fake.Repositories
 {
-    public class UserRepositoryFake : BaseRepository<IUserDbModel>, IUserRepository
+    public class UserRepositoryFake : BaseRepository<User>, IUserRepository
     {
         public UserRepositoryFake()
         {
             FakeDbModels =
-                new List<IUserDbModel>() {
-                    new UserDbModel
+                new List<User>() {
+                    new User
                     {
                         Id = 1,
                         Name = "Pol",
                         AvatarUrl = "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
                     },
-                    new UserDbModel
+                    new User
                     {
                         Id = 2,
                         Name = "Anna",
                     },
-                     new UserDbModel
+                     new User
                      {
                          Id = 3,
                          Name = "Nikita",
@@ -35,7 +29,7 @@ namespace Data.Fake.Repositories
                 };
         }
 
-        public IUserDbModel GetByName(string name)
+        public User GetByName(string name)
         {
             return FakeDbModels.First(x => x.Name == name);
         }
