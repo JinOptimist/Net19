@@ -2,8 +2,8 @@
 {
     public enum ImgTypeEnum
     {
-        proteins = 1,
-        fats = 2,
-        carbs = 3,
+        Proteins = 1,
+        Fats = 2,
+        Carbs = 3,
     }
 }

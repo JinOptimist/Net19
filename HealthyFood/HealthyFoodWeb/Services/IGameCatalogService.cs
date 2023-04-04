@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Services
 {
     public interface IGameCatalogService
     {
-        public List<ICatalogDbModel> GetCatalog();
+        public List<GameCategory> GetCatalog();
         public void AddCategory(GameCatalogVeiwModel viewModel);
     }
 }

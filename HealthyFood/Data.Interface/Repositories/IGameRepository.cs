@@ -2,9 +2,9 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IGameRepository : IBaseRepository<IGameDbModel>
+    public interface IGameRepository : IBaseRepository<Game>
     {
-        IGameDbModel GetGameByName(string name);
+        Game GetGameByName(string name);
 
         void RemoveByName(string name);
     }

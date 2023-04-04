@@ -5,10 +5,9 @@ namespace HealthyFoodWeb.Services
 {
     public interface IGameFruitConnectTwoService
     {
-        public List<ISimilarGamesDbModel> GetSimilarGameList();
+        public List<SimilarGame> GetSimilarGameList();
 
         public void AddGame(GetFruitConnectTwoViewModel model);
         public void RemoveGame(int id);
-        public void RemoveGame(string name);
     }
 }

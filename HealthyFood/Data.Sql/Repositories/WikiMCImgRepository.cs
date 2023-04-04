@@ -1,10 +1,9 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
-	public class WikiMCImgRepository : IWikiMCRepository
+    public class WikiMCImgRepository : IWikiMcRepository
 	{
 		private WebContext _webContext;
 
@@ -13,48 +12,48 @@ namespace Data.Sql.Repositories
 			_webContext = webContext;
 		}
 
-		public void Add(IWikiMCDbModel model)
+		public void Add(WikiMcImage model)
 		{
-			_webContext.MacronutrientCalculatorImgs.Add((WikiMCDbModel)model);
+			_webContext.WikiMcImages.Add((WikiMcImage)model);
 			_webContext.SaveChanges();
 		}
 
-		public IWikiMCDbModel Get(int id)
+		public WikiMcImage Get(int id)
 		{
-			return _webContext.MacronutrientCalculatorImgs.FirstOrDefault(x => x.Id == id);
+			return _webContext.WikiMcImages.FirstOrDefault(x => x.Id == id);
 		}
 
-		public IEnumerable<IWikiMCDbModel> GetAll()
+		public IEnumerable<WikiMcImage> GetAll()
 		{
-			return _webContext.MacronutrientCalculatorImgs.ToList();
+			return _webContext.WikiMcImages.ToList();
 		}
 
-		public IEnumerable<IWikiMCDbModel> GetAllImgByType(ImgTypeEnum type)
+		public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
 		{
-			return _webContext.MacronutrientCalculatorImgs.Where(x => x.ImgType == type);
+			return _webContext.WikiMcImages.Where(x => x.ImgType == type);
 		}
 
-		public IEnumerable<IWikiMCDbModel> GetAllImgByYear(int year)
+		public IEnumerable<WikiMcImage> GetAllImgByYear(int year)
 		{
-			return _webContext.MacronutrientCalculatorImgs.Where(x => x.Year == year);
+			return _webContext.WikiMcImages.Where(x => x.Year == year);
 		}
 
 		public void Remove(int id)
 		{
-			var mcImg = _webContext.MacronutrientCalculatorImgs.FirstOrDefault(_x => _x.Id == id);
-			_webContext.MacronutrientCalculatorImgs.Remove(mcImg);
+			var mcImg = _webContext.WikiMcImages.FirstOrDefault(_x => _x.Id == id);
+			_webContext.WikiMcImages.Remove(mcImg);
 		}
 
 		public void RemoveAllImgByType(ImgTypeEnum type)
 		{
-			var removedType = _webContext.MacronutrientCalculatorImgs.Where(x => x.ImgType == type).ToList();
-			removedType.ForEach(x => _webContext.MacronutrientCalculatorImgs.Remove(x));
+			var removedType = _webContext.WikiMcImages.Where(x => x.ImgType == type).ToList();
+			removedType.ForEach(x => _webContext.WikiMcImages.Remove(x));
 		}
 
 		public void RemoveAllImgByYear(int year)
 		{
-			var removedYear = _webContext.MacronutrientCalculatorImgs.Where(x => x.Year == year).ToList();
-			removedYear.ForEach(x => _webContext.MacronutrientCalculatorImgs.Remove(x));
+			var removedYear = _webContext.WikiMcImages.Where(x => x.Year == year).ToList();
+			removedYear.ForEach(x => _webContext.WikiMcImages.Remove(x));
 		}
 	}
 }

@@ -1,8 +1,6 @@
-﻿using Data.Interface.Models;
-
-namespace Data.Fake.Models
+﻿namespace Data.Interface.Models
 {
-    public class WikiMCDbModel :BaseDbModel, IWikiMCDbModel
+    public class WikiMcImage : BaseModel
     {
         public int Year { get; set; }
 

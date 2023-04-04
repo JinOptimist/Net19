@@ -1,20 +1,19 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Fake.Models;
 
 namespace Data.Fake.Repositories
 {
-    public class CartRepositoryFake : BaseRepository<ICartDbModel>, ICartRepository
+    public class CartRepositoryFake : BaseRepository<Cart>, ICartRepository
     {
         public CartRepositoryFake()
         {
-            FakeDbModels = new List<ICartDbModel>() {
-                new CartModel{
+            FakeDbModels = new List<Cart>() {
+                new Cart{
                     Id = 1,
                     Name = "Salat",
                     Price = 10
                 },
-                new CartModel
+                new Cart
                 {
                     Id = 2,
                     Name = "Sup",
@@ -24,7 +23,7 @@ namespace Data.Fake.Repositories
             };
         }
 
-        public ICartDbModel GetByName(string name)
+        public Cart GetByName(string name)
         {
             return FakeDbModels.FirstOrDefault(x => x.Name == name);
         }

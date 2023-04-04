@@ -2,7 +2,7 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface ICatalogRepository : IBaseRepository<ICatalogDbModel>
+    public interface IGameCategoryRepository : IBaseRepository<GameCategory>
     {
     
     }

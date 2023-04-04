@@ -2,10 +2,10 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IWikiMCRepository : IBaseRepository<IWikiMCDbModel>
+    public interface IWikiMcRepository : IBaseRepository<WikiMcImage>
     {
-        IEnumerable<IWikiMCDbModel> GetAllImgByYear(int year);
-        IEnumerable<IWikiMCDbModel> GetAllImgByType(ImgTypeEnum type);
+        IEnumerable<WikiMcImage> GetAllImgByYear(int year);
+        IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
         void RemoveAllImgByYear(int year);
         void RemoveAllImgByType(ImgTypeEnum type);
     }

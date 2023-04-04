@@ -1,8 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 using HealthyFoodWeb.Models;
-using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
@@ -10,25 +8,25 @@ namespace HealthyFoodWeb.Services
     {
         public const int CURRENT_YEAR = 2023;
 
-        private IWikiMCRepository _wikiMCRepository;
+        private IWikiMcRepository _wikiMCRepository;
 
-        public WikiMCService(IWikiMCRepository wikiMCRepository)
+        public WikiMCService(IWikiMcRepository wikiMCRepository)
         {
             _wikiMCRepository = wikiMCRepository;
         }
 
         public void AddImg(WikiMCViewModel viewModel)
         {
-            var wikiMCDbModel = new WikiMCDbModel()
+            var WikiMc = new WikiMcImage()
             {
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
             };
-            _wikiMCRepository.Add(wikiMCDbModel);
+            _wikiMCRepository.Add(WikiMc);
         }
 
-        public IEnumerable<IWikiMCDbModel> GetAllImgByYear()
+        public IEnumerable<WikiMcImage> GetAllImgByYear()
         {
             return _wikiMCRepository
                 .GetAll()
@@ -36,11 +34,11 @@ namespace HealthyFoodWeb.Services
                 ToList();
         }
       
-        public IEnumerable<IWikiMCDbModel> GetAllImgByType()
+        public IEnumerable<WikiMcImage> GetAllImgByType()
         {
             return _wikiMCRepository
                 .GetAll()
-                .Where(x => x.ImgType == ImgTypeEnum.proteins)
+                .Where(x => x.ImgType == ImgTypeEnum.Proteins)
                 .ToList();
         }
 

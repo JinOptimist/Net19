@@ -25,8 +25,7 @@ namespace HealthyFoodWeb.Controllers
                .Select(dbModel =>
                    new GameCatalogVeiwModel
                    {
-                       NameCategory = dbModel.NameCategory
-
+                       NameCategory = dbModel.Name
                    })
                .ToList();
 
@@ -52,7 +51,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetSimilarGameList()
                 .Select(dbModel => new GetFruitConnectTwoViewModel
                 {
-                    NameOfSimilarGame = dbModel.SimilarGames,
+                    NameOfSimilarGame = dbModel.Name,
                     Url = dbModel.Url,
                     LinkForPicture = dbModel.LinkForPicture,
                     Id = dbModel.Id
@@ -72,14 +71,9 @@ namespace HealthyFoodWeb.Controllers
             _gameFruitConnectTwoService.AddGame(viewModel);
             return RedirectToAction("GetFruitConnectTwo");
         }
-        //public IActionResult Remove(int id)
-        //{
-        //    _gameFruitConnectTwoService.RemoveGame(id);
-        //    return RedirectToAction("GetFruitConnectTwo");
-        //}
-        public IActionResult Remove(string name)
+        public IActionResult Remove(int id)
         {
-            _gameFruitConnectTwoService.RemoveGame(name);
+            _gameFruitConnectTwoService.RemoveGame(id);
             return RedirectToAction("GetFruitConnectTwo");
         }
         public IActionResult Donate()

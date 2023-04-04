@@ -1,6 +1,5 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
@@ -17,15 +16,15 @@ namespace HealthyFoodWeb.Services
 
         public void AddUser(UserViewModel viewModel)
         {
-            var userDbModel = new UserDbModel
+            var User = new User
             {
                 Name = viewModel.Name,
                 AvatarUrl = viewModel.AvatarUrl,
             };
-            _userRepository.Add(userDbModel);
+            _userRepository.Add(User);
         }
 
-        public List<IUserDbModel> GetUserModels()
+        public List<User> GetUserModels()
         {
             return _userRepository
                 .GetAll()

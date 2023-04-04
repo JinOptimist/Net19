@@ -1,20 +1,19 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
     public class GameCatalogService : IGameCatalogService
     {
-        private ICatalogRepository _catalogRepository;
+        private IGameCategoryRepository _catalogRepository;
 
-        public GameCatalogService(ICatalogRepository catalogRepositories)
+        public GameCatalogService(IGameCategoryRepository catalogRepositories)
         {
             _catalogRepository = catalogRepositories;
         }
 
-        public List<ICatalogDbModel> GetCatalog()
+        public List<GameCategory> GetCatalog()
         {
             return _catalogRepository.GetAll().ToList();
         }
@@ -22,9 +21,9 @@ namespace HealthyFoodWeb.Services
         public void AddCategory(GameCatalogVeiwModel viewModel)
         {
 
-            var catalogDbModel = new CatalogDbModel
+            var catalogDbModel = new GameCategory
             {
-                NameCategory = viewModel.NameCategory
+                Name = viewModel.NameCategory
             };
             _catalogRepository.Add(catalogDbModel);
         }

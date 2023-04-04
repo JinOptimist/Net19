@@ -1,40 +1,37 @@
-﻿
-
-using Data.Interface.Models;
+﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
-    public class CatalogRepository : ICatalogRepository
+    public class GameCategoryRepository : IGameCategoryRepository
     {
         private WebContext _webContext;
 
-        public CatalogRepository(WebContext webContext)
+        public GameCategoryRepository(WebContext webContext)
         {
             _webContext = webContext;
         }
-        public void Add(ICatalogDbModel model)
+        public void Add(GameCategory model)
         {
-            _webContext.CatalogDbModels.Add((CatalogDbModel)model);
+            _webContext.GameCategories.Add((GameCategory)model);
             _webContext.SaveChanges();
            
         }
 
-        public ICatalogDbModel Get(int id)
+        public GameCategory Get(int id)
         {
-           return _webContext.CatalogDbModels.FirstOrDefault(x => x.Id == id);
+           return _webContext.GameCategories.FirstOrDefault(x => x.Id == id);
         }
 
         public void Remove(int id)
         {
-            var categoryForRemoveId = _webContext.CatalogDbModels.FirstOrDefault(x => x.Id == id);
+            var categoryForRemoveId = _webContext.GameCategories.FirstOrDefault(x => x.Id == id);
             _webContext.Remove(categoryForRemoveId);
         }
-        IEnumerable <ICatalogDbModel> IBaseRepository<ICatalogDbModel>.GetAll()
+        IEnumerable <GameCategory> IBaseRepository<GameCategory>.GetAll()
         {
             
-            return _webContext.CatalogDbModels.ToList();
+            return _webContext.GameCategories.ToList();
         }
     }
 
