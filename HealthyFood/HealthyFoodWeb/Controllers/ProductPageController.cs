@@ -4,38 +4,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
 {
-    public class ProductPageController : Controller
-     {
-        private RatingProductService _RatingProductService;
+	public class ProductPageController : Controller
+	{
+		private RatingProductService _ratingProductService;
 
-        public ProductPageController(RatingProductService productService)
-        {
-            _RatingProductService = RatingProductService;
-        }
-        public IActionResult ChangeRatingProduct(GameViewModel viewModel)
-        {
-            _gameService.CreateGame(viewModel);
-            return RedirectToAction("Index");
-        }
-        public IActionResult Index()
-        {
-            return View();
-        }
+		public ProductPageController(RatingProductService ratingproductService)
+		{
+			_ratingProductService = ratingproductService;
+		}
 
-        [HttpGet]
-        public IActionResult ProductPage()
-        {
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-            return View();
-        }
-        [HttpPost]
-        public IActionResult ProductPage(ProductPageViewModel productPageView)
-        {
+		[HttpGet]
+		public IActionResult ProductPage()
+		{
 
-                _gameService.CreateGame(viewModel);
-                return RedirectToAction("Index");
-            
-            return View();
-        }
-    }
+			return View();
+		}
+		[HttpPost]
+		public IActionResult ProductPage(ProductPageViewModel productPageView)
+		{
+
+			_ratingProductService.UpdateRatingProduct(productPageView);
+			return RedirectToAction("Index");
+
+		}
+	}
 }

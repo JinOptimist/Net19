@@ -27,8 +27,8 @@ builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 
-builder.Services.AddScoped<ProductRepositoryFake>(
-    diContainer => new RatingProductService(diContainer.GetService<RatingProductService>()));
+builder.Services.AddScoped<RatingProductService>(
+    diContainer => new RatingProductService(diContainer.GetService<ProductRepositoryFake>()));
 
 
 

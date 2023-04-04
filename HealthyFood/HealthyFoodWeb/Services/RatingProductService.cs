@@ -1,6 +1,8 @@
-﻿using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
+﻿using Data.Fake.Repositories;
+using Data.Interface.Repositories;
+using Data.Sql.Models;
 using HealthyFoodWeb.Models;
+
 
 namespace HealthyFoodWeb.Services
 {
@@ -16,7 +18,7 @@ namespace HealthyFoodWeb.Services
 
         public void UpdateRatingProduct(ProductPageViewModel viewModel)
         {
-            var dbProductModel = new ProductModel()
+            var dbProductModel = new ProductDbModel()
             {
                 Rating = viewModel.Rating,
             };

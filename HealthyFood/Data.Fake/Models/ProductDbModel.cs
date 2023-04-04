@@ -1,6 +1,6 @@
-﻿namespace Data.Sql.Models
+﻿namespace Data.Sql.Models;
 
-public class ProductModel
+public class ProductDbModel
 {
     public int Id { get; set; }
 

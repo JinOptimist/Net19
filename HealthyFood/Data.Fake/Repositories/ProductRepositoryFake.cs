@@ -1,51 +1,50 @@
-﻿using Data.Interface.Models;
+﻿using Data.Fake.Models;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
-using HealthyFoodWeb.FakeDbModels;
-using HealthyFoodWeb.Models;
-using System.Xml.Linq;
+using Data.Sql.Models;
 
-namespace HealthyFoodWeb.Services
+namespace Data.Fake.Repositories
 {
     public class ProductRepositoryFake
     {
-        public static List<ProductModel> FakeDbProduct =
-            new List<ProductModel>() {
-                new ProductModel
+        public static List<ProductDbModel> FakeDbProduct =
+            new List<ProductDbModel>() {
+                new ProductDbModel
                 {
                     Id = 1,
                     Name = "Cabage",
                     Price = 4,
                     Rating = 3.8m
                 },
-                new ProductModel
+                new ProductDbModel
                 {
                     Id = 2,
                     Name = "Cabage2",
                     Price = 3,
                     Rating = 3
                 },
-                new ProductModel
+                new ProductDbModel
                 {
                     Id = 3,
                     Name = "Cabage3",
                     Price = 6,
                     Rating = 3.5m
                 },
-                new ProductModel
+                new ProductDbModel
                 {
                     Id = 4,
                     Name = "Cabage4",
                     Price = 7,
                     Rating = 4
                 },
-                new ProductModel
+                new ProductDbModel
                 {
                     Id = 5,
                     Name = "Cabage5",
                     Price = 1,
                     Rating = 5
                 },
-                new ProductModel
+                new ProductDbModel
                 {
                     Id = 6,
                     Name = "Cabage6",
@@ -54,12 +53,12 @@ namespace HealthyFoodWeb.Services
                 },
             };
 
-        public List<ProductModel> GetAll()
+        public List<ProductDbModel> GetAll()
         {
             return FakeDbProduct;
         }
 
-        public ProductModel GetProductByRating(decimal rating)
+        public ProductDbModel GetProductByRating(decimal rating)
         {
             return FakeDbProduct.FirstOrDefault(x => x.Rating == rating);
         }
@@ -69,7 +68,7 @@ namespace HealthyFoodWeb.Services
             FakeDbProduct.Remove(GetProductByRating(rating));
         }
 
-        public void SaveProduct(ProductModel product)
+        public void SaveProduct(ProductDbModel product)
         {
             var maxExistedId = FakeDbProduct.Max(x => x.Id);
             product.Id = maxExistedId + 1;
