@@ -11,12 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IGameService>(
+builder.Services.AddSingleton<IGameService>(
     diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
-builder.Services.AddScoped<ICartService>(
+builder.Services.AddSingleton<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>()));
-builder.Services.AddScoped<IUserService>(
+builder.Services.AddSingleton<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
+builder.Services.AddScoped<IGameCatalogService>(
+     diContainer => new GameCatalogService(diContainer.GetService<ICatalogRepository>()));
+
+
+builder.Services.AddScoped<IGameFruitConnectTwoService>(
+     diContainer => new GameFruitConnectTwoService(diContainer.GetService<ISimilarGameRepository>()));
 
 var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
@@ -27,6 +33,8 @@ builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IHealthyProductRepository>(x => new HealthyProductRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<ICatalogRepository>(x => new CatalogRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 
 var app = builder.Build();
 
