@@ -31,7 +31,8 @@ namespace Data.Sql.Repositories
         public void Remove(int id)
         {
            var gameForRemove = _webContext.SimilarGamesDbModels.FirstOrDefault(x => x.Id == id);
-            _webContext.SimilarGamesDbModels.Remove(gameForRemove); 
+            _webContext.SimilarGamesDbModels.Remove(gameForRemove);
+            _webContext.SaveChanges();
         }
         public void Remove(string name)
         {

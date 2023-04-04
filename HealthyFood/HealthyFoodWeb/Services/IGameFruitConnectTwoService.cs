@@ -9,6 +9,5 @@ namespace HealthyFoodWeb.Services
 
         public void AddGame(GetFruitConnectTwoViewModel model);
         public void RemoveGame(int id);
-        public void RemoveGame(string name);
     }
 }

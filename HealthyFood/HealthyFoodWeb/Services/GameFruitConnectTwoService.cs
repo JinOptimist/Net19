@@ -35,10 +35,7 @@ namespace HealthyFoodWeb.Services
         {
             _similarGameRepository.Remove(id);
         }
-        public void RemoveGame(string name)
-        {
-            _similarGameRepository.Remove(name);
-        }
+       
     }
    
 
