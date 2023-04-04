@@ -5,12 +5,7 @@ namespace Data.Sql.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-       
-
-        public UserRepository(WebContext webContext) : base(webContext)
-        {
-          
-        }
+        public UserRepository(WebContext webContext) : base(webContext) { }
 
         public User GetByName(string name)
         {
@@ -20,7 +15,8 @@ namespace Data.Sql.Repositories
         public void RemoveByName(string name)
         {
             var user = _dbSet.FirstOrDefault(_x => _x.Name == name);
-            _webContext.Users.Remove(user);
+            _dbSet.Remove(user);
+            _webContext.SaveChanges();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Data.Interface.Models;
+﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,16 +8,15 @@ namespace Data.Sql.Repositories
     {
         protected WebContext _webContext;
         protected DbSet<SomeModel> _dbSet;
+
         public BaseRepository(WebContext webContext)
         {
             _webContext = webContext;
             _dbSet = webContext.Set<SomeModel>();
         }
-       
 
         public void Add(SomeModel model)
         {
-
             _dbSet.Add(model);
             _webContext.SaveChanges();
         }
@@ -28,20 +26,14 @@ namespace Data.Sql.Repositories
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-       
+        public IEnumerable<SomeModel> GetAll()
+        {
+            return _dbSet.ToList();
+        }
 
         public void Remove(int id)
         {
-            var categoryForRemoveId = _dbSet.FirstOrDefault(x => x.Id == id);
-            _dbSet.Remove(categoryForRemoveId);
-        }
-
-       
-
-        IEnumerable<SomeModel> IBaseRepository<SomeModel>.GetAll()
-        {
-
-            return _dbSet.ToList();
+            _dbSet.Remove(Get(id));
         }
     }
 }
