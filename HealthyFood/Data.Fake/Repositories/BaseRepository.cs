@@ -14,7 +14,7 @@ namespace Data.Fake.Repositories
             FakeDbModels.Add(model);
         }
 
-        public List<DbModel> GetAll()
+        public IEnumerable<DbModel> GetAll()
         {
             return FakeDbModels;
         }

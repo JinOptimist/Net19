@@ -6,7 +6,7 @@ namespace Data.Interface.Repositories
     {
         void Add(DbModel model);
         DbModel Get(int id);
-        List<DbModel> GetAll();
+        IEnumerable<DbModel> GetAll();
         void Remove(int id);
     }
 }
