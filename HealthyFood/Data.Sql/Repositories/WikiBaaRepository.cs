@@ -1,30 +1,29 @@
-﻿using Data.Interface.Models;
-using Data.Interface.Repositories;
+﻿using Data.Interface.Repositories;
 using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
-    public class WikiRepositoryBAA : IWikiRepositoryBAA
+    public class WikiBaaRepository : IWikiBaaRepository
     {
         private WebContext _webContext;
 
-        public WikiRepositoryBAA(WebContext webContext)
+        public WikiBaaRepository(WebContext webContext)
         {
             _webContext = webContext;
         }
                
-        public void Add(IBlockModelBAA model)
+        public void Add(Block model)
         {
-            _webContext.Blocks.Add((BlockModelBAA)model);
+            _webContext.Blocks.Add((Block)model);
             _webContext.SaveChanges();
         }
        
-        public IBlockModelBAA Get(int id)
+        public Block Get(int id)
         {
             return _webContext.Blocks.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<IBlockModelBAA> GetAll()
+        public IEnumerable<Block> GetAll()
         {
             return _webContext.Blocks.ToList();
         }
@@ -34,15 +33,10 @@ namespace Data.Sql.Repositories
             var block = _webContext.Blocks.FirstOrDefault(_x => _x.Id == id);
             _webContext.Blocks.Remove(block);
         }
-
-        public IBlockModelBAA GetBlockId(int id)
-        {
-            return _webContext.Blocks.FirstOrDefault(x => x.Id == id);
-        }
-
+        
         public void RemoveBlock(int id)
         {
-            _webContext.Remove(GetBlockId(id));
+            _webContext.Remove(Get(id));
             _webContext.SaveChanges();
         }
     }

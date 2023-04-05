@@ -8,16 +8,16 @@ namespace HealthyFoodWeb.Services.WikiServices
 {
     public class WikiBAAPageRecomendateServices : IWikiBAAIPageRecomendateServices
     {
-        private IWikiRepositoryBAA _wikiRepositoryBAA;
+        private IWikiBaaRepository _wikiRepositoryBAA;
 
-        public WikiBAAPageRecomendateServices(IWikiRepositoryBAA wikiRepositoryBAA)
+        public WikiBAAPageRecomendateServices(IWikiBaaRepository wikiRepositoryBAA)
         {
             _wikiRepositoryBAA = wikiRepositoryBAA;
         }
 
-        public void CreateBlock(BLockPageViewModelBAA block)
+        public void CreateBlock(BLockPageBaaViewModel block)
         {
-            var dbBlockBAA = new BlockModelBAA()
+            var dbBlockBAA = new Block()
             {
                 Title = block.Title,
                 Text = block.Text,
@@ -26,7 +26,7 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiRepositoryBAA.Add(dbBlockBAA);
         }
 
-        public List<IBlockModelBAA> GetBlocks()
+        public List<Block> GetBlocks()
         {
             return _wikiRepositoryBAA.GetAll().ToList();
         }

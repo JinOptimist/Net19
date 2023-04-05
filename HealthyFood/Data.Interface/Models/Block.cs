@@ -1,8 +1,8 @@
 ﻿using Data.Interface.Models;
 
-namespace Data.Fake.Models
+namespace Data.Sql.Models
 {
-    public class BlockModelBAA : BaseDbModel, IBlockModelBAA
+    public class Block : BaseModel
     {
         public string Title { get; set; }
         public string Text { get; set; }

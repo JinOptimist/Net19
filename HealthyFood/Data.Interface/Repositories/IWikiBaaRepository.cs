@@ -1,10 +1,10 @@
 ﻿using Data.Interface.Models;
+using Data.Sql.Models;
 
 namespace Data.Interface.Repositories
 {
-    public interface IWikiRepositoryBAA : IBaseRepository<IBlockModelBAA>
+    public interface IWikiBaaRepository : IBaseRepository<Block>
     {
         void RemoveBlock(int id);
-        IBlockModelBAA GetBlockId(int id);
     }
 }
