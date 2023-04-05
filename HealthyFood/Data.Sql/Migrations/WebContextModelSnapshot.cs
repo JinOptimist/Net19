@@ -21,32 +21,7 @@ namespace Data.Sql.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Data.Sql.Models.BlockModelBAA", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Blocks");
-                });
-
-            modelBuilder.Entity("Data.Sql.Models.CartModel", b =>
-=======
             modelBuilder.Entity("Data.Interface.Models.Cart", b =>
->>>>>>> main
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +38,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
@@ -80,7 +55,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCategories");
+                    b.ToTable("GameCategories", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
@@ -105,7 +80,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SimilarGames");
+                    b.ToTable("SimilarGames", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
@@ -126,7 +101,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
@@ -149,7 +124,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WikiMcImages");
+                    b.ToTable("WikiMcImages", (string)null);
                 });
 #pragma warning restore 612, 618
         }
