@@ -5,5 +5,7 @@
         public List<GameViewModel> CheapGames { get; set; }
 
         public List<GameViewModel> RichGames { get; set; }
+
+        public GameViewModel TheBestGame {get;set;}
     }
 }

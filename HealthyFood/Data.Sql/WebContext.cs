@@ -15,6 +15,8 @@ namespace Data.Sql
 
 		public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
+        public DbSet<Game> Games { get; set; }
+
 		public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)

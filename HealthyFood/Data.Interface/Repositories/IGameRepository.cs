@@ -7,5 +7,7 @@ namespace Data.Interface.Repositories
         Game GetGameByName(string name);
 
         void RemoveByName(string name);
+
+        Game GetTheRichGameWithGenres();
     }
 }

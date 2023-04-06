@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230406162036_AddGame")]
+    partial class AddGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,12 +159,12 @@ namespace Data.Sql.Migrations
                     b.Property<int>("GamesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GenresId")
+                    b.Property<int>("GenreId")
                         .HasColumnType("int");
 
-                    b.HasKey("GamesId", "GenresId");
+                    b.HasKey("GamesId", "GenreId");
 
-                    b.HasIndex("GenresId");
+                    b.HasIndex("GenreId");
 
                     b.ToTable("GameGameCategory");
                 });
@@ -176,7 +179,7 @@ namespace Data.Sql.Migrations
 
                     b.HasOne("Data.Interface.Models.GameCategory", null)
                         .WithMany()
-                        .HasForeignKey("GenresId")
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
