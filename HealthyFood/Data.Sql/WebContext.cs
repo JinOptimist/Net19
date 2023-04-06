@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql
@@ -8,6 +9,8 @@ namespace Data.Sql
         public DbSet<User> Users { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<PageWikiBlock> PageWikiBlocks{ get; set; }
 
         public DbSet<GameCategory> GameCategories { get; set; }
 
