@@ -9,5 +9,6 @@
         public string CoverUrl { get; set; }
 
         public virtual List<GameCategory> Genres { get; set; }
+        public virtual List<User> Players { get; set; }
     }
 }

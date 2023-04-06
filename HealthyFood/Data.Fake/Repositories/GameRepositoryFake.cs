@@ -34,6 +34,11 @@ namespace Data.Fake.Repositories
             return FakeDbModels.FirstOrDefault(x => x.Name == name);
         }
 
+        public List<Game> GetPlayers()
+        {
+            throw new NotImplementedException();
+        }
+
         public Game GetTheRichGameWithGenres()
         {
             throw new NotImplementedException();

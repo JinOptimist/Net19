@@ -30,6 +30,10 @@ namespace HealthyFoodWeb.Controllers
 
             viewModel.TheBestGame = Conver(_gameService.GetTheBestGameWithGenres());
 
+            viewModel.GamesAndTheirPlayers = _gameService
+                .GetGamesWhithTheirPlayers()
+                .Select(Conver)
+                .ToList();
             return View(viewModel);
         }
 
@@ -68,7 +72,8 @@ namespace HealthyFoodWeb.Controllers
             {
                 Name = x.Name,
                 CoverUrl = x.CoverUrl,
-                Genres = x.Genres?.Select(x => x.Name).ToList()
+                Genres = x.Genres?.Select(x => x.Name).ToList(),
+                Players = x.Players?.Select(x => x.Name).ToList()
             };
         }
     }

@@ -7,5 +7,6 @@
         public List<GameViewModel> RichGames { get; set; }
 
         public GameViewModel TheBestGame {get;set;}
+        public List<GameViewModel> GamesAndTheirPlayers { get; set; }
     }
 }

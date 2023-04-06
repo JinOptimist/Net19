@@ -16,5 +16,6 @@ namespace HealthyFoodWeb.Services.IServices
         List<Game> GetAllRichGames();
 
         void Remove(string name);
+        List<Game> GetGamesWhithTheirPlayers();
     }
 }

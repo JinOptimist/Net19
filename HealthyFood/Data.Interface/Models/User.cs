@@ -5,5 +5,6 @@
         public string Name { get; set; }
 
         public string AvatarUrl { get; set; }
+        public virtual List<Game> Games { get; set; }
     }
 }

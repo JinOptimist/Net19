@@ -30,6 +30,10 @@ namespace HealthyFoodWeb.Services
         {
             return _gameRepository.GetTheRichGameWithGenres();
         }
+        public List<Game> GetGamesWhithTheirPlayers()
+        {
+            return _gameRepository.GetPlayers();
+        }
 
         public List<Game> GetAllCheapGames()
         {

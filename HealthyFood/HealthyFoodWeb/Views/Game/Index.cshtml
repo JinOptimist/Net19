@@ -37,8 +37,19 @@
             </div>
         }
     </div>
+    @foreach (var gameanduser in Model.GamesAndTheirPlayers)
+    {
+        <div>
+            Game: @gameanduser.Name Players: 
+            @foreach (var Name in @gameanduser.Players)
+            {
+             <span>  @Name </span> 
+            }
+        </div>
+    }
+
 </div>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/game.css" />
+<link rel="stylesheet" href="~/css/game.css" />
 }

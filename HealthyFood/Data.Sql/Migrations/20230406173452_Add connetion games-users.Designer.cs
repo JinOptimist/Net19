@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230406173452_Add connetion games-users")]
+    partial class Addconnetiongamesusers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,12 +174,12 @@ namespace Data.Sql.Migrations
                     b.Property<int>("GamesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlayersId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
-                    b.HasKey("GamesId", "PlayersId");
+                    b.HasKey("GamesId", "UsersId");
 
-                    b.HasIndex("PlayersId");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("GameUser");
                 });
@@ -206,7 +209,7 @@ namespace Data.Sql.Migrations
 
                     b.HasOne("Data.Interface.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("PlayersId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
