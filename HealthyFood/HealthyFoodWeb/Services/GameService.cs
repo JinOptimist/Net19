@@ -1,24 +1,23 @@
-﻿using Data.Fake.Models;
-using Data.Interface.Models;
+﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    public class RecomendateGameService : IGameService
+    public class GameService : IGameService
     {
         public const decimal CHEAP_GAME_BORDER = 5;
         private IGameRepository _gameRepository;
 
-        public RecomendateGameService(IGameRepository gameRepositoryFake)
+        public GameService(IGameRepository gameRepository)
         {
-            _gameRepository = gameRepositoryFake;
+            _gameRepository = gameRepository;
         }
 
         public void CreateGame(GameViewModel viewModel)
         {
-            var dbGameModel = new GameModel()
+            var dbGameModel = new Game()
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
@@ -27,7 +26,12 @@ namespace HealthyFoodWeb.Services
             _gameRepository.Add(dbGameModel);
         }
 
-        public List<IGameDbModel> GetAllCheapGames()
+        public Game GetTheBestGameWithGenres()
+        {
+            return _gameRepository.GetTheRichGameWithGenres();
+        }
+
+        public List<Game> GetAllCheapGames()
         {
             return _gameRepository
                 .GetAll()
@@ -35,7 +39,7 @@ namespace HealthyFoodWeb.Services
                 .ToList();
         }
 
-        public List<IGameDbModel> GetAllRichGames()
+        public List<Game> GetAllRichGames()
         {
             return _gameRepository
                  .GetAll()

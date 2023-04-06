@@ -2,11 +2,11 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IBaseRepository<DbModel> where DbModel : IDbModel
+    public interface IBaseRepository<T> where T : BaseModel
     {
-        void Add(DbModel model);
-        DbModel Get(int id);
-        IEnumerable<DbModel> GetAll();
+        void Add(T model);
+        T Get(int id);
+        IEnumerable<T> GetAll();
         void Remove(int id);
     }
 }

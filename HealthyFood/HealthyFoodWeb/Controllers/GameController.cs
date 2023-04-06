@@ -1,4 +1,5 @@
-﻿using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,23 +17,18 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult Index()
         {
             var viewModel = new GameIndexViewModel();
+
             viewModel.CheapGames = _gameService
                 .GetAllCheapGames()
-                .Select(x => new GameViewModel
-                {
-                    Name = x.Name,
-                    CoverUrl = x.CoverUrl,
-                })
+                .Select(Conver)
                 .ToList();
 
             viewModel.RichGames = _gameService
                 .GetAllRichGames()
-                .Select(x => new GameViewModel
-                {
-                    Name = x.Name,
-                    CoverUrl = x.CoverUrl,
-                })
+                .Select(Conver)
                 .ToList();
+
+            viewModel.TheBestGame = Conver(_gameService.GetTheBestGameWithGenres());
 
             return View(viewModel);
         }
@@ -64,6 +60,16 @@ namespace HealthyFoodWeb.Controllers
                 Name = bestGameName,
             };
             return View(recomendateGameViewModel);
+        }
+
+        private GameViewModel Conver(Game x)
+        {
+            return new GameViewModel
+            {
+                Name = x.Name,
+                CoverUrl = x.CoverUrl,
+                Genres = x.Genres?.Select(x => x.Name).ToList()
+            };
         }
     }
 }

@@ -348,3 +348,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/HealthyFood/Data.Interface/Models/IUserDbModel.cs
+/HealthyFood/Data.Interface/Models/ProductCategory.cs
+/HealthyFood/Data.Interface/Models/Product.cs
+/HealthyFood/Data.Interface/Models/ProductReview.cs
+/HealthyFood/Data.Interface/Models/ProductDbModel.cs
+/HealthyFood/Data.Interface/Models/ProductReviews.cs
+/HealthyFood/Data.Interface/Models/ProductDbModel.cs
+/HealthyFood/Data.Interface/Models/ProductDbModel.cs

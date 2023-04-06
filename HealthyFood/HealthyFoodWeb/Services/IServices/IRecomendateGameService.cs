@@ -5,13 +5,15 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface IGameService
     {
+        Game GetTheBestGameWithGenres();
+
         string GetTheBestGameName();
 
         void CreateGame(GameViewModel viewModel);
 
-        List<IGameDbModel> GetAllCheapGames();
+        List<Game> GetAllCheapGames();
 
-        List<IGameDbModel> GetAllRichGames();
+        List<Game> GetAllRichGames();
 
         void Remove(string name);
     }
