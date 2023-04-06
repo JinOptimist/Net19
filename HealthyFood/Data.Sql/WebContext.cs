@@ -24,6 +24,19 @@ namespace Data.Sql
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Game>()
+                .HasMany(x => x.Genres)//Game
+                .WithMany(x => x.Games);//GameCategory
+
+            modelBuilder.Entity<Game>()
+                .HasMany(x => x.SecondaryGenres)//Game
+                .WithMany(x => x.SecondaryGames);//Genre
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HealthyFood;Trusted_Connection=True;";
