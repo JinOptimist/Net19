@@ -3,8 +3,6 @@ using Data.Sql.Models;
 
 namespace Data.Interface.Repositories
 {
-    public interface IWikiBaaRepository : IBaseRepository<Block>
-    {
-        void RemoveBlock(int id);
-    }
+    public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock>
+    {}
 }

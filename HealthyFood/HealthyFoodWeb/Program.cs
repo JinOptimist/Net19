@@ -13,6 +13,17 @@ builder.Services.AddControllersWithViews();
 
 
 
+builder.Services.AddSingleton<IGameService>(
+    diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
+builder.Services.AddSingleton<ICartService>(
+    diContainer => new CartService(diContainer.GetService<ICartRepository>()));
+builder.Services.AddSingleton<IUserService>(
+    diContainer => new UserService(diContainer.GetService<IUserRepository>()));
+builder.Services.AddScoped<IWikiMCService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
+builder.Services.AddScoped<IGameCatalogService>(
+     diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
+
 builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiBaaRepository>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 

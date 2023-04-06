@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface IWikiBAAIPageRecomendateServices
     {
-        List<Block> GetBlocks();
+        List<PageWikiBlock> GetBlocks();
         void CreateBlock(BLockPageBaaViewModel block);
         void Remove(int id);
     }

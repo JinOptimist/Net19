@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20230404190853_AddWikiBaa")]
+    [Migration("20230406175902_AddWikiBaa")]
     partial class AddWikiBaa
     {
         /// <inheritdoc />
@@ -130,7 +130,7 @@ namespace Data.Sql.Migrations
                     b.ToTable("WikiMcImages");
                 });
 
-            modelBuilder.Entity("Data.Sql.Models.BlockModelBAA", b =>
+            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +148,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blocks");
+                    b.ToTable("PageWikiBlocks");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,7 @@
 
 namespace Data.Sql.Models
 {
-    public class Block : BaseModel
+    public class PageWikiBlock : BaseModel
     {
         public string Title { get; set; }
         public string Text { get; set; }

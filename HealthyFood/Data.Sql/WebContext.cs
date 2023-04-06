@@ -10,7 +10,7 @@ namespace Data.Sql
 
         public DbSet<Cart> Carts { get; set; }
 
-        public DbSet<Block> Blocks { get; set; }
+        public DbSet<PageWikiBlock> PageWikiBlocks{ get; set; }
 
         public DbSet<GameCategory> GameCategories { get; set; }
 

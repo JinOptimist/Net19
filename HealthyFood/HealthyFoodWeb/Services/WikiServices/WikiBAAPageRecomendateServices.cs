@@ -17,7 +17,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public void CreateBlock(BLockPageBaaViewModel block)
         {
-            var dbBlockBAA = new Block()
+            var dbBlockBAA = new PageWikiBlock()
             {
                 Title = block.Title,
                 Text = block.Text,
@@ -26,14 +26,14 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiRepositoryBAA.Add(dbBlockBAA);
         }
 
-        public List<Block> GetBlocks()
+        public List<PageWikiBlock> GetBlocks()
         {
             return _wikiRepositoryBAA.GetAll().ToList();
         }
 
         public void Remove(int id)
         {
-            _wikiRepositoryBAA.RemoveBlock(id);
+            _wikiRepositoryBAA.Remove(id);
         }
     }
 }

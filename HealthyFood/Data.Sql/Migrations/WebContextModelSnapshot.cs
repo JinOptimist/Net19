@@ -38,7 +38,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
@@ -55,7 +55,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCategories", (string)null);
+                    b.ToTable("GameCategories");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
@@ -80,7 +80,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SimilarGames", (string)null);
+                    b.ToTable("SimilarGames");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
@@ -101,7 +101,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
@@ -124,7 +124,28 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WikiMcImages", (string)null);
+                    b.ToTable("WikiMcImages");
+                });
+
+            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PageWikiBlocks");
                 });
 #pragma warning restore 612, 618
         }

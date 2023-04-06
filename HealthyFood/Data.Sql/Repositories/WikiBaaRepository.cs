@@ -12,31 +12,26 @@ namespace Data.Sql.Repositories
             _webContext = webContext;
         }
                
-        public void Add(Block model)
+        public void Add(PageWikiBlock model)
         {
-            _webContext.Blocks.Add((Block)model);
+            _webContext.PageWikiBlocks.Add((PageWikiBlock)model);
             _webContext.SaveChanges();
         }
        
-        public Block Get(int id)
+        public PageWikiBlock Get(int id)
         {
-            return _webContext.Blocks.FirstOrDefault(x => x.Id == id);
+            return _webContext.PageWikiBlocks.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Block> GetAll()
+        public IEnumerable<PageWikiBlock> GetAll()
         {
-            return _webContext.Blocks.ToList();
+            return _webContext.PageWikiBlocks.ToList();
         }
 
         public void Remove(int id)
         {
-            var block = _webContext.Blocks.FirstOrDefault(_x => _x.Id == id);
-            _webContext.Blocks.Remove(block);
-        }
-        
-        public void RemoveBlock(int id)
-        {
-            _webContext.Remove(Get(id));
+            var block = _webContext.PageWikiBlocks.FirstOrDefault(_x => _x.Id == id);
+            _webContext.PageWikiBlocks.Remove(block);
             _webContext.SaveChanges();
         }
     }
