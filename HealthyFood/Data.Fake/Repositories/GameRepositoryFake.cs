@@ -34,6 +34,11 @@ namespace Data.Fake.Repositories
             return FakeDbModels.FirstOrDefault(x => x.Name == name);
         }
 
+        public Game GetTheRichGameWithGenres()
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveByName(string name)
         {
             FakeDbModels.Remove(GetGameByName(name));

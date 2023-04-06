@@ -5,14 +5,14 @@ using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    public class RecomendateGameService : IGameService
+    public class GameService : IGameService
     {
         public const decimal CHEAP_GAME_BORDER = 5;
         private IGameRepository _gameRepository;
 
-        public RecomendateGameService(IGameRepository gameRepositoryFake)
+        public GameService(IGameRepository gameRepository)
         {
-            _gameRepository = gameRepositoryFake;
+            _gameRepository = gameRepository;
         }
 
         public void CreateGame(GameViewModel viewModel)
@@ -21,9 +21,15 @@ namespace HealthyFoodWeb.Services
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
+                CoverUrl = viewModel.CoverUrl,
             };
 
             _gameRepository.Add(dbGameModel);
+        }
+
+        public Game GetTheBestGameWithGenres()
+        {
+            return _gameRepository.GetTheRichGameWithGenres();
         }
 
         public List<Game> GetAllCheapGames()
