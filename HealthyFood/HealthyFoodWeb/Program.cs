@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddSingleton<IGameService>(
+builder.Services.AddScoped<IGameService>(
     diContainer => new RecomendateGameService(diContainer.GetService<IGameRepository>()));
-builder.Services.AddSingleton<ICartService>(
+builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>()));
-builder.Services.AddSingleton<IUserService>(
+builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 builder.Services.AddScoped<IWikiMCService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
