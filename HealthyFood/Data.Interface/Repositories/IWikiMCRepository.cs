@@ -8,5 +8,7 @@ namespace Data.Interface.Repositories
         IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
         void RemoveAllImgByYear(int year);
         void RemoveAllImgByType(ImgTypeEnum type);
+
+        List<WikiMcImage> GetAllImageWithTag();
     }
 }

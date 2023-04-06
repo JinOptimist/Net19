@@ -7,5 +7,7 @@
         public string ImgUrl { get; set; }
 
         public ImgTypeEnum ImgType { get; set; }
+
+        public virtual List<WikiTags> Tags { get; set; }
     }
 }

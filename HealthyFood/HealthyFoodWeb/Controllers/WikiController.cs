@@ -44,6 +44,13 @@ namespace HealthyFoodWeb.Controllers
                     ImgPath = x.ImgUrl,
                 })
                 .ToList();
+            viewModel.GetTags = _wikiMCImgService
+                .GetTags()
+                .Select(x => new WikiMCViewModel
+                {
+                    ImgPath = x.ImgUrl,
+                })
+                .ToList();
 
             return View(viewModel);
         }

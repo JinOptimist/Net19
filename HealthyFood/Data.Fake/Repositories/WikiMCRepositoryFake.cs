@@ -62,5 +62,10 @@ namespace Data.Fake.Repositories
             var removedYear = FakeDbModels.Where(x => x.Year == year).ToList();
             removedYear.ForEach(x => FakeDbModels.Remove(x));
         }
+
+        public List<WikiMcImage> GetAllImageWithTag()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

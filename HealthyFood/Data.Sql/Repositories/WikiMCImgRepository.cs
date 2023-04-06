@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -7,7 +8,8 @@ namespace Data.Sql.Repositories
 	{
         public WikiMCImgRepository(WebContext webContext) : base(webContext) { }
 
-		public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
+
+        public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
 		{
 			return _dbSet.Where(x => x.ImgType == type);
 		}
@@ -30,5 +32,13 @@ namespace Data.Sql.Repositories
 			removedYear.ForEach(x => _dbSet.Remove(x));
             _webContext.SaveChanges();
         }
-	}
+
+       public List<WikiMcImage> GetAllImageWithTag()
+        {
+			return _dbSet
+				.Include(x => x.Tags)
+				.Where(x => x.Year == 2023)
+				.ToList();
+        }
+    }
 }

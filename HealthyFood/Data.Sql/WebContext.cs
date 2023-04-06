@@ -17,7 +17,7 @@ namespace Data.Sql
 
         public DbSet<Game> Games { get; set; }
 
-		public WebContext() { }
+        public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)
