@@ -13,23 +13,11 @@
 .left-menu {
     display: flex;
     flex-direction: column; /* размещаем элементы к колонку */
-    min-width: 250px;
-    min-height: 100vh; /* на всю высоту экрана */
-
-    top: 0; /* прижимаем к верхнему */
-    left: 0; /* .. и нижнему краю */
     background-color: #62d09e;
     box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+    min-width: 0px;
+    min-height: 0vh;
 }
-
-/* Свойства для контента */
-.content {
-    padding-left: 280px; /* отступ от бокового меню 240px + 40px */
-    padding-top: 40px;
-    padding-right: 40px;
-    padding-bottom: 40px;
-}
-
 .logo {
     display: flex;
     align-items: center; /* центрируем логотип с текстом */
@@ -37,9 +25,8 @@
     font-size: 26px;
     text-decoration: none;
     font-family: "Rubik", sans-serif;
-    font-weight: bold;
-    border: 3px solid #0060899e;
-    padding: 10px;
+    border: 1px solid #208ebd9e;
+    padding: 7px;
 }
 
 .buttom-gamearcade {
@@ -47,7 +34,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -66,7 +53,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -85,7 +72,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -104,7 +91,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -123,7 +110,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -142,7 +129,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
@@ -161,7 +148,7 @@
     text-decoration: none !important;
     background-color: #9cd451 !important;
     color: #4c5c61 !important;
-    border: 3px solid #0060899e !important;
+    border: 1px solid #208ebd9e !important;
     border-radius: 5px !important;
     font-size: 22px !important;
     padding: 15px 40px !important;
