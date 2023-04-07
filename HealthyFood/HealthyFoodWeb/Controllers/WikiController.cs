@@ -2,6 +2,8 @@ using HealthyFoodWeb.Models.ModelsWiki;
 using Microsoft.AspNetCore.Mvc;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 using HealthyFoodWeb.Services.IServices;
+using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -9,10 +11,12 @@ namespace HealthyFoodWeb.Controllers
     {
 
         private IWikiBAAIPageRecomendateServices _blockInformationServices;
-  
-        public WikiController(IWikiBAAIPageRecomendateServices blockInformationServices)
+        private IWikiMCService _wikiMCImgService;
+
+        public WikiController(IWikiBAAIPageRecomendateServices blockInformationServices, IWikiMCService wikiMCImgService)
         {
             _blockInformationServices = blockInformationServices;
+            _wikiMCImgService = wikiMCImgService;
         }
 
         public IActionResult Main()
@@ -34,6 +38,28 @@ namespace HealthyFoodWeb.Controllers
             return View(PageViewModel);
         }
 
+        public IActionResult MacronutrientCalculator()
+        {
+            var viewModel = new WikiMCImgViewModel();
+            viewModel.AllImgByType = _wikiMCImgService
+                .GetAllImgByType()
+                .Select(x => new WikiMCViewModel
+                {
+                    ImgPath = x.ImgUrl,
+                })
+                .ToList();
+
+            viewModel.AllImgByYear = _wikiMCImgService
+                .GetAllImgByYear()
+                .Select(x => new WikiMCViewModel
+                {
+                    ImgPath = x.ImgUrl,
+                })
+                .ToList();
+
+            return View(viewModel);
+        }
+
         [HttpGet]
         public IActionResult CreateBlockInformatoin()
         {
@@ -52,6 +78,19 @@ namespace HealthyFoodWeb.Controllers
         {
             _blockInformationServices.Remove(id);
             return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        [HttpGet]
+        public IActionResult AddImg()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddImg(WikiMCViewModel viewModel)
+        {
+            _wikiMCImgService.AddImg(viewModel);
+            return RedirectToAction("MacronutrientCalculator");
         }
     }
 }
