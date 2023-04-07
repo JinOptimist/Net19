@@ -3,6 +3,7 @@ using Data.Interface.Repositories;
 using Data.Sql;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ builder.Services.AddScoped<IWikiMCService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
+
+builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiBaaRepository>()));
+builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 
 
 builder.Services.AddScoped<IGameFruitConnectTwoService>(

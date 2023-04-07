@@ -10,5 +10,7 @@
 
         public virtual List<GameCategory> Genres { get; set; }
         public virtual List<User> Players { get; set; }
+
+        public virtual List<GameCategory> SecondaryGenres { get; set; }
     }
 }

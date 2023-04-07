@@ -21,6 +21,7 @@ namespace HealthyFoodWeb.Services
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
+                CoverUrl = viewModel.CoverUrl,
             };
 
             _gameRepository.Add(dbGameModel);

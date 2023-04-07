@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql
@@ -8,6 +9,8 @@ namespace Data.Sql
         public DbSet<User> Users { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<PageWikiBlock> PageWikiBlocks{ get; set; }
 
         public DbSet<GameCategory> GameCategories { get; set; }
 
@@ -22,6 +25,19 @@ namespace Data.Sql
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Game>()
+                .HasMany(x => x.Genres)//Game
+                .WithMany(x => x.Games);//GameCategory
+
+            modelBuilder.Entity<Game>()
+                .HasMany(x => x.SecondaryGenres)//Game
+                .WithMany(x => x.SecondaryGames);//Genre
+
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
