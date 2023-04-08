@@ -9,5 +9,6 @@ namespace Data.Interface.Repositories
         void RemoveByName(string name);
 
         Game GetTheRichGameWithGenres();
+        List<Game> GetPlayers();
     }
 }

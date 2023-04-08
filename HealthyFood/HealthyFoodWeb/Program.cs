@@ -22,7 +22,8 @@ builder.Services.AddScoped<IWikiMCService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
-
+builder.Services.AddScoped<IQuizService>(
+    diContainer => new QuizService(diContainer.GetService<IQuizRepository>()));
 builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiBaaRepository>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 
@@ -43,7 +44,7 @@ builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryReposit
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
-
+builder.Services.AddScoped<IQuizRepository>(x=> new QuizRepository(x.GetService<WebContext>()));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

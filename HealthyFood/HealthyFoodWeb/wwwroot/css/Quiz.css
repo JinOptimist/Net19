@@ -1,0 +1,31 @@
+﻿body {
+    
+    background: url(https://sch.msr.mosreg.ru/files/image/07/48/86/lg!nrx.jpg);
+    background-size: 100%;
+}
+
+.myButton {
+    box-shadow: 4px 3px 3px 0px #3dc21b;
+    background-color: #44c767;
+    border-radius: 28px;
+    border: 1px solid #18ab29;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 16px 5px;
+    text-decoration: none;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .myButton:hover {
+        background-color: #56cc16;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }

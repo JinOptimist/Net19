@@ -15,6 +15,12 @@ namespace Data.Sql.Repositories
             return _dbSet.FirstOrDefault(x => x.Name == name);
         }
 
+        public List<Game> GetPlayers()
+        {
+            return _dbSet
+                 .Include(x => x.Players)
+                 .ToList();
+        }
         public Game GetTheRichGameWithGenres()
         {
             return _dbSet

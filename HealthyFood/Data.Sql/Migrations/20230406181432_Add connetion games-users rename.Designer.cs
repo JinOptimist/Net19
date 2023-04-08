@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230406181432_Add connetion games-users rename")]
+    partial class Addconnetiongamesusersrename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,28 +83,6 @@ namespace Data.Sql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GameCategories");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Quiz", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("QuantityOfPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityOfWinner")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityСorrect_answer")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Quizes");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
@@ -173,27 +154,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("WikiMcImages");
                 });
 
-            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PageWikiBlocks");
-                });
-
             modelBuilder.Entity("GameGameCategory", b =>
                 {
                     b.Property<int>("GamesId")
@@ -207,21 +167,6 @@ namespace Data.Sql.Migrations
                     b.HasIndex("GenresId");
 
                     b.ToTable("GameGameCategory");
-                });
-
-            modelBuilder.Entity("GameGameCategory1", b =>
-                {
-                    b.Property<int>("SecondaryGamesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SecondaryGenresId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SecondaryGamesId", "SecondaryGenresId");
-
-                    b.HasIndex("SecondaryGenresId");
-
-                    b.ToTable("GameGameCategory1");
                 });
 
             modelBuilder.Entity("GameUser", b =>
@@ -250,21 +195,6 @@ namespace Data.Sql.Migrations
                     b.HasOne("Data.Interface.Models.GameCategory", null)
                         .WithMany()
                         .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GameGameCategory1", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Game", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.GameCategory", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGenresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

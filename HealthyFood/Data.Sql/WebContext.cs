@@ -19,8 +19,8 @@ namespace Data.Sql
 		public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
         public DbSet<Game> Games { get; set; }
-
-		public WebContext() { }
+        public DbSet<Quiz> Quizes { get; set; }
+        public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)
