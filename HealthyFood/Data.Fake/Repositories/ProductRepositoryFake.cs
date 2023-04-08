@@ -6,44 +6,44 @@ namespace Data.Fake.Repositories
 {
 	public class ProductRepositoryFake : IProductRepository
 	{
-		public static List<ProductModel> Product =
-			new List<ProductModel>() {
-				new ProductModel
+		public static List<Product> FakeDbProduct =
+			new List<Product>() {
+				new Product
 				{
 					Id = 1,
 					Name = "Cabage",
 					Price = 4,
 					Rating = 3.8m
 				},
-				new ProductModel
+				new Product
 				{
 					Id = 2,
 					Name = "Cabage2",
 					Price = 3,
 					Rating = 3
 				},
-				new ProductModel
+				new Product
 				{
 					Id = 3,
 					Name = "Cabage3",
 					Price = 6,
 					Rating = 3.5m
 				},
-				new ProductModel
+				new Product
 				{
 					Id = 4,
 					Name = "Cabage4",
 					Price = 7,
 					Rating = 4
 				},
-				new ProductModel
+				new Product
 				{
 					Id = 5,
 					Name = "Cabage5",
 					Price = 1,
 					Rating = 5
 				},
-				new ProductModel
+				new Product
 				{
 					Id = 6,
 					Name = "Cabage6",
@@ -52,26 +52,26 @@ namespace Data.Fake.Repositories
 				},
 			};
 
-		public List<ProductModel> GetAll()
+		public List<Product> GetAll()
 		{
-			return Product;
+			return FakeDbProduct;
 		}
 
-		public ProductModel GetProductByRating(decimal rating)
+		public Product GetProductByRating(decimal rating)
 		{
-			return Product.FirstOrDefault(x => x.Rating == rating);
+			return FakeDbProduct.FirstOrDefault(x => x.Rating == rating);
 		}
 
 		public void RemoveByRating(decimal rating)
 		{
-			Product.Remove(GetProductByRating(rating));
+			FakeDbProduct.Remove(GetProductByRating(rating));
 		}
 
-		public void SaveProduct(ProductModel product)
+		public void SaveProduct(Product product)
 		{
-			var maxExistedId = Product.Max(x => x.Id);
+			var maxExistedId = FakeDbProduct.Max(x => x.Id);
 			product.Id = maxExistedId + 1;
-			Product.Add(product);
+			FakeDbProduct.Add(product);
 		}
 	}
 }

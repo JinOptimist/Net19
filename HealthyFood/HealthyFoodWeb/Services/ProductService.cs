@@ -16,19 +16,18 @@ namespace HealthyFoodWeb.Services
 			_productRepository = productRepositoryFake;
 		}
 
+		public List<Product> GetAllProduct()
+		{
+			return _productRepository.GetAll().ToList();
+		}
+
 		public void UpdateRatingProduct(ProductPageViewModel viewModel)
 		{
-			var productModel = new ProductModel()
+			var productModel = new Product()
 			{
 				Rating = viewModel.Rating + 1,
 			};
 
 		}
-
-		//List<ProductModel> GetProductMidRating();
-		//List<ProductModel> GetProductLowRating();
-		//List<ProductModel> GetProductHighRating();
-
-
 	}
 }

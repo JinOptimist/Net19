@@ -4,9 +4,9 @@ namespace Data.Fake.Repositories
 {
 	public interface IProductRepository
 	{
-		List<ProductModel> GetAll();
-		ProductModel GetProductByRating(decimal rating);
+		List<Product> GetAll();
+		Product GetProductByRating(decimal rating);
 		void RemoveByRating(decimal rating);
-		void SaveProduct(ProductModel product);
+		void SaveProduct(Product product);
 	}
 }
