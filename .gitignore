@@ -356,3 +356,4 @@ MigrationBackup/
 /HealthyFood/Data.Interface/Models/ProductReviews.cs
 /HealthyFood/Data.Interface/Models/ProductDbModel.cs
 /HealthyFood/Data.Interface/Models/ProductDbModel.cs
+/HealthyFood/Data.Fake/Repositories/ProductRepositoryFake.cs
