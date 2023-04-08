@@ -24,6 +24,7 @@ namespace HealthyFoodWeb.Controllers
 		{
 			var viewModel = new ProductPageViewModel();
 
+
 			return View(viewModel);
 		}
 
