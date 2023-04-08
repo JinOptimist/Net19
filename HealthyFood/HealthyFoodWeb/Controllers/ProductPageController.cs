@@ -6,11 +6,11 @@ namespace HealthyFoodWeb.Controllers
 {
 	public class ProductPageController : Controller
 	{
-		private RatingProductService _ratingProductService;
+		private ProductService _productService;
 
-		public ProductPageController(RatingProductService ratingproductService)
+		public ProductPageController(ProductService productService)
 		{
-			_ratingProductService = ratingproductService;
+			_productService = productService;
 		}
 
 		public IActionResult Index()
@@ -28,7 +28,7 @@ namespace HealthyFoodWeb.Controllers
 		public IActionResult ProductPage(ProductPageViewModel productPageView)
 		{
 
-			_ratingProductService.UpdateRatingProduct(productPageView);
+			_productService.UpdateRatingProduct(productPageView);
 			return RedirectToAction("Index");
 
 		}

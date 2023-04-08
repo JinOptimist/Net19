@@ -5,6 +5,7 @@ using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddScoped<IWikiMCService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
+builder.Services.AddScoped<IProductService>(
+	diContainer => new ProductService(diContainer.GetService<IProductRepository>()));
 
 builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiBaaRepository>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
@@ -37,15 +40,13 @@ dataSqlStartup.RegisterDbContext(builder.Services);
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
+builder.Services.AddSingleton<IProductRepository>(x => new ProductRepositoryFake());
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
-
-builder.Services.AddScoped<RatingProductService>(
-    diContainer => new RatingProductService(diContainer.GetService<ProductRepositoryFake>()));
 
 
 
