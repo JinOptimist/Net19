@@ -1,9 +1,9 @@
-﻿namespace Data.Sql.Models;
+﻿using Data.Interface.Models;
 
-public class Product
+namespace Data.Sql.Models;
+
+public class Product : BaseModel
 {
-    public int Id { get; set; }
-
     public string Name { get; set; }
 
     public decimal Price { get; set; }
