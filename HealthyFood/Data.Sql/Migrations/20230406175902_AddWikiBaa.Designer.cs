@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230406175902_AddWikiBaa")]
+    partial class AddWikiBaa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,30 +42,6 @@ namespace Data.Sql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Game", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CoverUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
@@ -170,66 +149,6 @@ namespace Data.Sql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PageWikiBlocks");
-                });
-
-            modelBuilder.Entity("GameGameCategory", b =>
-                {
-                    b.Property<int>("GamesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GenresId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GamesId", "GenresId");
-
-                    b.HasIndex("GenresId");
-
-                    b.ToTable("GameGameCategory");
-                });
-
-            modelBuilder.Entity("GameGameCategory1", b =>
-                {
-                    b.Property<int>("SecondaryGamesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SecondaryGenresId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SecondaryGamesId", "SecondaryGenresId");
-
-                    b.HasIndex("SecondaryGenresId");
-
-                    b.ToTable("GameGameCategory1");
-                });
-
-            modelBuilder.Entity("GameGameCategory", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.GameCategory", null)
-                        .WithMany()
-                        .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GameGameCategory1", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Game", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.GameCategory", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,8 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface IGameService
     {
+        Game GetTheBestGameWithGenres();
+
         string GetTheBestGameName();
 
         void CreateGame(GameViewModel viewModel);

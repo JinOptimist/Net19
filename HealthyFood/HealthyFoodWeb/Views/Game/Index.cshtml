@@ -5,6 +5,15 @@
 </div>
 <div class="games">
     <div class="cheap">
+        <h1>The Best</h1>
+        <div>
+            The best game is @Model.TheBestGame.Name.
+            @foreach (var genre in Model.TheBestGame.Genres)
+            {
+                <span class="genre">@genre</span>
+            }
+        </div>
+
         <h1>Cheap</h1>
         @foreach (var gameViewModel in Model.CheapGames)
         {

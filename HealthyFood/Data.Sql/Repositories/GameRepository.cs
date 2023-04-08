@@ -1,55 +1,32 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
-    public class GameRepository : IGameRepository
+    public class GameRepository : BaseRepository<Game>, IGameRepository
     {
-        private WebContext _webContext;
-
-        public GameRepository(WebContext webContext)
+        public GameRepository(WebContext webContext) : base(webContext)
         {
-            _webContext = webContext;
         }
 
-        public void Add(IGameDbModel model)
+        public Game GetGameByName(string name)
         {
-            _webContext.Games.Add((GameDbModel)model);
-            _webContext.SaveChanges();
+            return _dbSet.FirstOrDefault(x => x.Name == name);
         }
 
-        public IGameDbModel Get(int id)
+        public Game GetTheRichGameWithGenres()
         {
-            return _webContext.Games.FirstOrDefault(x => x.Id == id);
-        }
-
-        public IEnumerable<IGameDbModel> GetAll()
-        {
-            return _webContext.Games.ToList();
-        }
-
-        public IGameDbModel GetByName(string name)
-        {
-            return _webContext.Games.FirstOrDefault(x => x.Name == name);
-        }
-
-        public IGameDbModel GetGameByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            var game = _webContext.Games.FirstOrDefault(_x => _x.Id == id);
-            _webContext.Games.Remove(game);
+            return _dbSet
+                .Include(x => x.Genres)
+                .OrderByDescending(x => x.Price)
+                .First();
         }
 
         public void RemoveByName(string name)
         {
-            var game = _webContext.Games.FirstOrDefault(_x => _x.Name == name);
-            _webContext.Games.Remove(game);
+            var game = GetGameByName(name);
+            Remove(game.Id);
         }
     }
 }
-
