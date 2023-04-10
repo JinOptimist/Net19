@@ -37,6 +37,11 @@ namespace Data.Sql
                 .HasMany(x => x.SecondaryGenres)//Game
                 .WithMany(x => x.SecondaryGames);//Genre
 
+            modelBuilder.Entity<PageWikiBlock>()
+                .HasMany(x => x.Authors)
+                .WithMany(x => x.Blocks);
+
+
             base.OnModelCreating(modelBuilder);
         }
 

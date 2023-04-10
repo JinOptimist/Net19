@@ -64,5 +64,10 @@ namespace Data.Fake.Repositories
         {
             return FakeDbModels.FirstOrDefault(b => b.Id == id);
         }
+
+        public IEnumerable<PageWikiBlock> GetBlocksWithAuthors()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

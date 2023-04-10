@@ -202,6 +202,21 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameGameCategory1");
                 });
 
+            modelBuilder.Entity("PageWikiBlockUser", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlocksId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsId", "BlocksId");
+
+                    b.HasIndex("BlocksId");
+
+                    b.ToTable("PageWikiBlockUser");
+                });
+
             modelBuilder.Entity("GameGameCategory", b =>
                 {
                     b.HasOne("Data.Interface.Models.Game", null)
@@ -228,6 +243,21 @@ namespace Data.Sql.Migrations
                     b.HasOne("Data.Interface.Models.GameCategory", null)
                         .WithMany()
                         .HasForeignKey("SecondaryGenresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PageWikiBlockUser", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Sql.Models.PageWikiBlock", null)
+                        .WithMany()
+                        .HasForeignKey("BlocksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
