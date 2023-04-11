@@ -1,0 +1,174 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    width: 100%;
+    background: url(https://phonoteka.org/uploads/posts/2022-02/1644967243_46-phonoteka-org-p-fon-dlya-saita-minimalizm-47.jpg);
+    background-size: 100%;
+}
+
+.left-menu {
+    display: flex;
+    flex-direction: column; /* размещаем элементы к колонку */
+    background-color: #62d09e;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+    min-width: 0px;
+    min-height: 0vh;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    color: #292727bf;
+    font-size: 26px;
+    text-decoration: none;
+    font-family: "Rubik", sans-serif;
+    border: 1px solid #208ebd9e;
+    padding: 7px;
+    align-content: flex-end;
+    justify-content: space-around;
+}
+
+.buttom-gamearcade {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gamearcade:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gamevictory {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gamevictory:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gameracing {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gameracing:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gametraining {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gametraining:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gamecards {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gamecards:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gametests {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gametests:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.buttom-gameadventurn {
+    display: inline-block !important;
+    text-decoration: none !important;
+    background-color: #5b98d687 !important;
+    color: #4c5c61 !important;
+    border: 1px solid #208ebd9e !important;
+    border-radius: 5px !important;
+    font-size: 22px !important;
+    padding: 15px 40px !important;
+    transition: all 0.8s ease !important;
+}
+
+    .buttom-gameadventurn:hover {
+        text-decoration: none !important;
+        background-color: #0060899e !important;
+        color: #ffeded !important;
+        border-color: #0060899e !important;
+    }
+
+.all {
+    display: flex;
+}
+
+.footer {
+    padding: 50px;
+    width: inherit;
+}

@@ -1,0 +1,36 @@
+﻿@using HealthyFoodWeb.Models.ModelsWikiBAA;
+@model BLockPageBaaViewModel
+@{
+    Layout = "_LayoutWiki";
+    <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
+}
+
+<div class="container">
+    <div class="header"><h1>Create a new block</h1></div>
+    <div class="sidebar">
+        <p>Магазины БАДов :</p>
+        <p><a href="https://gamma.by/sportpit/zdorovie/">Gamma.by</a></p>
+        <p><a href="https://kakvapteke.by/catalog/bady/">Kakvapteke.by</a></p>
+        <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
+    </div>
+    <div class="content">
+        <div>
+            <form method="post">
+                <div class="title">
+                   Enter Title: @Html.TextBoxFor(x => x.Title)
+                </div>
+                <div class="text">
+                   Enter Text: @Html.TextAreaFor(x => x.Text)
+                </div>
+                <div class="button">
+                    <input type="submit" value="Create block" />
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">&copy; Крылов Вячеслав</div>
+</div>
+
+
+

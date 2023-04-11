@@ -5,3 +5,14 @@
 .rich {
     border: 3px red dotted;
 }
+
+
+.cover img{
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.genre{
+    border: 1px solid red;
+    border-radius: 10px;
+}
