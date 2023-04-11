@@ -69,7 +69,7 @@ namespace HealthyFoodWeb.Controllers
             }
 
             var claims = new List<Claim>() {
-                    new Claim("Id", user.Id.ToString()),
+                    new Claim(AuthService.AUTH_CLAIMS_ID_NAME, user.Id.ToString()),
                     new Claim("Name", user.Name),
                     new Claim(ClaimTypes.AuthenticationMethod, AuthService.AUTH_NAME)
                 };

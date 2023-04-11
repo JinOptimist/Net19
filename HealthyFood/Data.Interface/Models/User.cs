@@ -7,5 +7,7 @@
         public string AvatarUrl { get; set; }
 
         public string Password { get; set; }
+
+        public virtual List<Game> CreatedGames { get; set; }
     }
 }

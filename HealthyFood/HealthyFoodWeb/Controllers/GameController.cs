@@ -36,12 +36,14 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CreateGame()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateGame(GameViewModel viewModel)
         {
             _gameService.CreateGame(viewModel);

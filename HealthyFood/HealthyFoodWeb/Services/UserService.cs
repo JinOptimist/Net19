@@ -24,6 +24,11 @@ namespace HealthyFoodWeb.Services
             _userRepository.Add(User);
         }
 
+        public User GetById(int currentUserId)
+        {
+            return _userRepository.Get(currentUserId);
+        }
+
         public List<User> GetUserModels()
         {
             return _userRepository
