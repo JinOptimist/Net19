@@ -68,7 +68,7 @@ namespace HealthyFoodWeb.Controllers
             {
                 Name = x.Name,
                 CoverUrl = x.CoverUrl,
-                Genres = x.Genres?.Select(x => x.Name).ToList()
+                Genres = x.Genres?.Select(x => x.Name).ToList() ?? new List<string>()
             };
         }
     }
