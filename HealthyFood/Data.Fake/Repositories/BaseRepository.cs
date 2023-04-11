@@ -6,7 +6,6 @@ namespace Data.Fake.Repositories
     public abstract class BaseRepository<DbModel> : IBaseRepository<DbModel> where DbModel : BaseModel
     {
         public List<DbModel> FakeDbModels = new List<DbModel>();
-
         public void Add(DbModel model)
         {
             var maxExistedId = FakeDbModels.Max(x => x.Id);
