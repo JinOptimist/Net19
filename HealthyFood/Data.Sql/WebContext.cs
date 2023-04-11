@@ -42,6 +42,11 @@ namespace Data.Sql
                 .WithOne(x => x.Creater)
                 .IsRequired(false);
 
+            modelBuilder.Entity<PageWikiBlock>()
+                .HasMany(x => x.Authors)
+                .WithMany(x => x.Blocks);
+
+
             base.OnModelCreating(modelBuilder);
         }
 

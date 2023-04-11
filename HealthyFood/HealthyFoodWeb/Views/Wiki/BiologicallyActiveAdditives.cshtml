@@ -15,12 +15,22 @@
         <p><a href="https://kakvapteke.by/catalog/bady/">Kakvapteke.by</a></p>
         <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
     </div>
-    @foreach (var pageViewModelBAA in Model.BlocksList)
+    @foreach (var pageViewModelBaa in Model.BlocksList)
     {
         <div class="content">
-            <div Titles><h2>@pageViewModelBAA.Title <a href="/Wiki/Remove?id=@pageViewModelBAA.Id">delete</a></h2></div>
+            <div Titles><h2>@pageViewModelBaa.Title <a href="/Wiki/Remove?id=@pageViewModelBaa.Id">delete</a></h2></div>
 
-            <div Texts>@pageViewModelBAA.Text</div>
+            <div Texts>@pageViewModelBaa.Text</div>
+
+            @foreach (var pageViewModelBaaAuthor in Model.BlocksListWithAuthor)
+            {
+                @foreach (var authorName in pageViewModelBaaAuthor.Authors)
+                {
+                    <div class="author">
+                        Автор Текста: @authorName
+                    </div>
+                }
+            }
         </div>
     }
     <div class="footer">&copy; Крылов Вячеслав</div>
