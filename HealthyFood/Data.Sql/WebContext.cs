@@ -10,17 +10,17 @@ namespace Data.Sql
 
         public DbSet<Cart> Carts { get; set; }
 
-        public DbSet<PageWikiBlock> PageWikiBlocks{ get; set; }
+        public DbSet<PageWikiBlock> PageWikiBlocks { get; set; }
 
         public DbSet<GameCategory> GameCategories { get; set; }
 
         public DbSet<SimilarGame> SimilarGames { get; set; }
 
-		public DbSet<WikiMcImage> WikiMcImages { get; set; }
+        public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
         public DbSet<Game> Games { get; set; }
 
-		public WebContext() { }
+        public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
             : base(options)
@@ -36,6 +36,11 @@ namespace Data.Sql
             modelBuilder.Entity<Game>()
                 .HasMany(x => x.SecondaryGenres)//Game
                 .WithMany(x => x.SecondaryGames);//Genre
+
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.CreatedGames)
+                .WithOne(x => x.Creater)
+                .IsRequired(false);
 
             modelBuilder.Entity<PageWikiBlock>()
                 .HasMany(x => x.Authors)

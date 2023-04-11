@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230411184204_AddCreaterForGame")]
+    partial class AddCreaterForGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,21 +223,6 @@ namespace Data.Sql.Migrations
                     b.Navigation("Creater");
                 });
 
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-            {
-                b.Property<int>("AuthorsId")
-                    .HasColumnType("int");
-
-                b.Property<int>("BlocksId")
-                    .HasColumnType("int");
-
-                b.HasKey("AuthorsId", "BlocksId");
-
-                b.HasIndex("BlocksId");
-
-                b.ToTable("PageWikiBlockUser");
-            });
-
             modelBuilder.Entity("GameGameCategory", b =>
                 {
                     b.HasOne("Data.Interface.Models.Game", null)
@@ -269,21 +257,6 @@ namespace Data.Sql.Migrations
                 {
                     b.Navigation("CreatedGames");
                 });
-
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-            {
-                b.HasOne("Data.Interface.Models.User", null)
-                    .WithMany()
-                    .HasForeignKey("AuthorsId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("Data.Sql.Models.PageWikiBlock", null)
-                    .WithMany()
-                    .HasForeignKey("BlocksId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
 #pragma warning restore 612, 618
         }
     }
