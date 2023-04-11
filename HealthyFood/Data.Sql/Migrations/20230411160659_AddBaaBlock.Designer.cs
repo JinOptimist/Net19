@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20230410131645_BaaWikiBlocks")]
-    partial class BaaWikiBlocks
+    [Migration("20230411160659_AddBaaBlock")]
+    partial class AddBaaBlock
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

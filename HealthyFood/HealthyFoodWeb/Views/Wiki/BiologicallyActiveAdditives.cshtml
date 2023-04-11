@@ -21,11 +21,14 @@
             <div Titles><h2>@pageViewModelBaa.Title <a href="/Wiki/Remove?id=@pageViewModelBaa.Id">delete</a></h2></div>
 
             <div Texts>@pageViewModelBaa.Text</div>
+
             @foreach (var pageViewModelBaaAuthor in Model.BlocksListWithAuthor)
-        {
+            {
                 @foreach (var authorName in pageViewModelBaaAuthor.Authors)
                 {
-                    <p>Автор Текста: @authorName</p>
+                    <div class="author">
+                        Автор Текста: @authorName
+                    </div>
                 }
             }
         </div>

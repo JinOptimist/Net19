@@ -38,6 +38,10 @@ h2 {
     font-size: 1.3em;
 }
 
+.author {
+    margin-top: 2%;
+}
+
 .footer {
     background: #8fa09b; /* ���� ���� ������� */
     color: #fff; /* ���� ������ */
@@ -79,6 +83,7 @@ h2 {
     width: 60%;
     margin-top: 2%;
 }
+
 .button {
     margin-top: 2%;
 }
