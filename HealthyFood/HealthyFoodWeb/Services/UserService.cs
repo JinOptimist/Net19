@@ -31,5 +31,10 @@ namespace HealthyFoodWeb.Services
                 .Where(x => x.AvatarUrl != null)
                 .ToList();
         }
+
+        public User Login(string login, string password)
+        {
+            return _userRepository.GetByNameAndPassword(login, password);
+        }
     }
 }

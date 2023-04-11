@@ -11,6 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services
+    .AddAuthentication(AuthService.AUTH_NAME)
+    .AddCookie(AuthService.AUTH_NAME, x=>
+    {
+        x.LoginPath = "/User/Login";
+        //x.AccessDeniedPath = "/User/AccessDenied";
+    });
+
 
 builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(diContainer.GetService<IGameRepository>()));
@@ -59,7 +67,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); // Кто я?
+app.UseAuthorization(); // Можно ли сюда?
 
 app.MapControllerRoute(
     name: "default",
