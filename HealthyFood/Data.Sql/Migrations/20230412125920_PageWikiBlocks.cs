@@ -5,13 +5,12 @@
 namespace Data.Sql.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBaaBlock : Migration
+    public partial class PageWikiBlocks : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
-            migrationBuilder.CreateTable(
+             migrationBuilder.CreateTable(
                 name: "PageWikiBlocks",
                 columns: table => new
                 {
@@ -24,8 +23,7 @@ namespace Data.Sql.Migrations
                 {
                     table.PrimaryKey("PK_PageWikiBlocks", x => x.Id);
                 });
-
-            
+         
             migrationBuilder.CreateTable(
                 name: "PageWikiBlockUser",
                 columns: table => new
@@ -49,8 +47,7 @@ namespace Data.Sql.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-                       
-
+            
             migrationBuilder.CreateIndex(
                 name: "IX_PageWikiBlockUser_BlocksId",
                 table: "PageWikiBlockUser",
@@ -60,13 +57,11 @@ namespace Data.Sql.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
             migrationBuilder.DropTable(
                 name: "PageWikiBlockUser");
-
+           
             migrationBuilder.DropTable(
                 name: "PageWikiBlocks");
-            
         }
     }
 }

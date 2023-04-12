@@ -211,6 +211,21 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameGameCategory1");
                 });
 
+            modelBuilder.Entity("PageWikiBlockUser", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlocksId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsId", "BlocksId");
+
+                    b.HasIndex("BlocksId");
+
+                    b.ToTable("PageWikiBlockUser");
+                });
+
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Creater")
@@ -219,21 +234,6 @@ namespace Data.Sql.Migrations
 
                     b.Navigation("Creater");
                 });
-
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-            {
-                b.Property<int>("AuthorsId")
-                    .HasColumnType("int");
-
-                b.Property<int>("BlocksId")
-                    .HasColumnType("int");
-
-                b.HasKey("AuthorsId", "BlocksId");
-
-                b.HasIndex("BlocksId");
-
-                b.ToTable("PageWikiBlockUser");
-            });
 
             modelBuilder.Entity("GameGameCategory", b =>
                 {
@@ -265,25 +265,25 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PageWikiBlockUser", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Sql.Models.PageWikiBlock", null)
+                        .WithMany()
+                        .HasForeignKey("BlocksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
                     b.Navigation("CreatedGames");
                 });
-
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-            {
-                b.HasOne("Data.Interface.Models.User", null)
-                    .WithMany()
-                    .HasForeignKey("AuthorsId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("Data.Sql.Models.PageWikiBlock", null)
-                    .WithMany()
-                    .HasForeignKey("BlocksId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
 #pragma warning restore 612, 618
         }
     }

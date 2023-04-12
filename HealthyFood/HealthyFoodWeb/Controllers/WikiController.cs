@@ -33,7 +33,7 @@ namespace HealthyFoodWeb.Controllers
 
 			PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
 
-			PageViewModel.BlocksListWithAuthor = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
+			PageViewModel.BlocksListWithAuthors = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
 
 			return View(PageViewModel);
 		}
