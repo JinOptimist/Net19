@@ -24,6 +24,7 @@ namespace Data.Sql.Repositories
         {
             return _dbSet
                 .Include(x => x.Genres)
+                .Include(x => x.ScreenShots)
                 .OrderByDescending(x => x.Price)
                 .First();
         }

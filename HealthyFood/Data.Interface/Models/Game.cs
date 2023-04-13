@@ -13,5 +13,6 @@
         public virtual List<GameCategory> Genres { get; set; }
 
         public virtual List<GameCategory> SecondaryGenres { get; set; }
+        public virtual List<ScreenShots> ScreenShots { get; set; }
     }
 }

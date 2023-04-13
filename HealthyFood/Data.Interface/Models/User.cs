@@ -12,6 +12,7 @@ namespace Data.Interface.Models
 
         public virtual List<Game> CreatedGames { get; set; }
 
-        public virtual List<PageWikiBlock> Blocks { get; set;}
-	}
+        public virtual List<PageWikiBlock> Blocks { get; set; }
+        public virtual List<ScreenShots> ScreenShots { get; set; }
+    }
 }

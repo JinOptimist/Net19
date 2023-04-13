@@ -8,6 +8,16 @@
         <h1>The Best</h1>
         <div>
             The best game is @Model.TheBestGame.Name.
+            <div class="cover">
+                <img src="@Model.TheBestGame.CoverUrl" />
+            </div>
+            
+            @foreach (var screenshoot in Model.TheBestGame.UrlScreenShots)
+            {
+                <div class="cover">
+                    <img src="@screenshoot" />
+                </div>
+            }
             @foreach (var genre in Model.TheBestGame.Genres)
             {
                 <span class="genre">@genre</span>
