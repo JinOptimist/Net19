@@ -2,7 +2,7 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.IServices
 {
     public interface IGameCatalogService
     {

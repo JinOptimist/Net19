@@ -9,18 +9,23 @@ namespace HealthyFoodWeb.Services
     {
         public const decimal CHEAP_GAME_BORDER = 5;
         private IGameRepository _gameRepository;
+        private IAuthService _authService;
 
-        public GameService(IGameRepository gameRepository)
+        public GameService(IGameRepository gameRepository, IAuthService authService)
         {
             _gameRepository = gameRepository;
+            _authService = authService;
         }
 
         public void CreateGame(GameViewModel viewModel)
         {
+            var user = _authService.GetUser();
             var dbGameModel = new Game()
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
+                CoverUrl = viewModel.CoverUrl,
+                Creater = user
             };
 
             _gameRepository.Add(dbGameModel);

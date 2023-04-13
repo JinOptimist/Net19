@@ -12,6 +12,11 @@ namespace Data.Sql.Repositories
             return _dbSet.FirstOrDefault(x => x.Name == name);
         }
 
+        public User GetByNameAndPassword(string login, string password)
+        {
+            return _dbSet.FirstOrDefault(x => x.Name == login && x.Password == password);
+        }
+
         public void RemoveByName(string name)
         {
             var user = _dbSet.FirstOrDefault(_x => _x.Name == name);
