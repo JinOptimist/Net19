@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230408211309_addbase")]
+    partial class addbase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,12 +197,7 @@ namespace Data.Sql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuizPlayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizPlayerId");
 
                     b.ToTable("Users");
                 });
@@ -291,17 +289,6 @@ namespace Data.Sql.Migrations
                     b.HasIndex("PlayersId");
 
                     b.ToTable("GameUser");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.User", b =>
-                {
-                    b.HasOne("Data.Interface.Models.QuizPlayer", "QuizPlayer")
-                        .WithMany()
-                        .HasForeignKey("QuizPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("QuizPlayer");
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>

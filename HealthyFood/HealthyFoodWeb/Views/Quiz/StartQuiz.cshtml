@@ -1,0 +1,24 @@
+﻿@model StartQuizViewModel
+
+<div class="question">
+    @Model.NumberOfQuestion. Впорос: @Model.Question
+</div>
+
+<div class="answer">
+  
+    <form>
+        @Html.RadioButtonFor(x => x.Value, @Model.AnswerOne)
+        <span>@Model.AnswerOne</span> <br />
+        @Html.RadioButtonFor(x => x.Value, @Model.AnswerTwo)
+        <span>@Model.AnswerTwo</span> <br />
+        @Html.RadioButtonFor(x => x.Value, @Model.AnswerThree)
+        <span>@Model.AnswerThree</span>
+        <p>
+            <button type="submit">Отправить</button>
+        </p>
+    </form>
+
+</div>
+@section Styles{
+<link rel="stylesheet" href="~/css/Quiz.css" />
+}

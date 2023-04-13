@@ -7,6 +7,7 @@ namespace HealthyFoodWeb.Controllers
     public class QuizController : Controller
     {
         private IQuizService _quizService;
+       
         public QuizController(IQuizService quizService)
         {
             _quizService = quizService;
@@ -22,9 +23,33 @@ namespace HealthyFoodWeb.Controllers
                     QtyWinner = x.QuantityOfWinner,
                     QtyСorrect_answer = x.QuantityСorrect_answer
                 })
-                .ToList().First();
+                .First();
+            _quizService.AddGame();
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult StartQuiz()
+        {
+            
+            var viewModel = new StartQuizViewModel()
+            {
+                Question = _quizService.Start(1).Question,
+                AnswerOne = _quizService.Start(1).VariantOne,
+                AnswerTwo = _quizService.Start(1).VariantTwo,
+                AnswerThree = _quizService.Start(1).VariatThree,
+                NumberOfQuestion = 1
+            };
 
             return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult StartQuiz(StartQuizViewModel viewModel)
+        {
+            
+
+
+            return RedirectToAction("StartQuiz");
         }
     }
 }

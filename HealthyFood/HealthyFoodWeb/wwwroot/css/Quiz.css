@@ -1,6 +1,5 @@
 ﻿body {
-    
-    background: url(https://sch.msr.mosreg.ru/files/image/07/48/86/lg!nrx.jpg);
+    background: url(https://bogatyr.club/uploads/posts/2021-11/thumbs/1636965424_2-bogatyr-club-p-zdorovoe-pitanie-fon-2.jpg);
     background-size: 100%;
 }
 
@@ -29,3 +28,16 @@
         position: relative;
         top: 1px;
     }
+
+.question {
+    font-size: 34px;
+    font-weight: 600;
+    margin: 130px 0px 30px 0px;
+    text-align: center;
+}
+.answer {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0px 0px 0px 500px;
+   
+}

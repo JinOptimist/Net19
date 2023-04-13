@@ -20,6 +20,9 @@ namespace Data.Sql
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Quiz> Quizes { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
+        public DbSet<QuizPlayer> QuizPlayers { get; set; }
+        
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
@@ -36,6 +39,7 @@ namespace Data.Sql
             modelBuilder.Entity<Game>()
                 .HasMany(x => x.SecondaryGenres)//Game
                 .WithMany(x => x.SecondaryGames);//Genre
+          
 
             base.OnModelCreating(modelBuilder);
         }
