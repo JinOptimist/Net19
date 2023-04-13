@@ -1,0 +1,15 @@
+﻿@model CartViewModel
+
+<div>
+    <form method="post">
+        <div>
+            Name: @Html.TextBoxFor(x => x.Name)
+        </div>
+        <div>
+            Price: @Html.TextBoxFor(x => x.Price)
+        </div>
+        <div>
+            <input type="submit" value="Create product" />
+        </div>
+    </form>
+</div>
