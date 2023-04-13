@@ -20,6 +20,8 @@ namespace Data.Sql
 
         public DbSet<Game> Games { get; set; }
 
+        public DbSet<StoreItem> StoreItems { get; set; }
+
 		public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
