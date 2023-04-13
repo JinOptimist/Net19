@@ -5,5 +5,8 @@
         public string Name { get; set; }
 
         public string AvatarUrl { get; set; }
+
+        public virtual List<Cart> Products { get; set; }
+
     }
 }

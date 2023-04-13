@@ -8,5 +8,6 @@ namespace HealthyFoodWeb.Services.IServices
         List<Cart> GetAllProduct();
 
         void DeleteFromCart(string name);
+
     }
 }

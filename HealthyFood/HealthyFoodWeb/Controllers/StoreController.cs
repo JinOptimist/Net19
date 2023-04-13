@@ -1,4 +1,6 @@
-﻿using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,5 +39,7 @@ namespace HealthyFoodWeb.Controllers
             _cartService.DeleteFromCart(name);
             return RedirectToAction("CartPage");
         }
+
+        
     }
 }

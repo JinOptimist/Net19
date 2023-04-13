@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -22,5 +23,7 @@ namespace HealthyFoodWeb.Services
         {
             return _cartRepository.GetAll().ToList();
         }
+      
     }
 }
+  

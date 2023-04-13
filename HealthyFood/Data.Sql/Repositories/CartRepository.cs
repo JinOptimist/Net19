@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -18,5 +19,6 @@ namespace Data.Sql.Repositories
             _webContext.Carts.Remove(cart);
             _webContext.SaveChanges();
         }
+
     }
 }
