@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
+using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -9,9 +10,9 @@ namespace HealthyFoodWeb.Services
     {
         private ICartRepository _cartRepository;
 
-        public CartService(ICartRepository cartRepositoryFake)
+        public CartService(ICartRepository cartRepository)
         {
-            _cartRepository = cartRepositoryFake;
+            _cartRepository = cartRepository;
         }
 
         public void DeleteFromCart(string name)
@@ -23,7 +24,18 @@ namespace HealthyFoodWeb.Services
         {
             return _cartRepository.GetAll().ToList();
         }
-      
+
+        public void AddProductInBase(CartViewModel viewModel)
+        {
+            var dbCartModel = new Cart()
+            {
+                Name = viewModel.Name,
+                Price = viewModel.Price,
+            };
+
+            _cartRepository.Add(dbCartModel);
+        }
+
     }
 }
   
