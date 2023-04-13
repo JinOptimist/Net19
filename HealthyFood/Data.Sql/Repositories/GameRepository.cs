@@ -21,6 +21,11 @@ namespace Data.Sql.Repositories
                  .Include(x => x.Players)
                  .ToList();
         }
+        public List<Game> GetGamesByUserId(int userId)
+        {
+            return _dbSet.Where(x => x.Creater.Id == userId).ToList();
+        }
+
         public Game GetTheRichGameWithGenres()
         {
             return _dbSet

@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230411184204_AddCreaterForGame")]
+    partial class AddCreaterForGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,77 +90,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameCategories");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.Quiz", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("QuantityOfPlayers")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityOfWinner")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantityСorrect_answer")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Quizes");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.QuizPlayer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("NumberQuestion")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("QuizPlayers");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.QuizQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Question")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RightAnswer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VariantOne")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VariantTwo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VariatThree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("QuizQuestions");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
                 {
                     b.Property<int>("Id")
@@ -204,8 +136,6 @@ namespace Data.Sql.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizPlayerId");
 
                     b.ToTable("Users");
                 });
@@ -284,21 +214,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameGameCategory1");
                 });
 
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-                {
-                    b.Property<int>("AuthorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlocksId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AuthorsId", "BlocksId");
-
-                    b.HasIndex("BlocksId");
-
-                    b.ToTable("PageWikiBlockUser");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Creater")
@@ -338,39 +253,9 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Sql.Models.PageWikiBlock", null)
-                        .WithMany()
-                        .HasForeignKey("BlocksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
                     b.Navigation("CreatedGames");
-                });
-
-            modelBuilder.Entity("GameUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("PlayersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

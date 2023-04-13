@@ -10,5 +10,7 @@ namespace Data.Interface.Repositories
 
         Game GetTheRichGameWithGenres();
         List<Game> GetPlayers();
+
+        List<Game> GetGamesByUserId(int userId);
     }
 }

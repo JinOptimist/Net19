@@ -39,6 +39,11 @@ namespace Data.Fake.Repositories
             throw new NotImplementedException();
         }
 
+        public List<Game> GetGamesByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Game GetTheRichGameWithGenres()
         {
             throw new NotImplementedException();
