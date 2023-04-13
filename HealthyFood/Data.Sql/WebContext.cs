@@ -48,6 +48,14 @@ namespace Data.Sql
                 .HasMany(x => x.Authors)
                 .WithMany(x => x.Blocks);
 
+            modelBuilder.Entity<Manufacturer>()
+                .HasMany(x => x.StoreItems)
+                .WithOne(x => x.Manufacturer);
+
+            modelBuilder.Entity<StoreItem>()
+                .HasMany(x => x.Users)
+                .WithMany(x => x.StoreItems);
+
 
             base.OnModelCreating(modelBuilder);
         }

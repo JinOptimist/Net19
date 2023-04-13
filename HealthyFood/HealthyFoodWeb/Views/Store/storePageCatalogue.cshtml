@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "_layoutStore";
 }
+
+@model StoreCatalogueViewModel
 <div class="banner">
     <div class="content--banner">
         <div class="container">
@@ -28,34 +30,13 @@
                 <div class="filter--name">
                     <div class="filter--title">Производитель</div>
                     <div class="filter--names">
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="Mojo Cacao" id="Mojo Cacao" />
-                            <label for="Mojo Cacao">Mojo Cacao</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="Meditea" id="Meditea" />
-                            <label for="Meditea">Meditea</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="JUMP" id="JUMP" />
-                            <label for="JUMP">JUMP</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="Holy Corn" id="Holy Corn" />
-                            <label for="Holy Corn">Holy Corn</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="HOBA" id="HOBA" />
-                            <label for="HOBA">HOBA</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="Granola.Lab" id="Granola.Lab" />
-                            <label for="Granola.Lab">Granola.Lab</label>
-                        </div>
-                        <div class="name--checkbox">
-                            <input type="checkbox" name="Mr.Djemius ZERO" id="Mr.Djemius ZERO" />
-                            <label for="Mr.Djemius ZERO">Mr.Djemius ZERO</label>
-                        </div>
+                        @foreach (var manufacturer in Model.Manufacturer)
+                        {
+                          <div class="name--checkbox">
+                            <input type="checkbox" name="@manufacturer.Name" id="@manufacturer.Name" />
+                                <label for="@manufacturer.Name">@manufacturer.Name</label>
+                          </div>
+                        }
                     </div>
                 </div>
             </form>
@@ -80,91 +61,24 @@
                                 <button class="product--add-to-cart">в избранное</button>
                             </div>
                         </div>
-                        <div>
+                        @foreach (var item in Model.Items)
+                        {
+                         <div>
                             <div class="catalogue--product">
                                 <a>
                                     <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
+                                        <img src="@item.Img">
                                     </div>
                                     <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
+                                        <p>@item.Name</p>
                                     </div>
-                                    <div class="product--price">16.18 руб.</div>
+                                    <div class="product--price">@item.Price руб.</div>
                                 </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
+                                <button class="product--add-to-cart">В корзину</button>
+                                    <button class="product--add-to-cart">В избранное</button>
                             </div>
                         </div>
-                        <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
-                                    </div>
-                                    <div class="product--price">16.18 руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
-                                    </div>
-                                    <div class="product--price">16.18 руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
-                                    </div>
-                                    <div class="product--price">16.18 руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
-                                    </div>
-                                    <div class="product--price">16.18 руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="~/images/products/PenutButter.jpg">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>Арахисовая паста Nutbutter (классическая), 320гр</p>
-                                    </div>
-                                    <div class="product--price">16.18 руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">Добавить в корзину</button>
-                            </div>
-                        </div>
-
+                        }
                     </div>
                 </div>
             </div>

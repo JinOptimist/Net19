@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413164455_AddStoreCatalogue")]
+    partial class AddStoreCatalogue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,23 +90,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameCategories");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Manufacturer");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
                 {
                     b.Property<int>("Id")
@@ -137,13 +123,6 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ManufacturerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -152,8 +131,6 @@ namespace Data.Sql.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ManufacturerId");
 
                     b.ToTable("StoreItems");
                 });
@@ -272,21 +249,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("PageWikiBlockUser");
                 });
 
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.Property<int>("StoreItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StoreItemsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("StoreItemUser");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Creater")
@@ -294,17 +256,6 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("CreaterId");
 
                     b.Navigation("Creater");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.StoreItem", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Manufacturer", "Manufacturer")
-                        .WithMany("StoreItems")
-                        .HasForeignKey("ManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Manufacturer");
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>
@@ -350,26 +301,6 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("BlocksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.StoreItem", null)
-                        .WithMany()
-                        .HasForeignKey("StoreItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
-                {
-                    b.Navigation("StoreItems");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>

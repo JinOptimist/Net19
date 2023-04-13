@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413165854_AddManufacturer")]
+    partial class AddManufacturer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,21 +275,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("PageWikiBlockUser");
                 });
 
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.Property<int>("StoreItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StoreItemsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("StoreItemUser");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Creater")
@@ -348,21 +336,6 @@ namespace Data.Sql.Migrations
                     b.HasOne("Data.Sql.Models.PageWikiBlock", null)
                         .WithMany()
                         .HasForeignKey("BlocksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.StoreItem", null)
-                        .WithMany()
-                        .HasForeignKey("StoreItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

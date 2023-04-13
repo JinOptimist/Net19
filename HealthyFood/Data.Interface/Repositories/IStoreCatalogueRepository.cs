@@ -2,9 +2,9 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IStoreCatalogueRepository : IBaseRepository<Cart>
+    public interface IStoreCatalogueRepository : IBaseRepository<StoreItem>
     {
-        Cart GetByName(string name);
+        StoreItem GetByName(string name);
         void RemoveByName(string name);
     }
 }

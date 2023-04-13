@@ -7,15 +7,34 @@ namespace HealthyFoodWeb.Controllers
     public class StoreController : Controller
     {
         private ICartService _cartService;
+        private IStoreCatalogueService _storeCatalogueService;
 
-        public StoreController(ICartService cartService)
+        public StoreController(ICartService cartService, IStoreCatalogueService storeCatalogueService)
         {
             _cartService = cartService;
+            _storeCatalogueService = storeCatalogueService;
         }
 
         public IActionResult storePageCatalogue()
         {
-            return View();
+            var viewModel = new StoreCatalogueViewModel();
+            viewModel.Items = _storeCatalogueService
+                .GetAllItems()
+                .Select(x => new StoreItemViewModel
+                {
+                    Name = x.Name,
+                    Price = x.Price,
+                    Img = x.ImageUrl
+
+                }).ToList();
+            viewModel.Manufacturer = _storeCatalogueService
+                .GetAllManufacturer()
+                .Select(x => new ManufacturerViewModel
+                {
+                    Name = x.Name,
+                }).ToList();
+
+            return View(viewModel);
         }
 
         public IActionResult CartPage()

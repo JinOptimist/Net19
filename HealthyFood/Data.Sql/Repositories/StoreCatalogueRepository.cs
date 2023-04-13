@@ -3,11 +3,12 @@ using Data.Interface.Repositories;
 
 namespace Data.Sql.Repositories
 {
-    public class StoreCatalogueRepository : BaseRepository<User>, IUserRepository
+    public class StoreCatalogueRepository : BaseRepository<StoreItem>, IStoreCatalogueRepository
     {
         public StoreCatalogueRepository(WebContext webContext) : base(webContext) { }
 
-        public User GetByName(string name)
+
+        public StoreItem GetByName(string name)
         {
             return _dbSet.FirstOrDefault(x => x.Name == name);
         }
@@ -18,5 +19,6 @@ namespace Data.Sql.Repositories
             _dbSet.Remove(item);
             _webContext.SaveChanges();
         }
+
     }
 }
