@@ -1,14 +1,30 @@
 ﻿using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
 {
     public class HomeController : Controller
     {
+        private IUserService _userService;
+        private IAuthService _authService;
+
+        public HomeController(IUserService userService, IAuthService authService)
+        {
+            _userService = userService;
+            _authService = authService;
+        }
+
         public IActionResult Index()
         {
-            //step 1
-            return View();
+            var user = _authService.GetUser();
+
+            var viewModel = new ProfileViewModel();
+
+            viewModel.Name = user?.Name ?? "Гость";
+
+            return View(viewModel);
         }
 
         public IActionResult Profile(string name = "Ivan")
@@ -37,6 +53,4 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("Profile", new { name = model.ActualName });
         }
     }
-
-    
 }

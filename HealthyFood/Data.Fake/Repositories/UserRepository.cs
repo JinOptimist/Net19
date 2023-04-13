@@ -34,6 +34,11 @@ namespace Data.Fake.Repositories
             return FakeDbModels.First(x => x.Name == name);
         }
 
+        public User GetByNameAndPassword(string login, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveByName(string name)
         {
             FakeDbModels.Remove(GetByName(name));
