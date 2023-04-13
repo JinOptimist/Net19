@@ -40,13 +40,14 @@ dataSqlStartup.RegisterDbContext(builder.Services);
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-builder.Services.AddSingleton<IProductRepository>(x => new ProductRepositoryFake());
+//builder.Services.AddSingleton<IProductRepository>(x => new ProductRepositoryFake());
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IProductRepository>(x => new ProductRepository(x.GetService<WebContext>()));
 
 
 

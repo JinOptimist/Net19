@@ -16,6 +16,14 @@ namespace HealthyFoodWeb.Controllers
 
 		public IActionResult Index()
 		{
+			var products = _productService.GetAllProducts();
+			var viewModels = products.Select(dbModel => new ProductPageViewModel
+			{
+				Name= dbModel.Name,
+				Rating= dbModel.Rating,
+				Price= dbModel.Price,
+
+			}) ;
 			return View();
 		}
 

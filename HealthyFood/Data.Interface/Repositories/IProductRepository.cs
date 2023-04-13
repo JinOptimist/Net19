@@ -1,12 +1,14 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.Models;
+using Data.Interface.Repositories;
+using Data.Sql.Models;
 
 namespace Data.Fake.Repositories
 {
-	public interface IProductRepository
+	public interface IProductRepository : IBaseRepository<Product>
 	{
-		List<Product> GetAll();
-		Product GetProductByRating(decimal rating);
-		void RemoveByRating(decimal rating);
-		void SaveProduct(Product product);
+        void Add(Product product);
+        Product Get(string name);
+        List<Product> GetAll();
+        void Remove(string name);
 	}
 }

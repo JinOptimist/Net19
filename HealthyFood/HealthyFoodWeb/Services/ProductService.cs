@@ -16,7 +16,7 @@ namespace HealthyFoodWeb.Services
 			_productRepository = productRepositoryFake;
 		}
 
-		public List<Product> GetAllProduct()
+		public List<Product> GetAllProducts()
 		{
 			return _productRepository.GetAll().ToList();
 		}

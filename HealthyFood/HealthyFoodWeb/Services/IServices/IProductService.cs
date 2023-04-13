@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Services
 {
 	public interface IProductService
 	{
-		public List<Product> GetAllProduct();
+		public List<Product> GetAllProducts();
 		void UpdateRatingProduct(ProductPageViewModel viewModel);
 
 	}
