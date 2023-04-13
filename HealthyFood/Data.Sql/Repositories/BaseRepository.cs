@@ -4,29 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
-    public abstract class BaseRepository<Model> : IBaseRepository<Model> where Model : BaseModel
+    public abstract class BaseRepository<SomeModel> 
+        : IBaseRepository<SomeModel> where SomeModel : BaseModel
     {
         protected WebContext _webContext;
-        protected DbSet<Model> _dbSet;
+        protected DbSet<SomeModel> _dbSet;
 
         public BaseRepository(WebContext webContext)
         {
             _webContext = webContext;
-            _dbSet = webContext.Set<Model>();
+            _dbSet = webContext.Set<SomeModel>();
         }
 
-        public void Add(Model model)
+        public void Add(SomeModel model)
         {
             _dbSet.Add(model);
             _webContext.SaveChanges();
         }
 
-        public Model Get(int id)
+        public SomeModel Get(int id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Model> GetAll()
+        public IEnumerable<SomeModel> GetAll()
         {
             return _dbSet.ToList();
         }
