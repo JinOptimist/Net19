@@ -10,11 +10,14 @@ namespace HealthyFoodWeb.Controllers
     {
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
-    
-        public GameCatalogController(IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService)
+        private IReviewService _reviewService;
+
+        public GameCatalogController(
+            IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService, IReviewService reviewService)
         {
             _gameCatalogService = gameCatalog;
             _gameFruitConnectTwoService = gameFruitConnectTwoService;
+            _reviewService = reviewService;
         }
 
         public IActionResult GetCatalog()
@@ -81,6 +84,26 @@ namespace HealthyFoodWeb.Controllers
         {
 
             return View();
+        }
+       [HttpGet]
+        public IActionResult Review()
+        {
+
+            var viewModels = _reviewService
+              .GetAllReviews()
+              .Select(dbModel =>
+                  new ReviewViewModel
+                  {
+                     TextReview = dbModel.TextReview
+                  })
+              .ToList();
+            return View(viewModels);
+        }
+        [HttpPost]
+        public IActionResult Review(ReviewViewModel viewmodel)
+        {
+            var ViewModel = new ReviewViewModel();
+            return View(ViewModel);
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model List<ReviewViewModel>
+
+<h1>Отзывы пользователей</h1>
+<div>
+    @foreach (var text in Model)
+    {
+        <div>Пользователь: </div>
+        <div>Отзыв: @text.TextReview </div>
+        <div>Дата: </div>
+    }
+</div>

@@ -18,6 +18,8 @@ namespace Data.Sql
 
         public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+        
         public DbSet<Game> Games { get; set; }
 
         public WebContext() { }
@@ -45,7 +47,9 @@ namespace Data.Sql
             modelBuilder.Entity<PageWikiBlock>()
                 .HasMany(x => x.Authors)
                 .WithMany(x => x.Blocks);
-
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Reviews)
+                .WithOne(x => x.User);
 
             base.OnModelCreating(modelBuilder);
         }
