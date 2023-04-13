@@ -13,27 +13,16 @@ namespace Data.Sql.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        private WebContext _webContext;
-
         public ProductRepository(WebContext webContext) : base(webContext)
         {
-            _webContext = webContext;
         }
 
-        public Product Get(string name)
+        public void UpdateRating(int id, decimal rating)
         {
-            return _webContext.Products.FirstOrDefault(x => x.Name == name);
+            var product = _dbSet.FirstOrDefault(x => x.Id == id);
+            product.Rating = rating;
+            _webContext.SaveChanges();
         }
 
-        public void Remove(string name)
-        {
-            var product = Get(name);
-            Remove(product.Name);
-        }
-
-        List<Product> IProductRepository.GetAll()
-        {
-            return _webContext.Products.ToList();
-        }
     }
 }

@@ -28,9 +28,17 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult ProductPage()
+		public IActionResult ProductPage(int id)
 		{
-			var viewModel = new ProductPageViewModel();
+			var product = _productService.GetAllProducts()
+				.First(x => x.Id == id);
+			var viewModel = new ProductPageViewModel()
+			{
+				Id = product.Id,
+				Name = product.Name,
+				Price = product.Price,
+				Rating = product.Rating,
+			};
 
 
 			return View(viewModel);

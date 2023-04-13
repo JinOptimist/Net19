@@ -23,10 +23,8 @@ namespace HealthyFoodWeb.Services
 
 		public void UpdateRatingProduct(ProductPageViewModel viewModel)
 		{
-			var productModel = new Product()
-			{
-				Rating = viewModel.Rating + 1,
-			};
+			
+			_productRepository.UpdateRating(viewModel.Id, viewModel.Rating);
 
 		}
 	}

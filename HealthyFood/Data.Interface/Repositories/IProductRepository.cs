@@ -6,9 +6,7 @@ namespace Data.Fake.Repositories
 {
 	public interface IProductRepository : IBaseRepository<Product>
 	{
-        void Add(Product product);
-        Product Get(string name);
-        List<Product> GetAll();
-        void Remove(string name);
-	}
+        
+        void UpdateRating(int id, decimal rating);
+    }
 }

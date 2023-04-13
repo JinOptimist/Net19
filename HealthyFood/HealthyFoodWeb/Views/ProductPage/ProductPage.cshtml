@@ -2,89 +2,90 @@
 
 
 <head>
-	<link rel="stylesheet" href="PageOfProduct.css">
-	<title>@Model.Name</title>
+    <link rel="stylesheet" href="PageOfProduct.css">
+    <title>@Model.Name</title>
 </head>
 
 
 <h1 class="name-of-the-product">
-	@Model.Name
+    @Model.Name
 </h1>
 <div class="main-content">
-	<div class="images-of-the-product">
-		<div class="main-of-the-images">
-			<img src="~/images/products\Cabage\Main\Cabage main.jpg">
-		</div>
-		<div class="additional-images">
-			<div class="additional-images-first">
-				<img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
-			</div>
-			<div class="additional-images-second">
-				<img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
-			</div>
-			<div class="additional-images-third">
-				<img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
-			</div>
-		</div>
-	</div>
-	<div class="info-about-price">
-		<div class="price-of-the-product">
-			<div class="full-price">
-				Price:2$ 1kg
-			</div>
-			<div class="discount-price">
-				Discount price:1.82$ 1kg
-			</div>
+    <div class="images-of-the-product">
+        <div class="main-of-the-images">
+            <img src="~/images/products\Cabage\Main\Cabage main.jpg">
+        </div>
+        <div class="additional-images">
+            <div class="additional-images-first">
+                <img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
+            </div>
+            <div class="additional-images-second">
+                <img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
+            </div>
+            <div class="additional-images-third">
+                <img src="~/images\products\Cabage\Addentinal\Cabage 1.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="info-about-price">
+        <div class="price-of-the-product">
+            <div class="full-price">
+                Price:2$ 1kg
+            </div>
+            <div class="discount-price">
+                Discount price:1.82$ 1kg
+            </div>
 
-		</div>
-		<div class="go-shopping">
-			<div>
-				<a href="#" class="go-shopping-button">Buy</a>
-			</div>
+        </div>
+        <div class="go-shopping">
+            <div>
+                <a href="#" class="go-shopping-button">Buy</a>
+            </div>
 
-		</div>
-		<div class="rating-of-the-product">
-			<a href="#" class="rating-of-the-product-button"> rating @Model.Rating</a>
-		</div>
+        </div>
+        <div class="rating-of-the-product">
+            <a href="#" class="rating-of-the-product-button"> rating @Model.Rating</a>
+        </div>
 
-		<div class="reviews-and-ratings">
-			Rating @Model.Rating
-			<form method="post">
-				<div>
-					Enter rating: @Html.TextBoxFor(x => x.Rating)
-				</div>
-				<div>
-					<input type="submit" value="Update rating" />
-				</div>
-			</form>
-		</div>
+        <div class="reviews-and-ratings">
+            Rating @Model.Rating
+            <form method="post">
+                @Html.HiddenFor(x=>x.Id)
+                <div>
+                    Enter rating: @Html.TextBoxFor(x => x.Rating)
+                </div>
+                <div>
+                    <input type="submit" value="Update rating" />
+                </div>
+            </form>
+        </div>
 
-	</div>
+    </div>
 </div>
 <div class="compositions-of-the-product">
-	Nutritional value per 100 g
-	<table class="info-about-product">
+    Nutritional value per 100 g
+    <table class="info-about-product">
 
-		<tr class="proteins">
-			<td>Proteins</td>
-			<td>1.2</td>
-		</tr>
-		<tr class="carbohydrates">
-			<td>Carbohydrates</td>
-			<td>2</td>
-		</tr>
-		<tr class="fats">
-			<td>Fats</td>
-			<td>0.2</td>
-		</tr>
-		<tr class="energy value">
-			<td>Energy value</td>
-			<td>16 kcal 67j</td>
-		</tr>
-	</table>
+        <tr class="proteins">
+            <td>Proteins</td>
+            <td>1.2</td>
+        </tr>
+        <tr class="carbohydrates">
+            <td>Carbohydrates</td>
+            <td>2</td>
+        </tr>
+        <tr class="fats">
+            <td>Fats</td>
+            <td>0.2</td>
+        </tr>
+        <tr class="energy value">
+            <td>Energy value</td>
+            <td>16 kcal 67j</td>
+        </tr>
+    </table>
 
 </div>
 
 @section Styles{
-	<link rel="stylesheet" href="~/css/PageOfProduct.css" />
+    <link rel="stylesheet" href="~/css/PageOfProduct.css" />
     }
