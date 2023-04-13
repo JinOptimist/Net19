@@ -6,11 +6,11 @@ using Data.Sql.Models;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
-    public class WikiBAAPageRecomendateServices : IWikiBAAIPageRecomendateServices
+    public class WikiBAAPageServices : IWikiBAAPageServices
     {
         private IWikiBaaRepository _wikiRepositoryBAA;
-
-        public WikiBAAPageRecomendateServices(IWikiBaaRepository wikiRepositoryBAA)
+        
+        public WikiBAAPageServices(IWikiBaaRepository wikiRepositoryBAA)
         {
             _wikiRepositoryBAA = wikiRepositoryBAA;
         }
@@ -35,5 +35,11 @@ namespace HealthyFoodWeb.Services.WikiServices
         {
             _wikiRepositoryBAA.Remove(id);
         }
-    }
+
+        public List<PageWikiBlock> GetBlocksWithAuthors()
+        {
+            return _wikiRepositoryBAA.GetBlocksWithAuthors().ToList();
+        }
+
+	}
 }

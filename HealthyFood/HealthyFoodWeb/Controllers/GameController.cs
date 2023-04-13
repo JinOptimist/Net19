@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
@@ -14,6 +15,7 @@ namespace HealthyFoodWeb.Controllers
             _gameService = gameService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var viewModel = new GameIndexViewModel();
@@ -34,12 +36,14 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CreateGame()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateGame(GameViewModel viewModel)
         {
             _gameService.CreateGame(viewModel);
