@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using Data.Sql.Models;
 using HealthyFoodWeb.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Services
 {
@@ -8,6 +9,8 @@ namespace HealthyFoodWeb.Services
 	{
 		public List<Product> GetAllProducts();
 		void UpdateRatingProduct(ProductPageViewModel viewModel);
+		public void AddProduct(ProductPageViewModel viewModel);
+		public IActionResult RemoveProduct(ProductPageViewModel productPageView);
 
-	}
+    }
 }

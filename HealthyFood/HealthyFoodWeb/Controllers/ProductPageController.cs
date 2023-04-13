@@ -52,5 +52,29 @@ namespace HealthyFoodWeb.Controllers
 			return RedirectToAction("ProductPage");
 
 		}
-	}
+
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+		public IActionResult AddProduct(ProductPageViewModel productPageView)
+		{
+            _productService.AddProduct(productPageView);
+            return RedirectToAction("ProductPage");
+        }
+
+        [HttpGet]
+        public IActionResult RemoveProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RemoveProduct(ProductPageViewModel productPageView)
+        {
+        }
+    }
 }
