@@ -31,11 +31,12 @@ builder.Services.AddScoped<IWikiMCService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
+builder.Services.AddScoped<IStoreCatalogueService>(
+    diContainer => new StoreCatalogueService(diContainer.GetService<IStoreCatalogueRepository>(), diContainer.GetService<IManufacturerRepository>()));
 builder.Services.AddScoped<IAuthService>(
      diContainer => new AuthService(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
-
 builder.Services.AddScoped<IWikiBAAPageServices>(x => new WikiBAAPageServices(x.GetService<IWikiBaaRepository>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 
@@ -52,6 +53,8 @@ builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IManufacturerRepository>(x => new ManufacturerRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IStoreCatalogueRepository>(x => new StoreCatalogueRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));

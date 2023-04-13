@@ -18,10 +18,10 @@ namespace HealthyFoodWeb.Services
 
         public List<StoreItem> GetAllItems()
         {
-            return _catalogueRepository.GetAll().ToList();
+            return _catalogueRepository.GetItemsWithManufacturer();
         }
 
-        public List<Manufacturer> GetAllManufacturer()
+        public List<Manufacturer> GetAllManufacturers()
         {
             return _manufacturerRepository.GetAll().ToList();
         }

@@ -24,11 +24,12 @@ namespace HealthyFoodWeb.Controllers
                 {
                     Name = x.Name,
                     Price = x.Price,
-                    Img = x.ImageUrl
+                    Img = x.ImageUrl,
+                    Manufacturer = x.Manufacturer.Name,
 
                 }).ToList();
             viewModel.Manufacturer = _storeCatalogueService
-                .GetAllManufacturer()
+                .GetAllManufacturers()
                 .Select(x => new ManufacturerViewModel
                 {
                     Name = x.Name,

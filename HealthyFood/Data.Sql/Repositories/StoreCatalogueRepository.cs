@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -13,11 +14,12 @@ namespace Data.Sql.Repositories
             return _dbSet.FirstOrDefault(x => x.Name == name);
         }
 
-        public void RemoveByName(string name)
+        public List<StoreItem> GetItemsWithManufacturer()
         {
-            var item = _dbSet.FirstOrDefault(_x => _x.Name == name);
-            _dbSet.Remove(item);
-            _webContext.SaveChanges();
+            return _dbSet
+                .Include(x => x.Manufacturer)
+                .ToList();
+               
         }
 
     }

@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Services.IServices
     public interface IStoreCatalogueService
     {
         List<StoreItem> GetAllItems();
-        List<Manufacturer> GetAllManufacturer();
+        List<Manufacturer> GetAllManufacturers();
 
     }
 }
