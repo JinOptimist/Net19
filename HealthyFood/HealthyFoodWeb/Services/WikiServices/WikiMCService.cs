@@ -2,7 +2,7 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.WikiServices
 {
     public class WikiMCService : IWikiMCService
     {
@@ -33,7 +33,7 @@ namespace HealthyFoodWeb.Services
                 .Where(x => x.Year == CURRENT_YEAR).
                 ToList();
         }
-      
+
         public IEnumerable<WikiMcImage> GetAllImgByType()
         {
             return _wikiMCRepository
@@ -51,5 +51,10 @@ namespace HealthyFoodWeb.Services
         {
             _wikiMCRepository.RemoveAllImgByYear(year);
         }
-    }
+
+		public IEnumerable<WikiMcImage> GetAllImageWithTags()
+		{
+			return _wikiMCRepository.GetAllImageWithTags().ToList();
+		}
+	}
 }

@@ -5,6 +5,7 @@ using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
+using Data.Interface.Models;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -41,6 +42,7 @@ namespace HealthyFoodWeb.Controllers
 		public IActionResult MacronutrientCalculator()
 		{
 			var viewModel = new WikiMCImgViewModel();
+
 			viewModel.AllImgByType = _wikiMCImgService
 				.GetAllImgByType()
 				.Select(x => new WikiMCViewModel
@@ -51,26 +53,12 @@ namespace HealthyFoodWeb.Controllers
 
 			viewModel.AllImgByYear = _wikiMCImgService
 				.GetAllImgByYear()
-				.Select(x => new WikiMCViewModel
+				.Select(imageDb => new WikiMCViewModel
 				{
-					ImgPath = x.ImgUrl,
+					ImgPath = imageDb.ImgUrl,
+					Tags = imageDb.Tags?.Select(t=> t.Tag).ToList() ?? new List<string>()
 				})
 				.ToList();
-            viewModel.AllImgByYear = _wikiMCImgService
-                .GetAllImgByYear()
-                .Select(x => new WikiMCViewModel
-                {
-                    ImgPath = x.ImgUrl,
-                })
-                .ToList();
-            viewModel.GetTags = _wikiMCImgService
-                .GetTags()
-                .Select(x => new WikiMCViewModel
-                {
-                    ImgPath = x.ImgUrl,
-                })
-                .ToList();
-
 			return View(viewModel);
 		}
 

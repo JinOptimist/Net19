@@ -4,7 +4,6 @@
     {
         public List<WikiMCViewModel> AllImgByYear { get; set; }
         public List<WikiMCViewModel> AllImgByType { get; set; }
-
-        public List<WikiMCViewModel> GetTags { get; set; }
-    }
+		public WikiMCViewModel GetTag { get; set; }
+	}
 }

@@ -63,9 +63,9 @@ namespace Data.Fake.Repositories
             removedYear.ForEach(x => FakeDbModels.Remove(x));
         }
 
-        public List<WikiMcImage> GetAllImageWithTag()
+        public IEnumerable<WikiMcImage> GetAllImageWithTags()
         {
-            throw new NotImplementedException();
-        }
+			throw new NotImplementedException();
+		}
     }
 }

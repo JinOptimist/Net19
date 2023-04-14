@@ -46,6 +46,10 @@ namespace Data.Sql
                 .HasMany(x => x.Authors)
                 .WithMany(x => x.Blocks);
 
+            modelBuilder.Entity<WikiMcImage>()
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Images);
+
 
             base.OnModelCreating(modelBuilder);
         }

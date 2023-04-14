@@ -33,7 +33,7 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-       public List<WikiMcImage> GetAllImageWithTag()
+       public IEnumerable<WikiMcImage> GetAllImageWithTags()
         {
 			return _dbSet
 				.Include(x => x.Tags)
