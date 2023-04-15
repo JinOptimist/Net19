@@ -42,10 +42,14 @@ namespace Data.Sql
                 .WithOne(x => x.Creater)
                 .IsRequired(false);
 
+            modelBuilder.Entity<User>()
+               .HasMany(x => x.Products)
+               .WithOne(x => x.Customer)
+               .IsRequired(false);
+
             modelBuilder.Entity<PageWikiBlock>()
                 .HasMany(x => x.Authors)
                 .WithMany(x => x.Blocks);
-
 
             base.OnModelCreating(modelBuilder);
         }

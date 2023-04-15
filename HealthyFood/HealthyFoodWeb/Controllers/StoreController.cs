@@ -2,6 +2,7 @@
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
@@ -9,9 +10,13 @@ namespace HealthyFoodWeb.Controllers
     public class StoreController : Controller
     {
         private ICartService _cartService;
+        private IUserService _userService;
+        private IAuthService _authService;
 
-        public StoreController(ICartService cartService)
+        public StoreController(ICartService cartService, IUserService userService, IAuthService authService)
         {
+            _userService = userService;
+            _authService = authService;
             _cartService = cartService;
         }
 
@@ -23,8 +28,9 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult CartPage()
         {
             var viewModel = new CartIndexViewModel();
+
             viewModel.Product = _cartService.
-                GetAllProduct().
+                GetCustomerProduct().
                 Select(x => new CartViewModel
                 {
                     Name = x.Name,

@@ -6,7 +6,7 @@
 
         public decimal Price { get; set; }
 
-        public virtual List<User> Customers { get; set; }
+        public virtual User Customer { get; set; }
 
     }
 }

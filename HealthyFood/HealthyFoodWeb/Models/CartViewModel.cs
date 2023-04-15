@@ -11,9 +11,6 @@
 
         public int Quantity { get; set; }
         public int TotalQuantity { get; set; }
-
-        public List<string> Customers { get; set; } = new List<string>();
-
-
+        
     }
 }
