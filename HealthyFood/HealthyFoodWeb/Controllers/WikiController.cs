@@ -10,7 +10,6 @@ namespace HealthyFoodWeb.Controllers
 {
 	public class WikiController : Controller
 	{
-
 		private IWikiBAAPageServices _blockInformationServices;
 
 		private IWikiMCService _wikiMCImgService;
@@ -33,7 +32,7 @@ namespace HealthyFoodWeb.Controllers
 
 			PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
 
-			PageViewModel.BlocksListWithAuthors = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
+			PageViewModel.BlocksListWithAuthor = _blockInformationServices.GetBlocksWithAuthor().Select(Convert).ToList();
 
 			return View(PageViewModel);
 		}
@@ -99,7 +98,7 @@ namespace HealthyFoodWeb.Controllers
 				Id = x.Id,
 				Text = x.Text,
 				Title = x.Title,
-				Authors = x.Authors?.Select(x => x.Name).ToList()
+				Author = x.Author?.Name
 			};
 		}
 	}

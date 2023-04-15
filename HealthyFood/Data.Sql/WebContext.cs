@@ -43,7 +43,7 @@ namespace Data.Sql
                 .IsRequired(false);
 
             modelBuilder.Entity<PageWikiBlock>()
-                .HasMany(x => x.Authors)
+                .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
 
 

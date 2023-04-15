@@ -36,7 +36,7 @@ builder.Services.AddScoped<IAuthService>(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
 
-builder.Services.AddScoped<IWikiBAAPageServices>(x => new WikiBAAPageServices(x.GetService<IWikiBaaRepository>()));
+builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 
 
