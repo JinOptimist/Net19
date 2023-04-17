@@ -18,6 +18,12 @@
                     <img src="@screenshoot" />
                 </div>
             }
+            @foreach (var user in Model.TheBestGame.Users)
+            {
+                <div class="cover">
+                    <img src="@user" />
+                </div>
+            }
             @foreach (var genre in Model.TheBestGame.Genres)
             {
                 <span class="genre">@genre</span>

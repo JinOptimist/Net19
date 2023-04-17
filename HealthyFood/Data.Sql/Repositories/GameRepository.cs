@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
@@ -27,6 +28,25 @@ namespace Data.Sql.Repositories
                 .Include(x => x.ScreenShots)
                 .OrderByDescending(x => x.Price)
                 .First();
+        }
+        public GameAndScreensData GetTheScreenWithUser()
+        {
+            var game = _dbSet
+                .Include(x => x.Genres)
+                .OrderByDescending(x => x.Price)
+                .Select(gameDb =>
+                new GameAndScreensData
+                {
+                    Game = gameDb,
+                    ScreenAndUser = gameDb.ScreenShots.Select(screenshotDb =>
+                    new ScreenAndAuthorNameData
+                    {
+                        Screen = screenshotDb,
+                        AuthorName = screenshotDb.User.Name
+                    }).ToList(),
+                })
+                .First();
+            return game;
         }
 
         public void RemoveByName(string name)
