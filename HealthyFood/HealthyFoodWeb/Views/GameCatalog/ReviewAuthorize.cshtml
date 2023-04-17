@@ -11,13 +11,16 @@
     }
 </div>
 
-
+<form method="post" action = "/GameCatalog/AddReview/" >
 
     <div>
-        Отзывы могут оставлять только авторизованные пользователи
+        @Html.TextArea("newReview", new { @class = "Creat-review" })
      
     </div>
-  
+    <div>
+        <input type="submit" value="Написать отзыв" />
+    </div>
+</form>
 @section Styles{
     <link rel="stylesheet" href="~/css/Review.css" />
 }

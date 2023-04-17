@@ -5,5 +5,6 @@ namespace Data.Interface.Repositories
 {
     public interface IReviewRepository : IBaseRepository<Review>
     {
+        List<Review> GetReviews();
     }
 }
