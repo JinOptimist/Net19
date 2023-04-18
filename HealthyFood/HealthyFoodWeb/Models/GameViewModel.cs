@@ -12,6 +12,5 @@ namespace HealthyFoodWeb.Models
         public List<string> Genres { get; set; } = new List<string>();
         public List<string> Friends { get; set; } = new List<string>();
         public List<string> UrlScreenShots { get; set; } = new List<string>();
-        public List<ScreenAndAuthorNameData> Users { get; set; } = new List<ScreenAndAuthorNameData>();
     }
 }
