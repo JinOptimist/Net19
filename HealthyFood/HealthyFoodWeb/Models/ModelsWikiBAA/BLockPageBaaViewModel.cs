@@ -7,7 +7,12 @@ namespace HealthyFoodWeb.Models.ModelsWikiBAA
         public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public List<string> Authors { get; set; } =new List<string>();
+
+        public string Author { get; set; }
+
+        public string CommentText { get; set; }
+        
+        public PageBaaViewModel pageBaaViewModel { get; set; }
     }
 }
 
