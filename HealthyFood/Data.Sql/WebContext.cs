@@ -48,10 +48,13 @@ namespace Data.Sql
 
             modelBuilder.Entity<WikiMcImage>()
                 .HasMany(x => x.Tags)
-                .WithMany(x => x.Images);
+                .WithMany(x => x.Image);
 
+			//modelBuilder.Entity<WikiMcImage>()
+			//	.HasOne(x => x.ImageUploader)
+			//	.WithMany(x => x.WikiImages);
 
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

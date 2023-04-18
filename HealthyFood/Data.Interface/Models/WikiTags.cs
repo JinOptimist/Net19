@@ -9,6 +9,7 @@ namespace Data.Interface.Models
     public class WikiTags : BaseModel
     {
         public string Tag { get; set; }
-        public virtual List<WikiMcImage> Images { get; set; }
+
+        public virtual List<WikiMcImage> Image { get; set; }
     }
 }

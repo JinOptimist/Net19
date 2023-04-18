@@ -11,12 +11,25 @@ namespace Data.Sql.Repositories
 
         public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
 		{
-			return _dbSet.Where(x => x.ImgType == type);
+			return _dbSet
+				.Include(x => x.Tags)
+				.Where(x => x.ImgType == type)
+				.ToList();
+		}
+
+		public IEnumerable<WikiMcImage> GetAllImgByYearWithTags(int year)
+		{
+			return _dbSet
+				.Include(x => x.Tags)
+				.Where(x => x.Year == year)
+				.ToList();
 		}
 
 		public IEnumerable<WikiMcImage> GetAllImgByYear(int year)
 		{
-			return _dbSet.Where(x => x.Year == year);
+			return _dbSet
+				.Where(x => x.Year == year)
+				.ToList();
 		}
 
 		public void RemoveAllImgByType(ImgTypeEnum type)
@@ -33,12 +46,11 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-       public IEnumerable<WikiMcImage> GetAllImageWithTags()
-        {
-			return _dbSet
-				.Include(x => x.Tags)
-				.Where(x => x.Year == 2023)
-				.ToList();
-        }
-    }
+		//public IEnumerable<WikiMcImage> GetImagesWithUploader()
+		//{
+		//	return _dbSet
+		//		.Include(x => x.ImageUploader)
+		//		.ToList();
+		//}
+	}
 }

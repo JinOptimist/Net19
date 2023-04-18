@@ -9,5 +9,7 @@
         public ImgTypeEnum ImgType { get; set; }
 
         public virtual List<WikiTags> Tags { get; set; }
-    }
+
+		//public virtual User ImageUploader { get; set; }
+	}
 }

@@ -9,5 +9,6 @@ namespace HealthyFoodWeb.Models
         public ImgTypeEnum ImgType { get; set; }
         public int Year { get; set; }
 		public List<string> Tags { get; set; } = new List<string>();
+        //public User ImageUploader { get; set; }
 	}
 }

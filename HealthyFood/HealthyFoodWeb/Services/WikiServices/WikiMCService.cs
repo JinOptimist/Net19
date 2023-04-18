@@ -22,16 +22,14 @@ namespace HealthyFoodWeb.Services.WikiServices
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
+                //Tags = viewModel.Tags,
             };
             _wikiMCRepository.Add(WikiMc);
         }
 
         public IEnumerable<WikiMcImage> GetAllImgByYear()
         {
-            return _wikiMCRepository
-                .GetAll()
-                .Where(x => x.Year == CURRENT_YEAR).
-                ToList();
+            return _wikiMCRepository.GetAllImgByYearWithTags(CURRENT_YEAR);
         }
 
         public IEnumerable<WikiMcImage> GetAllImgByType()
@@ -52,9 +50,17 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiMCRepository.RemoveAllImgByYear(year);
         }
 
-		public IEnumerable<WikiMcImage> GetAllImageWithTags()
-		{
-			return _wikiMCRepository.GetAllImageWithTags().ToList();
-		}
-	}
+		//public IEnumerable<WikiMcImage> GetAllUserImages(User currentUser)
+		//{
+		//	return _wikiMCRepository
+  //              .GetImagesWithUploader()
+  //              .Where(x => x.ImageUploader == currentUser)
+  //              .ToList ();
+		//}
+
+        //public IEnumerable<WikiMcImage> GetAllUserImages()
+        //{
+        //    throw new NotImplementedException();
+        //}
+    }
 }

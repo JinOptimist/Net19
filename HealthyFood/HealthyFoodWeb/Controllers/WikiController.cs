@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Data.Interface.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -56,9 +57,10 @@ namespace HealthyFoodWeb.Controllers
 				.Select(imageDb => new WikiMCViewModel
 				{
 					ImgPath = imageDb.ImgUrl,
-					Tags = imageDb.Tags?.Select(t=> t.Tag).ToList() ?? new List<string>()
+					Tags = imageDb.Tags?.Select(t => t.Tag).ToList() ?? new List<string>()
 				})
 				.ToList();
+
 			return View(viewModel);
 		}
 
@@ -82,12 +84,14 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public IActionResult AddImg()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Authorize]
 		public IActionResult AddImg(WikiMCViewModel viewModel)
 		{
 			_wikiMCImgService.AddImg(viewModel);

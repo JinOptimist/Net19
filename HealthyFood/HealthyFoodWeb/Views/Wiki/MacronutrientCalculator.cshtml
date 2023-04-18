@@ -33,20 +33,16 @@
 				</p>
 			</div>
 			<div class="gallery">
-				<div class="new-img">
 					@foreach (var wikiMCImgViewModel in Model.AllImgByYear)
 					{
-						<div class="img-container">
-							<img src="@wikiMCImgViewModel.ImgPath">
-							<div class="tags">
-								@foreach(var tag in Model.GetTag.Tags)
-								{
-									<span class=" tag">@tag</span>
-								}
-							</div>
+						<img src="@wikiMCImgViewModel.ImgPath">
+						<div class="tag">
+							@foreach (var tag in wikiMCImgViewModel.Tags)
+						{
+							<span class="tooltiptext">@tag</span>
+						}
 						</div>
 					}
-				</div>
 			</div>
 		</div>
 	</div>
