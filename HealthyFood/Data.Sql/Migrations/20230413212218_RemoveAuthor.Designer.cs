@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413212218_RemoveAuthor")]
+    partial class RemoveAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,28 +140,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("WikiBlockComments");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
                 {
                     b.Property<int>("Id")
@@ -247,17 +228,6 @@ namespace Data.Sql.Migrations
                     b.Navigation("Creater");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Author")
@@ -302,8 +272,6 @@ namespace Data.Sql.Migrations
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
                     b.Navigation("Blocks");
-
-                    b.Navigation("Comments");
 
                     b.Navigation("CreatedGames");
                 });
