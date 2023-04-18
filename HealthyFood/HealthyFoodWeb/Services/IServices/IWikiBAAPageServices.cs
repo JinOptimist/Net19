@@ -1,4 +1,5 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.Models;
+using Data.Sql.Models;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 
 namespace HealthyFoodWeb.Services.IServices
@@ -12,5 +13,9 @@ namespace HealthyFoodWeb.Services.IServices
         void Remove(int id);
 
         IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
+
+        IEnumerable<WikiBlockComment> GetComments();
+
+        public void CreateComment(BLockPageBaaViewModel comment);
     }
 }

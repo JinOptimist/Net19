@@ -2,7 +2,7 @@
 
 namespace Data.Interface.Repositories
 {
-    public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock>
+    public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock> 
     {
 		IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
     }

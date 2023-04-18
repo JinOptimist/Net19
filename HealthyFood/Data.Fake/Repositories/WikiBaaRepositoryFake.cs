@@ -1,4 +1,5 @@
-﻿using Data.Interface.Repositories;
+﻿using Data.Interface.Models;
+using Data.Interface.Repositories;
 using Data.Sql.Models;
 
 namespace Data.Fake.Repositories
@@ -71,6 +72,16 @@ namespace Data.Fake.Repositories
         }
 
         public IEnumerable<PageWikiBlock> GetBlocksWithAuthor(int IdAuthor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PageWikiBlock> GetBlocksWithComments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<WikiBlockComment> GetComments()
         {
             throw new NotImplementedException();
         }

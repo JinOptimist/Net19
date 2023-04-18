@@ -1,11 +1,12 @@
 ﻿@using HealthyFoodWeb.Models.ModelsWiki;
 @using Data.Interface.Models;
 @using Data.Interface.Repositories;
+@using HealthyFoodWeb.Models.ModelsWikiBAA;
 @{
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
 }
-@model PageBaaViewModel
+@model BLockPageBaaViewModel
 
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
@@ -15,20 +16,35 @@
         <p><a href="https://kakvapteke.by/catalog/bady/">Kakvapteke.by</a></p>
         <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
     </div>
-    @foreach (var pageViewModelBaaWithAuthor in Model.BlocksListWithAuthor)
+
+    @foreach (var pageViewModelBaaWithAuthor in Model.pageBaaViewModel.BlocksListWithAuthor)
     {
         <div class="content">
             <div Titles><h2>@pageViewModelBaaWithAuthor.Title <a href="/Wiki/Remove?id=@pageViewModelBaaWithAuthor.Id">delete</a></h2></div>
-
             <div Texts>@pageViewModelBaaWithAuthor.Text</div>
-
-                    <div class="author">
+            <div class="author">
                 Автор Текста: @pageViewModelBaaWithAuthor.Author
+            </div>
+            <div>
+                @foreach (var AuthorWithCommentS in Model.pageBaaViewModel.AuthorWithComments)
+                {
+                    <div class="Comments">
+                    @AuthorWithCommentS.CommentText
                     </div>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post">
+                        <div class="text">
+                            Enter Comment:@Html.TextBoxFor(x=>x.CommentText)
+                            <div class="button">
+                                <input type="submit" value="Button" />
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
         </div>
     }
     <div class="footer">&copy; Крылов Вячеслав</div>
 </div>
-
-
-
