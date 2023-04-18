@@ -27,5 +27,10 @@ namespace Data.Fake.Repositories
         {
             FakeDbModels.Remove(Get(id));
         }
+
+        public bool Any()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

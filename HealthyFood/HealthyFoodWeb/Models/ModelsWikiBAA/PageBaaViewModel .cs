@@ -1,4 +1,5 @@
-﻿using HealthyFoodWeb.Models.ModelsWikiBAA;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models.ModelsWikiBAA;
 
 namespace HealthyFoodWeb.Models.ModelsWiki
 {

@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
+using HealthyFoodWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,9 +36,10 @@ builder.Services.AddScoped<IAuthService>(
      diContainer => new AuthService(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
+builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
+    diContainer.GetService<IAuthService>(),
+    diContainer.GetService<WikiBaaCommentRepository>()));
 
-builder.Services.AddScoped<IWikiBAAPageServices>(x => new WikiBAAPageServices(x.GetService<IWikiBaaRepository>()));
-builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 
 
 builder.Services.AddScoped<IGameFruitConnectTwoService>(
@@ -56,10 +58,17 @@ builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryReposit
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+app.Seed();
+//SeedData.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

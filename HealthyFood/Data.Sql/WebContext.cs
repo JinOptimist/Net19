@@ -20,6 +20,8 @@ namespace Data.Sql
 
         public DbSet<Game> Games { get; set; }
 
+        public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
+        
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
@@ -43,19 +45,23 @@ namespace Data.Sql
                 .IsRequired(false);
 
             modelBuilder.Entity<PageWikiBlock>()
-                .HasMany(x => x.Authors)
+                .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
 
-            modelBuilder.Entity<WikiMcImage>()
-                .HasMany(x => x.Tags)
-                .WithMany(x => x.Image);
+            modelBuilder.Entity<WikiBlockComment>()
+                .HasOne(x => x.Author)
+                .WithMany(x => x.Comments);
+			modelBuilder.Entity<WikiMcImage>()
+				.HasMany(x => x.Tags)
+				.WithMany(x => x.Image);
 
-            modelBuilder.Entity<User>()
-                .HasMany(x => x.UploadedImages)
-                .WithOne(x => x.ImageUploader)
-                .IsRequired(false);
+			modelBuilder.Entity<User>()
+				.HasMany(x => x.UploadedImages)
+				.WithOne(x => x.ImageUploader)
+				.IsRequired(false);
 
-            base.OnModelCreating(modelBuilder);
+
+			base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
