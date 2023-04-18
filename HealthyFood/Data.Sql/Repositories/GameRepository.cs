@@ -2,6 +2,7 @@
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Data.Sql.Repositories
 {
@@ -32,8 +33,6 @@ namespace Data.Sql.Repositories
         public GameAndScreensData GetTheScreenWithUser()
         {
             var game = _dbSet
-                .Include(x => x.Genres)
-                .OrderByDescending(x => x.Price)
                 .Select(gameDb =>
                 new GameAndScreensData
                 {
@@ -41,7 +40,7 @@ namespace Data.Sql.Repositories
                     ScreenAndUser = gameDb.ScreenShots.Select(screenshotDb =>
                     new ScreenAndAuthorNameData
                     {
-                        Screen = screenshotDb,
+                        ScreenUrl = screenshotDb.UrlScreen,
                         AuthorName = screenshotDb.User.Name
                     }).ToList(),
                 })

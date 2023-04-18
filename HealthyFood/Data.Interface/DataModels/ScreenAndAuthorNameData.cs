@@ -9,7 +9,7 @@ namespace Data.Sql.DataModels
 {
     public class ScreenAndAuthorNameData
     {
-        public ScreenShots Screen { get; set; }   
+        public string ScreenUrl { get; set; }   
         public string AuthorName { get; set; }
     }
 }
