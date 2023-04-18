@@ -4,9 +4,9 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace HealthyFoodWeb.Utility
 {
-    public class SeedData
+    public static class SeedData
     {
-        public static void Seed(WebApplication webApplication)
+        public static void Seed(this WebApplication webApplication)
         {
             using (var scope = webApplication.Services.CreateScope())
             {
