@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
+using HealthyFoodWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,8 @@ builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.Get
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+SeedData.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
