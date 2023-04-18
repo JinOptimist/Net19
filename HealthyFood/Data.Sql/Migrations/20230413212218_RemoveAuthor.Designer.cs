@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413212218_RemoveAuthor")]
+    partial class RemoveAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,28 +140,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("WikiBlockComments");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
                 {
                     b.Property<int>("Id")
@@ -208,44 +189,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("PageWikiBlocks");
                 });
 
-            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PageWikiBlocks");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiTags", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Tag")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WikiTags");
-                });
-
             modelBuilder.Entity("GameGameCategory", b =>
                 {
                     b.Property<int>("GamesId")
@@ -283,17 +226,6 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("CreaterId");
 
                     b.Navigation("Creater");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -337,61 +269,9 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameGameCategory1", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Game", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.GameCategory", null)
-                        .WithMany()
-                        .HasForeignKey("SecondaryGenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Sql.Models.PageWikiBlock", null)
-                        .WithMany()
-                        .HasForeignKey("BlocksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.User", b =>
-                {
-                    b.Navigation("CreatedGames");
-                });
-
-            modelBuilder.Entity("WikiMcImageWikiTags", b =>
-                {
-                    b.HasOne("Data.Interface.Models.WikiMcImage", null)
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.WikiTags", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
                     b.Navigation("Blocks");
-
-                    b.Navigation("Comments");
 
                     b.Navigation("CreatedGames");
                 });

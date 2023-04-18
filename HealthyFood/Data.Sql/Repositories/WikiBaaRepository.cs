@@ -19,11 +19,10 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<PageWikiBlock> GetBlocksWithAuthors()
+        public IEnumerable<PageWikiBlock> GetBlocksWithAuthor()
         {
             return _dbSet
-                .Include(x => x.Authors)
-                .ToList();
+           .Include(x => x.Author);
         }
 
         public void Remove(int id)
