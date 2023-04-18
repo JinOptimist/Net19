@@ -20,6 +20,8 @@ namespace Data.Sql
 
         public DbSet<Game> Games { get; set; }
 
+        public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
+        
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
@@ -43,8 +45,12 @@ namespace Data.Sql
                 .IsRequired(false);
 
             modelBuilder.Entity<PageWikiBlock>()
-                .HasMany(x => x.Authors)
+                .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
+
+            modelBuilder.Entity<WikiBlockComment>()
+                .HasOne(x => x.Author)
+                .WithMany(x => x.Comments);
 
 
             base.OnModelCreating(modelBuilder);

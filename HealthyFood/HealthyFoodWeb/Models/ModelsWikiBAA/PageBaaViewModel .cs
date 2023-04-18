@@ -1,4 +1,5 @@
-﻿using HealthyFoodWeb.Models.ModelsWikiBAA;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models.ModelsWikiBAA;
 
 namespace HealthyFoodWeb.Models.ModelsWiki
 {
@@ -6,7 +7,9 @@ namespace HealthyFoodWeb.Models.ModelsWiki
     {
         public List<BLockPageBaaViewModel> BlocksList { get; set; } = new List<BLockPageBaaViewModel>();
 
-		public List<BLockPageBaaViewModel> BlocksListWithAuthors { get; set; } = new List<BLockPageBaaViewModel>();
-	}
+		public List<BLockPageBaaViewModel> BlocksListWithAuthor { get; set; } = new List<BLockPageBaaViewModel>();
+
+        public List<BLockPageBaaViewModel> AuthorWithComments { get; set; } = new List<BLockPageBaaViewModel>();
+    }
 }
 
