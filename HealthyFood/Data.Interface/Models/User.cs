@@ -14,6 +14,6 @@ namespace Data.Interface.Models
 
         public virtual List<PageWikiBlock> Blocks { get; set;}
 
-		//public virtual List<WikiMcImage> WikiImages { get; set; }
-	}
+        public virtual List<WikiMcImage> UploadedImages { get; set; }
+    }
 }

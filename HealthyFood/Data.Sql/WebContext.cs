@@ -50,11 +50,12 @@ namespace Data.Sql
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.Image);
 
-			//modelBuilder.Entity<WikiMcImage>()
-			//	.HasOne(x => x.ImageUploader)
-			//	.WithMany(x => x.WikiImages);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.UploadedImages)
+                .WithOne(x => x.ImageUploader)
+                .IsRequired(false);
 
-			base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

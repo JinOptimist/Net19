@@ -1,0 +1,9 @@
+﻿@model WikiUserImagesViewModel
+
+<div>
+	My gallery:
+	@foreach(var image in Model.UserImages)
+	{
+		<img src="@image.ImgPath">
+	}
+</div>

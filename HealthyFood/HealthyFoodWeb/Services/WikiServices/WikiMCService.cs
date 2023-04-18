@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -9,20 +10,24 @@ namespace HealthyFoodWeb.Services.WikiServices
         public const int CURRENT_YEAR = 2023;
 
         private IWikiMcRepository _wikiMCRepository;
+        private IAuthService _authService;
 
-        public WikiMCService(IWikiMcRepository wikiMCRepository)
+        public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService)
         {
             _wikiMCRepository = wikiMCRepository;
+            _authService = authService;
         }
 
         public void AddImg(WikiMCViewModel viewModel)
         {
+            var user = _authService.GetUser();
             var WikiMc = new WikiMcImage()
             {
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
-                //Tags = viewModel.Tags,
+                ImageUploader = user,
+
             };
             _wikiMCRepository.Add(WikiMc);
         }
@@ -50,17 +55,10 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiMCRepository.RemoveAllImgByYear(year);
         }
 
-		//public IEnumerable<WikiMcImage> GetAllUserImages(User currentUser)
-		//{
-		//	return _wikiMCRepository
-  //              .GetImagesWithUploader()
-  //              .Where(x => x.ImageUploader == currentUser)
-  //              .ToList ();
-		//}
-
-        //public IEnumerable<WikiMcImage> GetAllUserImages()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IEnumerable<WikiMcImage> GetUserImages()
+        {
+            var user = _authService.GetUser();
+            return _wikiMCRepository.GetImagesByUserId(user.Id);
+        }
     }
 }

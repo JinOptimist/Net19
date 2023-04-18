@@ -10,6 +10,6 @@
 
         public virtual List<WikiTags> Tags { get; set; }
 
-		//public virtual User ImageUploader { get; set; }
-	}
+        public virtual User ImageUploader { get; set; }
+    }
 }

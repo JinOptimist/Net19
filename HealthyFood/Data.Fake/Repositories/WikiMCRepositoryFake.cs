@@ -67,5 +67,10 @@ namespace Data.Fake.Repositories
 		{
 			throw new NotImplementedException();
 		}
-    }
+
+		public IEnumerable<WikiMcImage> GetImagesByUserId(int userId)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

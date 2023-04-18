@@ -8,8 +8,8 @@ namespace Data.Interface.Repositories
 		IEnumerable<WikiMcImage> GetAllImgByYearWithTags(int year);
 		IEnumerable<WikiMcImage> GetAllImgByYear(int year);
 		IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
-		//IEnumerable<WikiMcImage> GetImagesWithUploader();
-		void RemoveAllImgByYear(int year);
+        IEnumerable<WikiMcImage> GetImagesByUserId(int userId);
+        void RemoveAllImgByYear(int year);
 		void RemoveAllImgByType(ImgTypeEnum type);
 	}
 }
