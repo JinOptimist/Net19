@@ -11,6 +11,7 @@ namespace HealthyFoodWeb.Utility
             using (var scope = webApplication.Services.CreateScope())
             {
                 SeedUsers(scope);
+                SeedGame(scope);
             }
         }
 
@@ -28,6 +29,22 @@ namespace HealthyFoodWeb.Utility
                 };
                 userRepository.Add(admin);
             }
+        }
+        private static void SeedGame(IServiceScope scope)
+        {
+            var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
+            if (!gameRepository.Any())
+            {
+
+                var game = new Game
+                {
+                    Name = "BestOfTheBestGame",
+                    Price = 1000
+
+                };
+
+            }
+
         }
     }
 }

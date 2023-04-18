@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.DataModels;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
@@ -15,11 +16,11 @@ namespace HealthyFoodWeb.Services
             _authService = authService; 
         }
 
-        public List<Review> GetAllReviews()
+        public List<ReviewAndInfoAboutTheirGames> GetAllReviews()
         {
             return _reviewRepository.GetReviews().ToList();
         }
-        public void AddReview(ReviewViewModelAuthorize model)
+        public void AddReview(ReviewViewModel model)
         {
             var user = _authService.GetUser();
             var dbModel = new Review()

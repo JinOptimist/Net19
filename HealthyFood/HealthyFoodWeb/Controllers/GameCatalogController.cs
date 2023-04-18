@@ -12,13 +12,13 @@ namespace HealthyFoodWeb.Controllers
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
         private IReviewService _reviewService;
-        
+
         public GameCatalogController(
-            IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService,IReviewService reviewService)
+            IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService, IReviewService reviewService)
         {
             _gameCatalogService = gameCatalog;
             _gameFruitConnectTwoService = gameFruitConnectTwoService;
-            _reviewService = reviewService;           
+            _reviewService = reviewService;
         }
 
         public IActionResult GetCatalog()
@@ -61,7 +61,7 @@ namespace HealthyFoodWeb.Controllers
                     Id = dbModel.Id
                 })
                 .ToList();
-          
+
             return View(viewModels);
         }
         [HttpGet]
@@ -80,54 +80,37 @@ namespace HealthyFoodWeb.Controllers
             _gameFruitConnectTwoService.RemoveGame(id);
             return RedirectToAction("GetFruitConnectTwo");
         }
-       
+
         public IActionResult Donate()
         {
 
             return View();
         }
 
-         
+
         public IActionResult Review()
         {
             var viewModels = _reviewService
               .GetAllReviews()
               .Select(dbModel =>
-                  new ReviewViewModelAuthorize
-                  {
-                     TextReview = dbModel.TextReview,
-                     Date = dbModel.Date,
-                     Author = dbModel.User.Name
-                     //CreatedGame = ????
-
-        })
-              .ToList();
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("ReviewAuthorize");
-            }
-            return View(viewModels);
-        }
-        [Authorize]
-        public IActionResult ReviewAuthorize()
-        {
-
-            var viewModels = _reviewService
-              .GetAllReviews()
-              .Select(dbModel =>
-                  new ReviewViewModelAuthorize
+                  new ReviewViewModel
                   {
                       TextReview = dbModel.TextReview,
                       Date = dbModel.Date,
-                      Author = dbModel.User.Name
+                      Author = dbModel.UserName,
+                      CreatedGame = dbModel.GamesName.ToList()
+
                   })
               .ToList();
+           
             return View(viewModels);
         }
-        [HttpPost]       
+
+
+        [HttpPost]
         public IActionResult AddReview(string newReview)
         {
-            var ViewModel = new ReviewViewModelAuthorize
+            var ViewModel = new ReviewViewModel
             {
                 CreatReview = newReview
             };
