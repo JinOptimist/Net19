@@ -23,7 +23,9 @@ namespace Data.Sql
         public DbSet<Game> Games { get; set; }
 
         public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
-        
+
+        public DbSet<StoreItem> StoreItems { get; set; }
+
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
@@ -46,6 +48,11 @@ namespace Data.Sql
                 .WithOne(x => x.Creater)
                 .IsRequired(false);
 
+            modelBuilder.Entity<User>()
+               .HasMany(x => x.Products)
+               .WithOne(x => x.Customer)
+               .IsRequired(false);
+
             modelBuilder.Entity<PageWikiBlock>()
                 .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
@@ -56,6 +63,14 @@ namespace Data.Sql
             modelBuilder.Entity<WikiBlockComment>()
                 .HasOne(x => x.Author)
                 .WithMany(x => x.Comments);
+
+            modelBuilder.Entity<Manufacturer>()
+                .HasMany(x => x.StoreItems)
+                .WithOne(x => x.Manufacturer);
+
+            modelBuilder.Entity<StoreItem>()
+                .HasMany(x => x.Users)
+                .WithMany(x => x.StoreItems);
 
 
             base.OnModelCreating(modelBuilder);
