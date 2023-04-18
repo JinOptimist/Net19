@@ -6,5 +6,6 @@ namespace Data.Interface.Repositories
     {
         Cart GetByName(string name);
         void RemoveByName(string name);
+
     }
 }
