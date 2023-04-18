@@ -25,7 +25,7 @@ builder.Services
 builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(diContainer.GetService<IGameRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<ICartService>(
-    diContainer => new CartService(diContainer.GetService<ICartRepository>()));
+    diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 builder.Services.AddScoped<IWikiMCService>(
@@ -38,8 +38,10 @@ builder.Services.AddScoped<IAuthService>(
      diContainer => new AuthService(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
-builder.Services.AddScoped<IWikiBAAPageServices>(x => new WikiBAAPageServices(x.GetService<IWikiBaaRepository>()));
-builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
+    diContainer.GetService<IAuthService>(),
+    diContainer.GetService<WikiBaaCommentRepository>()));
+
 
 
 builder.Services.AddScoped<IGameFruitConnectTwoService>(
@@ -49,7 +51,7 @@ var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
 
-builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
+//builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 
@@ -60,6 +62,9 @@ builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryReposit
 builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 
 builder.Services.AddHttpContextAccessor();
 
@@ -89,3 +94,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
