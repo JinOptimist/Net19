@@ -6,7 +6,7 @@
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
 }
-@model BLockPageBaaViewModel
+@model List<BLockPageBaaViewModel>
 
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
@@ -17,28 +17,28 @@
         <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
     </div>
 
-    @foreach (var pageViewModelBaaWithAuthor in Model.pageBaaViewModel.BlocksListWithAuthor)
+    @foreach (var pageViewModel in Model)
     {
         <div class="content">
-            <div Titles><h2>@pageViewModelBaaWithAuthor.Title <a href="/Wiki/Remove?id=@pageViewModelBaaWithAuthor.Id">delete</a></h2></div>
-            <div Texts>@pageViewModelBaaWithAuthor.Text</div>
+            <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
+            <div Texts>@pageViewModel.Text</div>
             <div class="author">
-                Автор Текста: @pageViewModelBaaWithAuthor.Author
+                Автор Текста: @pageViewModel.Author
             </div>
             <div>
-                @foreach (var AuthorWithCommentS in Model.pageBaaViewModel.AuthorWithComments)
+                @foreach (var CommentS in pageViewModel.CommentText)
                 {
                     <div class="Comments">
-                    @AuthorWithCommentS.CommentText
+                        @CommentS
                     </div>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
                     <form method="post">
                         <div class="text">
-                            Enter Comment:@Html.TextBoxFor(x=>x.CommentText)
+                            Enter Comment: <input name="newComment" id="newComment">
                             <div class="button">
-                                <input type="submit" value="Button" />
+                                <input type="submit" value="Add comment" />
                             </div>
                         </div>
                     </form>

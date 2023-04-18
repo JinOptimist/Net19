@@ -35,32 +35,23 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public List<PageWikiBlock> GetBlocks()
+        public void CreateComment(int pageId, string comment)
         {
-            return _wikiBaaRepository.GetAll().ToList();
+            var user = _authService.GetUser();
+            var dbComment = new WikiBlockComment()
+            {
+                Text = comment,
+                Author = user,
+            };
+            _wikiBaaCommentRepository.Add(dbComment);
         }
 
         public IEnumerable<PageWikiBlock> GetBlocksWithAuthor()
         {
             return _wikiBaaRepository.GetBlocksWithAuthor();
         }
-
-        public IEnumerable<WikiBlockComment> GetComments()
-        {
-            return _wikiBaaCommentRepository.GetComments();
-        }
-
-        public void CreateComment(BLockPageBaaViewModel comment)
-        {
-            var user = _authService.GetUser();
-            var dbComment = new WikiBlockComment()
-            {
-                Id = comment.Id,
-                Text = comment.CommentText,
-                Author = user
-            };
-            _wikiBaaCommentRepository.Add(dbComment);
-        }
+        
+       
 
         public void Remove(int id)
         {
