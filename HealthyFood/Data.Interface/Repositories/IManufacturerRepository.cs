@@ -4,6 +4,6 @@ namespace Data.Interface.Repositories
 {
     public interface IManufacturerRepository : IBaseRepository<Manufacturer>
     {
-     
+        Manufacturer GetFirst();
     }
 }

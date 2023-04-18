@@ -36,8 +36,12 @@
                         <button class="header--bar__search-button"></button>
                     </div>
                     <div class="header--bar__user">
-                        <button class="header--bar__login"></button>
-                        <button class="header--bar__cart"></button>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="header--bar__login"></a>
+                        }
+                        
+                        <a class="header--bar__cart"></a>
                     </div>
                 </div>
             </div>

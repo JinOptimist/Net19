@@ -6,6 +6,9 @@ namespace Data.Sql.Repositories
     public class ManufacturerRepository : BaseRepository<Manufacturer>, IManufacturerRepository
     {
         public ManufacturerRepository(WebContext webContext) : base(webContext) { }
-
+        public Manufacturer GetFirst()
+        {
+            return _dbSet.FirstOrDefault();
+        }
     }
 }
