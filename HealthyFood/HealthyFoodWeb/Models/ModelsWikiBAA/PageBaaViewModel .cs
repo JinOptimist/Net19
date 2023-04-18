@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Models.ModelsWiki
     {
         public List<BLockPageBaaViewModel> BlocksList { get; set; } = new List<BLockPageBaaViewModel>();
 
-		public List<BLockPageBaaViewModel> BlocksListWithAuthor { get; set; } = new List<BLockPageBaaViewModel>();
+		public List<BLockPageBaaViewModel> BlocksListWithAuthors { get; set; } = new List<BLockPageBaaViewModel>();
 	}
 }
 

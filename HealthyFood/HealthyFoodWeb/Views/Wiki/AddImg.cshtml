@@ -10,12 +10,16 @@
             Year: @Html.TextBoxFor(x=>x.Year)
         </div>
         <div>
-            ImgUrl: 
-            @Html.TextBoxFor(x => x.ImgPath)
-            @*<input type="text" name="ImgPath" id="ImgPath" />*@
+            ImgUrl: @Html.TextBoxFor(x => x.ImgPath)
         </div>
         <div>
-            <input type="submit" value="Add" />
+            Tags: @Html.TextBoxFor(x=>x.Tags), @Html.TextBoxFor(x=>x.Tags), @Html.TextBoxFor(x=>x.Tags)
+        </div>
+        <div>
+            <input type="submit" value="Add"/>
         </div>
     </form>
+</div>
+<div>
+    <a href="/Wiki/ShowUploadImages">My Images</a>
 </div>

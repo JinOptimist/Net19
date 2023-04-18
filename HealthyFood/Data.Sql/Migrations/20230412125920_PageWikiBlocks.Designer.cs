@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20230411160659_AddBaaBlock")]
-    partial class AddBaaBlock
+    [Migration("20230412125920_PageWikiBlocks")]
+    partial class PageWikiBlocks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,9 @@ namespace Data.Sql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CreaterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -64,6 +67,8 @@ namespace Data.Sql.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreaterId");
 
                     b.ToTable("Games");
                 });
@@ -123,6 +128,10 @@ namespace Data.Sql.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -220,6 +229,15 @@ namespace Data.Sql.Migrations
                     b.ToTable("PageWikiBlockUser");
                 });
 
+            modelBuilder.Entity("Data.Interface.Models.Game", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", "Creater")
+                        .WithMany("CreatedGames")
+                        .HasForeignKey("CreaterId");
+
+                    b.Navigation("Creater");
+                });
+
             modelBuilder.Entity("GameGameCategory", b =>
                 {
                     b.HasOne("Data.Interface.Models.Game", null)
@@ -263,6 +281,11 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("BlocksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Data.Interface.Models.User", b =>
+                {
+                    b.Navigation("CreatedGames");
                 });
 #pragma warning restore 612, 618
         }

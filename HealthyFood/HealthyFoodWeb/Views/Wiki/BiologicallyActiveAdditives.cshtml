@@ -22,9 +22,9 @@
 
             <div Texts>@pageViewModelBaa.Text</div>
 
-            @foreach (var pageViewModelBaaAuthor in Model.BlocksListWithAuthor)
+            @foreach (var pageViewModelBaaAuthors in Model.BlocksListWithAuthors)
             {
-                @foreach (var authorName in pageViewModelBaaAuthor.Authors)
+                @foreach (var authorName in pageViewModelBaaAuthors.Authors)
                 {
                     <div class="author">
                         Автор Текста: @authorName

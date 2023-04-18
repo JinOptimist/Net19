@@ -5,6 +5,9 @@ using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
+using Data.Interface.Models;
+using Microsoft.AspNetCore.Authorization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -33,7 +36,7 @@ namespace HealthyFoodWeb.Controllers
 
 			PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
 
-			PageViewModel.BlocksListWithAuthor = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
+			PageViewModel.BlocksListWithAuthors = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
 
 			return View(PageViewModel);
 		}
@@ -41,19 +44,22 @@ namespace HealthyFoodWeb.Controllers
 		public IActionResult MacronutrientCalculator()
 		{
 			var viewModel = new WikiMCImgViewModel();
+
 			viewModel.AllImgByType = _wikiMCImgService
 				.GetAllImgByType()
-				.Select(x => new WikiMCViewModel
-				{
-					ImgPath = x.ImgUrl,
-				})
+				.Select(imageDb => new WikiMCViewModel
+                {
+					ImgPath = imageDb.ImgUrl,
+                    Tags = imageDb.Tags?.Select(t => t.Tag).ToList() ?? new List<string>()
+                })
 				.ToList();
 
 			viewModel.AllImgByYear = _wikiMCImgService
 				.GetAllImgByYear()
-				.Select(x => new WikiMCViewModel
+				.Select(imageDb => new WikiMCViewModel
 				{
-					ImgPath = x.ImgUrl,
+					ImgPath = imageDb.ImgUrl,
+					Tags = imageDb.Tags?.Select(t => t.Tag).ToList() ?? new List<string>()
 				})
 				.ToList();
 
@@ -80,19 +86,39 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
 		public IActionResult AddImg()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Authorize]
 		public IActionResult AddImg(WikiMCViewModel viewModel)
 		{
 			_wikiMCImgService.AddImg(viewModel);
-			return RedirectToAction("MacronutrientCalculator");
+			return RedirectToAction("AddImg");
+
 		}
 
-		private BLockPageBaaViewModel Convert(PageWikiBlock x)
+        [HttpGet]
+        [Authorize]
+        public IActionResult ShowUploadedImages()
+        {
+            var viewModel = new WikiUserImagesViewModel();
+
+            viewModel.UserImages = _wikiMCImgService
+                .GetUserImages()
+                .Select(imageDb => new WikiMCViewModel
+                {
+                    ImgPath = imageDb.ImgUrl,
+                })
+                .ToList();
+
+            return View(viewModel);
+        }
+
+        private BLockPageBaaViewModel Convert(PageWikiBlock x)
 		{
 			return new BLockPageBaaViewModel
 			{
