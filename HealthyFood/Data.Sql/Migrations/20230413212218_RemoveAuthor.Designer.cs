@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413212218_RemoveAuthor")]
+    partial class RemoveAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,8 +40,6 @@ namespace Data.Sql.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Carts");
                 });
@@ -142,28 +140,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("WikiBlockComments");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
                 {
                     b.Property<int>("Id")
@@ -252,27 +228,7 @@ namespace Data.Sql.Migrations
                     b.Navigation("Creater");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Customer")
-                        .WithMany("Products")
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Game", b =>
+            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Author")
                         .WithMany("Blocks")
@@ -317,11 +273,7 @@ namespace Data.Sql.Migrations
                 {
                     b.Navigation("Blocks");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("CreatedGames");
-
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

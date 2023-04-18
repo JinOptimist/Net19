@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230418153715_Comments")]
+    partial class Comments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -40,8 +40,6 @@ namespace Data.Sql.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Carts");
                 });
@@ -263,16 +261,7 @@ namespace Data.Sql.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Customer")
-                        .WithMany("Products")
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Game", b =>
+            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Author")
                         .WithMany("Blocks")
@@ -320,8 +309,6 @@ namespace Data.Sql.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("CreatedGames");
-
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

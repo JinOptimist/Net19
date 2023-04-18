@@ -5,102 +5,117 @@ using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
+using Data.Interface.Models;
 
 namespace HealthyFoodWeb.Controllers
 {
-	public class WikiController : Controller
-	{
+    public class WikiController : Controller
+    {
+        private IWikiBAAPageServices _blockInformationServices;
 
-		private IWikiBAAPageServices _blockInformationServices;
+        private IWikiMCService _wikiMCImgService;
 
-		private IWikiMCService _wikiMCImgService;
+        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMCService wikiMCImgService)
+        {
+            _blockInformationServices = blockInformationServices;
+            _wikiMCImgService = wikiMCImgService;
+        }
 
-		public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMCService wikiMCImgService)
-		{
-			_blockInformationServices = blockInformationServices;
-			_wikiMCImgService = wikiMCImgService;
-		}
+        public IActionResult Main()
+        {
+            //step 1
+            return View();
+        }
 
-		public IActionResult Main()
-		{
-			//step 1
-			return View();
-		}
+        [HttpGet]
+        public IActionResult BiologicallyActiveAdditives()
+        {
+            var PageViewModel = new BLockPageBaaViewModel();
+            PageViewModel.pageBaaViewModel = new Models.ModelsWiki.PageBaaViewModel();
 
-		public IActionResult BiologicallyActiveAdditives()
-		{
-			var PageViewModel = new PageBaaViewModel();
+            PageViewModel.pageBaaViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
 
-			PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
+            PageViewModel.pageBaaViewModel.BlocksListWithAuthor = _blockInformationServices.GetBlocksWithAuthor().Select(Convert).ToList();
 
-			PageViewModel.BlocksListWithAuthors = _blockInformationServices.GetBlocksWithAuthors().Select(Convert).ToList();
+            PageViewModel.pageBaaViewModel.AuthorWithComments = _blockInformationServices.GetComments().Select(x => new BLockPageBaaViewModel
+            {
+                CommentText=x.Text
+            }).ToList();
 
-			return View(PageViewModel);
-		}
+            return View(PageViewModel);
+        }
 
-		public IActionResult MacronutrientCalculator()
-		{
-			var viewModel = new WikiMCImgViewModel();
-			viewModel.AllImgByType = _wikiMCImgService
-				.GetAllImgByType()
-				.Select(x => new WikiMCViewModel
-				{
-					ImgPath = x.ImgUrl,
-				})
-				.ToList();
+        public IActionResult MacronutrientCalculator()
+        {
+            var viewModel = new WikiMCImgViewModel();
+            viewModel.AllImgByType = _wikiMCImgService
+                .GetAllImgByType()
+                .Select(x => new WikiMCViewModel
+                {
+                    ImgPath = x.ImgUrl,
+                })
+                .ToList();
 
-			viewModel.AllImgByYear = _wikiMCImgService
-				.GetAllImgByYear()
-				.Select(x => new WikiMCViewModel
-				{
-					ImgPath = x.ImgUrl,
-				})
-				.ToList();
+            viewModel.AllImgByYear = _wikiMCImgService
+                .GetAllImgByYear()
+                .Select(x => new WikiMCViewModel
+                {
+                    ImgPath = x.ImgUrl,
+                })
+                .ToList();
 
-			return View(viewModel);
-		}
+            return View(viewModel);
+        }
 
-		[HttpGet]
-		public IActionResult CreateBlockInformatoin()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult CreateBlockInformatoin()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		public IActionResult CreateBlockInformatoin(BLockPageBaaViewModel block)
-		{
-			_blockInformationServices.CreateBlock(block);
-			return RedirectToAction("BiologicallyActiveAdditives");
-		}
+        [HttpPost]
+        public IActionResult CreateBlockInformatoin(BLockPageBaaViewModel block)
+        {
+            _blockInformationServices.CreateBlock(block);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
 
-		public IActionResult Remove(int id)
-		{
-			_blockInformationServices.Remove(id);
-			return RedirectToAction("BiologicallyActiveAdditives");
-		}
+        [HttpPost]
+        public IActionResult BiologicallyActiveAdditives(BLockPageBaaViewModel comment)
+        {
+            _blockInformationServices.CreateComment(comment);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
 
-		[HttpGet]
-		public IActionResult AddImg()
-		{
-			return View();
-		}
+        public IActionResult Remove(int id)
+        {
+            _blockInformationServices.Remove(id);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
 
-		[HttpPost]
-		public IActionResult AddImg(WikiMCViewModel viewModel)
-		{
-			_wikiMCImgService.AddImg(viewModel);
-			return RedirectToAction("MacronutrientCalculator");
-		}
+        [HttpGet]
+        public IActionResult AddImg()
+        {
+            return View();
+        }
 
-		private BLockPageBaaViewModel Convert(PageWikiBlock x)
-		{
-			return new BLockPageBaaViewModel
-			{
-				Id = x.Id,
-				Text = x.Text,
-				Title = x.Title,
-				Authors = x.Authors?.Select(x => x.Name).ToList()
-			};
-		}
-	}
+        [HttpPost]
+        public IActionResult AddImg(WikiMCViewModel viewModel)
+        {
+            _wikiMCImgService.AddImg(viewModel);
+            return RedirectToAction("MacronutrientCalculator");
+        }
+
+        private BLockPageBaaViewModel Convert(PageWikiBlock x)
+        {
+            return new BLockPageBaaViewModel
+            {
+                Id = x.Id,
+                Text = x.Text,
+                Title = x.Title,
+                Author = x.Author?.Name,
+                pageBaaViewModel = new Models.ModelsWiki.PageBaaViewModel()
+            };
+        }
+    }
 }
