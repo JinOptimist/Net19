@@ -14,5 +14,7 @@ namespace Data.Sql.Repositories
         {
             return _dbSet.Include(x => x.User).Include(x => x.User.CreatedGames).ToList();
         }
+
+      
     }
 }

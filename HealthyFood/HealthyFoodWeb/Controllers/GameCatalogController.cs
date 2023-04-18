@@ -97,8 +97,8 @@ namespace HealthyFoodWeb.Controllers
                   {
                      TextReview = dbModel.TextReview,
                      Date = dbModel.Date,
-                     Author = dbModel.User.Name,
-                     CreatedGame = ????
+                     Author = dbModel.User.Name
+                     //CreatedGame = ????
 
         })
               .ToList();
