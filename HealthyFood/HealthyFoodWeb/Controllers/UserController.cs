@@ -80,7 +80,7 @@ namespace HealthyFoodWeb.Controllers
 
             await HttpContext.SignInAsync(principal);
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Logout()

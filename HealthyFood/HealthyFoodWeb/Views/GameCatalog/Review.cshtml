@@ -5,10 +5,16 @@
 <div>
     @foreach (var text in Model)
     {
-        <div>Пользователь:@text.Author (Создал игры: 
-            @foreach (var gameName in text.CreatedGame)
+        <div>
+            @text.Author
+            @if (text.CreatedGame.Count > 0)
             {
-                @gameName
+                @foreach (var gameName in text.CreatedGame)
+                {
+                    <text>
+                         (cоздатель игр: @gameName)
+                    </text>
+                }
             }
         </div>
         <div>Отзыв: @text.TextReview </div>
@@ -29,10 +35,11 @@
             <input type="submit" value="Написать отзыв" />
         </div>
     }
-    else {
-    <div>
-        Отзывы могут оставлять только авторизованные пользователи
-    </div>
+    else
+    {
+        <div>
+            Отзывы могут оставлять только авторизованные пользователи
+        </div>
     }
 </form>
 

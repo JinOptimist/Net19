@@ -7,5 +7,6 @@ namespace Data.Interface.Repositories
         User GetByName(string name);
         User GetByNameAndPassword(string login, string password);
         void RemoveByName(string name);
+        User GetFirst();
     }
 }
