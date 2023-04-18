@@ -43,7 +43,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
@@ -72,7 +72,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("CreaterId");
 
-                    b.ToTable("Games");
+                    b.ToTable("Games", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
@@ -89,7 +89,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCategories");
+                    b.ToTable("GameCategories", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
@@ -106,7 +106,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturer");
+                    b.ToTable("Manufacturer", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
@@ -131,7 +131,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SimilarGames");
+                    b.ToTable("SimilarGames", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.StoreItem", b =>
@@ -160,7 +160,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("StoreItems");
+                    b.ToTable("StoreItems", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
@@ -185,7 +185,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
@@ -207,7 +207,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("WikiBlockComments");
+                    b.ToTable("WikiBlockComments", (string)null);
                 });
 
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
@@ -230,7 +230,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WikiMcImages");
+                    b.ToTable("WikiMcImages", (string)null);
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -256,7 +256,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("PageWikiBlocks");
+                    b.ToTable("PageWikiBlocks", (string)null);
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>
@@ -271,7 +271,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("GenresId");
 
-                    b.ToTable("GameGameCategory");
+                    b.ToTable("GameGameCategory", (string)null);
                 });
 
             modelBuilder.Entity("GameGameCategory1", b =>
@@ -286,36 +286,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("SecondaryGenresId");
 
-                    b.ToTable("GameGameCategory1");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Game", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Creater")
-                        .WithMany("CreatedGames")
-                        .HasForeignKey("CreaterId");
-
-                    b.Navigation("Creater");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Customer")
-                        .WithMany("Products")
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
+                    b.ToTable("GameGameCategory1", (string)null);
                 });
 
             modelBuilder.Entity("StoreItemUser", b =>
@@ -330,18 +301,25 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("StoreItemUser");
+                    b.ToTable("StoreItemUser", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", "Customer")
+                        .WithMany("Products")
+                        .HasForeignKey("CustomerId");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
                 {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Blocks")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Data.Interface.Models.User", "Creater")
+                        .WithMany("CreatedGames")
+                        .HasForeignKey("CreaterId");
 
-                    b.Navigation("Author");
+                    b.Navigation("Creater");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.StoreItem", b =>
@@ -353,6 +331,28 @@ namespace Data.Sql.Migrations
                         .IsRequired();
 
                     b.Navigation("Manufacturer");
+                });
+
+            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", "Author")
+                        .WithMany("Comments")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", "Author")
+                        .WithMany("Blocks")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>
@@ -385,40 +385,25 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PageWikiBlockUser", b =>
-            {
-                b.HasOne("Data.Interface.Models.User", null)
-                    .WithMany()
-                    .HasForeignKey("AuthorsId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("Data.Sql.Models.PageWikiBlock", null)
-                    .WithMany()
-                    .HasForeignKey("BlocksId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
-
             modelBuilder.Entity("StoreItemUser", b =>
-            {
-                b.HasOne("Data.Interface.Models.StoreItem", null)
-                    .WithMany()
-                    .HasForeignKey("StoreItemsId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
+                {
+                    b.HasOne("Data.Interface.Models.StoreItem", null)
+                        .WithMany()
+                        .HasForeignKey("StoreItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                b.HasOne("Data.Interface.Models.User", null)
-                    .WithMany()
-                    .HasForeignKey("UsersId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-            });
+                    b.HasOne("Data.Interface.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
             modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
-            {
-                b.Navigation("StoreItems");
-            });
+                {
+                    b.Navigation("StoreItems");
+                });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
