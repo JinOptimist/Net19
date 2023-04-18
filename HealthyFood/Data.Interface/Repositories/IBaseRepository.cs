@@ -8,5 +8,6 @@ namespace Data.Interface.Repositories
         T Get(int id);
         IEnumerable<T> GetAll();
         void Remove(int id);
+        bool Any();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Data.Sql.Models;
-
 namespace Data.Interface.Models
 {
     public class User : BaseModel
@@ -9,6 +8,8 @@ namespace Data.Interface.Models
         public string AvatarUrl { get; set; }
 
         public string Password { get; set; }
+
+        public virtual List<WikiBlockComment> Comments { get; set; }
 
         public virtual List<Game> CreatedGames { get; set; }
 

@@ -12,7 +12,10 @@ namespace HealthyFoodWeb.Services.IServices
 
         void Remove(int id);
 
-        public List<PageWikiBlock> GetBlocksWithAuthors();
+        IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
 
-	}
+        IEnumerable<WikiBlockComment> GetComments();
+
+        public void CreateComment(BLockPageBaaViewModel comment);
+    }
 }
