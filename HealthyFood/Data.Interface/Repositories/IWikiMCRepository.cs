@@ -9,7 +9,6 @@ namespace Data.Interface.Repositories
 		IEnumerable<WikiMcImage> GetAllImgByYearWithTags(int year);
 		IEnumerable<WikiMcImage> GetAllImgByYear(int year);
         IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
-		IEnumerable<WikiMcImage> GetImagesByUserId(int userId);
         List<ImagesAndInfoAboutTheirUploader> GetUserImages();
         void RemoveAllImgByYear(int year);
         void RemoveAllImgByType(ImgTypeEnum type);

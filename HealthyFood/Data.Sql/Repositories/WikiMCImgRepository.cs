@@ -16,12 +16,11 @@ namespace Data.Sql.Repositories
                 .Select(image => new ImagesAndInfoAboutTheirUploader
                 {
                     Year = image.Year,
-                    ImgUrl = image.TextReview,
+                    ImgUrl = image.ImgUrl,
+					ImgType = image.ImgType,
                     UserName = image.ImageUploader.Name,
-                    GamesName = image.User.CreatedGames.Select(x => x.Name).ToList(),
-
+                    Tags = image.ImageUploader.UploadedImages.Select(x => x.Tags).ToList(),
                 }).ToList();
-
         }
 
         public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
@@ -40,11 +39,6 @@ namespace Data.Sql.Repositories
 				.Include(x => x.Tags)
 				.Where(x => x.Year == year)
 				.ToList();
-		}
-
-		public IEnumerable<WikiMcImage> GetImagesByUserId(int userId)
-		{
-			return _dbSet.Where(x => x.ImageUploader.Id == userId).ToList();
 		}
 
 		public void RemoveAllImgByType(ImgTypeEnum type)

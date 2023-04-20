@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
@@ -23,7 +24,7 @@ namespace HealthyFoodWeb.Services
 			var user = _authService.GetUser();
             var WikiMc = new WikiMcImage()
             {
-                UserTags = viewModel.EnteredTags.Split(',').ToList(),
+                Tags = viewModel.EnteredTags.Split(','),
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
@@ -59,17 +60,9 @@ namespace HealthyFoodWeb.Services
             _wikiMCRepository.RemoveAllImgByYear(year);
         }
 
-		public IEnumerable<WikiMcImage> GetUserImages()
+		public IEnumerable<ImagesAndInfoAboutTheirUploader> GetUserImages()
 		{
-			var user = _authService.GetUser();
-			return _wikiMCRepository.GetImagesByUserId(user.Id);
+			return _wikiMCRepository.GetUserImages();
 		}
-
-        //public List<WikiTags> GetTagsFromUser(string enteredTags)
-        //{
-        //    var tags = new List<WikiTags>();
-
-        //    return tags;
-        //}
 	}
 }
