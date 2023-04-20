@@ -12,7 +12,8 @@
             ImageUrl: @Html.TextBoxFor(x => x.Img)
         </div>
         <div>
-            Manufacturer: @Html.DropDownListFor(m => )
+            Manufacturer: 
+            @Html.DropDownListFor(m => m.Manufacturer, Model.AllManufacturers)
         </div>
         <div>
             <input type="submit" value="Create product" />

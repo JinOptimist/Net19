@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HealthyFoodWeb.Models
 {
@@ -8,6 +9,8 @@ namespace HealthyFoodWeb.Models
         public decimal Price { get; set; }
         public string Img { get; set; }
         public string Manufacturer { get; set; }
+
+        public List<SelectListItem> AllManufacturers { get; set; }
 
     }
 }

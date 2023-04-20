@@ -4,6 +4,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -84,7 +85,19 @@ namespace HealthyFoodWeb.Controllers
         [HttpGet]
         public IActionResult AddProductInCatalogue()
         {
-            return View();
+            var manufacturers = _storeCatalogueService
+                .GetAllManufacturers();
+            var viewModel = new StoreItemViewModel
+            {
+                AllManufacturers = manufacturers.Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Name,
+                })
+                .ToList()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
