@@ -4,12 +4,15 @@
     <form method="post">
         <div>
             Name: @Html.TextBoxFor(x => x.Name)
+            @Html.ValidationMessageFor(x=>x.Name)
         </div>
         <div>
             Price: @Html.TextBoxFor(x => x.Price)
+            @Html.ValidationMessageFor(x=>x.Price)
         </div>
         <div>
             CoverUrl: @Html.TextBoxFor(x => x.CoverUrl)
+            @Html.ValidationMessageFor(x=>x.CoverUrl)
         </div>
         <div>
             <input type="submit" value="Create game" />
