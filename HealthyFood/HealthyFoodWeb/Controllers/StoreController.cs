@@ -103,6 +103,7 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult AddProductInCatalogue(StoreItemViewModel viewModel)
         {
+            _storeCatalogueService.AddStoreItem(viewModel);
             return RedirectToAction("storePageCatalogue");
         }
 

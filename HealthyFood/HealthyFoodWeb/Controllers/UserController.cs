@@ -9,7 +9,7 @@ using System.Security.Claims;
 namespace HealthyFoodWeb.Controllers
 {
     public class UserController : Controller
-    {3
+    {
         private IUserService _userService;
 
         public UserController(IUserService userService)
