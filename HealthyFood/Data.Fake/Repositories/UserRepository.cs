@@ -39,6 +39,11 @@ namespace Data.Fake.Repositories
             throw new NotImplementedException();
         }
 
+        public User GetFirst()
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveByName(string name)
         {
             FakeDbModels.Remove(GetByName(name));

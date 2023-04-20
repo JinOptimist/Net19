@@ -4,6 +4,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230418181202_newEmpty")]
+    partial class newEmpty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,9 +247,6 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ImageUploaderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ImgType")
                         .HasColumnType("int");
 
@@ -259,26 +259,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageUploaderId");
-
                     b.ToTable("WikiMcImages");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiTags", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("TagName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WikiTags");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -352,21 +333,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("StoreItemUser");
                 });
 
-            modelBuilder.Entity("WikiMcImageWikiTags", b =>
-                {
-                    b.Property<int>("ImagesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ImagesId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("WikiMcImageWikiTags");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Cart", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "Customer")
@@ -416,17 +382,6 @@ namespace Data.Sql.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "ImageUploader")
-                        .WithMany("UploadedImages")
-                        .HasForeignKey("ImageUploaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ImageUploader");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -485,21 +440,6 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WikiMcImageWikiTags", b =>
-                {
-                    b.HasOne("Data.Interface.Models.WikiMcImage", null)
-                        .WithMany()
-                        .HasForeignKey("ImagesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.WikiTags", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
                 {
                     b.Navigation("StoreItems");
@@ -516,8 +456,6 @@ namespace Data.Sql.Migrations
                     b.Navigation("Products");
 
                     b.Navigation("Reviews");
-
-                    b.Navigation("UploadedImages");
                 });
 #pragma warning restore 612, 618
         }

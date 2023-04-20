@@ -31,19 +31,20 @@ namespace HealthyFoodWeb.Controllers
         [HttpGet]
         public IActionResult BiologicallyActiveAdditives()
         {
-            var PageViewModel = new BLockPageBaaViewModel();
-            PageViewModel.pageBaaViewModel = new Models.ModelsWiki.PageBaaViewModel();
+            var pageViewModels = _blockInformationServices
+                .GetBlocksWithAuthor()
+                .Select(
+                x => new BLockPageBaaViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Author = x.Author.Name,
+                    CommentText = x.Author.Comments.Select(x => x.Text).ToList()
+                })
+                .ToList();
 
-            PageViewModel.pageBaaViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(Convert).ToList();
-
-            PageViewModel.pageBaaViewModel.BlocksListWithAuthor = _blockInformationServices.GetBlocksWithAuthor().Select(Convert).ToList();
-
-            PageViewModel.pageBaaViewModel.AuthorWithComments = _blockInformationServices.GetComments().Select(x => new BLockPageBaaViewModel
-            {
-                CommentText=x.Text
-            }).ToList();
-
-            return View(PageViewModel);
+            return View(pageViewModels);
         }
 
         public IActionResult MacronutrientCalculator()
@@ -83,9 +84,9 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult BiologicallyActiveAdditives(BLockPageBaaViewModel comment)
+        public IActionResult BiologicallyActiveAdditives(string newComment, int pageId)
         {
-            _blockInformationServices.CreateComment(comment);
+            _blockInformationServices.CreateComment(pageId, newComment);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
@@ -135,7 +136,6 @@ namespace HealthyFoodWeb.Controllers
                 Text = x.Text,
                 Title = x.Title,
                 Author = x.Author?.Name,
-                pageBaaViewModel = new Models.ModelsWiki.PageBaaViewModel()
             };
         }
     }

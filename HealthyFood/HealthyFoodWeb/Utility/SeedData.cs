@@ -13,6 +13,8 @@ namespace HealthyFoodWeb.Utility
                 SeedUsers(scope);
                 SeedManufacturer(scope);
                 SeedStoreItems(scope);
+                SeedGame(scope);
+                SeedReview(scope);
             }
         }
 
@@ -63,6 +65,37 @@ namespace HealthyFoodWeb.Utility
 
                 };
                 storeCatalogueRepository.Add(adminItem);
+            }
+        }
+        private static void SeedGame(IServiceScope scope)
+        {
+            var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
+            if (!gameRepository.Any())
+            {
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var randomUser = userRepository.GetFirst();
+                var game = new Game
+                {
+                    Name = "BestOfTheBestGame",
+                    Price = 1000,
+                    CoverUrl = "",
+                    Creater = randomUser
+
+                };
+                gameRepository.Add(game);
+            }
+
+        }
+        private static void SeedReview(IServiceScope scope)
+        {
+            var reviewRepository = scope.ServiceProvider.GetRequiredService<IReviewRepository>();
+            if (!reviewRepository.Any())
+            {
+                var review = new Review
+                {
+                    TextReview = "",
+                    Date = DateTime.Now
+                };
             }
         }
     }

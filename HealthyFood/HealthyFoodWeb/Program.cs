@@ -38,6 +38,8 @@ builder.Services.AddScoped<IAuthService>(
      diContainer => new AuthService(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
+builder.Services.AddScoped<IReviewService>(
+    diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
     diContainer.GetService<IAuthService>(),
     diContainer.GetService<WikiBaaCommentRepository>()));
@@ -65,6 +67,7 @@ builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.Get
 builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
 
 builder.Services.AddHttpContextAccessor();
 

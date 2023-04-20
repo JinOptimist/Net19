@@ -22,7 +22,8 @@ namespace Data.Sql.Repositories
         public IEnumerable<PageWikiBlock> GetBlocksWithAuthor()
         {
             return _dbSet
-           .Include(x => x.Author);
+           .Include(x => x.Author)
+           .ThenInclude(x => x.Comments);
         }
 
         public void Remove(int id)
