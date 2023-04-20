@@ -13,6 +13,27 @@ namespace HealthyFoodWeb.Utility
                 SeedUsers(scope);
                 SeedManufacturer(scope);
                 SeedStoreItems(scope);
+                SeedCarts(scope);
+            }
+        }
+
+        private static void SeedCarts(IServiceScope scope)
+        {
+            var cartRepository = scope.ServiceProvider.GetRequiredService<ICartRepository>();
+            var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+
+
+            if (!cartRepository.Any())
+            {
+                var user = userRepository.GetFirst();
+
+                var productdefault = new Cart
+                {
+                    Name = "Sup",
+                    Price = 10,
+                    Customer = user
+                };
+                cartRepository.Add(productdefault);
             }
         }
 
@@ -49,7 +70,7 @@ namespace HealthyFoodWeb.Utility
         private static void SeedStoreItems(IServiceScope scope)
         {
             var storeCatalogueRepository = scope.ServiceProvider.GetRequiredService<IStoreCatalogueRepository>();
-            var manufacturerRep= scope.ServiceProvider.GetRequiredService<IManufacturerRepository>();
+            var manufacturerRep = scope.ServiceProvider.GetRequiredService<IManufacturerRepository>();
 
             if (!storeCatalogueRepository.Any())
             {

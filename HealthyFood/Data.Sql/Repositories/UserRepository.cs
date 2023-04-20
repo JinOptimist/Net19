@@ -23,5 +23,10 @@ namespace Data.Sql.Repositories
             _dbSet.Remove(user);
             _webContext.SaveChanges();
         }
+
+        public User GetFirst()
+        {
+            return _dbSet.FirstOrDefault();
+        }
     }
 }
