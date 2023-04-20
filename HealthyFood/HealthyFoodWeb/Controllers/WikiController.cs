@@ -4,16 +4,18 @@ using HealthyFoodWeb.Models.ModelsWikiBAA;
 using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
+using Data.Sql.Models;
+using Data.Interface.Models;
 
 namespace HealthyFoodWeb.Controllers
 {
     public class WikiController : Controller
     {
+        private IWikiBAAPageServices _blockInformationServices;
 
-        private IWikiBAAIPageRecomendateServices _blockInformationServices;
         private IWikiMCService _wikiMCImgService;
 
-        public WikiController(IWikiBAAIPageRecomendateServices blockInformationServices, IWikiMCService wikiMCImgService)
+        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMCService wikiMCImgService)
         {
             _blockInformationServices = blockInformationServices;
             _wikiMCImgService = wikiMCImgService;
@@ -25,17 +27,23 @@ namespace HealthyFoodWeb.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult BiologicallyActiveAdditives()
         {
-            var PageViewModel = new PageBaaViewModel();
-            PageViewModel.BlocksList = _blockInformationServices.GetBlocks().Select(x => new BLockPageBaaViewModel
-            {
-                Text = x.Text,
-                Title = x.Title,
-                Id=x.Id
-            }).ToList();
+            var pageViewModels = _blockInformationServices
+                .GetBlocksWithAuthor()
+                .Select(
+                x => new BLockPageBaaViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Author = x.Author.Name,
+                    CommentText = x.Author.Comments.Select(x => x.Text).ToList()
+                })
+                .ToList();
 
-            return View(PageViewModel);
+            return View(pageViewModels);
         }
 
         public IActionResult MacronutrientCalculator()
@@ -73,7 +81,13 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
-        
+        [HttpPost]
+        public IActionResult BiologicallyActiveAdditives(string newComment, int pageId)
+        {
+            _blockInformationServices.CreateComment(pageId, newComment);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
         public IActionResult Remove(int id)
         {
             _blockInformationServices.Remove(id);
@@ -91,6 +105,17 @@ namespace HealthyFoodWeb.Controllers
         {
             _wikiMCImgService.AddImg(viewModel);
             return RedirectToAction("MacronutrientCalculator");
+        }
+
+        private BLockPageBaaViewModel Convert(PageWikiBlock x)
+        {
+            return new BLockPageBaaViewModel
+            {
+                Id = x.Id,
+                Text = x.Text,
+                Title = x.Title,
+                Author = x.Author?.Name,
+            };
         }
     }
 }

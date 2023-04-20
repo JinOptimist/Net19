@@ -22,6 +22,9 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
+        public bool Any()
+            => _dbSet.Any();
+
         public SomeModel Get(int id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);
@@ -37,4 +40,5 @@ namespace Data.Sql.Repositories
             _dbSet.Remove(Get(id));
         }
     }
+
 }

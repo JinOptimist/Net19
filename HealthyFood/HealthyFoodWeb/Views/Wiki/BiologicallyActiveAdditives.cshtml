@@ -1,11 +1,12 @@
 ﻿@using HealthyFoodWeb.Models.ModelsWiki;
 @using Data.Interface.Models;
 @using Data.Interface.Repositories;
+@using HealthyFoodWeb.Models.ModelsWikiBAA;
 @{
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
 }
-@model PageBaaViewModel
+@model List<BLockPageBaaViewModel>
 
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
@@ -15,16 +16,35 @@
         <p><a href="https://kakvapteke.by/catalog/bady/">Kakvapteke.by</a></p>
         <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
     </div>
-    @foreach (var pageViewModelBAA in Model.BlocksList)
+
+    @foreach (var pageViewModel in Model)
     {
         <div class="content">
-            <div Titles><h2>@pageViewModelBAA.Title <a href="/Wiki/Remove?id=@pageViewModelBAA.Id">delete</a></h2></div>
-
-            <div Texts>@pageViewModelBAA.Text</div>
+            <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
+            <div Texts>@pageViewModel.Text</div>
+            <div class="author">
+                Автор Текста: @pageViewModel.Author
+            </div>
+            <div>
+                @foreach (var CommentS in pageViewModel.CommentText)
+                {
+                    <div class="Comments">
+                        @CommentS
+                    </div>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post">
+                        <div class="text">
+                            Enter Comment: <input name="newComment" id="newComment">
+                            <div class="button">
+                                <input type="submit" value="Add comment" />
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
         </div>
     }
     <div class="footer">&copy; Крылов Вячеслав</div>
 </div>
-
-
-

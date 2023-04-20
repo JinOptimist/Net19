@@ -5,23 +5,23 @@
 namespace Data.Sql.Migrations
 {
     /// <inheritdoc />
-    public partial class AddWikiBaa : Migration
+    public partial class AddStoreCatalogue : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PageWikiBlocks",
+                name: "StoreItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PageWikiBlocks", x => x.Id);
+                    table.PrimaryKey("PK_StoreItems", x => x.Id);
                 });
         }
 
@@ -29,7 +29,7 @@ namespace Data.Sql.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PageWikiBlocks");
+                name: "StoreItems");
         }
     }
 }

@@ -11,6 +11,6 @@
 
         public int Quantity { get; set; }
         public int TotalQuantity { get; set; }
-
+        
     }
 }

@@ -7,5 +7,5 @@
         public string ImgUrl { get; set; }
 
         public ImgTypeEnum ImgType { get; set; }
-    }
+	}
 }

@@ -1,0 +1,16 @@
+﻿using Data.Sql.Models;
+using HealthyFoodWeb.Models.ModelsWikiBAA;
+
+namespace HealthyFoodWeb.Services.IServices
+{
+    public interface IWikiBAAPageServices
+    {
+       void CreateBlock(BLockPageBaaViewModel block);
+
+        void Remove(int id);
+
+        IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
+       
+        public void CreateComment(int pageId, string comment);
+    }
+}

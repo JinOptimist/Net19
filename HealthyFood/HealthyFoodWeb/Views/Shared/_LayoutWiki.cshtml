@@ -22,9 +22,12 @@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Wiki" asp-action="BiologicallyActiveAdditives">Biologically Active Additives</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Wiki" asp-action="CreateBlockInformatoin">Create Block to BAA</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Wiki" asp-action="CreateBlockInformatoin">Create Block to BAA</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Wiki" asp-action="MacronutrientCalculator">Macronutrient Calculator</a>
                         </li>
