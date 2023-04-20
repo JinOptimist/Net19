@@ -46,8 +46,14 @@ namespace HealthyFoodWeb.Controllers
 			return View(viewModel);
 		}
 
-		[HttpPost]
-		public IActionResult ProductPage(ProductPageViewModel productPageView)
+        [HttpGet]
+        public IActionResult UpdateRating()
+        {
+            return View();
+        }
+
+        [HttpPost]
+		public IActionResult UpdateRating(ProductPageViewModel productPageView)
 		{
 
 			_productService.UpdateRatingProduct(productPageView);

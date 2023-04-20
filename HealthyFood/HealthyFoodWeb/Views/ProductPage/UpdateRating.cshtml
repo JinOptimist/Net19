@@ -2,7 +2,9 @@
 
 
 <form method="post">
-    @Html.HiddenFor(x=>x.Id)
+    <div>
+        Enter id: @Html.TextBoxFor(x => x.Id)
+    </div>
 
     <div>
         Enter rating: @Html.TextBoxFor(x => x.Rating)
