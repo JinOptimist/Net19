@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Healthy Food</title>
-        <link rel="stylesheet" href="styles/styleStorePageCatalogue.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="~/css/store.css" />
+    <title>Healthy Food</title>
+    <link rel="stylesheet" href="styles/styleStorePageCatalogue.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/store.css" />
 
     @RenderSection("Styles", false)
 </head>
@@ -40,18 +40,17 @@
                         {
                             <a class="header--bar__login"></a>
                         }
-                        
-                        <a class="header--bar__cart"></a>
+                        <a href="/Store/CartPage" class="header--bar__cart"></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

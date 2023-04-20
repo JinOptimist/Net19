@@ -3,6 +3,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230413212218_RemoveAuthor")]
+    partial class RemoveAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -41,9 +41,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
@@ -72,7 +70,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("CreaterId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.GameCategory", b =>
@@ -89,24 +87,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCategories", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Manufacturer", (string)null);
+                    b.ToTable("GameCategories");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.SimilarGame", b =>
@@ -131,36 +112,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SimilarGames", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.StoreItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ManufacturerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ManufacturerId");
-
-                    b.ToTable("StoreItems", (string)null);
+                    b.ToTable("SimilarGames");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
@@ -185,29 +137,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("WikiBlockComments", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
@@ -230,7 +160,7 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WikiMcImages", (string)null);
+                    b.ToTable("WikiMcImages");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -256,7 +186,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("PageWikiBlocks", (string)null);
+                    b.ToTable("PageWikiBlocks");
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>
@@ -271,7 +201,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("GenresId");
 
-                    b.ToTable("GameGameCategory", (string)null);
+                    b.ToTable("GameGameCategory");
                 });
 
             modelBuilder.Entity("GameGameCategory1", b =>
@@ -286,31 +216,7 @@ namespace Data.Sql.Migrations
 
                     b.HasIndex("SecondaryGenresId");
 
-                    b.ToTable("GameGameCategory1", (string)null);
-                });
-
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.Property<int>("StoreItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StoreItemsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("StoreItemUser", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Cart", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Customer")
-                        .WithMany("Products")
-                        .HasForeignKey("CustomerId");
-
-                    b.Navigation("Customer");
+                    b.ToTable("GameGameCategory1");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Game", b =>
@@ -320,28 +226,6 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("CreaterId");
 
                     b.Navigation("Creater");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.StoreItem", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Manufacturer", "Manufacturer")
-                        .WithMany("StoreItems")
-                        .HasForeignKey("ManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Manufacturer");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.WikiBlockComment", b =>
-                {
-                    b.HasOne("Data.Interface.Models.User", "Author")
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -385,35 +269,11 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StoreItemUser", b =>
-                {
-                    b.HasOne("Data.Interface.Models.StoreItem", null)
-                        .WithMany()
-                        .HasForeignKey("StoreItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
-                {
-                    b.Navigation("StoreItems");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.User", b =>
                 {
                     b.Navigation("Blocks");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("CreatedGames");
-
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

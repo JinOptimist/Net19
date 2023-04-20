@@ -1,5 +1,8 @@
-﻿using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
@@ -7,10 +10,14 @@ namespace HealthyFoodWeb.Controllers
     public class StoreController : Controller
     {
         private ICartService _cartService;
+        private IUserService _userService;
+        private IAuthService _authService;
         private IStoreCatalogueService _storeCatalogueService;
 
-        public StoreController(ICartService cartService, IStoreCatalogueService storeCatalogueService)
+        public StoreController(ICartService cartService, IUserService userService, IAuthService authService, IStoreCatalogueService storeCatalogueService)
         {
+            _userService = userService;
+            _authService = authService;
             _cartService = cartService;
             _storeCatalogueService = storeCatalogueService;
         }
@@ -41,8 +48,9 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult CartPage()
         {
             var viewModel = new CartIndexViewModel();
+
             viewModel.Product = _cartService.
-                GetAllProduct().
+                GetCustomerProduct().
                 Select(x => new CartViewModel
                 {
                     Name = x.Name,
@@ -72,6 +80,7 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("CartPage");
         }
 
+
         [HttpGet]
         public IActionResult AddProductInCatalogue()
         {
@@ -83,5 +92,6 @@ namespace HealthyFoodWeb.Controllers
         {
             return RedirectToAction("storePageCatalogue");
         }
+
     }
 }
