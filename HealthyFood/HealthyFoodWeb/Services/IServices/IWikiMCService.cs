@@ -11,6 +11,8 @@ namespace HealthyFoodWeb.Services
 
 		IEnumerable<WikiMcImage> GetAllImgByType();
 
+		IEnumerable<WikiMcImage> GetUserImages();
+
 		void RemoveByType(ImgTypeEnum type);
 
 		void RemoveByYear(int year);

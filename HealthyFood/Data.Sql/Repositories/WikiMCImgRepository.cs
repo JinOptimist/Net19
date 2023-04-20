@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -15,6 +16,19 @@ namespace Data.Sql.Repositories
 		public IEnumerable<WikiMcImage> GetAllImgByYear(int year)
 		{
 			return _dbSet.Where(x => x.Year == year);
+		}
+
+		public IEnumerable<WikiMcImage> GetAllImgByYearWithTags(int year)
+		{
+			return _dbSet
+				.Include(x => x.Tags)
+				.Where(x => x.Year == year)
+				.ToList();
+		}
+
+		public IEnumerable<WikiMcImage> GetImagesByUserId(int userId)
+		{
+			return _dbSet.Where(x => x.ImageUploader.Id == userId).ToList();
 		}
 
 		public void RemoveAllImgByType(ImgTypeEnum type)

@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Data.Interface.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -61,6 +62,7 @@ namespace HealthyFoodWeb.Controllers
                 .Select(x => new WikiMCViewModel
                 {
                     ImgPath = x.ImgUrl,
+                    Tags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
                 })
                 .ToList();
 
@@ -94,19 +96,38 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddImg()
+		[Authorize]
+		public IActionResult AddImg()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddImg(WikiMCViewModel viewModel)
+		[Authorize]
+		public IActionResult AddImg(WikiMCViewModel viewModel)
         {
             _wikiMCImgService.AddImg(viewModel);
-            return RedirectToAction("MacronutrientCalculator");
+            return RedirectToAction("AddImg");
         }
 
-        private BLockPageBaaViewModel Convert(PageWikiBlock x)
+		[HttpGet]
+		[Authorize]
+		public IActionResult ShowUploadedImages()
+		{
+			var viewModel = new WikiUserImagesViewModel();
+
+			viewModel.UserImages = _wikiMCImgService
+				.GetUserImages()
+				.Select(imageDb => new WikiMCViewModel
+				{
+					ImgPath = imageDb.ImgUrl,
+				})
+				.ToList();
+
+			return View(viewModel);
+		}
+
+		private BLockPageBaaViewModel Convert(PageWikiBlock x)
         {
             return new BLockPageBaaViewModel
             {

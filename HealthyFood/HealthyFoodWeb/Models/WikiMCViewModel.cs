@@ -7,5 +7,6 @@ namespace HealthyFoodWeb.Models
         public string ImgPath { get; set; }
         public ImgTypeEnum ImgType { get; set; }
         public int Year { get; set; }
-    }
+		public List<string> Tags { get; set; } = new List<string>();
+	}
 }
