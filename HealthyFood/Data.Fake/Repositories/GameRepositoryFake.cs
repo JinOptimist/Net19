@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.DataModels;
 
 namespace Data.Fake.Repositories
 {
@@ -40,6 +41,11 @@ namespace Data.Fake.Repositories
         }
 
         public Game GetTheRichGameWithGenres()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GameAndScreensData GetTheScreenWithUser()
         {
             throw new NotImplementedException();
         }

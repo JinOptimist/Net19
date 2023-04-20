@@ -76,13 +76,13 @@ namespace HealthyFoodWeb.Controllers
                 UrlScreenShots = x.ScreenShots?.Select(e => e.UrlScreen).ToList() ?? new List<string>(),
             };
         }
-        public IActionResult GameWithScreenAndAuthorName() 
-        {
-            var authorScreen = _gameService.GetGameAndScreens();
-            var screenAndAuthorNameModel = new ScreenAndAuthorNameViewModel
-            {
-                AuthorName = authorScreen.ScreenAndUser.,
-            };
-        }
+        //public IActionResult GameWithScreenAndAuthorName() 
+        //{
+        //    var authorScreen = _gameService.GetGameAndScreens();
+        //    var screenAndAuthorNameModel = new ScreenAndAuthorNameViewModel
+        //    {
+        //        AuthorName = authorScreen.ScreenAndUser.,
+        //    };
+        //}
     }
 }
