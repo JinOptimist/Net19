@@ -2,6 +2,6 @@
 {
 	public class WikiUserImagesViewModel
 	{
-		public List<WikiMCViewModel> UserImages { get; set; }
+		public List<WikiMcViewModel> UserImages { get; set; }
 	}
 }

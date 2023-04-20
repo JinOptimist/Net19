@@ -8,6 +8,10 @@
 
         public ImgTypeEnum ImgType { get; set; }
 
+        public string EnteredTags { get; set; }
+
+        public List<string> UserTags { get; set; }
+
         public virtual List<WikiTags> Tags { get; set; }
 
         public virtual User ImageUploader { get; set; }

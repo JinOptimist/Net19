@@ -1,4 +1,6 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
+using Data.Sql.DataModels;
 
 namespace Data.Interface.Repositories
 {
@@ -8,7 +10,8 @@ namespace Data.Interface.Repositories
 		IEnumerable<WikiMcImage> GetAllImgByYear(int year);
         IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
 		IEnumerable<WikiMcImage> GetImagesByUserId(int userId);
-		void RemoveAllImgByYear(int year);
+        List<ImagesAndInfoAboutTheirUploader> GetUserImages();
+        void RemoveAllImgByYear(int year);
         void RemoveAllImgByType(ImgTypeEnum type);
     }
 }

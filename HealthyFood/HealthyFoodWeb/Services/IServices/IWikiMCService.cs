@@ -5,7 +5,7 @@ namespace HealthyFoodWeb.Services
 {
 	public interface IWikiMCService
 	{
-		void AddImg(WikiMCViewModel viewModel);
+		void AddImg(WikiMcViewModel viewModel);
 
 		IEnumerable<WikiMcImage> GetAllImgByYear();
 

@@ -49,10 +49,10 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult MacronutrientCalculator()
         {
-            var viewModel = new WikiMCImgViewModel();
+            var viewModel = new WikiMcImgViewModel();
             viewModel.AllImgByType = _wikiMCImgService
                 .GetAllImgByType()
-                .Select(x => new WikiMCViewModel
+                .Select(x => new WikiMcViewModel
                 {
                     ImgPath = x.ImgUrl,
                 })
@@ -60,10 +60,10 @@ namespace HealthyFoodWeb.Controllers
 
             viewModel.AllImgByYear = _wikiMCImgService
                 .GetAllImgByYear()
-                .Select(x => new WikiMCViewModel
+                .Select(x => new WikiMcViewModel
                 {
                     ImgPath = x.ImgUrl,
-                    Tags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
+                    UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
                 })
                 .ToList();
 
@@ -105,7 +105,7 @@ namespace HealthyFoodWeb.Controllers
 
         [HttpPost]
 		[Authorize]
-		public IActionResult AddImg(WikiMCViewModel viewModel)
+		public IActionResult AddImg(WikiMcViewModel viewModel)
         {
             _wikiMCImgService.AddImg(viewModel);
             return RedirectToAction("AddImg");
@@ -119,7 +119,7 @@ namespace HealthyFoodWeb.Controllers
 
 			viewModel.UserImages = _wikiMCImgService
 				.GetUserImages()
-				.Select(imageDb => new WikiMCViewModel
+				.Select(imageDb => new WikiMcViewModel
 				{
 					ImgPath = imageDb.ImgUrl,
 				})

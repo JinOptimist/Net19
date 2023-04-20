@@ -18,15 +18,17 @@ namespace HealthyFoodWeb.Services
 			_authService = authService;
 		}
 
-        public void AddImg(WikiMCViewModel viewModel)
+        public void AddImg(WikiMcViewModel viewModel)
         {
 			var user = _authService.GetUser();
-			var WikiMc = new WikiMcImage()
+            var WikiMc = new WikiMcImage()
             {
+                UserTags = viewModel.EnteredTags.Split(',').ToList(),
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
 				ImageUploader = user,
+                
 			};
             _wikiMCRepository.Add(WikiMc);
         }
@@ -62,5 +64,12 @@ namespace HealthyFoodWeb.Services
 			var user = _authService.GetUser();
 			return _wikiMCRepository.GetImagesByUserId(user.Id);
 		}
+
+        //public List<WikiTags> GetTagsFromUser(string enteredTags)
+        //{
+        //    var tags = new List<WikiTags>();
+
+        //    return tags;
+        //}
 	}
 }

@@ -18,9 +18,9 @@ namespace Data.Interface.Models
         public virtual List<Cart> Products { get; set; }
 
         public virtual List<StoreItem> StoreItems { get; set; }
-        public virtual List<Review> Reviews { get; set; }
-    }
 
-        public virtual List<WikiMcImage> UploadedImages { get; set; }
+        public virtual List<Review> Reviews { get; set; }
+
+		public virtual List<WikiMcImage> UploadedImages { get; set; }
 	}
 }
