@@ -29,12 +29,13 @@ namespace HealthyFoodWeb.Services
 
         public void AddStoreItem(StoreItemViewModel viewModel) 
         {
+            var manufacturer = _manufacturerRepository.GetByName(viewModel.Manufacturer);
             var dbCartModel = new StoreItem()
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
                 ImageUrl = viewModel.Img,
-                Manufacturer = viewModel.Manufacturer,
+                Manufacturer = manufacturer,
             };
 
             _catalogueRepository.Add(dbCartModel);
