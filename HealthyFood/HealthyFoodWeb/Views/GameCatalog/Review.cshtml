@@ -2,25 +2,27 @@
 
 
 <h1>Отзывы пользователей</h1>
-<div>
-    @foreach (var text in Model)
-    {
-        <div>
+
+@foreach (var text in Model)
+{
+    <div class="one-review">
+        <div class="info-user">
             @text.Author
             @if (text.CreatedGame.Count > 0)
             {
                 @foreach (var gameName in text.CreatedGame)
                 {
                     <text>
-                         (cоздатель игр: @gameName)
+                        (cоздатель игр: @gameName)
                     </text>
                 }
             }
+            Дата: @text.Date
         </div>
-        <div>Отзыв: @text.TextReview </div>
-        <div>Дата: @text.Date</div>
-    }
-</div>
+        <div>@text.TextReview </div>
+    </div>
+}
+
 
 
 <form method="post" action="/GameCatalog/AddReview/">
