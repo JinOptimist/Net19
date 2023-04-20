@@ -7,7 +7,5 @@ namespace HealthyFoodWeb.Models
         public List<StoreItemViewModel> Items { get; set; }
         public List<ManufacturerViewModel> Manufacturer { get; set; }
 
-
-
     }
 }

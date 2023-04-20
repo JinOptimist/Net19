@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
@@ -24,6 +25,19 @@ namespace HealthyFoodWeb.Services
         public List<Manufacturer> GetAllManufacturers()
         {
             return _manufacturerRepository.GetAll().ToList();
+        }
+
+        public void AddStoreItem(StoreItemViewModel viewModel) 
+        {
+            var dbCartModel = new StoreItem()
+            {
+                Name = viewModel.Name,
+                Price = viewModel.Price,
+                ImageUrl = viewModel.Img,
+                Manufacturer = viewModel.Manufacturer,
+            };
+
+            _catalogueRepository.Add(dbCartModel);
         }
     }
 }

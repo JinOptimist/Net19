@@ -57,5 +57,31 @@ namespace HealthyFoodWeb.Controllers
             _cartService.DeleteFromCart(name);
             return RedirectToAction("CartPage");
         }
+
+
+        [HttpGet]
+        public IActionResult AddProductInBase()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddProductInBase(CartViewModel viewModel)
+        {
+            _cartService.AddProductInBase(viewModel);
+            return RedirectToAction("CartPage");
+        }
+
+        [HttpGet]
+        public IActionResult AddProductInCatalogue()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddProductInCatalogue(StoreItemViewModel viewModel)
+        {
+            return RedirectToAction("storePageCatalogue");
+        }
     }
 }
