@@ -103,6 +103,18 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult AddProductInCatalogue(StoreItemViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var manufacturers = _storeCatalogueService
+                .GetAllManufacturers();
+                viewModel.AllManufacturers = manufacturers.Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Name,
+                })
+                    .ToList();
+                return View(viewModel);
+            }
             _storeCatalogueService.AddStoreItem(viewModel);
             return RedirectToAction("storePageCatalogue");
         }
