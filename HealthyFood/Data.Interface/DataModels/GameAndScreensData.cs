@@ -10,7 +10,8 @@ namespace Data.Sql.DataModels
 {
     public class GameAndScreensData
     {
-        public Game Game { get; set; }
+        public string GameName { get; set; }
+        public string GameCoverUrl { get; set; }
         public List<ScreenAndAuthorNameData> ScreenAndUser { get; set;}
     }
 }

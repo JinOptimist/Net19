@@ -36,7 +36,8 @@ namespace Data.Sql.Repositories
                 .Select(gameDb =>
                 new GameAndScreensData
                 {
-                    Game = gameDb,
+                    GameCoverUrl = gameDb.CoverUrl,
+                    GameName = gameDb.Name,
                     ScreenAndUser = gameDb.ScreenShots.Select(screenshotDb =>
                     new ScreenAndAuthorNameData
                     {

@@ -1,0 +1,15 @@
+﻿@model HealthyFoodWeb.Models.ScreensViewModels.GameAndScreenViewModel
+
+<div>
+    Game: @Model.GameName
+</div>
+<div>
+    <img src="@Model.GameCoverUrl" />
+</div>
+
+@foreach(var screen in Model.Screens){
+    <div>
+        AuthorName: @screen.AuthorName
+        <img src="@screen.Url" />
+    </div>
+}

@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.ScreensViewModels;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -76,13 +77,26 @@ namespace HealthyFoodWeb.Controllers
                 UrlScreenShots = x.ScreenShots?.Select(e => e.UrlScreen).ToList() ?? new List<string>(),
             };
         }
-        //public IActionResult GameWithScreenAndAuthorName() 
-        //{
-        //    var authorScreen = _gameService.GetGameAndScreens();
-        //    var screenAndAuthorNameModel = new ScreenAndAuthorNameViewModel
-        //    {
-        //        AuthorName = authorScreen.ScreenAndUser.,
-        //    };
-        //}
+
+
+        public IActionResult GameWithScreenAndAuthorName()
+        {
+            var gameWithScreenshots = _gameService.GetGameAndScreens();
+            var screenAndAuthorNameModel = new GameAndScreenViewModel
+            {
+                GameName = gameWithScreenshots.GameName,
+                GameCoverUrl = gameWithScreenshots.GameCoverUrl,
+                Screens = gameWithScreenshots
+                    .ScreenAndUser
+                    .Select(screenAndAuth => new ScreenAndAuthorViewModel
+                    {
+                        Url = screenAndAuth.ScreenUrl,
+                        AuthorName = screenAndAuth.AuthorName
+                    })
+                    .ToList()
+            };
+
+            return View(screenAndAuthorNameModel);
+        }
     }
 }
