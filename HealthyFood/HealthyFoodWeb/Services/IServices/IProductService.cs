@@ -10,7 +10,6 @@ namespace HealthyFoodWeb.Services
 		public List<Product> GetAllProducts();
 		void UpdateRatingProduct(ProductPageViewModel viewModel);
 		public void AddProduct(ProductPageViewModel viewModel);
-		public IActionResult RemoveProduct(ProductPageViewModel productPageView);
-
+		public void Remove(int id);
     }
 }

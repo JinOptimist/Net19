@@ -24,7 +24,7 @@ builder.Services.AddScoped<IWikiMCService>(
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IProductService>(
-	diContainer => new ProductService(diContainer.GetService<IProductRepository>()));
+    diContainer => new ProductService(diContainer.GetService<IProductRepository>()));
 
 builder.Services.AddScoped<IWikiBAAIPageRecomendateServices>(x => new WikiBAAPageRecomendateServices(x.GetService<IWikiBaaRepository>()));
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
@@ -40,7 +40,7 @@ dataSqlStartup.RegisterDbContext(builder.Services);
 builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
 builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 //builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-//builder.Services.AddSingleton<IProductRepository>(x => new ProductRepositoryFake());
+
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryRepository(x.GetService<WebContext>()));

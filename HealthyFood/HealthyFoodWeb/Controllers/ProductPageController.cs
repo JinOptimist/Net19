@@ -28,16 +28,18 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult ProductPage(int id)
+		public IActionResult ProductPage()
 		{
-			var product = _productService.GetAllProducts()
-				.First(x => x.Id == id);
-			var viewModel = new ProductPageViewModel()
+			var product = _productService.GetAllProducts();
+			var viewModel = new ProductPageIndexViewModel()
 			{
-				Id = product.Id,
-				Name = product.Name,
-				Price = product.Price,
-				Rating = product.Rating,
+				Products = product.Select(dbModel => new ProductPageViewModel {
+					Name= dbModel.Name,
+					Rating= dbModel.Rating,
+					Price= dbModel.Price,
+					Id= dbModel.Id
+                }).ToList(),
+
 			};
 
 
@@ -65,16 +67,10 @@ namespace HealthyFoodWeb.Controllers
             _productService.AddProduct(productPageView);
             return RedirectToAction("ProductPage");
         }
-
-        [HttpGet]
-        public IActionResult RemoveProduct()
+        public IActionResult Remove(int id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult RemoveProduct(ProductPageViewModel productPageView)
-        {
+            _productService.Remove(id);
+            return RedirectToAction("ProductPage");
         }
     }
 }

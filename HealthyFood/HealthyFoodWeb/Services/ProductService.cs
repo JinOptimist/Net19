@@ -12,6 +12,11 @@ namespace HealthyFoodWeb.Services
     {
         public const decimal RATINGPRODUCT_DEFAULT = 4;
         private IProductRepository _productRepository;
+        
+        public ProductService(IProductRepository? productRepository)
+        {
+            _productRepository = productRepository;
+        }
 
         public List<Product> GetAllProducts()
         {
@@ -33,9 +38,16 @@ namespace HealthyFoodWeb.Services
 
             _productRepository.Add(dbProductModel);
         }
+
         public void Remove(int id)
         {
             _productRepository.Remove(id);
         }
+        //public void Remove(int id)
+        //{
+        //    _productRepository.Remove(id);
+        //}
+
+
     }
 }

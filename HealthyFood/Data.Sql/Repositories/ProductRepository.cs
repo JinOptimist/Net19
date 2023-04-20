@@ -22,6 +22,7 @@ namespace Data.Sql.Repositories
             var product = _dbSet.FirstOrDefault(x => x.Id == id);
             product.Rating = rating;
             _webContext.SaveChanges();
+
         }
 
     }

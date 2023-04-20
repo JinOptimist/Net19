@@ -1,14 +1,24 @@
-﻿@model ProductPageViewModel
+﻿@model ProductPageIndexViewModel
 
 
 <head>
     <link rel="stylesheet" href="PageOfProduct.css">
-    <title>@Model.Name</title>
+    <title>
+        @foreach (var viewModel in Model.Products)
+        {
+            @viewModel.Name
+        }
+    </title>
 </head>
-
+<div>
+    <a href="/ProductPage/AddProduct">Add Product</a>
+</div>
 
 <h1 class="name-of-the-product">
-    @Model.Name
+    @foreach (var viewModel in Model.Products)
+    {
+        @viewModel.Name
+    }
 </h1>
 <div class="main-content">
     <div class="images-of-the-product">
@@ -29,9 +39,12 @@
     </div>
     <div class="info-about-price">
         <div class="price-of-the-product">
-            <div class="full-price">
-                Price:2$ 1kg
-            </div>
+            @foreach (var viewModel in Model.Products)
+            {
+                <div class="full-price">
+                    Price:@viewModel.Price 1kg
+                </div>
+            }
             <div class="discount-price">
                 Discount price:1.82$ 1kg
             </div>
@@ -44,20 +57,13 @@
 
         </div>
         <div class="rating-of-the-product">
-            <a href="#" class="rating-of-the-product-button"> rating @Model.Rating</a>
-        </div>
-
-        <div class="reviews-and-ratings">
-            Rating @Model.Rating
-            <form method="post">
-                @Html.HiddenFor(x=>x.Id)
-                <div>
-                    Enter rating: @Html.TextBoxFor(x => x.Rating)
-                </div>
-                <div>
-                    <input type="submit" value="Update rating" />
-                </div>
-            </form>
+            <a href="#" class="rating-of-the-product-button">
+                rating
+                @foreach (var viewModel in Model.Products)
+                {
+                    @viewModel.Rating
+                }
+            </a>
         </div>
 
     </div>
