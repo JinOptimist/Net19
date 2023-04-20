@@ -21,16 +21,24 @@ namespace HealthyFoodWeb.Services
 
         public void AddImg(WikiMcViewModel viewModel)
         {
-			var user = _authService.GetUser();
+           
+            var user = _authService.GetUser();
             var WikiMc = new WikiMcImage()
             {
-                Tags = viewModel.EnteredTags.Split(','),
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
 				ImageUploader = user,
-                
 			};
+
+            var tags = viewModel.EnteredTags.Split(',').ToList();
+            foreach (var tag in tags)
+            {
+                var dbTag = _tagRepository.GetOrCreateTag(tag);
+                WikiMc.Tags.Add(dbTag);
+            }
+           
+
             _wikiMCRepository.Add(WikiMc);
         }
 
