@@ -11,12 +11,14 @@ namespace HealthyFoodWeb.Services
         public const int CURRENT_YEAR = 2023;
 
         private IWikiMcRepository _wikiMCRepository;
-		private IAuthService _authService;
+        private IWikiTagRepository _tagRepository;
+        private IAuthService _authService;
 
-		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService)
+		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
         {
             _wikiMCRepository = wikiMCRepository;
 			_authService = authService;
+            _tagRepository = tagService;
 		}
 
         public void AddImg(WikiMcViewModel viewModel)
@@ -36,8 +38,7 @@ namespace HealthyFoodWeb.Services
             {
                 var dbTag = _tagRepository.GetOrCreateTag(tag);
                 WikiMc.Tags.Add(dbTag);
-            }
-           
+            }           
 
             _wikiMCRepository.Add(WikiMc);
         }
@@ -68,7 +69,7 @@ namespace HealthyFoodWeb.Services
             _wikiMCRepository.RemoveAllImgByYear(year);
         }
 
-		public IEnumerable<ImagesAndInfoAboutTheirUploader> GetUserImages()
+		public IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
 		{
 			return _wikiMCRepository.GetUserImages();
 		}

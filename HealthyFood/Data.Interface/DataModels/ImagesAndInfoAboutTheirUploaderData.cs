@@ -2,7 +2,7 @@
 
 namespace Data.Interface.DataModels
 {
-    public class ImagesAndInfoAboutTheirUploader
+    public class ImagesAndInfoAboutTheirUploaderData
     {
         public int Year { get; set; }
 

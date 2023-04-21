@@ -12,7 +12,7 @@ namespace HealthyFoodWeb.Services
 
 		IEnumerable<WikiMcImage> GetAllImgByType();
 
-		IEnumerable<ImagesAndInfoAboutTheirUploader> GetUserImages();
+		IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages();
 
         void RemoveByType(ImgTypeEnum type);
 

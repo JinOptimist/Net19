@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 
 namespace Data.Fake.Repositories
@@ -72,5 +73,10 @@ namespace Data.Fake.Repositories
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        public List<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
