@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Data.Interface.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -31,7 +32,7 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult BiologicallyActiveAdditives()
         {
             var pageViewModels = _blockInformationServices
-                .GetBlocksWithAuthor()
+                .GetBlocksWithAuthorAndComments()
                 .Select(
                 x => new BLockPageBaaViewModel
                 {
@@ -82,9 +83,9 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult BiologicallyActiveAdditives(string newComment, int pageId)
+        public IActionResult BiologicallyActiveAdditives(string newComment, int blockId)
         {
-            _blockInformationServices.CreateComment(pageId, newComment);
+            _blockInformationServices.CreateComment(blockId, newComment);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
