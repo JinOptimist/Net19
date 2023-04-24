@@ -52,5 +52,9 @@ namespace HealthyFoodWeb.Controllers
         {
             return RedirectToAction("Profile", new { name = model.ActualName });
         }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
