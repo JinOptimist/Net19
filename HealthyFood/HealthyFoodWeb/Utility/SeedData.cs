@@ -6,6 +6,8 @@ namespace HealthyFoodWeb.Utility
 {
     public static class SeedData
     {
+        private const int MIN_GAME_COUNT = 100;
+
         public static void Seed(this WebApplication webApplication)
         {
             using (var scope = webApplication.Services.CreateScope())
@@ -83,6 +85,26 @@ namespace HealthyFoodWeb.Utility
 
                 };
                 gameRepository.Add(game);
+            }
+
+
+            if (gameRepository.Count() < MIN_GAME_COUNT)
+            {
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var randomUser = userRepository.GetFirst();
+
+                for (int i = 0; i < MIN_GAME_COUNT; i++)
+                {
+                    var game = new Game
+                    {
+                        Name = $"RichGame№{i}",
+                        Price = 100 + i,
+                        CoverUrl = "https://i.imgur.com/eOtEAB7.jpg",
+                        Creater = randomUser
+
+                    };
+                    gameRepository.Add(game);
+                }
             }
 
         }
