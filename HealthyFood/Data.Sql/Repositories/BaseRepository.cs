@@ -25,6 +25,9 @@ namespace Data.Sql.Repositories
         public bool Any()
             => _dbSet.Any();
 
+        public int Count()
+            => _dbSet.Count();
+
         public SomeModel Get(int id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);

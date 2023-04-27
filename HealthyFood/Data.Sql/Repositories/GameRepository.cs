@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,18 @@ namespace Data.Sql.Repositories
         public List<Game> GetGamesByUserId(int userId)
         {
             return _dbSet.Where(x => x.Creater.Id == userId).ToList();
+        }
+
+        public GameAndPaginatorData GetGamesForPaginator(int page, int perPage)
+        {
+            var dataModel = new GameAndPaginatorData();
+            var games = _dbSet
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .ToList();
+            dataModel.Games = games;
+            dataModel.TotalCount = _dbSet.Count();
+            return dataModel;
         }
 
         public Game GetTheRichGameWithGenres()

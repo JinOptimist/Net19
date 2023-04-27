@@ -1,8 +1,10 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -22,16 +24,37 @@ namespace HealthyFoodWeb.Controllers
 
             viewModel.CheapGames = _gameService
                 .GetAllCheapGames()
-                .Select(Conver)
+                .Select(Convert)
                 .ToList();
 
             viewModel.RichGames = _gameService
                 .GetAllRichGames()
-                .Select(Conver)
+                .Select(Convert)
                 .ToList();
 
-            viewModel.TheBestGame = Conver(_gameService.GetTheBestGameWithGenres());
+            viewModel.TheBestGame = Convert(_gameService.GetTheBestGameWithGenres());
 
+            return View(viewModel);
+        }
+
+        public IActionResult Games(int page = 1, int perPage = 10)
+        {
+            var viewModel = new GameAndPagginatorViewModel();
+            var dataModel = _gameService.GetGamesForPaginator(page, perPage);
+            viewModel.Games = dataModel
+                .Games
+                .Select(Convert)
+                .ToList();
+
+            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
+            var totalPageCount =
+                (dataModel.TotalCount / perPage)
+                + (doWeNeedOneMorePage ? 1 : 0);
+
+            viewModel.PageList = Enumerable
+                .Range(1, totalPageCount)
+                .ToList();
+            viewModel.ActivePageNumber = page;
             return View(viewModel);
         }
 
@@ -71,7 +94,7 @@ namespace HealthyFoodWeb.Controllers
             return View(recomendateGameViewModel);
         }
 
-        private GameViewModel Conver(Game x)
+        private GameViewModel Convert(Game x)
         {
             return new GameViewModel
             {

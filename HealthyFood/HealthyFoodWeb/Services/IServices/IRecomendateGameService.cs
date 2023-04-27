@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services.IServices
@@ -16,5 +17,7 @@ namespace HealthyFoodWeb.Services.IServices
         List<Game> GetAllRichGames();
 
         void Remove(string name);
+
+        GameAndPaginatorData GetGamesForPaginator(int page, int perPage);
     }
 }

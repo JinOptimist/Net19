@@ -32,5 +32,10 @@ namespace Data.Fake.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
