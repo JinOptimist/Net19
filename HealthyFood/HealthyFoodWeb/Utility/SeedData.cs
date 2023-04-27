@@ -15,11 +15,11 @@ namespace HealthyFoodWeb.Utility
                 SeedStoreItems(scope);
                 SeedGame(scope);
                 SeedReview(scope);
-                SeedCarts(scope);
+                SeedCart(scope);
             }
         }
 
-        private static void SeedCarts(IServiceScope scope)
+        private static void SeedCart(IServiceScope scope)
         {
             var cartRepository = scope.ServiceProvider.GetRequiredService<ICartRepository>();
             var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
