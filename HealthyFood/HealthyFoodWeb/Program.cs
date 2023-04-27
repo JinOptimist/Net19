@@ -5,6 +5,7 @@ using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
+using HealthyFoodWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -23,8 +23,6 @@ namespace Data.Sql
         public DbSet<Game> Games { get; set; }
 		public DbSet<Product> Products { get; set; }
 
-		public DbSet<Game> Games { get; set; }
-
         public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
 
         public DbSet<StoreItem> StoreItems { get; set; }
