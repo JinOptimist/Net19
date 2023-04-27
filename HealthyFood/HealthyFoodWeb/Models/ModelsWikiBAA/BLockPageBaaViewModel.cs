@@ -14,8 +14,6 @@ namespace HealthyFoodWeb.Models.ModelsWikiBAA
         public string Author { get; set; }
 
         public List<string> CommentText { get; set; }
-
-       // public PageBaaViewModel pageBaaViewModel { get; set; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 
 namespace Data.Fake.Repositories
@@ -35,6 +36,16 @@ namespace Data.Fake.Repositories
         }
 
         public List<Game> GetGamesByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Game> GetGamesForPaginator(int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GameAndPaginatorData GetGamesForPaginator(int page, int perPage)
         {
             throw new NotImplementedException();
         }
