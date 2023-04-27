@@ -1,0 +1,50 @@
+﻿@model List<ReviewViewModel>
+
+
+<h1>Отзывы пользователей</h1>
+<div>
+    @foreach (var text in Model)
+    {
+        <div>
+            @text.Author
+            @if (text.CreatedGame.Count > 0)
+            {
+                @foreach (var gameName in text.CreatedGame)
+                {
+                    <text>
+                         (cоздатель игр: @gameName)
+                    </text>
+                }
+            }
+        </div>
+        <div>Отзыв: @text.TextReview </div>
+        <div>Дата: @text.Date</div>
+    }
+</div>
+
+
+<form method="post" action="/GameCatalog/AddReview/">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            @Html.TextArea("newReview", new { @class = "Creat-review" })
+
+        </div>
+        <div>
+            <input type="submit" value="Написать отзыв" />
+        </div>
+    }
+    else
+    {
+        <div>
+            Отзывы могут оставлять только авторизованные пользователи
+        </div>
+    }
+</form>
+
+
+
+@section Styles{
+<link rel="stylesheet" href="~/css/Review.css" />
+}

@@ -46,6 +46,11 @@ namespace HealthyFoodWeb.Controllers
         [Authorize]
         public IActionResult CreateGame(GameViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             _gameService.CreateGame(viewModel);
             return RedirectToAction("Index");
         }

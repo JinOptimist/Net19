@@ -18,6 +18,8 @@ namespace Data.Sql
 
         public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+        
         public DbSet<Game> Games { get; set; }
 
         public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
@@ -54,6 +56,9 @@ namespace Data.Sql
             modelBuilder.Entity<PageWikiBlock>()
                 .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Reviews)
+                .WithOne(x => x.User);
 
             modelBuilder.Entity<WikiBlockComment>()
                 .HasOne(x => x.Author)

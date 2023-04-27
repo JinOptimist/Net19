@@ -2,6 +2,7 @@
 using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
@@ -10,11 +11,14 @@ namespace HealthyFoodWeb.Controllers
     {
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
-    
-        public GameCatalogController(IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService)
+        private IReviewService _reviewService;
+
+        public GameCatalogController(
+            IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService, IReviewService reviewService)
         {
             _gameCatalogService = gameCatalog;
             _gameFruitConnectTwoService = gameFruitConnectTwoService;
+            _reviewService = reviewService;
         }
 
         public IActionResult GetCatalog()
@@ -57,7 +61,7 @@ namespace HealthyFoodWeb.Controllers
                     Id = dbModel.Id
                 })
                 .ToList();
-          
+
             return View(viewModels);
         }
         [HttpGet]
@@ -76,11 +80,42 @@ namespace HealthyFoodWeb.Controllers
             _gameFruitConnectTwoService.RemoveGame(id);
             return RedirectToAction("GetFruitConnectTwo");
         }
-       
+
         public IActionResult Donate()
         {
 
             return View();
+        }
+
+
+        public IActionResult Review()
+        {
+            var viewModels = _reviewService
+              .GetAllReviews()
+              .Select(dbModel =>
+                  new ReviewViewModel
+                  {
+                      TextReview = dbModel.TextReview,
+                      Date = dbModel.Date,
+                      Author = dbModel.UserName,
+                      CreatedGame = dbModel.GamesName.ToList()
+
+                  })
+              .ToList();
+           
+            return View(viewModels);
+        }
+
+
+        [HttpPost]
+        public IActionResult AddReview(string newReview)
+        {
+            var ViewModel = new ReviewViewModel
+            {
+                CreatReview = newReview
+            };
+            _reviewService.AddReview(ViewModel);
+            return RedirectToAction("Review");
         }
     }
 }
