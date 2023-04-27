@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 
 namespace Data.Interface.Repositories
 {
@@ -11,5 +12,7 @@ namespace Data.Interface.Repositories
         Game GetTheRichGameWithGenres();
 
         List<Game> GetGamesByUserId(int userId);
+
+        GameAndPaginatorData GetGamesForPaginator(int page, int perPage);
     }
 }

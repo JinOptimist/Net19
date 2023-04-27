@@ -16,3 +16,21 @@
     border: 1px solid red;
     border-radius: 10px;
 }
+
+.pagginator {
+    padding: 10px;
+}
+
+.pagginator a {
+    border: 1px solid #196cbe;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background: #CCC;
+    color: black;
+    text-decoration: none;
+}
+
+    .pagginator a.active {
+        background: #c8cc5e;
+    }
