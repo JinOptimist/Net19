@@ -4,6 +4,7 @@ using Data.Interface.Repositories;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Services.IServices;
 
 
 namespace HealthyFoodWeb.Services
@@ -12,10 +13,12 @@ namespace HealthyFoodWeb.Services
     {
         public const decimal RATINGPRODUCT_DEFAULT = 4;
         private IProductRepository _productRepository;
-        
-        public ProductService(IProductRepository? productRepository)
+        private IAuthService _authService;
+
+        public ProductService(IProductRepository productRepository, IAuthService authService)
         {
             _productRepository = productRepository;
+            _authService = authService;
         }
 
         public List<Product> GetAllProducts()
