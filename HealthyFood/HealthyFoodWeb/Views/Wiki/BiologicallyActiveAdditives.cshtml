@@ -36,7 +36,8 @@
                 {
                     <form method="post">
                         <div class="text">
-                            Enter Comment: <textarea name="newComment" id="newComment"></textarea>
+                            Enter Comment: <textarea name="newComment"></textarea>
+                            <input type="hidden" value="@pageViewModel.Id" name="blockId">
                             <div class="button">
                                 <input type="submit" value="Add comment" />
                                 <input type="reset" value=" Очистить">

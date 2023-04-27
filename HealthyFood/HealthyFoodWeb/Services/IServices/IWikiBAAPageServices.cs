@@ -11,6 +11,6 @@ namespace HealthyFoodWeb.Services.IServices
 
         IEnumerable<PageWikiBlock> GetBlocksWithAuthorAndComments();
        
-        public void CreateComment(int pageId, string comment);
+        public void CreateComment(int blockeId, string comment);
     }
 }
