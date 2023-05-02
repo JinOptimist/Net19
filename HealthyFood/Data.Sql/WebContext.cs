@@ -65,7 +65,12 @@ namespace Data.Sql
                 .HasOne(x => x.Author)
                 .WithMany(x => x.Comments)
                 .OnDelete(DeleteBehavior.NoAction);
-             
+
+            modelBuilder.Entity<PageWikiBlock>()
+                .HasMany(x => x.Comment)
+                .WithOne(x => x.Block)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Manufacturer>()
                 .HasMany(x => x.StoreItems)
                 .WithOne(x => x.Manufacturer);
