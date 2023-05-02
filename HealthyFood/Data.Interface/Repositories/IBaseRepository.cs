@@ -10,5 +10,10 @@ namespace Data.Interface.Repositories
         void Remove(int id);
         bool Any();
         int Count();
+        
+        /// <summary>
+        /// DANGEROUS. Try to not use it
+        /// </summary>
+        void Update(T model);
     }
 }

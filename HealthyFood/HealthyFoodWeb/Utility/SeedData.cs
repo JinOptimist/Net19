@@ -19,6 +19,7 @@ namespace HealthyFoodWeb.Utility
                 SeedStoreItems(scope);
                 SeedGame(scope);
                 SeedReview(scope);
+                SeedGameCategory(scope);
             }
         }
 
@@ -55,7 +56,7 @@ namespace HealthyFoodWeb.Utility
         private static void SeedStoreItems(IServiceScope scope)
         {
             var storeCatalogueRepository = scope.ServiceProvider.GetRequiredService<IStoreCatalogueRepository>();
-            var manufacturerRep= scope.ServiceProvider.GetRequiredService<IManufacturerRepository>();
+            var manufacturerRep = scope.ServiceProvider.GetRequiredService<IManufacturerRepository>();
 
             if (!storeCatalogueRepository.Any())
             {
@@ -138,6 +139,26 @@ namespace HealthyFoodWeb.Utility
                     TextReview = "",
                     Date = DateTime.Now
                 };
+            }
+        }
+
+        private static void SeedGameCategory(IServiceScope scope)
+        {
+            var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror" };
+
+            var gameCategoryRepository = scope.ServiceProvider
+                .GetRequiredService<IGameCategoryRepository>();
+
+            foreach (var genreName in defaultGenres)
+            {
+                if (gameCategoryRepository.Get(genreName) == null)
+                {
+                    var gameCatalog = new GameCategory
+                    {
+                        Name = genreName
+                    };
+                    gameCategoryRepository.Add(gameCatalog);
+                }
             }
         }
     }

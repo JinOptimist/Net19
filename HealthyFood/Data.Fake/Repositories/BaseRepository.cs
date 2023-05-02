@@ -37,5 +37,10 @@ namespace Data.Fake.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void Update(DbModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
