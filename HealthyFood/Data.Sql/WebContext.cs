@@ -56,14 +56,16 @@ namespace Data.Sql
             modelBuilder.Entity<PageWikiBlock>()
                 .HasOne(x => x.Author)
                 .WithMany(x => x.Blocks);
+
             modelBuilder.Entity<User>()
                 .HasMany(x => x.Reviews)
                 .WithOne(x => x.User);
 
             modelBuilder.Entity<WikiBlockComment>()
                 .HasOne(x => x.Author)
-                .WithMany(x => x.Comments);
-
+                .WithMany(x => x.Comments)
+                .OnDelete(DeleteBehavior.NoAction);
+             
             modelBuilder.Entity<Manufacturer>()
                 .HasMany(x => x.StoreItems)
                 .WithOne(x => x.Manufacturer);

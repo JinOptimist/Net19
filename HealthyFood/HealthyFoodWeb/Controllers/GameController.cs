@@ -94,10 +94,30 @@ namespace HealthyFoodWeb.Controllers
             return View(recomendateGameViewModel);
         }
 
+        public IActionResult Update(int id)
+        {
+            var viewModel = _gameService.GetGameViewModel(id);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Update(GameViewModel gameViewModel)
+        {
+            _gameService.UpdateNameAndCover(gameViewModel.Id, 
+                gameViewModel.Name, 
+                gameViewModel.CoverUrl);
+
+            _gameService.UpdateGenres(gameViewModel.Id,
+                gameViewModel.Genres);
+
+            return RedirectToAction("Games", "Game");
+        }
+
         private GameViewModel Convert(Game x)
         {
             return new GameViewModel
             {
+                Id = x.Id,
                 Name = x.Name,
                 CoverUrl = x.CoverUrl,
                 Genres = x.Genres?.Select(x => x.Name).ToList() ?? new List<string>()

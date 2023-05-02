@@ -37,9 +37,11 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public void CreateComment(int blockeId, string comment)
         {
+            var block = _wikiBaaRepository.Get(blockeId);
             var user = _authService.GetUser();
             var dbComment = new WikiBlockComment()
             {
+                Block = block,
                 Text = comment,
                 Author = user,
             };
