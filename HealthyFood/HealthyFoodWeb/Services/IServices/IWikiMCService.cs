@@ -4,7 +4,7 @@ using HealthyFoodWeb.Models;
 
 namespace HealthyFoodWeb.Services
 {
-	public interface IWikiMCService
+	public interface IWikiMcService
 	{
 		void AddImg(WikiMcViewModel viewModel);
 

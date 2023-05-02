@@ -176,7 +176,7 @@ namespace HealthyFoodWeb.Utility
                     ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/41204/pub_5b00259fad0f222dd299aae7_5b005a50a936f4e52e30b616/scale_1200",
                     Year = 2023,
                     ImgType = ImgTypeEnum.Proteins,
-                    ImageUploader = randomUser,
+                    //ImageUploader = randomUser,
                     Tags = new List<WikiTags>
                         {
                             new WikiTags
@@ -196,7 +196,7 @@ namespace HealthyFoodWeb.Utility
                     ImgUrl = "https://www.health.com/thmb/nxURaqGxebTJBMzXi5jZpaAL02Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Healthy-Fats-Food-GettyImages-1301412044-2000-8ab23a10624d42df85fa3f37d7c76a6b.jpg",
                     Year = 2023,
                     ImgType = ImgTypeEnum.Fats,
-                    ImageUploader = randomUser,
+                    //ImageUploader = randomUser,
                     Tags = new List<WikiTags>
                         {
                             new WikiTags
@@ -216,7 +216,7 @@ namespace HealthyFoodWeb.Utility
                     ImgUrl = "https://medlineplus.gov/images/Carbohydrates_share.jpg",
                     Year = 2023,
                     ImgType = ImgTypeEnum.Carbs,
-                    ImageUploader = randomUser,
+                    //ImageUploader = randomUser,
                     Tags = new List<WikiTags>
                         {
                             new WikiTags

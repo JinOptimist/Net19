@@ -18,8 +18,8 @@ namespace Data.Sql.Repositories
                     Year = image.Year,
                     ImgUrl = image.ImgUrl,
                     ImgType = image.ImgType,
-                    UserName = image.ImageUploader.Name,
-                    Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
+                    //UserName = image.ImageUploader.Name,
+                    //Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
                 }).ToList();
         }
 

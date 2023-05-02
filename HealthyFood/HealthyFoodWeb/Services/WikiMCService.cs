@@ -6,7 +6,7 @@ using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    public class WikiMCService : IWikiMCService
+    public class WikiMCService : IWikiMcService
     {
         public const int CURRENT_YEAR = 2023;
 
@@ -30,7 +30,7 @@ namespace HealthyFoodWeb.Services
                 ImgType = viewModel.ImgType,
                 ImgUrl = viewModel.ImgPath,
                 Year = viewModel.Year,
-				ImageUploader = user,
+				//ImageUploader = user,
 			};
 
             var tags = viewModel.EnteredTags.Split(',').ToList();

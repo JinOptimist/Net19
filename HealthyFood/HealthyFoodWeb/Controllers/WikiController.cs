@@ -14,9 +14,9 @@ namespace HealthyFoodWeb.Controllers
     {
         private IWikiBAAPageServices _blockInformationServices;
 
-        private IWikiMCService _wikiMCImgService;
+        private IWikiMcService _wikiMCImgService;
 
-        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMCService wikiMCImgService)
+        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMcService wikiMCImgService)
         {
             _blockInformationServices = blockInformationServices;
             _wikiMCImgService = wikiMCImgService;

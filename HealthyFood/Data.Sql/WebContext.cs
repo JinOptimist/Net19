@@ -18,6 +18,8 @@ namespace Data.Sql
 
         public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
+        public DbSet<WikiTags> WikiTags { get; set; }
+
         public DbSet<Review> Reviews { get; set; }
         
         public DbSet<Game> Games { get; set; }
@@ -74,9 +76,9 @@ namespace Data.Sql
                 .HasMany(x => x.Users)
                 .WithMany(x => x.StoreItems);
 
-            modelBuilder.Entity<User>()
-                .HasMany(x => x.UploadedImages)
-                .WithOne(x => x.ImageUploader);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(x => x.UploadedImages)
+            //    .WithOne(x => x.ImageUploader);
 
             modelBuilder.Entity<WikiMcImage>()
                 .HasMany(x => x.Tags)

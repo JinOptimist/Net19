@@ -423,7 +423,7 @@ namespace Data.Sql.Migrations
                     b.HasOne("Data.Sql.Models.PageWikiBlock", "Block")
                         .WithMany("Comment")
                         .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
