@@ -76,9 +76,10 @@ namespace Data.Sql
                 .HasMany(x => x.Users)
                 .WithMany(x => x.StoreItems);
 
-            //modelBuilder.Entity<User>()
-            //    .HasMany(x => x.UploadedImages)
-            //    .WithOne(x => x.ImageUploader);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.UploadedImages)
+                .WithOne(x => x.ImageUploader)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<WikiMcImage>()
                 .HasMany(x => x.Tags)
