@@ -7,6 +7,7 @@ namespace HealthyFoodWeb.Models
 {
     public class StoreItemViewModel
     {
+        public int Id { get; set; }
         [Required] 
         public string Name { get; set; }
         [Positive]

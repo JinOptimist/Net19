@@ -6,5 +6,7 @@ namespace Data.Interface.Repositories
     {
         StoreItem GetByName(string name);
         List<StoreItem> GetItemsWithManufacturer();
+        StoreItem GetItemWithManufacturer(int id);
+        void UpdateItem(int id, string name, decimal price, string img, string manufacturer);
     }
 }

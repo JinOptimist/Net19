@@ -22,5 +22,19 @@ namespace Data.Sql.Repositories
                
         }
 
+        public StoreItem GetItemWithManufacturer(int id)
+        {
+            return _dbSet.Include(x => x.Manufacturer).SingleOrDefault(x => x.Id == id);
+        }
+
+        public void UpdateItem(int id, string name, decimal price, string img, string manufacturer)
+        {
+            var item = _dbSet.SingleOrDefault(x => x.Id == id);
+            item.Name = name;
+            item.Price = price;
+            item.ImageUrl = img;
+            item.Manufacturer = _webContext.Manufacturer.FirstOrDefault(x => x.Name == manufacturer);
+            _webContext.SaveChanges();
+        }
     }
 }

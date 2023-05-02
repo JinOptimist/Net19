@@ -3,6 +3,7 @@ using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HealthyFoodWeb.Services
 {
@@ -39,6 +40,41 @@ namespace HealthyFoodWeb.Services
             };
 
             _catalogueRepository.Add(dbCartModel);
+        }
+
+        public StoreItemViewModel GetStoreViewModel(int id)
+        {
+            var storeDb = _catalogueRepository.GetItemWithManufacturer(id);
+            var manufacturers = _manufacturerRepository
+                .GetAll()
+                .Select(x => x.Name)
+                .Select(x => new SelectListItem
+                 {
+                   Text = x,
+                   Value = x
+                 })
+                 .ToList();
+
+            return new StoreItemViewModel
+            {
+                Id = storeDb.Id,
+                Name = storeDb.Name,
+                Img = storeDb.ImageUrl,
+                Price = storeDb.Price,
+                AllManufacturers = manufacturers,
+                Manufacturer = storeDb.Manufacturer.Name   
+            };
+
+        }
+
+        public void UpdateItem(StoreItemViewModel storeItemViewModel)
+        {
+            _catalogueRepository.UpdateItem(storeItemViewModel.Id,
+                storeItemViewModel.Name,
+                storeItemViewModel.Price,
+                storeItemViewModel.Img,
+                storeItemViewModel.Manufacturer
+                );
         }
     }
 }

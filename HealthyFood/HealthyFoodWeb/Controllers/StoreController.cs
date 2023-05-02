@@ -30,6 +30,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetAllItems()
                 .Select(x => new StoreItemViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Price = x.Price,
                     Img = x.ImageUrl,
@@ -67,6 +68,19 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("CartPage");
         }
 
+        public IActionResult UpdateStoreCatalogue(int id)
+        {
+            var viewModel = _storeCatalogueService.GetStoreViewModel(id);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStoreCatalogue(StoreItemViewModel storeItemViewModel)
+        {
+            _storeCatalogueService.UpdateItem(storeItemViewModel);
+
+            return RedirectToAction("storePageCatalogue", "Store");
+        }
 
         [HttpGet]
         public IActionResult AddProductInBase()
