@@ -19,5 +19,10 @@ namespace HealthyFoodWeb.Services.IServices
         void Remove(string name);
 
         GameAndPaginatorData GetGamesForPaginator(int page, int perPage);
+        
+        GameViewModel GetGameViewModel(int id);
+        
+        void UpdateNameAndCover(int id, string name, string coverUrl);
+        void UpdateGenres(int id, List<string> genres);
     }
 }

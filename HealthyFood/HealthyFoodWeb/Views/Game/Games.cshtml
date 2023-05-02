@@ -15,9 +15,15 @@
     {
         <div class="game">
             <div class="cover">
-                <img src="@gameViewModel.CoverUrl" />
+                <a href="/Game/Update/@gameViewModel.Id">
+                    <img src="@gameViewModel.CoverUrl" />
+                </a>
             </div>
-            Name @gameViewModel.Name <a href="/Game/Remove?name=@gameViewModel.Name">X</a>
+            Name @gameViewModel.Name
+            @foreach (var genre in gameViewModel.Genres)
+            {
+                <span class="genre">@genre</span>
+            }
         </div>
     }
 </div>

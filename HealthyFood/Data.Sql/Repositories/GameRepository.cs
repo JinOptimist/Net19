@@ -11,6 +11,13 @@ namespace Data.Sql.Repositories
         {
         }
 
+        public Game GetGameAndGenres(int id)
+        {
+            return _dbSet
+                .Include(x => x.Genres)
+                .SingleOrDefault(x => x.Id == id);
+        }
+
         public Game GetGameByName(string name)
         {
             return _dbSet.FirstOrDefault(x => x.Name == name);
@@ -25,6 +32,7 @@ namespace Data.Sql.Repositories
         {
             var dataModel = new GameAndPaginatorData();
             var games = _dbSet
+                .Include(x => x.Genres)
                 .Skip((page - 1) * perPage)
                 .Take(perPage)
                 .ToList();
@@ -45,6 +53,14 @@ namespace Data.Sql.Repositories
         {
             var game = GetGameByName(name);
             Remove(game.Id);
+        }
+
+        public void UpdateNameAndCover(int id, string name, string coverUrl)
+        {
+            var game = Get(id);
+            game.Name = name;
+            game.CoverUrl = coverUrl;
+            _webContext.SaveChanges();
         }
     }
 }
