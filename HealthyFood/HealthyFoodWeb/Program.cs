@@ -1,4 +1,3 @@
-using Data.Fake.Repositories;
 using Data.Interface.Repositories;
 using Data.Sql;
 using Data.Sql.Repositories;
@@ -55,10 +54,6 @@ builder.Services.AddScoped<IGameFruitConnectTwoService>(
 var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
-
-//builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
-builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-//builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IManufacturerRepository>(x => new ManufacturerRepository(x.GetService<WebContext>()));
