@@ -47,7 +47,7 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult CartPage()
         {
-            var viewModel = new CartIndexViewModel();
+            var viewModel = new CartPagginatorViewModel();
 
             viewModel.Product = _cartService.
                 GetCustomerProduct().

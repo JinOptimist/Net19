@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace HealthyFoodWeb.Utility
@@ -7,6 +8,7 @@ namespace HealthyFoodWeb.Utility
     public static class SeedData
     {
         private const int MIN_GAME_COUNT = 100;
+        private const int MIN_CART_COUNT = 100;
 
         public static void Seed(this WebApplication webApplication)
         {
@@ -38,6 +40,23 @@ namespace HealthyFoodWeb.Utility
                     Customer = user
                 };
                 cartRepository.Add(productdefault);
+            }
+
+            if (cartRepository.Count() < MIN_CART_COUNT)
+            {
+                var randomUser = userRepository.GetFirst();
+
+                for (int i = 0; i < MIN_CART_COUNT; i++)
+                {
+                    var product = new Cart
+                    {
+                        Name = $"Sup {i}",
+                        Price = 10,
+                        Customer = randomUser
+
+                    };
+                    cartRepository.Add(product);
+                }
             }
         }
 

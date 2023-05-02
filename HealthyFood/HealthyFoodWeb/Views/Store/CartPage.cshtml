@@ -2,7 +2,7 @@
     Layout = "_layoutStore";
 }
 
-@model CartIndexViewModel
+@model CartPagginatorViewModel
 
 <div class="text">
     Ordering
@@ -56,6 +56,14 @@
         To order
     </button>
 </div>
+
+@*<div class="pagginator">
+    @foreach (var pageNumber in Model.PageList)
+    {
+        <a href="/Store/CartPage/CartPage?page=@pageNumber"
+       class=" @(Model.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+    }
+</div>*@
 
 @section Styles{
     <link rel="stylesheet" href="~/css/styleCartPage.css">
