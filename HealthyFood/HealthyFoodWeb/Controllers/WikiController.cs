@@ -107,6 +107,11 @@ namespace HealthyFoodWeb.Controllers
 		[Authorize]
 		public IActionResult AddImg(WikiMcViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             _wikiMCImgService.AddImg(viewModel);
             return RedirectToAction("AddImg");
         }
