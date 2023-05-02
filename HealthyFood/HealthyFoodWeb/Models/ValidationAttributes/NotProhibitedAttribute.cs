@@ -10,5 +10,13 @@ namespace HealthyFoodWeb.Models.ValidationAttributes
                 ? $"Вам комментарий содержит запрещенные слова {name}"
                 : ErrorMessage;
         }
+
+        //public override bool IsValid(object? value)
+        //{
+        //  switch (value)
+        //    {
+        //        case 
+        //    }
+        //}
     }
 }

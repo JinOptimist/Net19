@@ -1,9 +1,9 @@
-﻿@model List<ReviewViewModel>
+﻿@model GeneralReviewViewModel
 
 
 <h1>Отзывы пользователей</h1>
 
-@foreach (var text in Model)
+@foreach (var text in Model.ReviewViewModels)
 {
     <div class="one-review">
         <div class="info-user">
@@ -34,7 +34,10 @@
 
         </div>
         <div>
-            <input type="submit" value="Написать отзыв" />
+            <input type="submit" value="Написать отзыв" /> <span class = "Error">@Model.TextError </span>
+        </div>
+        <div>
+            
         </div>
     }
     else

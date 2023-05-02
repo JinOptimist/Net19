@@ -43,7 +43,7 @@ namespace HealthyFoodWeb.Controllers
             var dataModel = _gameService.GetGamesForPaginator(page, perPage);
             viewModel.Games = dataModel
                 .Games
-                .Select(Convert)
+                .Select(gameDb=> Convert(gameDb))
                 .ToList();
 
             var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
