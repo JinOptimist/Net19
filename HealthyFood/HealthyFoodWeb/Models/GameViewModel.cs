@@ -5,6 +5,8 @@ namespace HealthyFoodWeb.Models
 {
     public class GameViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string CoverUrl { get; set; }
@@ -15,6 +17,8 @@ namespace HealthyFoodWeb.Models
 
         [Positive]
         public int ActiveGamers { get; set; }
+
+        public List<string> AvailableGenres { get; set; } = new List<string>();
 
         public List<string> Genres { get; set; } = new List<string>();
         public List<string> Friends { get; set; } = new List<string>();
