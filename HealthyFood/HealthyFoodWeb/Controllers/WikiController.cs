@@ -40,7 +40,7 @@ namespace HealthyFoodWeb.Controllers
                     Title = x.Title,
                     Text = x.Text,
                     Author = x.Author.Name,
-                    CommentText = x.Comment.Select(x => x.Text).ToList()
+                    CommentText = x.Comment?.Select(x => x.Text).ToList() ?? new List<string>()
                 })
                 .ToList();
 
