@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthyFoodWeb.Models
@@ -6,7 +7,7 @@ namespace HealthyFoodWeb.Models
     public class WikiMcViewModel
     {
         [Required]
-        [Url]
+        [MyUrl]
         public string ImgPath { get; set; }
 
         public ImgTypeEnum ImgType { get; set; }

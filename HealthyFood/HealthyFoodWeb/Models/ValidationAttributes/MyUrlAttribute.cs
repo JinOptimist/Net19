@@ -2,7 +2,7 @@
 
 namespace HealthyFoodWeb.Models.ValidationAttributes
 {
-    public class UrlAttribute : ValidationAttribute
+    public class MyUrlAttribute : ValidationAttribute
     {
         public override string FormatErrorMessage(string imgPath)
         {
