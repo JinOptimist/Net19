@@ -1,8 +1,8 @@
 ﻿namespace HealthyFoodWeb.Models
 {
-    public class WikiMCImgViewModel
+    public class WikiMcImgViewModel
     {
-        public List<WikiMCViewModel> AllImgByYear { get; set; }
-        public List<WikiMCViewModel> AllImgByType { get; set; }
+        public List<WikiMcViewModel> AllImgByYear { get; set; }
+        public List<WikiMcViewModel> AllImgByType { get; set; }
     }
 }
