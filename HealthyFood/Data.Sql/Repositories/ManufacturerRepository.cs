@@ -10,5 +10,10 @@ namespace Data.Sql.Repositories
         {
             return _dbSet.FirstOrDefault();
         }
+
+        public Manufacturer GetByName(string name)
+        {
+            return _dbSet.FirstOrDefault(x => x.Name == name);
+        }
     }
 }

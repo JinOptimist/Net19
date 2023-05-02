@@ -1,12 +1,14 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace HealthyFoodWeb.Utility
 {
     public static class SeedData
     {
-        private const int MIN_GAME_COUNT = 100;
+        private const int MIN_GAME_COUNT = 20;
+        private const int MIN_STORE_COUNT = 20;
 
         public static void Seed(this WebApplication webApplication)
         {
@@ -68,6 +70,24 @@ namespace HealthyFoodWeb.Utility
 
                 };
                 storeCatalogueRepository.Add(adminItem);
+            }
+
+            if (storeCatalogueRepository.Count() < MIN_STORE_COUNT)
+            {
+                var manufacturer = manufacturerRep.GetFirst();
+
+                for (int i = 0; i < MIN_STORE_COUNT; i++)
+                {
+                    var adminItem = new StoreItem
+                    {
+                        Name = $"Admin{i}",
+                        Price = 1+i,
+                        ImageUrl = "NoImage",
+                        Manufacturer = manufacturer
+
+                    };
+                    storeCatalogueRepository.Add(adminItem);
+                }
             }
         }
         private static void SeedGame(IServiceScope scope)
