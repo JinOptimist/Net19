@@ -9,5 +9,6 @@ namespace Data.Interface.Repositories
         IEnumerable<T> GetAll();
         void Remove(int id);
         bool Any();
+        int Count();
     }
 }

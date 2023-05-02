@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
@@ -62,6 +63,12 @@ namespace HealthyFoodWeb.Services
         public void Remove(string name)
         {
             _gameRepository.RemoveByName(name);
+        }
+
+        public GameAndPaginatorData GetGamesForPaginator(int page, int perPage)
+        {
+            return _gameRepository
+                .GetGamesForPaginator(page, perPage);
         }
     }
 }
