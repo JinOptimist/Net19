@@ -29,19 +29,19 @@
                     Автор Текста: @pageViewModel.Author
                 </span>
                 <div>
-                    @foreach (var CommentS in pageViewModel.CommentText)
-                    {
-                        <div>
-                        <span class="blockAuthorComments">
-                            <span class="comments">
-                                @CommentS
-                            </span>
-                            <span class="authorComments">
-                                Автор комментария:@pageViewModel.Author
-                            </span>
-                        </span>
-                        </div>
-                    }
+                    <div>
+                        @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
+                        {
+                            <div>
+                                <span class="blockAuthorComments">
+                                    <span class="comments">
+                                        @CommentAndAuthor.Comment
+                                        @CommentAndAuthor.Author
+                                    </span>
+                                </span>
+                            </div>
+                        }
+                    </div>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form method="post">

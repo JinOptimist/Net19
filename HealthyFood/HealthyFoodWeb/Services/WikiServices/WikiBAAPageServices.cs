@@ -50,7 +50,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public IEnumerable<PageWikiBlock> GetBlocksWithAuthorAndComments()
         {
-            var List = _wikiBaaRepository.GetBlocksWithAuthor().ToList();
+            
             return _wikiBaaRepository.GetBlocksWithAuthor();
         }
        
