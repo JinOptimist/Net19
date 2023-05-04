@@ -30,13 +30,21 @@ namespace HealthyFoodWeb.Utility
 
             if (!userRepository.Any())
             {
-                var admin = new User
+                var user = new User
                 {
                     Name = "Admin",
                     Password = "123",
-                    AvatarUrl = "NoAvatar"
+                    AvatarUrl = "NoAvatar",
+                    Role = MyRole.Admin
                 };
-                userRepository.Add(admin);
+                userRepository.Add(user);
+            }
+
+            var admin = userRepository.GetByName("Admin");
+            if (admin.Role != MyRole.Admin)
+            {
+                admin.Role = MyRole.Admin;
+                userRepository.Update(admin);
             }
         }
 

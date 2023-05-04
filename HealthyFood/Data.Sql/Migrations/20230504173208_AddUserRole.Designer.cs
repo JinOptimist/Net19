@@ -4,6 +4,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230504173208_AddUserRole")]
+    partial class AddUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,76 +111,6 @@ namespace Data.Sql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturer");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.ProductPage.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.ProductPage.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategory");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.ProductPage.ProductContain", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Carbohydrates")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("EnergyValue")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Fat")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Proteins")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductContain");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Review", b =>
@@ -415,21 +348,6 @@ namespace Data.Sql.Migrations
                     b.ToTable("GameGameCategory1");
                 });
 
-            modelBuilder.Entity("ProductProductCategory", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("ProductProductCategory");
-                });
-
             modelBuilder.Entity("StoreItemUser", b =>
                 {
                     b.Property<int>("StoreItemsId")
@@ -476,13 +394,6 @@ namespace Data.Sql.Migrations
                         .HasForeignKey("CreaterId");
 
                     b.Navigation("Creater");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.ProductPage.ProductContain", b =>
-                {
-                    b.HasOne("Data.Interface.Models.ProductPage.Product", null)
-                        .WithMany("Contains")
-                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Review", b =>
@@ -578,21 +489,6 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductProductCategory", b =>
-                {
-                    b.HasOne("Data.Interface.Models.ProductPage.ProductCategory", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Interface.Models.ProductPage.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("StoreItemUser", b =>
                 {
                     b.HasOne("Data.Interface.Models.StoreItem", null)
@@ -626,11 +522,6 @@ namespace Data.Sql.Migrations
             modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
                 {
                     b.Navigation("StoreItems");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.ProductPage.Product", b =>
-                {
-                    b.Navigation("Contains");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>
