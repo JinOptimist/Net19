@@ -23,7 +23,7 @@ namespace Data.Sql.Repositories
         {
             return _dbSet
            .Include(x => x.Author)
-           .ThenInclude(x => x.Comments);
+           .Include(x => x.Comment);
         }
 
         public void Remove(int id)

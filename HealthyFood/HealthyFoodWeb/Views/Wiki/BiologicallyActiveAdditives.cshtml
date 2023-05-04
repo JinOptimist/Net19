@@ -20,31 +20,42 @@
     @foreach (var pageViewModel in Model)
     {
         <div class="content">
-            <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
-            <div Texts>@pageViewModel.Text</div>
-            <div class="author">
-                Автор Текста: @pageViewModel.Author
-            </div>
-            <div>
-                @foreach (var CommentS in pageViewModel.CommentText)
-                {
-                    <div class="Comments">
-                        @CommentS
-                    </div>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <form method="post">
-                        <div class="text">
-                            Enter Comment: <textarea name="newComment"></textarea>
-                            <input type="hidden" value="@pageViewModel.Id" name="blockId">
-                            <div class="button">
-                                <input type="submit" value="Add comment" />
-                                <input type="reset" value=" Очистить">
-                            </div>
+            <div class="block">
+                <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
+                <div class="textBlock">
+                    @pageViewModel.Text
+                </div>
+                <span class="author">
+                    Автор Текста: @pageViewModel.Author
+                </span>
+                <div>
+                    @foreach (var CommentS in pageViewModel.CommentText)
+                    {
+                        <div>
+                        <span class="blockAuthorComments">
+                            <span class="comments">
+                                @CommentS
+                            </span>
+                            <span class="authorComments">
+                                Автор комментария:@pageViewModel.Author
+                            </span>
+                        </span>
                         </div>
-                    </form>
-                }
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post">
+                            <div class="text">
+                                Enter Comment: <textarea name="newComment"></textarea>
+                                <input type="hidden" value="@pageViewModel.Id" name="blockId">
+                                <div class="button">
+                                    <input type="submit" value="Add comment" />
+                                    <input type="reset" value=" Очистить">
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
             </div>
         </div>
     }
