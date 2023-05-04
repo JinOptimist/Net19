@@ -9,6 +9,8 @@ namespace Data.Interface.Models
 
         public string Password { get; set; }
 
+        public MyRole Role { get; set; }
+
         public virtual List<WikiBlockComment> Comments { get; set; }
 
         public virtual List<Game> CreatedGames { get; set; }

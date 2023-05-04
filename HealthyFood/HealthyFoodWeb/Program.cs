@@ -17,7 +17,7 @@ builder.Services
     .AddCookie(AuthService.AUTH_NAME, x=>
     {
         x.LoginPath = "/User/Login";
-        //x.AccessDeniedPath = "/User/AccessDenied";
+        x.AccessDeniedPath = "/User/AccessDenied";
     });
 
 
