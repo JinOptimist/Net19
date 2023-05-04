@@ -32,10 +32,10 @@
                     <div class="filter--names">
                         @foreach (var manufacturer in Model.Manufacturer)
                         {
-                          <div class="name--checkbox">
-                            <input type="checkbox" name="@manufacturer.Name" id="@manufacturer.Name" />
+                            <div class="name--checkbox">
+                                <input type="checkbox" name="@manufacturer.Name" id="@manufacturer.Name" />
                                 <label for="@manufacturer.Name">@manufacturer.Name</label>
-                          </div>
+                            </div>
                         }
                     </div>
                 </div>
@@ -48,21 +48,24 @@
                     <div class="catalogue--products">
                         @foreach (var item in Model.Items)
                         {
-                         <div>
-                            <div class="catalogue--product">
-                                <a>
-                                    <div class="product--image">
-                                        <img src="@item.Img">
-                                    </div>
-                                    <div class="product--name">
-                                        <p>@item.Name (@item.Manufacturer)</p>
-                                    </div>
-                                    <div class="product--price">@item.Price руб.</div>
-                                </a>
-                                <button class="product--add-to-cart">В корзину</button>
+                            <div>
+                                <div class="catalogue--product">
+                                    <a>
+                                        <div class="product--image">
+
+                                            <a href="/ProductPage/ProductPage">
+                                                <img src="@item.Img">
+                                            </a>
+                                        </div>
+                                        <div class="product--name">
+                                            <p>@item.Name (@item.Manufacturer)</p>
+                                        </div>
+                                        <div class="product--price">@item.Price руб.</div>
+                                    </a>
+                                    <button class="product--add-to-cart">В корзину</button>
                                     <button class="product--add-to-cart">В избранное</button>
+                                </div>
                             </div>
-                        </div>
                         }
                         <a href="/Store/AddProductInCatalogue">
                             <div class="catalogue--product">

@@ -1,10 +1,5 @@
-﻿using Data.Fake.Repositories;
-using Data.Interface.Models.ProductPage;
+﻿using Data.Interface.Models.ProductPage;
 using Data.Interface.Repositories.IProductPageRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;   
 namespace Data.Sql.Repositories.ProductPageRepositories
 {
     public class ProductCategoryRepository : BaseRepository<ProductCategory>, IProductCategoryRepository
