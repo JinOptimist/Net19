@@ -1,7 +1,8 @@
 ﻿using Azure.Core;
-using Data.Fake.Repositories;
 using Data.Interface.Models;
+using Data.Interface.Models.ProductPage;
 using Data.Interface.Repositories;
+using Data.Interface.Repositories.IProductPageRepositories;
 using Data.Sql.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Sql.Repositories
+namespace Data.Sql.Repositories.ProductPageRepositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {

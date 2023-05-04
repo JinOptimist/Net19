@@ -1,4 +1,3 @@
-using Data.Fake.Repositories;
 using Data.Interface.Repositories;
 using Data.Sql;
 using Data.Sql.Repositories;
@@ -6,6 +5,8 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Utility;
+using Data.Interface.Repositories.IProductPageRepositories;
+using Data.Sql.Repositories.ProductPageRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +72,9 @@ builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetSe
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IProductRepository>(x => new ProductRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IProductContainRepository>(x => new ProductContainRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IProductCategoryRepository>(x => new ProductCategoryRepository(x.GetService<WebContext>()));
+
 
 
 builder.Services.AddHttpContextAccessor();

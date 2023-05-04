@@ -1,7 +1,7 @@
-﻿using Data.Fake.Repositories;
-using Data.Interface.Models;
+﻿using Data.Interface.Models;
+using Data.Interface.Models.ProductPage;
 using Data.Interface.Repositories;
-using Data.Sql.Models;
+using Data.Interface.Repositories.IProductPageRepositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;

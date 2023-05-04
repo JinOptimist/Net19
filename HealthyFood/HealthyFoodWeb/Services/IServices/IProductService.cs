@@ -1,11 +1,11 @@
 ﻿using Data.Interface.Models;
-using Data.Sql.Models;
+using Data.Interface.Models.ProductPage;
 using HealthyFoodWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Services
 {
-	public interface IProductService
+    public interface IProductService
 	{
 		public List<Product> GetAllProducts();
 		void UpdateRatingProduct(ProductPageViewModel viewModel);
