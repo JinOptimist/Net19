@@ -69,11 +69,12 @@ namespace HealthyFoodWeb.Services
 
         public void UpdateItem(StoreItemViewModel storeItemViewModel)
         {
+            var manufacturer = _manufacturerRepository.GetByName(storeItemViewModel.Manufacturer);
             _catalogueRepository.UpdateItem(storeItemViewModel.Id,
                 storeItemViewModel.Name,
                 storeItemViewModel.Price,
                 storeItemViewModel.Img,
-                storeItemViewModel.Manufacturer
+                manufacturer
                 );
         }
     }
