@@ -28,19 +28,19 @@ namespace HealthyFoodWeb.Utility
         {
             var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 
-            if (!userRepository.Any())
+            var admin = userRepository.GetByName("Admin");
+            if (admin == null)
             {
-                var user = new User
+                admin = new User
                 {
                     Name = "Admin",
                     Password = "123",
                     AvatarUrl = "NoAvatar",
                     Role = MyRole.Admin
                 };
-                userRepository.Add(user);
+                userRepository.Add(admin);
             }
 
-            var admin = userRepository.GetByName("Admin");
             if (admin.Role != MyRole.Admin)
             {
                 admin.Role = MyRole.Admin;
@@ -90,7 +90,7 @@ namespace HealthyFoodWeb.Utility
                     var adminItem = new StoreItem
                     {
                         Name = $"Admin{i}",
-                        Price = 1+i,
+                        Price = 1 + i,
                         ImageUrl = "NoImage",
                         Manufacturer = manufacturer
 
