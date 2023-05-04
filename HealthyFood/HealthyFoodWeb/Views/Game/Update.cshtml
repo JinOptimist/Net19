@@ -3,12 +3,12 @@
 <div>
     <form method="post">
         @Html.HiddenFor(x=>x.Id)
+        <input type="hidden" value="@Model.Id" />
 
         <img src="@Model.CoverUrl" />
 
         <div>
             Name: @Html.TextBoxFor(x=>x.Name)
-           
         </div>
 
         <div>

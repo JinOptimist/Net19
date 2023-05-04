@@ -115,6 +115,7 @@ namespace HealthyFoodWeb.Services
             game.Genres.RemoveAll(x => true);
 
             newGenres.ForEach(genre => game.Genres.Add(genre));
+            // newGenres.ForEach(game.Genres.Add);
 
             _gameRepository.Update(game);
         }

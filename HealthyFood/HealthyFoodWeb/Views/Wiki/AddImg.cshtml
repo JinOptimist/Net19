@@ -1,21 +1,33 @@
 ﻿@using Data.Interface.Models;
-@model WikiMCViewModel
+@model WikiMcViewModel
+
+@{
+    Layout = "_LayoutWiki";
+    <link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
+}
 
 <div>
     <form method="post">
-        <div>
+        <div class="type">
             Type: @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
         </div>
-        <div>
+        <div class="year">
             Year: @Html.TextBoxFor(x=>x.Year)
         </div>
-        <div>
+        <div class="url">
             ImgUrl: 
             @Html.TextBoxFor(x => x.ImgPath)
-            @*<input type="text" name="ImgPath" id="ImgPath" />*@
+            @Html.ValidationMessageFor(x=>x.ImgPath)
+        </div>
+        <div class="tags">
+            Tags:
+            @Html.TextBoxFor(x => x.EnteredTags)  (enter the tags without spaces separated by commas)
         </div>
         <div>
-            <input type="submit" value="Add" />
+            <input type="submit" value="Add"/>
         </div>
     </form>
+</div>
+<div>
+    <a href="/Wiki/ShowUploadedImages">My Images</a>
 </div>
