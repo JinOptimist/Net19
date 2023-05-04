@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.GameCatalogController;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -87,8 +88,9 @@ namespace HealthyFoodWeb.Controllers
         }
 
 
-        public IActionResult Review()
+        public IActionResult Review(string errorMessage = "")
         {
+         
             var viewModels = _reviewService
               .GetAllReviews()
               .Select(dbModel =>
@@ -97,23 +99,29 @@ namespace HealthyFoodWeb.Controllers
                       TextReview = dbModel.TextReview,
                       Date = dbModel.Date,
                       Author = dbModel.UserName,
-                      CreatedGame = dbModel.GamesName.ToList()
-
+                      CreatedGame = dbModel.GamesName.ToList(),
+                      ErrorMessage = errorMessage
                   })
               .ToList();
-           
-            return View(viewModels);
+            var generalReviewViewModel = new GeneralReviewViewModel
+            {
+                ReviewViewModels = viewModels,
+                TextError = errorMessage
+            };
+
+            return View(generalReviewViewModel);
         }
 
 
         [HttpPost]
-        public IActionResult AddReview(string newReview)
+        public IActionResult AddReview(NewReviewViewModel viewMdoel)
         {
-            var ViewModel = new ReviewViewModel
+            if (!ModelState.IsValid)
             {
-                CreatReview = newReview
-            };
-            _reviewService.AddReview(ViewModel);
+                return RedirectToAction("Review", new { errorMessage  = "Текст отзыва не может быть пустым"});
+            }
+
+            _reviewService.AddReview(viewMdoel);
             return RedirectToAction("Review");
         }
     }
