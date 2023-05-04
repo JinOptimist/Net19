@@ -11,5 +11,6 @@ namespace HealthyFoodWeb.Services
 		void UpdateRatingProduct(ProductPageViewModel viewModel);
 		public void AddProduct(ProductPageViewModel viewModel);
 		public void Remove(int id);
+        public Product GetExpensiveProductWithCategories();
     }
 }

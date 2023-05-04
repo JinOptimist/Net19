@@ -7,7 +7,7 @@ using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.ProductPageServices
 {
     public class ProductService : IProductService
     {
@@ -46,11 +46,11 @@ namespace HealthyFoodWeb.Services
         {
             _productRepository.Remove(id);
         }
-        //public void Remove(int id)
-        //{
-        //    _productRepository.Remove(id);
-        //}
 
+        public Product GetExpensiveProductWithCategories()
+        {
+            return _productRepository.GetExpensiveProductWithCategories();
+        }
 
     }
 }

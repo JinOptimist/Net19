@@ -6,7 +6,7 @@ namespace Data.Interface.Repositories.IProductPageRepositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-
+        Product GetExpensiveProductWithCategories();
         void UpdateRating(int id, decimal rating);
     }
 }

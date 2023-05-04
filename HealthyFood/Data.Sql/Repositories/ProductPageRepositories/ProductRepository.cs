@@ -4,6 +4,7 @@ using Data.Interface.Models.ProductPage;
 using Data.Interface.Repositories;
 using Data.Interface.Repositories.IProductPageRepositories;
 using Data.Sql.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +27,12 @@ namespace Data.Sql.Repositories.ProductPageRepositories
 
         }
 
+        public Product GetExpensiveProductWithCategories()
+        {
+            return _dbSet
+                .Include(x => x.Categories)
+                .OrderByDescending(x => x.Price)
+                .First();
+        }
     }
 }

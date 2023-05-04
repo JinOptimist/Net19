@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>556f5002-5d2a-4422-994b-20652bfc1f94</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,10 @@
 
   <ItemGroup>
 	  <ProjectReference Include="..\Data.Sql\Data.Sql.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\ProductPageViewModels\" />
   </ItemGroup>
 
 </Project>

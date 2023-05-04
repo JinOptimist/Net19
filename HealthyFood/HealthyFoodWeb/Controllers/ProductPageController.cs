@@ -1,11 +1,10 @@
 ﻿using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
-using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers
 {
-	public class ProductPageController : Controller
+    public class ProductPageController : Controller
 	{
 		private IProductService _productService;
 

@@ -7,6 +7,7 @@ using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Utility;
 using Data.Interface.Repositories.IProductPageRepositories;
 using Data.Sql.Repositories.ProductPageRepositories;
+using HealthyFoodWeb.Services.ProductPageServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
