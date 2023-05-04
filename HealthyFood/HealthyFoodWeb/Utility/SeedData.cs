@@ -20,6 +20,7 @@ namespace HealthyFoodWeb.Utility
                 SeedGame(scope);
                 SeedReview(scope);
                 SeedGameCategory(scope);
+                SeedWikiMcImages(scope);
             }
         }
 
@@ -159,6 +160,76 @@ namespace HealthyFoodWeb.Utility
                     };
                     gameCategoryRepository.Add(gameCatalog);
                 }
+            }
+        }
+
+        private static void SeedWikiMcImages(IServiceScope scope)
+        {
+            var wikiMcImagesRepository = scope.ServiceProvider.GetRequiredService<IWikiMcRepository>();
+
+            if (!wikiMcImagesRepository.Any())
+            {
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var randomUser = userRepository.GetFirst();
+                var image1 = new WikiMcImage
+                {
+                    ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/41204/pub_5b00259fad0f222dd299aae7_5b005a50a936f4e52e30b616/scale_1200",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Proteins,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags>
+                        {
+                            new WikiTags
+                            {
+                                TagName = "Protein"
+                            },
+                            new WikiTags
+                            {
+                                TagName = "Muscles"
+                            },
+                        }
+                };
+                wikiMcImagesRepository.Add(image1);
+
+                var image2 = new WikiMcImage
+                {
+                    ImgUrl = "https://www.health.com/thmb/nxURaqGxebTJBMzXi5jZpaAL02Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Healthy-Fats-Food-GettyImages-1301412044-2000-8ab23a10624d42df85fa3f37d7c76a6b.jpg",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Fats,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags>
+                        {
+                            new WikiTags
+                            {
+                                TagName = "Fat"
+                            },
+                            new WikiTags
+                            {
+                                TagName = "Polyunsaturated fats"
+                            },
+                        }
+                };
+                wikiMcImagesRepository.Add(image2);
+
+                var image3 = new WikiMcImage
+                {
+                    ImgUrl = "https://medlineplus.gov/images/Carbohydrates_share.jpg",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Carbs,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags>
+                        {
+                            new WikiTags
+                            {
+                                TagName = "Carb"
+                            },
+                            new WikiTags
+                            {
+                                TagName = "Complex carbs"
+                            },
+                        }
+                };
+                wikiMcImagesRepository.Add(image3);
             }
         }
     }

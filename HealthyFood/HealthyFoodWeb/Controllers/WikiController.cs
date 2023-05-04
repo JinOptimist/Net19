@@ -14,9 +14,9 @@ namespace HealthyFoodWeb.Controllers
     {
         private IWikiBAAPageServices _blockInformationServices;
 
-        private IWikiMCService _wikiMCImgService;
+        private IWikiMcService _wikiMCImgService;
 
-        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMCService wikiMCImgService)
+        public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMcService wikiMCImgService)
         {
             _blockInformationServices = blockInformationServices;
             _wikiMCImgService = wikiMCImgService;
@@ -40,7 +40,7 @@ namespace HealthyFoodWeb.Controllers
                     Title = x.Title,
                     Text = x.Text,
                     Author = x.Author.Name,
-                    CommentText = x.Author.Comments.Select(x => x.Text).ToList()
+                    CommentText = x.Comment?.Select(x => x.Text).ToList() ?? new List<string>()
                 })
                 .ToList();
 
@@ -49,10 +49,10 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult MacronutrientCalculator()
         {
-            var viewModel = new WikiMCImgViewModel();
+            var viewModel = new WikiMcImgViewModel();
             viewModel.AllImgByType = _wikiMCImgService
                 .GetAllImgByType()
-                .Select(x => new WikiMCViewModel
+                .Select(x => new WikiMcViewModel
                 {
                     ImgPath = x.ImgUrl,
                 })
@@ -60,9 +60,10 @@ namespace HealthyFoodWeb.Controllers
 
             viewModel.AllImgByYear = _wikiMCImgService
                 .GetAllImgByYear()
-                .Select(x => new WikiMCViewModel
+                .Select(x => new WikiMcViewModel
                 {
                     ImgPath = x.ImgUrl,
+                    UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
                 })
                 .ToList();
 
@@ -96,19 +97,43 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddImg()
+		[Authorize]
+		public IActionResult AddImg()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddImg(WikiMCViewModel viewModel)
+		[Authorize]
+		public IActionResult AddImg(WikiMcViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             _wikiMCImgService.AddImg(viewModel);
-            return RedirectToAction("MacronutrientCalculator");
+            return RedirectToAction("AddImg");
         }
 
-        private BLockPageBaaViewModel Convert(PageWikiBlock x)
+		[HttpGet]
+		[Authorize]
+		public IActionResult ShowUploadedImages()
+		{
+			var viewModel = new WikiUserImagesViewModel();
+
+			viewModel.UserImages = _wikiMCImgService
+				.GetUserImages()
+				.Select(imageDb => new WikiMcViewModel
+				{
+					ImgPath = imageDb.ImgUrl,
+				})
+				.ToList();
+
+			return View(viewModel);
+		}
+
+		private BLockPageBaaViewModel Convert(PageWikiBlock x)
         {
             return new BLockPageBaaViewModel
             {
