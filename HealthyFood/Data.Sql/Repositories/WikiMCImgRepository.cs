@@ -3,6 +3,7 @@ using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Data.Sql.Repositories
 {
@@ -18,9 +19,23 @@ namespace Data.Sql.Repositories
                     Year = image.Year,
                     ImgUrl = image.ImgUrl,
                     ImgType = image.ImgType,
-                    //UserName = image.ImageUploader.Name,
-                    //Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
+                    UserName = image.ImageUploader.Name,
+                    Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
                 }).ToList();
+        }
+
+        public ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage)
+        {
+            var userImages = GetUserImages();
+
+            var dataModel = new ImagesAndPaginatorData();
+            var images = userImages
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .ToList();
+            dataModel.Images = images;
+            dataModel.TotalCount = _dbSet.Count();
+            return dataModel;
         }
 
         public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)

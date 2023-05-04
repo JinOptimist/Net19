@@ -14,6 +14,8 @@ namespace HealthyFoodWeb.Services
 
 		IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages();
 
+        ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage);
+
         void RemoveByType(ImgTypeEnum type);
 
 		void RemoveByYear(int year);

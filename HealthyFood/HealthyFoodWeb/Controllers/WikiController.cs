@@ -5,6 +5,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Microsoft.AspNetCore.Authorization;
+using HealthyFoodWeb.Models.Games;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -116,22 +117,53 @@ namespace HealthyFoodWeb.Controllers
 
 		[HttpGet]
 		[Authorize]
-		public IActionResult ShowUploadedImages()
+		public IActionResult ShowUploadedImages(int page = 1, int perPage = 1)
 		{
-			var viewModel = new WikiUserImagesViewModel();
+            var viewModel = new WikiUserImagesViewModel();
+            var dataModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
+            viewModel.UserImages = dataModel
+                .Images
+                .Select(x => new WikiMcViewModel
+                {
+                   Year = x.Year,
+                   ImgPath = x.ImgUrl,
+                   ImgType = x.ImgType,
+                   UserTags = x.Tags,
+                })
+                .ToList();
 
-			viewModel.UserImages = _wikiMCImgService
-				.GetUserImages()
-				.Select(imageDb => new WikiMcViewModel
-				{
-					ImgPath = imageDb.ImgUrl,
-				})
-				.ToList();
+            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
+            var totalPageCount =
+                (dataModel.TotalCount / perPage)
+                + (doWeNeedOneMorePage ? 1 : 0);
 
-			return View(viewModel);
+            viewModel.PageList = Enumerable
+                .Range(1, totalPageCount)
+                .ToList();
+            viewModel.ActivePageNumber = page;
+            return View(viewModel);
 		}
 
-		private BLockPageBaaViewModel Convert(PageWikiBlock x)
+        public IActionResult UpdateImages(int id)
+        {
+            var viewModel = _wikiMCImgService.GetImageViewModel(id);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateImages(WikiMcViewModel wikiMcViewModel)
+        {
+            _gameService.UpdateNameAndCover(wikiMcViewModel.Id,
+                wikiMcViewModel.Name,
+                wikiMcViewModel.CoverUrl);
+
+            _gameService.UpdateGenres(wikiMcViewModel.Id,
+                wikiMcViewModel.Genres);
+
+            return RedirectToAction("Games", "Game");
+        }
+
+        private BLockPageBaaViewModel Convert(PageWikiBlock x)
         {
             return new BLockPageBaaViewModel
             {

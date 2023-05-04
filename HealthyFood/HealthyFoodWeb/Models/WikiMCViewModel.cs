@@ -6,6 +6,8 @@ namespace HealthyFoodWeb.Models
 {
     public class WikiMcViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [MyUrl]
         public string ImgPath { get; set; }
