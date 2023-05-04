@@ -8,6 +8,11 @@ namespace Data.Sql.Repositories
         public GameCategoryRepository(WebContext webContext) : base(webContext)
         {
         }
+
+        public GameCategory Get(string name)
+        {
+            return _dbSet.SingleOrDefault(x => x.Name == name);
+        }
     }
 }
 

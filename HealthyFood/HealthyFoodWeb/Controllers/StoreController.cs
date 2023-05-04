@@ -4,6 +4,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -78,6 +79,44 @@ namespace HealthyFoodWeb.Controllers
         {
             _cartService.AddProductInBase(viewModel);
             return RedirectToAction("CartPage");
+        }
+
+
+        [HttpGet]
+        public IActionResult AddProductInCatalogue()
+        {
+            var manufacturers = _storeCatalogueService
+                .GetAllManufacturers();
+            var viewModel = new StoreItemViewModel
+            {
+                AllManufacturers = manufacturers.Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Name,
+                })
+                .ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddProductInCatalogue(StoreItemViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var manufacturers = _storeCatalogueService
+                .GetAllManufacturers();
+                viewModel.AllManufacturers = manufacturers.Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Name,
+                })
+                    .ToList();
+                return View(viewModel);
+            }
+            _storeCatalogueService.AddStoreItem(viewModel);
+            return RedirectToAction("storePageCatalogue");
         }
 
     }

@@ -30,6 +30,11 @@ namespace Data.Fake.Repositories
             });
         }
 
+        public Game GetGameAndGenres(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Game GetGameByName(string name)
         {
             return FakeDbModels.FirstOrDefault(x => x.Name == name);
@@ -58,6 +63,16 @@ namespace Data.Fake.Repositories
         public void RemoveByName(string name)
         {
             FakeDbModels.Remove(GetGameByName(name));
+        }
+
+        public void UpdateNameAndCover(int id, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateNameAndCover(int id, string name, string coverUrl)
+        {
+            throw new NotImplementedException();
         }
     }
 }
