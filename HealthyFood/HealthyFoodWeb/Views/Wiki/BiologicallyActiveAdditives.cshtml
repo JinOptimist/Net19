@@ -25,7 +25,7 @@
                 <div class="textBlock">
                     @pageViewModel.Text
                 </div>
-                <span class="blockAuthor">
+                <span class="borderAuthor">
                     <span class="author">
                         Автор Текста: @pageViewModel.Author
                     </span>
@@ -35,7 +35,7 @@
                         @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
                         {
                             <div>
-                                <span class="blockAuthorComments">
+                                <span class="borderAuthorComments">
                                     <span class="comments">
                                         @CommentAndAuthor.Comment
                                         @CommentAndAuthor.Author
