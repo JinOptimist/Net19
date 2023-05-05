@@ -1,7 +1,4 @@
-﻿using Data.Interface.Models;
-using HealthyFoodWeb.Models.ModelsWiki;
-
-namespace HealthyFoodWeb.Models.ModelsWikiBAA
+﻿namespace HealthyFoodWeb.Models.ModelsWikiBAA
 {
     public class BLockPageBaaViewModel
     {

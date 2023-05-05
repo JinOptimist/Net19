@@ -20,7 +20,7 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<BlockPageBaaData> GetBlocksWithAuthor()
+        public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
             // return _dbSet
             //.Include(x => x.Author)

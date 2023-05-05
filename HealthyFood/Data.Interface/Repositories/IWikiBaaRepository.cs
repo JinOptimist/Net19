@@ -5,6 +5,6 @@ namespace Data.Interface.Repositories
 {
     public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock> 
     {
-		IEnumerable<BlockPageBaaData> GetBlocksWithAuthor();
+		IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents();
     }
 }
