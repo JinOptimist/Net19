@@ -4,6 +4,7 @@ using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Interface.Models;
 using Data.Sql.Repositories;
+using Data.Interface.DataModels;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -48,12 +49,28 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaCommentRepository.Add(dbComment);
         }
 
-        public IEnumerable<PageWikiBlock> GetBlocksWithAuthorAndComments()
+        public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
         {
-            
-            return _wikiBaaRepository.GetBlocksWithAuthor();
+
+            return _wikiBaaRepository.GetBlocksWithAuthorComMents()
+                .Select(
+                x => new BLockPageBaaViewModel
+                {
+                    Id = x.Id,
+                    Text = x.Text,
+                    Title = x.Title,
+                    Author = x.Author,
+                    CommentAndAuthor = x.CommentAndAuthor?
+                    .Select
+                    (c => new CommentAndAuthorViewModel
+                    {
+                        Comment = c.Comment,
+                        Author = c.Author
+                    })
+                    .ToList() ?? new List<CommentAndAuthorViewModel>()
+                });
         }
-       
+
         public void Remove(int id)
         {
             _wikiBaaRepository.Remove(id);
