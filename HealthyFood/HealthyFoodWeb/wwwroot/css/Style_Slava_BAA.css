@@ -129,3 +129,9 @@ h2 {
     padding: 1px;
     display: inline-block;
 }
+
+.blockAuthor {
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 1px;
+    display: inline-block;
+}
