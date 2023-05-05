@@ -83,7 +83,6 @@ h2 {
 
 .text textArea {
     width: 60%;
-    margin-top: 2%;
 }
 
 .title input {
@@ -92,7 +91,7 @@ h2 {
 }
 
 .button {
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .textBlock {
@@ -146,4 +145,8 @@ h2 {
 span.authorComments {
     align-self: flex-end;
     text-decoration: underline;
+}
+
+.button input {
+    background: #fff;
 }
