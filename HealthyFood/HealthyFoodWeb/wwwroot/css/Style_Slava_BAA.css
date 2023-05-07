@@ -125,13 +125,6 @@ h2 {
     margin-top: 1%;
 }
 
-.borderAuthor {
-    border: 2mm ridge rgb(211 220 50 / 30%);
-    padding: 1px;
-    display: inline-block;
-    margin-top: 1%;
-}
-
 .enterComments {
     display: flex;
     align-items: baseline;
@@ -140,6 +133,7 @@ h2 {
 .positionAuthor {
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
 }
 
 span.authorComments {
@@ -149,4 +143,19 @@ span.authorComments {
 
 .button input {
     background: #fff;
+}
+
+.deletBlock {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deletBlockBorder {
+    padding: 4px;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    background: #f0f0f0;
+}
+
+.deletBlockBorder input{
+    border: 0px;
 }

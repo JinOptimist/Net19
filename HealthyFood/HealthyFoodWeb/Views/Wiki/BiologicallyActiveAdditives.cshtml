@@ -21,18 +21,29 @@
     {
         <div class="content">
             <div class="block">
-                <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
+                <div Titles>
+                    <h2>
+                        @pageViewModel.Title
+                    </h2>
+                </div>
                 <div class="textBlock">
                     @pageViewModel.Text
                 </div>
                 <div class="positionAuthor">
-                    <div class="borderAuthor">
-                        <div class="author">
-                            <span>
-                                Автор Текста: @pageViewModel.Author
-                            </span>
+                    <span class="deletBlock">
+                        <div class="deletBlockBorder">
+                            <form action="/Wiki/Remove">
+                                <input type="hidden" value="@pageViewModel.Id" name="id">
+                                <input type="submit" value="Delet Block">
+                            </form>
                         </div>
+                    </span>
+                    <div class="author">
+                        <span>
+                            Автор Текста: @pageViewModel.Author
+                        </span>
                     </div>
+
                 </div>
                 <div>
                     <div>
@@ -62,7 +73,7 @@
                                 </div>
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
                                 <div class="button">
-                                    <input type="submit" value="Add comment" />
+                                    <input type="submit" value="Add comment">
                                     <input type="reset" value=" Очистить">
                                 </div>
                             </div>
