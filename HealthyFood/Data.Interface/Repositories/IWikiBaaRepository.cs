@@ -1,9 +1,10 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.DataModels;
+using Data.Sql.Models;
 
 namespace Data.Interface.Repositories
 {
     public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock> 
     {
-		IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
+		IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents();
     }
 }

@@ -1,6 +1,7 @@
-﻿using Data.Interface.Repositories;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Repositories;
 using Data.Sql.Models;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Data.Sql.Repositories
 {
@@ -19,11 +20,30 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<PageWikiBlock> GetBlocksWithAuthor()
+        public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
-            return _dbSet
-           .Include(x => x.Author)
-           .Include(x => x.Comment);
+            // return _dbSet
+            //.Include(x => x.Author)
+            //.Include(x => x.Comment)
+            //.ThenInclude(x => x.Author);
+
+            return _dbSet.Select(
+                x => new BlockPageBaaData
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Author = x.Author.Name,
+                    CommentAndAuthor = x
+                        .Comment
+                        .Select(c => new CommentAndAuthorData
+                        {
+                            Comment = c.Text,
+                            Author = c.Author.Name,
+                        })
+                        .ToList(),
+                })
+                .ToList();
         }
 
         public void Remove(int id)

@@ -2,6 +2,7 @@
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.GameCatalogController;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -20,16 +21,14 @@ namespace HealthyFoodWeb.Services
         {
             return _reviewRepository.GetReviews().ToList();
         }
-        public void AddReview(ReviewViewModel model)
+        public void AddReview(NewReviewViewModel model)
         {
             var user = _authService.GetUser();
             var dbModel = new Review()
             {
-                TextReview = model.CreatReview,
+                TextReview = model.NewReview,
                 Date = DateTime.Now,
                 User = user
-
-               
             };
             _reviewRepository.Add(dbModel);
         }
