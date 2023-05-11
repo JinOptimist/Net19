@@ -35,6 +35,7 @@ namespace Data.Sql.Repositories
                         {
                             Comment = c.Text,
                             Author = c.Author,
+                            CommentId=c.Id
                         })
                         .ToList(),
                 })

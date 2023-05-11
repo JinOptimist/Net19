@@ -8,20 +8,24 @@
 
 <div>
     <form method="post">
-        <div class="type">
-            Type: @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
-        </div>
-        <div class="year">
-            Year: @Html.TextBoxFor(x=>x.Year)
-        </div>
-        <div class="url">
-            ImgUrl: 
-            @Html.TextBoxFor(x => x.ImgPath)
-            @Html.ValidationMessageFor(x=>x.ImgPath)
-        </div>
-        <div class="tags">
-            Tags:
-            @Html.TextBoxFor(x => x.EnteredTags)  (enter the tags without spaces separated by commas)
+        <div class="add-parameters">
+            <div class="type">
+                Type <br />
+                @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
+            </div>
+            <div class="year">
+                Year <br /> 
+                @Html.TextBoxFor(x=>x.Year)
+            </div>
+            <div class="url">
+                ImgUrl <br />
+                @Html.TextBoxFor(x => x.ImgPath)
+                @Html.ValidationMessageFor(x=>x.ImgPath)
+           </div>
+            <div class="tags">
+                Tags <br />
+                @Html.TextBoxFor(x => x.EnteredTags, new { @placeholder = "sport,life,food..."})
+            </div>
         </div>
         <div>
             <input type="submit" value="Add"/>

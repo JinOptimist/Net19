@@ -1,0 +1,27 @@
+﻿
+.gallery {
+    margin-inline: 30px;
+    display: flex;
+}
+
+.gallery img {
+    max-width: 350px;
+    max-height: 225px;
+    min-height: 225px;
+    min-width: 350px;
+    margin: 10px;
+}
+
+.paginator a {
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background: #ffffff;
+    color: black;
+    text-decoration: none;
+}
+
+.paginator a.active {
+    color: dimgrey;
+}
