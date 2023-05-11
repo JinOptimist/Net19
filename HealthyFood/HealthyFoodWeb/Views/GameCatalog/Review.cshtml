@@ -30,11 +30,16 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div>
-            @Html.TextArea("newReview", new { @class = "Creat-review" })
+            @Html.TextAreaFor(x => x.NewReview, new { @class = "Creat-review" })
+             @*   //@Model.NewReview, new { @class = "Creat-review" })*@
 
         </div>
         <div>
-            <input type="submit" value="Написать отзыв" /> <span class = "Error">@Model.TextError </span>
+            <input type="submit" value="Написать отзыв" /> 
+            <span class = "Error">@Model.TextError 
+             
+            </span>
+          
         </div>
         <div>
             
