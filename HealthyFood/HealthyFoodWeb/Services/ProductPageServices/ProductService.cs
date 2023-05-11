@@ -3,7 +3,7 @@ using Data.Interface.Models.ProductPage;
 using Data.Interface.Repositories;
 using Data.Interface.Repositories.IProductPageRepositories;
 using Data.Sql.Repositories;
-using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.ProductPageViewModels;
 using HealthyFoodWeb.Services.IServices;
 
 

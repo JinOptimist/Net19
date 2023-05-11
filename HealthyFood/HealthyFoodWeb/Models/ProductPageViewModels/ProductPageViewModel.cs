@@ -1,4 +1,4 @@
-﻿namespace HealthyFoodWeb.Models
+﻿namespace HealthyFoodWeb.Models.ProductPageViewModels
 {
     public class ProductPageViewModel
     {
@@ -12,6 +12,6 @@
         public List<string> ProductCategories { get; set; } = new List<string>();
 
         public List<decimal> ProductContain { get; set; } = new List<decimal>();
-          
+
     }
 }

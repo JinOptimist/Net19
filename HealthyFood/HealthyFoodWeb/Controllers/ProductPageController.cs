@@ -1,4 +1,5 @@
 ﻿using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.ProductPageViewModels;
 using HealthyFoodWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 

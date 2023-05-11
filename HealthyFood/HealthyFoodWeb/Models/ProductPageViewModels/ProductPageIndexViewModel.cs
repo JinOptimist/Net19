@@ -1,4 +1,6 @@
-﻿namespace HealthyFoodWeb.Models
+﻿using HealthyFoodWeb.Models.ProductPageViewModels;
+
+namespace HealthyFoodWeb.Models
 {
     public class ProductPageIndexViewModel
     {

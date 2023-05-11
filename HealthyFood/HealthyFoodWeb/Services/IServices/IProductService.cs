@@ -1,6 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Models.ProductPage;
-using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.ProductPageViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Services
