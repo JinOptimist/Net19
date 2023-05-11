@@ -22,11 +22,6 @@ namespace Data.Sql.Repositories
 
         public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
-            // return _dbSet
-            //.Include(x => x.Author)
-            //.Include(x => x.Comment)
-            //.ThenInclude(x => x.Author);
-
             return _dbSet.Select(
                 x => new BlockPageBaaData
                 {
@@ -39,7 +34,7 @@ namespace Data.Sql.Repositories
                         .Select(c => new CommentAndAuthorData
                         {
                             Comment = c.Text,
-                            Author = c.Author.Name,
+                            Author = c.Author,
                         })
                         .ToList(),
                 })

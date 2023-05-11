@@ -29,24 +29,6 @@ namespace HealthyFoodWeb.Controllers
         [HttpGet]
         public IActionResult BiologicallyActiveAdditives()
         {
-            //var pageViewModels = _blockInformationServices
-            //    .GetBlocksWithAuthorAndComments()
-            //    .Select(
-            //    x => new BLockPageBaaViewModel
-            //    {
-            //        Id = x.Id,
-            //        Title = x.Title,
-            //        Text = x.Text,
-            //        Author = x.Author.Name,
-            //        CommentAndAuthor = x.Comment?.Select(c => new CommentAndAuthorViewModel
-            //        {
-            //            Comment = c.Text,
-            //            Author = c.Author.Name,
-            //        })
-            //        .ToList(),
-            //    })
-            //    .ToList();
-
             var pageViewModels = _blockInformationServices
                 .GetBlocksWithAuthorAndComments();
             return View(pageViewModels);

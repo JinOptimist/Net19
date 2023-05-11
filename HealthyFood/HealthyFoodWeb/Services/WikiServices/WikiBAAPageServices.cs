@@ -36,17 +36,17 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockeId, string comment)
+        public void CreateComment(int blockId, string comment)
         {
-            var block = _wikiBaaRepository.Get(blockeId);
+            var block = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            var dbComment = new WikiBlockComment()
-            {
-                Block = block,
-                Text = comment,
-                Author = user,
-            };
-            _wikiBaaCommentRepository.Add(dbComment);
+            _wikiBaaCommentRepository.CreateComment(
+                new CommentAndAuthorData
+                {
+                    Block = block,
+                    Comment = comment,
+                    Author = user
+                });
         }
 
         public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
@@ -57,15 +57,15 @@ namespace HealthyFoodWeb.Services.WikiServices
                 x => new BLockPageBaaViewModel
                 {
                     Id = x.Id,
-                    Text = x.Text,
                     Title = x.Title,
+                    Text = x.Text,
                     Author = x.Author,
                     CommentAndAuthor = x.CommentAndAuthor?
                     .Select
                     (c => new CommentAndAuthorViewModel
                     {
                         Comment = c.Comment,
-                        Author = c.Author
+                        Author = c.Author.Name
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });
