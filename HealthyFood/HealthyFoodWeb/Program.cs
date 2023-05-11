@@ -66,6 +66,7 @@ builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiTagRepository>(x => new WikiTagRepository(x.GetService<WebContext>()));
 
 builder.Services.AddHttpContextAccessor();
 

@@ -20,7 +20,8 @@ namespace HealthyFoodWeb.Utility
                 SeedGame(scope);
                 SeedReview(scope);
                 SeedGameCategory(scope);
-                SeedWikiMcImages(scope);
+                SeedWikiTag(scope);
+                SeedWikiMcImage(scope);
             }
         }
 
@@ -171,13 +172,35 @@ namespace HealthyFoodWeb.Utility
             }
         }
 
-        private static void SeedWikiMcImages(IServiceScope scope)
+        private static void SeedWikiTag(IServiceScope scope)
+        {
+            var defaultTags = new List<string> { "Protein", "Fat", "Carb", "Muscles", "Polyunsaturated fats", "Complex carbs" };
+
+            var tagRepository = scope.ServiceProvider
+                .GetRequiredService<IWikiTagRepository>();
+
+            foreach (var tagName in defaultTags)
+            {
+                if (tagRepository.Get(tagName) == null)
+                {
+                    var tagCatalog = new WikiTags
+                    {
+                        TagName = tagName
+                    };
+                    tagRepository.Add(tagCatalog);
+                }
+            }
+        }
+
+        private static void SeedWikiMcImage(IServiceScope scope)
         {
             var wikiMcImagesRepository = scope.ServiceProvider.GetRequiredService<IWikiMcRepository>();
 
             if (!wikiMcImagesRepository.Any())
             {
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var tagRepository = scope.ServiceProvider.GetRequiredService<IWikiTagRepository>();
+                var tags = tagRepository.GetAll().ToDictionary(x => x.TagName, x => x);
                 var randomUser = userRepository.GetFirst();
                 var image1 = new WikiMcImage
                 {
@@ -185,17 +208,7 @@ namespace HealthyFoodWeb.Utility
                     Year = 2023,
                     ImgType = ImgTypeEnum.Proteins,
                     ImageUploader = randomUser,
-                    Tags = new List<WikiTags>
-                        {
-                            new WikiTags
-                            {
-                                TagName = "Protein"
-                            },
-                            new WikiTags
-                            {
-                                TagName = "Muscles"
-                            },
-                        }
+                    Tags = new List<WikiTags> { tags["Protein"], tags["Muscles"] },
                 };
                 wikiMcImagesRepository.Add(image1);
 
@@ -205,17 +218,7 @@ namespace HealthyFoodWeb.Utility
                     Year = 2023,
                     ImgType = ImgTypeEnum.Fats,
                     ImageUploader = randomUser,
-                    Tags = new List<WikiTags>
-                        {
-                            new WikiTags
-                            {
-                                TagName = "Fat"
-                            },
-                            new WikiTags
-                            {
-                                TagName = "Polyunsaturated fats"
-                            },
-                        }
+                    Tags = new List<WikiTags> { tags["Fat"], tags["Polyunsaturated fats"] },
                 };
                 wikiMcImagesRepository.Add(image2);
 
@@ -225,17 +228,7 @@ namespace HealthyFoodWeb.Utility
                     Year = 2023,
                     ImgType = ImgTypeEnum.Carbs,
                     ImageUploader = randomUser,
-                    Tags = new List<WikiTags>
-                        {
-                            new WikiTags
-                            {
-                                TagName = "Carb"
-                            },
-                            new WikiTags
-                            {
-                                TagName = "Complex carbs"
-                            },
-                        }
+                    Tags = new List<WikiTags> { tags["Carb"], tags["Complex carbs"] },
                 };
                 wikiMcImagesRepository.Add(image3);
             }
