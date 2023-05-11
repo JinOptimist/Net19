@@ -30,18 +30,7 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult BiologicallyActiveAdditives()
         {
             var pageViewModels = _blockInformationServices
-                .GetBlocksWithAuthorAndComments()
-                .Select(
-                x => new BLockPageBaaViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Text = x.Text,
-                    Author = x.Author.Name,
-                    CommentText = x.Comment?.Select(x => x.Text).ToList() ?? new List<string>()
-                })
-                .ToList();
-
+                .GetBlocksWithAuthorAndComments();
             return View(pageViewModels);
         }
 
@@ -95,15 +84,15 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
-		[Authorize]
-		public IActionResult AddImg()
+        [Authorize]
+        public IActionResult AddImg()
         {
             return View();
         }
 
         [HttpPost]
-		[Authorize]
-		public IActionResult AddImg(WikiMcViewModel viewModel)
+        [Authorize]
+        public IActionResult AddImg(WikiMcViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -114,24 +103,24 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("AddImg");
         }
 
-		[HttpGet]
-		[Authorize]
-		public IActionResult ShowUploadedImages()
-		{
-			var viewModel = new WikiUserImagesViewModel();
+        [HttpGet]
+        [Authorize]
+        public IActionResult ShowUploadedImages()
+        {
+            var viewModel = new WikiUserImagesViewModel();
 
-			viewModel.UserImages = _wikiMCImgService
-				.GetUserImages()
-				.Select(imageDb => new WikiMcViewModel
-				{
-					ImgPath = imageDb.ImgUrl,
-				})
-				.ToList();
+            viewModel.UserImages = _wikiMCImgService
+                .GetUserImages()
+                .Select(imageDb => new WikiMcViewModel
+                {
+                    ImgPath = imageDb.ImgUrl,
+                })
+                .ToList();
 
-			return View(viewModel);
-		}
+            return View(viewModel);
+        }
 
-		private BLockPageBaaViewModel Convert(PageWikiBlock x)
+        private BLockPageBaaViewModel Convert(PageWikiBlock x)
         {
             return new BLockPageBaaViewModel
             {

@@ -1,6 +1,6 @@
-﻿namespace HealthyFoodWeb.Models.ModelsWikiBAA
+﻿namespace Data.Interface.DataModels
 {
-    public class BLockPageBaaViewModel
+    public class BlockPageBaaData
     {
         public int Id { get; set; }
 
@@ -10,7 +10,6 @@
 
         public string Author { get; set; }
 
-        public List<CommentAndAuthorViewModel> CommentAndAuthor { get; set; }
+        public List<CommentAndAuthorData> CommentAndAuthor { get; set; }
     }
 }
-
