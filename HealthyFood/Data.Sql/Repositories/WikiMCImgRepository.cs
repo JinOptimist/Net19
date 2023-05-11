@@ -15,6 +15,7 @@ namespace Data.Sql.Repositories
             => _dbSet
                 .Select(image => new ImagesAndInfoAboutTheirUploaderData
                 {
+                    Id = image.Id,
                     Year = image.Year,
                     ImgUrl = image.ImgUrl,
                     ImgType = image.ImgType,

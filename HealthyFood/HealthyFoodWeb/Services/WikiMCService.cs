@@ -95,7 +95,7 @@ namespace HealthyFoodWeb.Services
                 ImgType = imageDb.ImgType,
                 ImgPath = imageDb.ImgUrl,
                 Year = imageDb.Year,
-                AvailableTags = tags,
+                //AvailableTags = tags,
                 UserTags = imageDb.Tags.Select(x => x.TagName).ToList()
             };
         }

@@ -4,6 +4,8 @@ namespace Data.Interface.DataModels
 {
     public class ImagesAndInfoAboutTheirUploaderData
     {
+        public int Id { get; set; }
+
         public int Year { get; set; }
 
         public string ImgUrl { get; set; }

@@ -124,6 +124,7 @@ namespace HealthyFoodWeb.Controllers
                 .Images
                 .Select(x => new WikiMcViewModel
                 {
+                   Id = x.Id,
                    Year = x.Year,
                    ImgPath = x.ImgUrl,
                    ImgType = x.ImgType,
