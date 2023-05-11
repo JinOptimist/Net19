@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 
 namespace Data.Fake.Repositories
@@ -61,6 +62,21 @@ namespace Data.Fake.Repositories
         {
             var removedYear = FakeDbModels.Where(x => x.Year == year).ToList();
             removedYear.ForEach(x => FakeDbModels.Remove(x));
+        }
+
+		public IEnumerable<WikiMcImage> GetAllImgByYearWithTags(int year)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<WikiMcImage> GetImagesByUserId(int userId)
+		{
+			throw new NotImplementedException();
+		}
+
+        public List<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Data.Interface.Models
 
         public string Password { get; set; }
 
+        public MyRole Role { get; set; }
+
         public virtual List<WikiBlockComment> Comments { get; set; }
 
         public virtual List<Game> CreatedGames { get; set; }
@@ -18,6 +20,9 @@ namespace Data.Interface.Models
         public virtual List<Cart> Products { get; set; }
 
         public virtual List<StoreItem> StoreItems { get; set; }
+
         public virtual List<Review> Reviews { get; set; }
+
+        public virtual List<WikiMcImage> UploadedImages { get; set; }
     }
 }

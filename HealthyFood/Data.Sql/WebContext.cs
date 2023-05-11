@@ -18,6 +18,8 @@ namespace Data.Sql
 
         public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
+        public DbSet<WikiTags> WikiTags { get; set; }
+
         public DbSet<Review> Reviews { get; set; }
         
         public DbSet<Game> Games { get; set; }
@@ -66,10 +68,10 @@ namespace Data.Sql
                 .WithMany(x => x.Comments)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<WikiBlockComment>()
-                .HasOne(x => x.Block)
-                .WithMany(x => x.Comment)
-                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<PageWikiBlock>()
+                .HasMany(x => x.Comment)
+                .WithOne(x => x.Block)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Manufacturer>()
                 .HasMany(x => x.StoreItems)
@@ -79,6 +81,14 @@ namespace Data.Sql
                 .HasMany(x => x.Users)
                 .WithMany(x => x.StoreItems);
 
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.UploadedImages)
+                .WithOne(x => x.ImageUploader)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<WikiMcImage>()
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Images);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,0 +1,14 @@
+﻿@model WikiUserImagesViewModel
+
+@{
+	Layout = "_LayoutWiki";
+	<link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
+}
+
+<div class="gallery">
+	My gallery:
+	@foreach (var image in Model.UserImages)
+	{
+		<img src="@image.ImgPath">
+	}
+</div>

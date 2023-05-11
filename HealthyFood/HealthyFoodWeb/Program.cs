@@ -17,7 +17,7 @@ builder.Services
     .AddCookie(AuthService.AUTH_NAME, x=>
     {
         x.LoginPath = "/User/Login";
-        //x.AccessDeniedPath = "/User/AccessDenied";
+        x.AccessDeniedPath = "/User/AccessDenied";
     });
 
 
@@ -30,8 +30,8 @@ builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-builder.Services.AddScoped<IWikiMCService>(
-    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
+builder.Services.AddScoped<IWikiMcService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), diContainer.GetService<IAuthService>(), diContainer.GetService<IWikiTagRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(

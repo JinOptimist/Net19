@@ -20,6 +20,8 @@ namespace HealthyFoodWeb.Services
             {
                 Name = viewModel.Name,
                 AvatarUrl = viewModel.AvatarUrl,
+                Password = viewModel.Password,
+                Role = MyRole.User
             };
             _userRepository.Add(User);
         }
