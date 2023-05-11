@@ -6,7 +6,7 @@
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
 }
-@model List<BLockPageBaaViewModel>
+@model IEnumerable<BLockPageBaaViewModel>
 
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
@@ -21,35 +21,59 @@
     {
         <div class="content">
             <div class="block">
-                <div Titles><h2>@pageViewModel.Title <a href="/Wiki/Remove?id=@pageViewModel.Id">delete</a></h2></div>
+                <div Titles>
+                    <h2>
+                        @pageViewModel.Title
+                    </h2>
+                </div>
                 <div class="textBlock">
                     @pageViewModel.Text
                 </div>
-                <span class="author">
-                    Автор Текста: @pageViewModel.Author
-                </span>
-                <div>
-                    @foreach (var CommentS in pageViewModel.CommentText)
-                    {
-                        <div>
-                        <span class="blockAuthorComments">
-                            <span class="comments">
-                                @CommentS
-                            </span>
-                            <span class="authorComments">
-                                Автор комментария:@pageViewModel.Author
-                            </span>
-                        </span>
+                <div class="positionAuthor">
+                    <span class="deletBlock">
+                        <div class="deletBlockBorder">
+                            <form action="/Wiki/Remove">
+                                <input type="hidden" value="@pageViewModel.Id" name="id">
+                                <input type="submit" value="Delet Block">
+                            </form>
                         </div>
-                    }
+                    </span>
+                    <div class="author">
+                        <span>
+                            Автор Текста: @pageViewModel.Author
+                        </span>
+                    </div>
+
+                </div>
+                <div>
+                    <div>
+                        @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
+                        {
+                            <div>
+                                <div class="comments">
+                                    <span>
+                                        @CommentAndAuthor.Comment
+                                    </span>
+                                    <span class="authorComments">
+                                        @CommentAndAuthor.Author
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </div>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form method="post">
                             <div class="text">
-                                Enter Comment: <textarea name="newComment"></textarea>
+                                <div class="enterCommentsBorder">
+                                    <span class="enterComments">
+                                        Enter Comment:
+                                    </span>
+                                    <textarea name="newComment"></textarea>
+                                </div>
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
                                 <div class="button">
-                                    <input type="submit" value="Add comment" />
+                                    <input type="submit" value="Add comment">
                                     <input type="reset" value=" Очистить">
                                 </div>
                             </div>

@@ -1,7 +1,9 @@
 ﻿@model GameViewModel
 
-<div>
-    <form method="post">
+
+<div class="create-game">
+    <div class="data">
+        <form method="post">
         <div>
             Name: @Html.TextBoxFor(x => x.Name)
             @Html.ValidationMessageFor(x=>x.Name)
@@ -18,4 +20,21 @@
             <input type="submit" value="Create game" />
         </div>
     </form>
+    </div>
+    <div class="preview">
+        <div>
+            Game name: <span class="name">Tetris</span> <span class="price">0</span>$
+        </div>
+        <div class="preview-container">
+            <img />
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/createGame.js"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/game.css/" />
+}
