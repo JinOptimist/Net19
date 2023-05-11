@@ -167,8 +167,3 @@
 .all {
     display: flex;
 }
-
-.footer {
-    padding: 50px;
-    width: inherit;
-}

@@ -1,0 +1,42 @@
+﻿@model GameViewModel
+@{
+    Layout = "_Layout_GameCatalog";
+}
+<title>Catalog</title>
+<div class="all">
+    <div class="left-menu">
+        <div class="logo">Catalog &#9917</div>
+        <a href="http://hearlyfood/game/arcade" class="buttom-gamearcade" target="_blank">
+            &#127906;Arcade
+        </a>
+        <a href="http://hearlyfood/game/victory" class="buttom-gamevictory" target="_blank">
+            &#128106;Quizzes
+        </a>
+        <a href="http://hearlyfood/game/racing" class="buttom-gameracing" target="_blank">
+            &#128664;Race
+        </a>
+        <a href="http://hearlyfood/game/training" class="buttom-gametraining" target="_blank">
+            &#128214;Training
+        </a>
+        <a href="http://hearlyfood/game/cards" class="buttom-gamecards" target="_blank">
+            &#127183;Card
+        </a>
+        <a href="http://hearlyfood/game/tests" class="buttom-gametests" target="_blank">
+            &#128214;Tests
+        </a>
+        <a href="http://hearlyfood/game/adventurn" class="buttom-gameadventurn" target="_blank">
+            &#127939;Adventure
+        </a>
+        @*<div>
+        <a href="/Game/CreateGame">Create game</a>
+        </div>*@
+    </div>
+
+    <div class="centre">
+        @Model.Name
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Catalog.css" />
+}
