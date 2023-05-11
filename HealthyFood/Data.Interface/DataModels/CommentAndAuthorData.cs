@@ -5,6 +5,8 @@ namespace Data.Interface.DataModels
 {
     public class CommentAndAuthorData
     {
+        public int CommentId { get; set; }
+
         public string Comment { get; set; }
 
         public User Author { get; set; }

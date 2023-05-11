@@ -1,5 +1,4 @@
-﻿using Data.Sql.Models;
-using HealthyFoodWeb.Models.ModelsWikiBAA;
+﻿using HealthyFoodWeb.Models.ModelsWikiBAA;
 
 namespace HealthyFoodWeb.Services.IServices
 {
@@ -11,6 +10,8 @@ namespace HealthyFoodWeb.Services.IServices
 
         IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments();
        
-        public void CreateComment(int blockeId, string comment);
+        public void CreateComment(int blockId, string comment, int CommentId);
+
+        void RemoveComment(int id);
     }
 }
