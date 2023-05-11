@@ -3,7 +3,6 @@ using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
-using Data.Interface.DataModels;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -35,17 +34,11 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockId, string comment)
+        public void CreateComment(int blockId, string comment,int idComment)
         {
             var block = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            _wikiBaaCommentRepository.CreateComment(
-                new CommentAndAuthorData
-                {
-                    Block = block,
-                    Comment = comment,
-                    Author = user
-                });
+            _wikiBaaCommentRepository.CreateComment(user, block, comment,idComment);
         }
 
         public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
@@ -64,7 +57,8 @@ namespace HealthyFoodWeb.Services.WikiServices
                     (c => new CommentAndAuthorViewModel
                     {
                         Comment = c.Comment,
-                        Author = c.Author.Name
+                        Author = c.Author.Name,
+                        CommentId= c.CommentId,
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });
@@ -73,6 +67,11 @@ namespace HealthyFoodWeb.Services.WikiServices
         public void Remove(int id)
         {
             _wikiBaaRepository.Remove(id);
+        }
+
+        public void RemoveComment(int id)
+        {
+            _wikiBaaCommentRepository.RemoveComment(id);
         }
     }
 }

@@ -59,6 +59,10 @@
                                     </span>
                                 </div>
                             </div>
+                            <form action="/Wiki/RemoveComment">
+                                <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                <input type="submit" value="Delet Block">
+                            </form>
                         }
                     </div>
                     @if (User.Identity.IsAuthenticated)
