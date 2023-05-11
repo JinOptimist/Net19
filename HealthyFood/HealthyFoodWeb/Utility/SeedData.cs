@@ -21,6 +21,7 @@ namespace HealthyFoodWeb.Utility
                 SeedReview(scope);
                 SeedGameCategory(scope);
                 SeedWikiMcImages(scope);
+                //SeedImageTags(scope);
             }
         }
 
@@ -170,6 +171,26 @@ namespace HealthyFoodWeb.Utility
                 }
             }
         }
+
+        //private static void SeedImageTags(IServiceScope scope)
+        //{
+        //    var defaultTags = new List<string> { "Sport", "Protein", "Fat", "Carbs", "Life", "Health" };
+
+        //    var tagRepository = scope.ServiceProvider
+        //        .GetRequiredService<IWikiTagRepository>();
+
+        //    foreach (var tagName in defaultTags)
+        //    {
+        //        if (tagRepository.GetOrCreateTag(tagName) == null)
+        //        {
+        //            var tagCatalog = new WikiTags
+        //            {
+        //                TagName = tagName
+        //            };
+        //            tagRepository.Add(tagCatalog);
+        //        }
+        //    }
+        //}
 
         private static void SeedWikiMcImages(IServiceScope scope)
         {

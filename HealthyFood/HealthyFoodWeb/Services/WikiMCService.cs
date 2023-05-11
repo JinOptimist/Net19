@@ -100,30 +100,29 @@ namespace HealthyFoodWeb.Services
             };
         }
 
-        public void UpdateAllExeptTags(int id, ImgTypeEnum type, string imgUrl, int year)
+        public void UpdateAllExсeptTags(int id, ImgTypeEnum type, string imgUrl, int year)
         {
             _wikiMCRepository.UpdateAllExeptTags(id, type, imgUrl, year);
         }
 
-        public void UpdateTags(int id, List<string> tags)
+        public void UpdateTags(int id, List<string> newTagsNames)
         {
-            var image = _gameRepository.GetGameAndGenres(id);
-            if (image.Genres == null)
+            var image = _wikiMCRepository.GetImageAndTags(id);
+            if (image.Tags == null)
             {
-                image.Genres = new List<GameCategory>();
+                image.Tags = new List<WikiTags>();
             }
 
-            var newGenres = _gameCategoryRepository
+            var newTags = _tagRepository
                 .GetAll()
-                .Where(genre => newGenresNames.Contains(genre.Name))
+                .Where(tag => newTagsNames.Contains(tag.TagName))
                 .ToList();
 
-            image.Genres.RemoveAll(x => true);
+            image.Tags.RemoveAll(x => true);
 
-            newGenres.ForEach(genre => image.Genres.Add(genre));
-            // newGenres.ForEach(game.Genres.Add);
+            newTags.ForEach(tag => image.Tags.Add(tag));
 
-            _gameRepository.Update(image);
+            _wikiMCRepository.Update(image);
         }
     }
 }

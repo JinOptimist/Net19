@@ -2,7 +2,7 @@
 
 @{
 	Layout = "_LayoutWiki";
-	<link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
+	<link rel="stylesheet" href="~/css/Style_User_Gallery.css" />
 }
 
 <div class="paginator">
@@ -16,19 +16,21 @@
 <div>
     @foreach (var imageViewModel in Model.UserImages)
     {
-        <div class="game">
+        <div class="gallery">
             <div class="cover">
-                <a href="/Wiki/Update/@imageViewModel.Id">
+                <a href="/Wiki/UpdateImage/@imageViewModel.Id">
                     <img src="@imageViewModel.ImgPath" />
                 </a>
             </div>
-            Year @imageViewModel.Year
-            Type @imageViewModel.ImgType
-            Tags
+            <div class="prop">
+            Year : @imageViewModel.Year <br/>
+            Type : @imageViewModel.ImgType <br />
+            Tags:
             @foreach (var tag in imageViewModel.UserTags)
             {
                 <span class="tag">@tag</span>
             }
+            </div>
         </div>
     }
 </div>

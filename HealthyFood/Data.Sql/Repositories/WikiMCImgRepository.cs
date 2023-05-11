@@ -11,9 +11,8 @@ namespace Data.Sql.Repositories
     {
         public WikiMCImgRepository(WebContext webContext) : base(webContext) { }
 
-        public List<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
-        {
-            return _dbSet
+        public IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable()
+            => _dbSet
                 .Select(image => new ImagesAndInfoAboutTheirUploaderData
                 {
                     Year = image.Year,
@@ -21,15 +20,18 @@ namespace Data.Sql.Repositories
                     ImgType = image.ImgType,
                     UserName = image.ImageUploader.Name,
                     Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
-                }).ToList();
+                });
+
+        public List<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
+        {
+            return GetUserImagesIQueryable().ToList();
         }
 
         public ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage)
         {
-            var userImages = GetUserImages();
-
             var dataModel = new ImagesAndPaginatorData();
-            var images = userImages
+            var images =
+                GetUserImagesIQueryable()
                 .Skip((page - 1) * perPage)
                 .Take(perPage)
                 .ToList();
@@ -67,6 +69,22 @@ namespace Data.Sql.Repositories
         {
             var removedYear = _dbSet.Where(x => x.Year == year).ToList();
             removedYear.ForEach(x => _dbSet.Remove(x));
+            _webContext.SaveChanges();
+        }
+
+        public WikiMcImage GetImageAndTags(int id)
+        {
+            return _dbSet
+                .Include(x => x.Tags)
+                .SingleOrDefault(x => x.Id == id);
+        }
+
+        public void UpdateAllExeptTags(int id, ImgTypeEnum type, string imgUrl, int year)
+        {
+            var image = Get(id);
+            image.ImgType = type;
+            image.ImgUrl = imgUrl;
+            image.Year = year;
             _webContext.SaveChanges();
         }
     }

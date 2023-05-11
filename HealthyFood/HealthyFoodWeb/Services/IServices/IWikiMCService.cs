@@ -16,8 +16,14 @@ namespace HealthyFoodWeb.Services
 
         ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage);
 
+        WikiMcViewModel GetImageViewModel(int id);
+
         void RemoveByType(ImgTypeEnum type);
 
 		void RemoveByYear(int year);
-	}
+
+        void UpdateAllExсeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
+
+        void UpdateTags(int id, List<string> tags);
+    }
 }

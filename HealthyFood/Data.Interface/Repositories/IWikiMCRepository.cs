@@ -1,6 +1,5 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models;
-using Data.Sql.DataModels;
 
 namespace Data.Interface.Repositories
 {
@@ -13,5 +12,8 @@ namespace Data.Interface.Repositories
         ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage);
         void RemoveAllImgByYear(int year);
         void RemoveAllImgByType(ImgTypeEnum type);
+        WikiMcImage GetImageAndTags(int id);
+        void UpdateAllExeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
+        IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable();
     }
 }

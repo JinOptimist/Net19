@@ -1,0 +1,45 @@
+﻿@using Data.Interface.Models;
+@model WikiMcViewModel
+
+<div>
+    <form method="post">
+        @Html.HiddenFor(x=>x.Id)
+        <input type="hidden" value="@Model.Id" />
+
+        <img src="@Model.ImgPath" />
+        <div class="type">
+            Type <br />
+            @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)), htmlAttributes: new {placeholder = Model.ImgType});
+        </div>
+        <div>
+            Year<br />
+            @Html.TextBoxFor(x=>x.Year)
+        </div>
+        <div>
+            ImgUrl<br /> 
+            @Html.TextBoxFor(x=>x.ImgPath)
+            <input name="ImgPath" />
+        </div>
+
+        <div class="tag-container">
+            @foreach (var tag in Model.AvailableTags)
+            {
+                <span class="tag">
+                    <label>
+                        <input @(Model.UserTags.Contains(tag)
+                            ? "checked='checked'"
+                            : "")
+                               type="checkbox"
+                               value="@tag"
+                               name="@nameof(WikiMcViewModel.UserTags)" />
+                        @tag
+                    </label>
+                </span>
+            }
+        </div>
+
+        <div>
+            <input type="submit" value="UpdateImage" />
+        </div>
+    </form>
+</div>

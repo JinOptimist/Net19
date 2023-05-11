@@ -5,7 +5,6 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Microsoft.AspNetCore.Authorization;
-using HealthyFoodWeb.Models.Games;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -117,7 +116,7 @@ namespace HealthyFoodWeb.Controllers
 
 		[HttpGet]
 		[Authorize]
-		public IActionResult ShowUploadedImages(int page = 1, int perPage = 1)
+		public IActionResult ShowUploadedImages(int page = 1, int perPage = 2)
 		{
             var viewModel = new WikiUserImagesViewModel();
             var dataModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
@@ -144,23 +143,26 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
 		}
 
-        public IActionResult UpdateImages(int id)
+        public IActionResult UpdateImage(int id)
         {
             var viewModel = _wikiMCImgService.GetImageViewModel(id);
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult UpdateImages(WikiMcViewModel wikiMcViewModel)
+        public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
         {
-            _gameService.UpdateNameAndCover(wikiMcViewModel.Id,
-                wikiMcViewModel.Name,
-                wikiMcViewModel.CoverUrl);
+            _wikiMCImgService.UpdateAllExñeptTags(
+                wikiMcViewModel.Id, 
+                wikiMcViewModel.ImgType,
+                wikiMcViewModel.ImgPath,
+                wikiMcViewModel.Year);
 
-            _gameService.UpdateGenres(wikiMcViewModel.Id,
-                wikiMcViewModel.Genres);
+            _wikiMCImgService.UpdateTags(
+                wikiMcViewModel.Id,
+                wikiMcViewModel.UserTags);
 
-            return RedirectToAction("Games", "Game");
+            return RedirectToAction("ShowUploadedImages", "Wiki");
         }
 
         private BLockPageBaaViewModel Convert(PageWikiBlock x)
