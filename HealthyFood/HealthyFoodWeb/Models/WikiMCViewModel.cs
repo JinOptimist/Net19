@@ -15,7 +15,6 @@ namespace HealthyFoodWeb.Models
         public ImgTypeEnum ImgType { get; set; }
         public int Year { get; set; }
         public string EnteredTags { get; set; }
-        public List<string> AvailableTags { get; set; } = new List<string>();
         public List<string> UserTags { get; set; } = new List<string>();
 	}
 }

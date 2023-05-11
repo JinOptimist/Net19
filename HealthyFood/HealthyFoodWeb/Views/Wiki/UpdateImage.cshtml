@@ -1,12 +1,18 @@
 ﻿@using Data.Interface.Models;
 @model WikiMcViewModel
+@{
+    Layout = "_LayoutWiki";
+    <link rel="stylesheet" href="~/css/Style_User_Gallery.css" />
+}
 
 <div>
     <form method="post">
         @Html.HiddenFor(x=>x.Id)
         <input type="hidden" value="@Model.Id" />
 
-        <img src="@Model.ImgPath" />
+        <div class="gallery">
+            <img src="@Model.ImgPath" />
+        </div>
         <div class="type">
             Type <br />
             @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)), htmlAttributes: new {placeholder = Model.ImgType});
@@ -22,7 +28,7 @@
         </div>
 
         <div class="tag-container">
-            @foreach (var tag in Model.AvailableTags)
+            @foreach (var tag in Model.UserTags)
             {
                 <span class="tag">
                     <label>

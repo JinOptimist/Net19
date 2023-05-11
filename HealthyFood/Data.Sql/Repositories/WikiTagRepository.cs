@@ -12,9 +12,9 @@ namespace Data.Sql.Repositories
     {
         public WikiTagRepository(WebContext webContext) : base(webContext) { }
 
-        public WikiTags GetOrCreateTag(string tag)
+        public WikiTags Get(string tag)
         {
-            return _dbSet.FirstOrDefault(x => x.TagName == tag);
+            return _dbSet.SingleOrDefault(x => x.TagName == tag);
         }
     }
 }

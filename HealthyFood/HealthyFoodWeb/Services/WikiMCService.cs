@@ -37,7 +37,7 @@ namespace HealthyFoodWeb.Services
             var tags = viewModel.EnteredTags.Split(',').ToList();
             foreach (var tag in tags)
             {
-                var dbTag = _tagRepository.GetOrCreateTag(tag);
+                var dbTag = _tagRepository.Get(tag);
                 WikiMc.Tags.Add(dbTag);
             }
 
@@ -95,7 +95,6 @@ namespace HealthyFoodWeb.Services
                 ImgType = imageDb.ImgType,
                 ImgPath = imageDb.ImgUrl,
                 Year = imageDb.Year,
-                //AvailableTags = tags,
                 UserTags = imageDb.Tags.Select(x => x.TagName).ToList()
             };
         }
