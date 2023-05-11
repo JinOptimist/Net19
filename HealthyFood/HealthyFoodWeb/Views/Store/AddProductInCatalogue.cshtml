@@ -10,6 +10,7 @@
             Price: @Html.TextBoxFor(x => x.Price)
             @Html.ValidationMessageFor(x=>x.Price)
         </div>
+        <div class="price-error"></div>
         <div>
             ImageUrl: @Html.TextBoxFor(x => x.Img)
             @Html.ValidationMessageFor(x=>x.Img)
@@ -22,4 +23,29 @@
             <input type="submit" value="Create product" />
         </div>
     </form>
+
+    <div>
+        <div class="catalogue--product">
+            <a>
+                <div class="product--image">
+                    <img>
+                </div>
+                <div class="product--name">
+                    <p><span class="name-preview">default</span> (<span class="manufacturer-preview">default</span>)</p>
+                </div>
+                <div class="product--price"><span class="price-preview">0</span>руб. </div>
+               
+            </a>
+            <button class="product--add-to-cart">В корзину</button>
+            <button class="product--add-to-cart">В избранное</button>
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/AddProductInCatalogue.js"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/styleStorePageCatalogue.css" />
+    }
