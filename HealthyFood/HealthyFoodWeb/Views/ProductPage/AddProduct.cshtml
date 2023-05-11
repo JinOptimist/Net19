@@ -1,0 +1,21 @@
+﻿@model ProductPageViewModel
+
+
+<form method="post">
+    <div>
+        Enter id: @Html.TextBoxFor(x => x.Id)
+    </div>
+
+    <div>
+        Enter name: @Html.TextBoxFor(x => x.Name)
+    </div>
+    <div>
+        Enter price: @Html.TextBoxFor(x => x.Price)
+    </div>
+    <div>
+        Enter rating: @Html.TextBoxFor(x => x.Rating)
+    </div>
+    <div>
+        <input type="submit" value="Add product" />
+    </div>
+</form>

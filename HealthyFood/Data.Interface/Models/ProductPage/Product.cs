@@ -10,7 +10,7 @@ public class Product : BaseModel
 
     public decimal Rating { get; set; }
 
-    public virtual List<ProductContain> Contains { get; set; }
+    public virtual List<ProductContain> Contain { get; set; }
 
     public virtual List<ProductCategory> Categories { get; set; }
 }

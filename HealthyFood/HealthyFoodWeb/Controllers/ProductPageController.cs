@@ -5,45 +5,47 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthyFoodWeb.Controllers
 {
     public class ProductPageController : Controller
-	{
-		private IProductService _productService;
+    {
+        private IProductService _productService;
 
-		public ProductPageController(IProductService productService)
-		{
-			_productService = productService;
-		}
+        public ProductPageController(IProductService productService)
+        {
+            _productService = productService;
+        }
 
-		public IActionResult Index()
-		{
-			var products = _productService.GetAllProducts();
-			var viewModels = products.Select(dbModel => new ProductPageViewModel
-			{
-				Name= dbModel.Name,
-				Rating= dbModel.Rating,
-				Price= dbModel.Price,
+        public IActionResult Index()
+        {
+            var products = _productService.GetAllProducts();
+            var viewModels = products.Select(dbModel => new ProductPageViewModel
+            {
+                Name = dbModel.Name,
+                Rating = dbModel.Rating,
+                Price = dbModel.Price,
+                ProductCategories = dbModel.Categories?.Select(dbModel => dbModel.Name).ToList(),
+            });
 
-			}) ;
-			return View();
-		}
+            return View();
+        }
 
-		[HttpGet]
-		public IActionResult ProductPage()
-		{
-			var product = _productService.GetAllProducts();
-			var viewModel = new ProductPageIndexViewModel()
-			{
-				Products = product.Select(dbModel => new ProductPageViewModel {
-					Name= dbModel.Name,
-					Rating= dbModel.Rating,
-					Price= dbModel.Price,
-					Id= dbModel.Id
+        [HttpGet]
+        public IActionResult ProductPage()
+        {
+            var product = _productService.GetAllProducts();
+            var viewModel = new ProductPageIndexViewModel()
+            {
+                Products = product.Select(dbModel => new ProductPageViewModel
+                {
+                    Name = dbModel.Name,
+                    Rating = dbModel.Rating,
+                    Price = dbModel.Price,
+                    Id = dbModel.Id,
                 }).ToList(),
 
-			};
+            };
 
 
-			return View(viewModel);
-		}
+            return View(viewModel);
+        }
 
         [HttpGet]
         public IActionResult UpdateRating()
@@ -52,13 +54,13 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-		public IActionResult UpdateRating(ProductPageViewModel productPageView)
-		{
+        public IActionResult UpdateRating(ProductPageViewModel productPageView)
+        {
 
-			_productService.UpdateRatingProduct(productPageView);
-			return RedirectToAction("ProductPage");
+            _productService.UpdateRatingProduct(productPageView);
+            return RedirectToAction("ProductPage");
 
-		}
+        }
 
         [HttpGet]
         public IActionResult AddProduct()
@@ -67,8 +69,8 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-		public IActionResult AddProduct(ProductPageViewModel productPageView)
-		{
+        public IActionResult AddProduct(ProductPageViewModel productPageView)
+        {
             _productService.AddProduct(productPageView);
             return RedirectToAction("ProductPage");
         }

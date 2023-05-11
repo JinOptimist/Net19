@@ -30,7 +30,7 @@ namespace Data.Sql.Repositories.ProductPageRepositories
         public Product GetExpensiveProductWithCategories()
         {
             return _dbSet
-                .Include(x => x.Categories)
+                .Include(x => x.Contain)
                 .OrderByDescending(x => x.Price)
                 .First();
         }
