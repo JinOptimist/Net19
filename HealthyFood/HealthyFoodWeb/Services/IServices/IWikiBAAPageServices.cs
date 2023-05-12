@@ -12,6 +12,6 @@ namespace HealthyFoodWeb.Services.IServices
        
         public void CreateComment(int blockId, string comment, int CommentId);
 
-        void RemoveComment(int id);
+        void RemoveComment(int commentId);
     }
 }
