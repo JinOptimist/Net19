@@ -57,6 +57,13 @@ namespace HealthyFoodWeb.Services
                  .ToList();
         }
 
+        public List<GameViewModel> GetAllGames()
+        {
+            return _gameRepository
+                .GetAllGames()
+                ();
+        }
+
         public string GetTheBestGameName()
         {
             //do some diff logic

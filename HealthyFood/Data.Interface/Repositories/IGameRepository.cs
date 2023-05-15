@@ -10,6 +10,7 @@ namespace Data.Interface.Repositories
         void RemoveByName(string name);
 
         Game GetTheRichGameWithGenres();
+        Game GetAllGames();
 
         List<Game> GetGamesByUserId(int userId);
 

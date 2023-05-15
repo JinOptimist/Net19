@@ -12,15 +12,15 @@ namespace HealthyFoodWeb.Controllers
         {
             _gameService = gameService;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            var allgame = _gameService.GetGameViewModel(id);
-            var recomendateGameViewModel = new GameViewModel
+            var allgames = _gameService.GetAllGames();
+            var games = new GameViewModel
             {
                 Id = allgame.Id,
                 Name = allgame.Name,
             };
-            return View(recomendateGameViewModel);
+            return View(games);
         }
     }
 }

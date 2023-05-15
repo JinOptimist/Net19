@@ -41,6 +41,14 @@ namespace Data.Sql.Repositories
             return dataModel;
         }
 
+        public Game GetAllGames()
+        {
+            return _dbSet
+                .Include(x => x.Genres)
+                .Include(x => x.Price)
+                .Include(x => x.CoverUrl)
+                .First();
+        }
         public Game GetTheRichGameWithGenres()
         {
             return _dbSet
