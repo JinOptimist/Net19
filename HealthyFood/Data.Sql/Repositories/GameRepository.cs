@@ -11,6 +11,23 @@ namespace Data.Sql.Repositories
         {
         }
 
+        public GamesCountData GetDataForGamesCount(int budget)
+        {
+            var availableGames = _dbSet.Where(x => x.Price <= budget);
+            var count = availableGames.Count();
+            var names = availableGames
+                .OrderBy(x => x.Genres.Count)
+                .Take(3)
+                .Select(x => x.Name)
+                .ToList();
+
+            return new GamesCountData
+            {
+                Count = count,
+                TopNames = names
+            };
+        }
+
         public Game GetGameAndGenres(int id)
         {
             return _dbSet

@@ -1,6 +1,7 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 
 namespace HealthyFoodWeb.Services.IServices
 {
@@ -24,5 +25,7 @@ namespace HealthyFoodWeb.Services.IServices
         
         void UpdateNameAndCover(int id, string name, string coverUrl);
         void UpdateGenres(int id, List<string> genres);
+
+        GamesCountViewModel GetViewModelForGamesCount(int budget);
     }
 }
