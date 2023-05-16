@@ -1,4 +1,5 @@
-﻿using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +15,13 @@ namespace HealthyFoodWeb.Controllers
         }
         public IActionResult Index()
         {
-            var allgames = _gameService.GetAllGames();
-            var games = new GameViewModel
-            {
-                Id = allgame.Id,
-                Name = allgame.Name,
-            };
-            return View(games);
+            var viewModel = new GameViewModel();
+
+            viewModel.Name = _gameService
+                .GetAllGames()
+                .ToList();
+
+            return View(viewModel);
         }
     }
 }

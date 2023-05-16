@@ -60,8 +60,15 @@ namespace HealthyFoodWeb.Services
         public List<GameViewModel> GetAllGames()
         {
             return _gameRepository
-                .GetAllGames()
-                ();
+                .GetAll()
+                .Select(dbModel => new GameViewModel
+                {
+                    Id = dbModel.Id,
+                    Name = dbModel.Name,    
+                    Price = dbModel.Price,
+                    CoverUrl = dbModel.CoverUrl,
+                })
+                .ToList();
         }
 
         public string GetTheBestGameName()

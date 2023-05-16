@@ -33,7 +33,10 @@
     </div>
 
     <div class="centre">
-        Здесь игры
+        @foreach (var gameViewModel in Model.Name)
+    {
+            Name @gameViewModel.Name
+    }
     </div>
 </div>
 
