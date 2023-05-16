@@ -59,6 +59,7 @@ namespace HealthyFoodWeb.Services.WikiServices
                         Comment = c.Comment,
                         Author = c.Author.Name,
                         CommentId = c.CommentId,
+                        AuthorId=c.Author.Id
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });

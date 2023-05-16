@@ -177,16 +177,5 @@ namespace HealthyFoodWeb.Controllers
 
             return RedirectToAction("ShowUploadedImages", "Wiki");
         }
-
-        private BLockPageBaaViewModel Convert(PageWikiBlock x)
-        {
-            return new BLockPageBaaViewModel
-            {
-                Id = x.Id,
-                Text = x.Text,
-                Title = x.Title,
-                Author = x.Author?.Name,
-            };
-        }
     }
 }
