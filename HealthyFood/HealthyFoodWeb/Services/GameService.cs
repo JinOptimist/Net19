@@ -67,7 +67,7 @@ namespace HealthyFoodWeb.Services
                     Name = dbModel.Name,    
                     Price = dbModel.Price,
                     CoverUrl = dbModel.CoverUrl,
-                    Genres = dbModel.Genres.Select(g=>g.Name).ToList() ?? new List<string>(),
+                    Genres = dbModel.Genres.Select(g=>g.Name).ToList(),
                 })
                 .ToList();
         }
