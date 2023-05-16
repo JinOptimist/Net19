@@ -18,5 +18,7 @@ namespace Data.Interface.Repositories
         void UpdateNameAndCover(int id, string name, string coverUrl);
 
         Game GetGameAndGenres(int id);
+
+        GamesCountData GetDataForGamesCount(int budget);
     }
 }

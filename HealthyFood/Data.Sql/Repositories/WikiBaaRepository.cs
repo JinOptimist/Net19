@@ -2,7 +2,6 @@
 using Data.Interface.Repositories;
 using Data.Sql.Models;
 
-
 namespace Data.Sql.Repositories
 {
     public class WikiBaaRepository : BaseRepository<PageWikiBlock>, IWikiBaaRepository
@@ -35,7 +34,7 @@ namespace Data.Sql.Repositories
                         {
                             Comment = c.Text,
                             Author = c.Author,
-                            CommentId=c.Id
+                            CommentId = c.Id
                         })
                         .ToList(),
                 })
@@ -46,6 +45,25 @@ namespace Data.Sql.Repositories
         {
             var block = _dbSet.FirstOrDefault(_x => _x.Id == id);
             _dbSet.Remove(block);
+            _webContext.SaveChanges();
+        }
+
+        public BlockPageBaaData GetBLockPageBaaViewModel(int id)
+        {
+            var block = _dbSet.SingleOrDefault(x => x.Id == id);
+            return new BlockPageBaaData
+            {
+                Id = block.Id,
+                Title = block.Title,
+                Text = block.Text,
+            };
+        }
+
+        public void UpdateBlock(int id, string title, string text)
+        {
+            var block = Get(id);
+            block.Title = title;
+            block.Text = text;
             _webContext.SaveChanges();
         }
     }
