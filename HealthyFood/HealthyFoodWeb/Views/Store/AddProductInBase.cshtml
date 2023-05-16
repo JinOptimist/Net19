@@ -1,6 +1,7 @@
 ﻿@model CartViewModel
 
-<div>
+<div class="create-product">
+    <div class="data">
     <form method="post">
         <div>
             Name: @Html.TextBoxFor(x => x.Name)
@@ -12,4 +13,18 @@
             <input type="submit" value="Create product" />
         </div>
     </form>
-</div>
+    </div>
+
+    <div class="preview">
+         <div>
+            Product name: <span class="name">Salat</span> <span class="price">0</span>$
+        </div>
+        <div class="preview-container">
+            <img />
+        </div>
+    </div>
+
+
+@section Scripts{
+    <script src="~/js/addproductinbase.js"></script>
+}
