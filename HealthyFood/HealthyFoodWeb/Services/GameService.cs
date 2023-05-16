@@ -2,6 +2,7 @@
 using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -133,6 +134,16 @@ namespace HealthyFoodWeb.Services
             // newGenres.ForEach(game.Genres.Add);
 
             _gameRepository.Update(game);
+        }
+
+        public GamesCountViewModel GetViewModelForGamesCount(int budget)
+        {
+            var dataModel = _gameRepository.GetDataForGamesCount(budget);
+            return new GamesCountViewModel
+            {
+                TotalGamesCount = dataModel.Count,
+                RandomGamesNames = dataModel.TopNames
+            };
         }
     }
 }

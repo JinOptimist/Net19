@@ -3,7 +3,6 @@ using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
-using Data.Interface.DataModels;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -35,17 +34,11 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockId, string comment)
+        public void CreateComment(int blockId, string comment, int commentId)
         {
-            var block = _wikiBaaRepository.Get(blockId);
+            var blockDb = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            _wikiBaaCommentRepository.CreateComment(
-                new CommentAndAuthorData
-                {
-                    Block = block,
-                    Comment = comment,
-                    Author = user
-                });
+            _wikiBaaCommentRepository.CreateComment(user, blockDb, comment, commentId);
         }
 
         public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
@@ -64,7 +57,8 @@ namespace HealthyFoodWeb.Services.WikiServices
                     (c => new CommentAndAuthorViewModel
                     {
                         Comment = c.Comment,
-                        Author = c.Author.Name
+                        Author = c.Author.Name,
+                        CommentId = c.CommentId,
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });
@@ -73,6 +67,27 @@ namespace HealthyFoodWeb.Services.WikiServices
         public void Remove(int id)
         {
             _wikiBaaRepository.Remove(id);
+        }
+
+        public void RemoveComment(int commentId)
+        {
+            _wikiBaaCommentRepository.RemoveComment(commentId);
+        }
+
+        public BLockPageBaaViewModel GetBLockPageBaaViewModel(int id)
+        {
+            var blockPage = _wikiBaaRepository.GetBLockPageBaaViewModel(id);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockPage.Id,
+                Title = blockPage.Title,
+                Text = blockPage.Text,
+            };
+        }
+
+        public void Updateblock(int id, string title, string text)
+        {
+            _wikiBaaRepository.UpdateBlock(id,title,text);
         }
     }
 }

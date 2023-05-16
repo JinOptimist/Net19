@@ -38,6 +38,14 @@
                             </form>
                         </div>
                     </span>
+                    <span class="borderUpdateBlock">
+                        <div class="updateBlock">
+                            <form action="/Wiki/UpdateBlock">
+                                <input type="hidden" value="@pageViewModel.Id" name="id">
+                                <input type="submit" value="Update Block">
+                            </form>
+                        </div>
+                    </span>
                     <div class="author">
                         <span>
                             Автор Текста: @pageViewModel.Author
@@ -59,6 +67,10 @@
                                     </span>
                                 </div>
                             </div>
+                            <form action="/Wiki/RemoveComment">
+                                <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                <input type="submit" value="Delet Comment">
+                            </form>
                         }
                     </div>
                     @if (User.Identity.IsAuthenticated)
