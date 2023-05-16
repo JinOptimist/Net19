@@ -16,10 +16,11 @@ namespace Data.Sql.Repositories
             _dbSet = webContext.Set<SomeModel>();
         }
 
-        public void Add(SomeModel model)
+        public SomeModel Add(SomeModel model)
         {
             _dbSet.Add(model);
             _webContext.SaveChanges();
+            return model;
         }
 
         public void Update(SomeModel model)
