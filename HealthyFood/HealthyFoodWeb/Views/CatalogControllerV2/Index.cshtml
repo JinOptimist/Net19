@@ -1,4 +1,4 @@
-﻿@model GameViewModel
+﻿@model List<GameViewModel>
 @{
     Layout = "_Layout_GameCatalog";
 }
@@ -33,10 +33,15 @@
     </div>
 
     <div class="centre">
-        @foreach (var gameViewModel in Model.Name)
-    {
-            Name @gameViewModel.Name
-    }
+        @foreach(var games in Model)
+        {
+            <div class="allgame">
+                @games.Name
+                @games.Price
+                @games.Genres
+                <img src="@games.CoverUrl" />
+            </div>
+        }
     </div>
 </div>
 

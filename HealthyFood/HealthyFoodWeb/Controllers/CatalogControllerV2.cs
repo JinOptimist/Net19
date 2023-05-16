@@ -15,13 +15,11 @@ namespace HealthyFoodWeb.Controllers
         }
         public IActionResult Index()
         {
-            var viewModel = new GameViewModel();
-
-            viewModel.Name = _gameService
+            var viewModels = _gameService
                 .GetAllGames()
                 .ToList();
 
-            return View(viewModel);
+            return View(viewModels);
         }
     }
 }
