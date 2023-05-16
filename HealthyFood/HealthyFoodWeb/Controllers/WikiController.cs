@@ -77,12 +77,14 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
+        [Authorize]
         public IActionResult Remove(int id)
         {
             _blockInformationServices.Remove(id);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
+        [Authorize]
         public IActionResult RemoveComment(int commentId)
         {
             _blockInformationServices.RemoveComment(commentId);
@@ -90,6 +92,7 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult UpdateBlock(int id)
         {
             var viewModel = _blockInformationServices.GetBLockPageBaaViewModel(id);
