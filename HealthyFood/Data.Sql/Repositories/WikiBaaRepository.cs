@@ -50,14 +50,12 @@ namespace Data.Sql.Repositories
 
         public BlockPageBaaData GetBLockPageBaaViewModel(int id)
         {
-            _dbSet.SingleOrDefault(x => x.Id == id);
-            _webContext.SaveChanges();
-            var pageWiki = new PageWikiBlock();
+            var block = _dbSet.SingleOrDefault(x => x.Id == id);
             return new BlockPageBaaData
             {
-                Id = pageWiki.Id,
-                Title = pageWiki.Title,
-                Text = pageWiki.Text,
+                Id = block.Id,
+                Title = block.Title,
+                Text = block.Text,
             };
         }
 
