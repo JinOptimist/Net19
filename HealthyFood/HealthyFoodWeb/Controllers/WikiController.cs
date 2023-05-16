@@ -71,15 +71,38 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult BiologicallyActiveAdditives(string newComment, int blockId)
+        public IActionResult BiologicallyActiveAdditives(string newComment, int blockId, int commentId)
         {
-            _blockInformationServices.CreateComment(blockId, newComment);
+            _blockInformationServices.CreateComment(blockId, newComment, commentId);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
+        [Authorize]
         public IActionResult Remove(int id)
         {
             _blockInformationServices.Remove(id);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        [Authorize]
+        public IActionResult RemoveComment(int commentId)
+        {
+            _blockInformationServices.RemoveComment(commentId);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult UpdateBlock(int id)
+        {
+            var viewModel = _blockInformationServices.GetBLockPageBaaViewModel(id);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateBlock(BLockPageBaaViewModel blockViewModel)
+        {
+            _blockInformationServices.Updateblock(blockViewModel.Id,blockViewModel.Title,blockViewModel.Text);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
@@ -105,19 +128,54 @@ namespace HealthyFoodWeb.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult ShowUploadedImages()
+        public IActionResult ShowUploadedImages(int page = 1, int perPage = 2)
         {
             var viewModel = new WikiUserImagesViewModel();
-
-            viewModel.UserImages = _wikiMCImgService
-                .GetUserImages()
-                .Select(imageDb => new WikiMcViewModel
+            var dataModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
+            viewModel.UserImages = dataModel
+                .Images
+                .Select(x => new WikiMcViewModel
                 {
-                    ImgPath = imageDb.ImgUrl,
+                    Id = x.Id,
+                    Year = x.Year,
+                    ImgPath = x.ImgUrl,
+                    ImgType = x.ImgType,
+                    UserTags = x.Tags,
                 })
                 .ToList();
 
+            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
+            var totalPageCount =
+                (dataModel.TotalCount / perPage)
+                + (doWeNeedOneMorePage ? 1 : 0);
+
+            viewModel.PageList = Enumerable
+                .Range(1, totalPageCount)
+                .ToList();
+            viewModel.ActivePageNumber = page;
             return View(viewModel);
+        }
+
+        public IActionResult UpdateImage(int id)
+        {
+            var viewModel = _wikiMCImgService.GetImageViewModel(id);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
+        {
+            _wikiMCImgService.UpdateAllExñeptTags(
+                wikiMcViewModel.Id,
+                wikiMcViewModel.ImgType,
+                wikiMcViewModel.ImgPath,
+                wikiMcViewModel.Year);
+
+            _wikiMCImgService.UpdateTags(
+                wikiMcViewModel.Id,
+                wikiMcViewModel.UserTags);
+
+            return RedirectToAction("ShowUploadedImages", "Wiki");
         }
 
         private BLockPageBaaViewModel Convert(PageWikiBlock x)
