@@ -156,6 +156,16 @@ span.authorComments {
     background: #f0f0f0;
 }
 
-.deletBlockBorder input{
+.deletBlockBorder input {
+    border: 0px;
+}
+
+.updateBlock {
+    padding: 4px;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    background: #f0f0f0;
+}
+
+.updateBlock input {
     border: 0px;
 }
