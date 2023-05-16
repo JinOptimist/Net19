@@ -9,6 +9,7 @@ namespace HealthyFoodWeb.Utility
     {
         private const int MIN_GAME_COUNT = 20;
         private const int MIN_STORE_COUNT = 20;
+        private static Random _random = new Random();
 
         public static void Seed(this WebApplication webApplication)
         {
@@ -17,9 +18,9 @@ namespace HealthyFoodWeb.Utility
                 SeedUsers(scope);
                 SeedManufacturer(scope);
                 SeedStoreItems(scope);
+                SeedGameCategory(scope);
                 SeedGame(scope);
                 SeedReview(scope);
-                SeedGameCategory(scope);
                 SeedWikiTag(scope);
                 SeedWikiMcImage(scope);
             }
@@ -100,45 +101,34 @@ namespace HealthyFoodWeb.Utility
                 }
             }
         }
+       
         private static void SeedGame(IServiceScope scope)
         {
             var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
-            if (!gameRepository.Any())
-            {
-                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                var randomUser = userRepository.GetFirst();
-                var game = new Game
-                {
-                    Name = "BestOfTheBestGame",
-                    Price = 1000,
-                    CoverUrl = "",
-                    Creater = randomUser
-
-                };
-                gameRepository.Add(game);
-            }
-
+            var genreRepository = scope.ServiceProvider.GetRequiredService<IGameCategoryRepository>();
 
             if (gameRepository.Count() < MIN_GAME_COUNT)
             {
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
                 var randomUser = userRepository.GetFirst();
+                var genres = genreRepository.GetAll();
 
                 for (int i = 0; i < MIN_GAME_COUNT; i++)
                 {
                     var game = new Game
                     {
                         Name = $"RichGame№{i}",
-                        Price = 100 + i,
+                        Price = 1 + _random.Next(100),
                         CoverUrl = "https://i.imgur.com/eOtEAB7.jpg",
-                        Creater = randomUser
-
+                        Creater = randomUser,
+                        Genres = new List<GameCategory> { genres.Random() }
                     };
                     gameRepository.Add(game);
                 }
             }
 
         }
+        
         private static void SeedReview(IServiceScope scope)
         {
             var reviewRepository = scope.ServiceProvider.GetRequiredService<IReviewRepository>();
@@ -154,7 +144,7 @@ namespace HealthyFoodWeb.Utility
 
         private static void SeedGameCategory(IServiceScope scope)
         {
-            var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror" };
+            var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror", "Hentai" };
 
             var gameCategoryRepository = scope.ServiceProvider
                 .GetRequiredService<IGameCategoryRepository>();
