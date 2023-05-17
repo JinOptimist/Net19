@@ -59,7 +59,7 @@ namespace HealthyFoodWeb.Services.WikiServices
                         Comment = c.Comment,
                         Author = c.Author.Name,
                         CommentId = c.CommentId,
-                        AuthorId=c.Author.Id
+                        AuthorId = c.Author.Id
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });
@@ -88,7 +88,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public void Updateblock(int id, string title, string text)
         {
-            _wikiBaaRepository.UpdateBlock(id,title,text);
+            _wikiBaaRepository.UpdateBlock(id, title, text);
         }
     }
 }

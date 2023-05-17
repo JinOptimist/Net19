@@ -8,17 +8,6 @@ namespace Data.Sql.Repositories
     {
         public WikiBaaRepository(WebContext webContext) : base(webContext) { }
 
-        public void Add(PageWikiBlock model)
-        {
-            _dbSet.Add((PageWikiBlock)model);
-            _webContext.SaveChanges();
-        }
-
-        public IEnumerable<PageWikiBlock> GetAll()
-        {
-            return _dbSet.ToList();
-        }
-
         public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
             return _dbSet.Select(
