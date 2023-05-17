@@ -78,9 +78,9 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [Authorize]
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int blockId)
         {
-            _blockInformationServices.Remove(id);
+            _blockInformationServices.RemoveBlock(blockId);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 

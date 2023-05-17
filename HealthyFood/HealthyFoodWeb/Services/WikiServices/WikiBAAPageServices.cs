@@ -65,7 +65,7 @@ namespace HealthyFoodWeb.Services.WikiServices
                 });
         }
 
-        public void Remove(int id)
+        public void RemoveBlock(int id)
         {
             _wikiBaaRepository.Remove(id);
         }

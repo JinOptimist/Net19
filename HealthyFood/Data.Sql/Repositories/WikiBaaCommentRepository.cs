@@ -12,13 +12,7 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-        public void Add(WikiBlockComment model)
-        {
-            _dbSet.Add((WikiBlockComment)model);
-            _webContext.SaveChanges();
-        }
-
-        public void CreateComment(User Author, PageWikiBlock Block, string Text, int CommentId)
+       public void CreateComment(User Author, PageWikiBlock Block, string Text, int CommentId)
         {
             _dbSet.Add(new WikiBlockComment
             {
