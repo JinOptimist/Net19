@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
@@ -28,6 +29,23 @@ namespace Data.Sql.Repositories
         {
             var comment = _dbSet.FirstOrDefault(_x => _x.Id == idComment);
             _dbSet.Remove(comment);
+            _webContext.SaveChanges();
+        }
+
+        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int commentId)
+        {
+            var blockComment= _dbSet.SingleOrDefault(x => x.Id == commentId);
+            return new CommentAndAuthorData
+            {
+                CommentId = blockComment.Id,
+                Comment= blockComment.Text
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            var blockComment = Get(Id);
+            blockComment.Text = Text;
             _webContext.SaveChanges();
         }
     }

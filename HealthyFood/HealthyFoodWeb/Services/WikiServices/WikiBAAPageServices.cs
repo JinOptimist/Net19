@@ -3,6 +3,8 @@ using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
+using Data.Interface.DataModels;
+using System.ComponentModel.Design;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -89,6 +91,21 @@ namespace HealthyFoodWeb.Services.WikiServices
         public void Updateblock(int id, string title, string text)
         {
             _wikiBaaRepository.UpdateBlock(id, title, text);
+        }
+
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        {
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockCommentPage.CommentId,
+                Text = blockCommentPage.Comment,
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            _wikiBaaCommentRepository.UpdateBlockComment(Id, Text);
         }
     }
 }

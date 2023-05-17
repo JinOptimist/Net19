@@ -5,6 +5,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Data.Sql.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -88,6 +89,22 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult RemoveComment(int commentId)
         {
             _blockInformationServices.RemoveComment(commentId);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult UpdateComment(int commentId)
+        {
+            var viewModel = _blockInformationServices.GetBlockCommentPageBaaViewModel(commentId);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateComment(BLockPageBaaViewModel blockViewModel)
+        {
+            
+            _blockInformationServices.UpdateBlockComment(blockViewModel.Id,blockViewModel.Text);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
