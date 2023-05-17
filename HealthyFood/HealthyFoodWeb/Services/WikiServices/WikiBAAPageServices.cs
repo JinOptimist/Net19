@@ -90,5 +90,20 @@ namespace HealthyFoodWeb.Services.WikiServices
         {
             _wikiBaaRepository.UpdateBlock(id, title, text);
         }
+
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        {
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockCommentPage.CommentId,
+                Text = blockCommentPage.Comment,
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            _wikiBaaCommentRepository.UpdateBlockComment(Id, Text);
+        }
     }
 }
