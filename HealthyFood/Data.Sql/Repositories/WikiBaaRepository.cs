@@ -30,9 +30,9 @@ namespace Data.Sql.Repositories
                 .ToList();
         }
 
-        public void Remove(int id)
+        public void Remove(int blockId)
         {
-            var block = _dbSet.FirstOrDefault(_x => _x.Id == id);
+            var block = _dbSet.FirstOrDefault(_x => _x.Id == blockId);
             _dbSet.Remove(block);
             _webContext.SaveChanges();
         }
