@@ -8,17 +8,6 @@ namespace Data.Sql.Repositories
     {
         public WikiBaaRepository(WebContext webContext) : base(webContext) { }
 
-        public void Add(PageWikiBlock model)
-        {
-            _dbSet.Add((PageWikiBlock)model);
-            _webContext.SaveChanges();
-        }
-
-        public IEnumerable<PageWikiBlock> GetAll()
-        {
-            return _dbSet.ToList();
-        }
-
         public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
             return _dbSet.Select(
@@ -41,23 +30,21 @@ namespace Data.Sql.Repositories
                 .ToList();
         }
 
-        public void Remove(int id)
+        public void Remove(int blockId)
         {
-            var block = _dbSet.FirstOrDefault(_x => _x.Id == id);
+            var block = _dbSet.FirstOrDefault(_x => _x.Id == blockId);
             _dbSet.Remove(block);
             _webContext.SaveChanges();
         }
 
         public BlockPageBaaData GetBLockPageBaaViewModel(int id)
         {
-            _dbSet.SingleOrDefault(x => x.Id == id);
-            _webContext.SaveChanges();
-            var pageWiki = new PageWikiBlock();
+            var block = _dbSet.SingleOrDefault(x => x.Id == id);
             return new BlockPageBaaData
             {
-                Id = pageWiki.Id,
-                Title = pageWiki.Title,
-                Text = pageWiki.Text,
+                Id = block.Id,
+                Title = block.Title,
+                Text = block.Text,
             };
         }
 

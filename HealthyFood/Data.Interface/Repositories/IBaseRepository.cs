@@ -1,10 +1,11 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 
 namespace Data.Interface.Repositories
 {
     public interface IBaseRepository<T> where T : BaseModel
     {
-        void Add(T model);
+        T Add(T model);
         T Get(int id);
         IEnumerable<T> GetAll();
         void Remove(int id);
@@ -15,5 +16,7 @@ namespace Data.Interface.Repositories
         /// DANGEROUS. Try to not use it
         /// </summary>
         void Update(T model);
+
+        PaginatorData<T> GetPaginator(int page, int perPage);
     }
 }

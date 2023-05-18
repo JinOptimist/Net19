@@ -45,25 +45,6 @@ namespace Data.Sql.Repositories
             return _dbSet.Where(x => x.Creater.Id == userId).ToList();
         }
 
-        public GameAndPaginatorData GetGamesForPaginator(int page, int perPage)
-        {
-            var dataModel = new GameAndPaginatorData();
-            var games = _dbSet
-                .Include(x => x.Genres)
-                .Skip((page - 1) * perPage)
-                .Take(perPage)
-                .ToList();
-            dataModel.Games = games;
-            dataModel.TotalCount = _dbSet.Count();
-            return dataModel;
-        }
-
-        public List<Game> GetAllGames()
-        {
-            return _dbSet
-                .Include(x => x.Genres)
-                .ToList();
-        }
         public Game GetTheRichGameWithGenres()
         {
             return _dbSet
@@ -84,6 +65,12 @@ namespace Data.Sql.Repositories
             game.Name = name;
             game.CoverUrl = coverUrl;
             _webContext.SaveChanges();
+        }
+
+        public override PaginatorData<Game> GetPaginator(int page, int perPage)
+        {
+            var initialSource = _dbSet.Include(x => x.Genres);
+            return base.GetPaginator(initialSource, page, perPage);
         }
     }
 }

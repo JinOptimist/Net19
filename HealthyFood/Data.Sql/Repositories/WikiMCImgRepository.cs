@@ -20,7 +20,7 @@ namespace Data.Sql.Repositories
                     ImgUrl = image.ImgUrl,
                     ImgType = image.ImgType,
                     UserName = image.ImageUploader.Name,
-                    Tags = image.ImageUploader.UploadedImages.SelectMany(x => x.Tags).Select(x => x.TagName).Distinct().ToList(),
+                    Tags = image.Tags.Select(x => x.TagName).Distinct().ToList(),
                 });
 
         public List<ImagesAndInfoAboutTheirUploaderData> GetUserImages()

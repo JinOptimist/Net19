@@ -59,14 +59,15 @@ namespace HealthyFoodWeb.Services.WikiServices
                         Comment = c.Comment,
                         Author = c.Author.Name,
                         CommentId = c.CommentId,
+                        AuthorId = c.Author.Id
                     })
                     .ToList() ?? new List<CommentAndAuthorViewModel>()
                 });
         }
 
-        public void Remove(int id)
+        public void RemoveBlock(int blockId)
         {
-            _wikiBaaRepository.Remove(id);
+            _wikiBaaRepository.Remove(blockId);
         }
 
         public void RemoveComment(int commentId)
@@ -87,7 +88,22 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public void Updateblock(int id, string title, string text)
         {
-            _wikiBaaRepository.UpdateBlock(id,title,text);
+            _wikiBaaRepository.UpdateBlock(id, title, text);
+        }
+
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        {
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockCommentPage.CommentId,
+                Text = blockCommentPage.Comment,
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            _wikiBaaCommentRepository.UpdateBlockComment(Id, Text);
         }
     }
 }

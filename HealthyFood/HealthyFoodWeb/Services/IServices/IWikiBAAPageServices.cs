@@ -6,7 +6,7 @@ namespace HealthyFoodWeb.Services.IServices
     {
         void CreateBlock(BLockPageBaaViewModel block);
 
-        void Remove(int id);
+        void RemoveBlock(int blockId);
 
         IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments();
        
@@ -17,5 +17,9 @@ namespace HealthyFoodWeb.Services.IServices
         BLockPageBaaViewModel GetBLockPageBaaViewModel(int id);
 
         void Updateblock(int id, string title, string text);
+
+        BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId);
+
+        void UpdateBlockComment(int Id, string Text);
     }
 }

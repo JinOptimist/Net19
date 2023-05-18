@@ -3,7 +3,6 @@ using HealthyFoodWeb.Models.ModelsWikiBAA;
 using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
-using Data.Sql.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HealthyFoodWeb.Controllers
@@ -78,9 +77,9 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [Authorize]
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int blockId)
         {
-            _blockInformationServices.Remove(id);
+            _blockInformationServices.RemoveBlock(blockId);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
@@ -88,6 +87,22 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult RemoveComment(int commentId)
         {
             _blockInformationServices.RemoveComment(commentId);
+            return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult UpdateComment(int commentId)
+        {
+            var viewModel = _blockInformationServices.GetBlockCommentPageBaaViewModel(commentId);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateComment(BLockPageBaaViewModel blockViewModel)
+        {
+            
+            _blockInformationServices.UpdateBlockComment(blockViewModel.Id,blockViewModel.Text);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
@@ -176,17 +191,6 @@ namespace HealthyFoodWeb.Controllers
                 wikiMcViewModel.UserTags);
 
             return RedirectToAction("ShowUploadedImages", "Wiki");
-        }
-
-        private BLockPageBaaViewModel Convert(PageWikiBlock x)
-        {
-            return new BLockPageBaaViewModel
-            {
-                Id = x.Id,
-                Text = x.Text,
-                Title = x.Title,
-                Author = x.Author?.Name,
-            };
         }
     }
 }
