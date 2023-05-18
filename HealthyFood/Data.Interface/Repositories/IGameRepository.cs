@@ -13,8 +13,6 @@ namespace Data.Interface.Repositories
 
         List<Game> GetGamesByUserId(int userId);
 
-        GameAndPaginatorData GetGamesForPaginator(int page, int perPage);
-
         void UpdateNameAndCover(int id, string name, string coverUrl);
 
         Game GetGameAndGenres(int id);
