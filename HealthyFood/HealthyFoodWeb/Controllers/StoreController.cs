@@ -25,23 +25,7 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult storePageCatalogue()
         {
-            var viewModel = new StoreCatalogueViewModel();
-            viewModel.Items = _storeCatalogueService
-                .GetAllItems()
-                .Select(x => new StoreItemViewModel
-                {
-                    Name = x.Name,
-                    Price = x.Price,
-                    Img = x.ImageUrl,
-                    Manufacturer = x.Manufacturer.Name,
-
-                }).ToList();
-            viewModel.Manufacturer = _storeCatalogueService
-                .GetAllManufacturers()
-                .Select(x => new ManufacturerViewModel
-                {
-                    Name = x.Name,
-                }).ToList();
+            var viewModel = _storeCatalogueService.CreateStoreViewModel();
 
             return View(viewModel);
         }

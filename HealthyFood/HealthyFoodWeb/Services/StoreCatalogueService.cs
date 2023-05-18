@@ -40,6 +40,28 @@ namespace HealthyFoodWeb.Services
 
             _catalogueRepository.Add(dbCartModel);
         }
+
+        public StoreCatalogueViewModel CreateStoreViewModel()
+        {
+            var viewModel = new StoreCatalogueViewModel();
+            viewModel.Items = GetAllItems()
+                .Select(x => new StoreItemViewModel
+                {
+                    Name = x.Name,
+                    Price = x.Price,
+                    Img = x.ImageUrl,
+                    Manufacturer = x.Manufacturer.Name,
+
+                }).ToList();
+            viewModel.Manufacturer = GetAllManufacturers()
+                .Select(x => new ManufacturerViewModel
+                {
+                    Name = x.Name,
+                }).ToList();
+
+            return viewModel;
+
+        }
     }
 }
 
