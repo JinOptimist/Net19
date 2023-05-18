@@ -9,6 +9,7 @@ namespace HealthyFoodWeb.Utility
     {
         private const int MIN_GAME_COUNT = 20;
         private const int MIN_STORE_COUNT = 20;
+        private static Random _random = new Random();
 
         public static void Seed(this WebApplication webApplication)
         {
@@ -17,9 +18,11 @@ namespace HealthyFoodWeb.Utility
                 SeedUsers(scope);
                 SeedManufacturer(scope);
                 SeedStoreItems(scope);
+                SeedGameCategory(scope);
                 SeedGame(scope);
                 SeedReview(scope);
-                SeedGameCategory(scope);
+                SeedWikiTag(scope);
+                SeedWikiMcImage(scope);
             }
         }
 
@@ -27,15 +30,23 @@ namespace HealthyFoodWeb.Utility
         {
             var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 
-            if (!userRepository.Any())
+            var admin = userRepository.GetByName("Admin");
+            if (admin == null)
             {
-                var admin = new User
+                admin = new User
                 {
                     Name = "Admin",
                     Password = "123",
-                    AvatarUrl = "NoAvatar"
+                    AvatarUrl = "NoAvatar",
+                    Role = MyRole.Admin
                 };
                 userRepository.Add(admin);
+            }
+
+            if (admin.Role != MyRole.Admin)
+            {
+                admin.Role = MyRole.Admin;
+                userRepository.Update(admin);
             }
         }
 
@@ -81,7 +92,7 @@ namespace HealthyFoodWeb.Utility
                     var adminItem = new StoreItem
                     {
                         Name = $"Admin{i}",
-                        Price = 1+i,
+                        Price = 1 + i,
                         ImageUrl = "NoImage",
                         Manufacturer = manufacturer
 
@@ -90,45 +101,34 @@ namespace HealthyFoodWeb.Utility
                 }
             }
         }
+       
         private static void SeedGame(IServiceScope scope)
         {
             var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
-            if (!gameRepository.Any())
-            {
-                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
-                var randomUser = userRepository.GetFirst();
-                var game = new Game
-                {
-                    Name = "BestOfTheBestGame",
-                    Price = 1000,
-                    CoverUrl = "",
-                    Creater = randomUser
-
-                };
-                gameRepository.Add(game);
-            }
-
+            var genreRepository = scope.ServiceProvider.GetRequiredService<IGameCategoryRepository>();
 
             if (gameRepository.Count() < MIN_GAME_COUNT)
             {
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
                 var randomUser = userRepository.GetFirst();
+                var genres = genreRepository.GetAll();
 
                 for (int i = 0; i < MIN_GAME_COUNT; i++)
                 {
                     var game = new Game
                     {
                         Name = $"RichGame№{i}",
-                        Price = 100 + i,
+                        Price = 1 + _random.Next(100),
                         CoverUrl = "https://i.imgur.com/eOtEAB7.jpg",
-                        Creater = randomUser
-
+                        Creater = randomUser,
+                        Genres = new List<GameCategory> { genres.Random() }
                     };
                     gameRepository.Add(game);
                 }
             }
 
         }
+        
         private static void SeedReview(IServiceScope scope)
         {
             var reviewRepository = scope.ServiceProvider.GetRequiredService<IReviewRepository>();
@@ -144,7 +144,7 @@ namespace HealthyFoodWeb.Utility
 
         private static void SeedGameCategory(IServiceScope scope)
         {
-            var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror" };
+            var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror", "Hentai" };
 
             var gameCategoryRepository = scope.ServiceProvider
                 .GetRequiredService<IGameCategoryRepository>();
@@ -159,6 +159,68 @@ namespace HealthyFoodWeb.Utility
                     };
                     gameCategoryRepository.Add(gameCatalog);
                 }
+            }
+        }
+
+        private static void SeedWikiTag(IServiceScope scope)
+        {
+            var defaultTags = new List<string> { "Protein", "Fat", "Carb", "Muscles", "Polyunsaturated fats", "Complex carbs" };
+
+            var tagRepository = scope.ServiceProvider
+                .GetRequiredService<IWikiTagRepository>();
+
+            foreach (var tagName in defaultTags)
+            {
+                if (tagRepository.Get(tagName) == null)
+                {
+                    var tagCatalog = new WikiTags
+                    {
+                        TagName = tagName
+                    };
+                    tagRepository.Add(tagCatalog);
+                }
+            }
+        }
+
+        private static void SeedWikiMcImage(IServiceScope scope)
+        {
+            var wikiMcImagesRepository = scope.ServiceProvider.GetRequiredService<IWikiMcRepository>();
+
+            if (!wikiMcImagesRepository.Any())
+            {
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var tagRepository = scope.ServiceProvider.GetRequiredService<IWikiTagRepository>();
+                var tags = tagRepository.GetAll().ToDictionary(x => x.TagName, x => x);
+                var randomUser = userRepository.GetFirst();
+                var image1 = new WikiMcImage
+                {
+                    ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/41204/pub_5b00259fad0f222dd299aae7_5b005a50a936f4e52e30b616/scale_1200",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Proteins,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags> { tags["Protein"], tags["Muscles"] },
+                };
+                wikiMcImagesRepository.Add(image1);
+
+                var image2 = new WikiMcImage
+                {
+                    ImgUrl = "https://www.health.com/thmb/nxURaqGxebTJBMzXi5jZpaAL02Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Healthy-Fats-Food-GettyImages-1301412044-2000-8ab23a10624d42df85fa3f37d7c76a6b.jpg",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Fats,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags> { tags["Fat"], tags["Polyunsaturated fats"] },
+                };
+                wikiMcImagesRepository.Add(image2);
+
+                var image3 = new WikiMcImage
+                {
+                    ImgUrl = "https://medlineplus.gov/images/Carbohydrates_share.jpg",
+                    Year = 2023,
+                    ImgType = ImgTypeEnum.Carbs,
+                    ImageUploader = randomUser,
+                    Tags = new List<WikiTags> { tags["Carb"], tags["Complex carbs"] },
+                };
+                wikiMcImagesRepository.Add(image3);
             }
         }
     }

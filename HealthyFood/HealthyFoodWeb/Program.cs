@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
+using HealthyFoodWeb.Services.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services
     .AddCookie(AuthService.AUTH_NAME, x=>
     {
         x.LoginPath = "/User/Login";
-        //x.AccessDeniedPath = "/User/AccessDenied";
+        x.AccessDeniedPath = "/User/AccessDenied";
     });
 
 
@@ -25,13 +26,15 @@ builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(
         diContainer.GetService<IGameRepository>(), 
         diContainer.GetService<IAuthService>(),
-        diContainer.GetService<IGameCategoryRepository>()));
+        diContainer.GetService<IGameCategoryRepository>(),
+        diContainer.GetService<IPagginatorService>()));
+builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-builder.Services.AddScoped<IWikiMCService>(
-    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
+builder.Services.AddScoped<IWikiMcService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), diContainer.GetService<IAuthService>(), diContainer.GetService<IWikiTagRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(
@@ -66,6 +69,7 @@ builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiTagRepository>(x => new WikiTagRepository(x.GetService<WebContext>()));
 
 builder.Services.AddHttpContextAccessor();
 

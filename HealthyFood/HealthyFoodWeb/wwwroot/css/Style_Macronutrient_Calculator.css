@@ -60,3 +60,8 @@
 .suggestions {
     margin-inline: 30pt;
 }
+
+.add-image{
+    display:flex!important;
+}
+

@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using HealthyFoodWeb.Controllers.CustomAuthorizeAttributes;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.IServices;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 
 namespace HealthyFoodWeb.Controllers
 {
+
     public class GameController : Controller
     {
         private IGameService _gameService;
@@ -24,42 +26,28 @@ namespace HealthyFoodWeb.Controllers
 
             viewModel.CheapGames = _gameService
                 .GetAllCheapGames()
-                .Select(Convert)
+                .Select(BuildViewModelFromDbModel)
                 .ToList();
 
             viewModel.RichGames = _gameService
                 .GetAllRichGames()
-                .Select(Convert)
+                .Select(BuildViewModelFromDbModel)
                 .ToList();
 
-            viewModel.TheBestGame = Convert(_gameService.GetTheBestGameWithGenres());
+            viewModel.TheBestGame = BuildViewModelFromDbModel(_gameService.GetTheBestGameWithGenres());
 
             return View(viewModel);
         }
 
         public IActionResult Games(int page = 1, int perPage = 10)
         {
-            var viewModel = new GameAndPagginatorViewModel();
-            var dataModel = _gameService.GetGamesForPaginator(page, perPage);
-            viewModel.Games = dataModel
-                .Games
-                .Select(Convert)
-                .ToList();
-
-            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
-            var totalPageCount =
-                (dataModel.TotalCount / perPage)
-                + (doWeNeedOneMorePage ? 1 : 0);
-
-            viewModel.PageList = Enumerable
-                .Range(1, totalPageCount)
-                .ToList();
-            viewModel.ActivePageNumber = page;
+            var viewModel = _gameService.GetGamesForPaginator(page, perPage);
             return View(viewModel);
         }
 
         [HttpGet]
         [Authorize]
+        [IsHasRole(MyRole.Admin, MyRole.Manager)]
         public IActionResult CreateGame()
         {
             return View();
@@ -67,6 +55,7 @@ namespace HealthyFoodWeb.Controllers
 
         [HttpPost]
         [Authorize]
+        [IsHasRole(MyRole.Admin)]
         public IActionResult CreateGame(GameViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -103,8 +92,8 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult Update(GameViewModel gameViewModel)
         {
-            _gameService.UpdateNameAndCover(gameViewModel.Id, 
-                gameViewModel.Name, 
+            _gameService.UpdateNameAndCover(gameViewModel.Id,
+                gameViewModel.Name,
                 gameViewModel.CoverUrl);
 
             _gameService.UpdateGenres(gameViewModel.Id,
@@ -113,7 +102,7 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("Games", "Game");
         }
 
-        private GameViewModel Convert(Game x)
+        private GameViewModel BuildViewModelFromDbModel(Game x)
         {
             return new GameViewModel
             {

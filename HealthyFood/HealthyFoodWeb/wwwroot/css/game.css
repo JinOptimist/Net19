@@ -40,3 +40,12 @@
     padding: 7px;
     margin: 10px;
 }
+
+.create-game{
+    display: flex;
+}
+
+.loader {
+    height: 40px;
+    display: none;
+}

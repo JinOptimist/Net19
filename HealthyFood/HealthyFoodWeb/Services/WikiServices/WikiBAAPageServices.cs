@@ -2,7 +2,6 @@
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
-using Data.Interface.Models;
 using Data.Sql.Repositories;
 
 namespace HealthyFoodWeb.Services.WikiServices
@@ -35,27 +34,76 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockeId, string comment)
+        public void CreateComment(int blockId, string comment, int commentId)
         {
-            var block = _wikiBaaRepository.Get(blockeId);
+            var blockDb = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            var dbComment = new WikiBlockComment()
-            {
-                Block = block,
-                Text = comment,
-                Author = user,
-            };
-            _wikiBaaCommentRepository.Add(dbComment);
+            _wikiBaaCommentRepository.CreateComment(user, blockDb, comment, commentId);
         }
 
-        public IEnumerable<PageWikiBlock> GetBlocksWithAuthorAndComments()
+        public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
         {
-            return _wikiBaaRepository.GetBlocksWithAuthor();
+
+            return _wikiBaaRepository.GetBlocksWithAuthorComMents()
+                .Select(
+                x => new BLockPageBaaViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Author = x.Author,
+                    CommentAndAuthor = x.CommentAndAuthor?
+                    .Select
+                    (c => new CommentAndAuthorViewModel
+                    {
+                        Comment = c.Comment,
+                        Author = c.Author.Name,
+                        CommentId = c.CommentId,
+                        AuthorId = c.Author.Id
+                    })
+                    .ToList() ?? new List<CommentAndAuthorViewModel>()
+                });
         }
-       
-        public void Remove(int id)
+
+        public void RemoveBlock(int blockId)
         {
-            _wikiBaaRepository.Remove(id);
+            _wikiBaaRepository.Remove(blockId);
+        }
+
+        public void RemoveComment(int commentId)
+        {
+            _wikiBaaCommentRepository.RemoveComment(commentId);
+        }
+
+        public BLockPageBaaViewModel GetBLockPageBaaViewModel(int id)
+        {
+            var blockPage = _wikiBaaRepository.GetBLockPageBaaViewModel(id);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockPage.Id,
+                Title = blockPage.Title,
+                Text = blockPage.Text,
+            };
+        }
+
+        public void Updateblock(int id, string title, string text)
+        {
+            _wikiBaaRepository.UpdateBlock(id, title, text);
+        }
+
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        {
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            return new BLockPageBaaViewModel
+            {
+                Id = blockCommentPage.CommentId,
+                Text = blockCommentPage.Comment,
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            _wikiBaaCommentRepository.UpdateBlockComment(Id, Text);
         }
     }
 }

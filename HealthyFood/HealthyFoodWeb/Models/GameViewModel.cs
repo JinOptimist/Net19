@@ -15,7 +15,6 @@ namespace HealthyFoodWeb.Models
         [Positive]
         public decimal Price { get; set; }
 
-        [Positive]
         public int ActiveGamers { get; set; }
 
         public List<string> AvailableGenres { get; set; } = new List<string>();

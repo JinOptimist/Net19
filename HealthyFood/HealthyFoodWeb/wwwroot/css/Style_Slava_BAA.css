@@ -1,52 +1,59 @@
 body {
-    font: 13pt Arial, Helvetica, sans-serif; /* ����� �� ���-�������� */
-    background: #e1dfb9; /* ���� ���� */
+    font: 13pt Arial, Helvetica, sans-serif; /* ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    background: #e1dfb9; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 }
 
 h2 {
-    font-size: 1.5em; /* ������ ������ */
-    color: #800040; /* ���� ������ */
-    margin-top: 0; /* ������ ������ */
+    font-size: 1.5em; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    color: #800040; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    display: inline-block;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 5px;
+    background: #f0f0f0;
 }
 
 .container {
-    width: 101%; /* ������ ���� */
-    margin: 0 auto; /* ������������ �� ������ */
-    background: #f0f0f0; /* ���� ���� ����� ������� */
+    width: 101%; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+    margin: 0 auto; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    background: #f0f0f0; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }
 
 .header {
     margin-left: -22px;
-    font-size: 2.5em; /* ������ ������ */
-    text-align: center; /* ������������ �� ������ */
-    padding: 5px; /* ������� ������ ������ */
-    background: #8fa09b; /* ���� ���� ����� */
-    color: #ffe; /* ���� ������ */
+    font-size: 2.5em; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    text-align: center; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    padding: 5px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    background: #8fa09b; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    color: #ffe; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }
 
 .sidebar {
     margin-top: 10px;
-    width: 110px; /* ������ ���� */
-    padding: 0 10px; /* ������� ������ ������ */
-    float: left; /* ��������� �� ������� ���� */
+    width: 110px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+    padding: 0 10px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    float: left; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 }
 
 .content {
-    margin-left: 130px; /* ������ ����� */
-    padding: 10px; /* ���� ������ ������ */
-    background: #fff; /* ���� ���� ������ ������� */
+    margin-left: 130px;
+    padding: 10px;
+    background: #e1dfb9bf;
     font-size: 1.3em;
 }
 
 .author {
-    margin-top: 2%;
+    display: inline-block;
+    margin-top: 1%;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 5px;
+    background: #f0f0f0;
 }
 
 .footer {
-    background: #8fa09b; /* ���� ���� ������� */
-    color: #fff; /* ���� ������ */
-    padding: 5px; /* ������� ������ ������ */
-    clear: left; /* �������� �������� float */
+    background: #8fa09b; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    color: #fff; /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    padding: 5px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    clear: left; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ float */
 }
 
 .introduction img {
@@ -76,7 +83,6 @@ h2 {
 
 .text textArea {
     width: 60%;
-    margin-top: 2%;
 }
 
 .title input {
@@ -85,5 +91,81 @@ h2 {
 }
 
 .button {
-    margin-top: 2%;
+    margin-top: 1%;
+}
+
+.textBlock {
+    margin-top: 1%;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 7px;
+    background: #f0f0f0;
+}
+
+.comments {
+    display: flex;
+    margin: 10px 5px;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 5px;
+    background: #f0f0f0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    flex-direction: column;
+}
+
+.block {
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 5px;
+    background: #e1dfb9bf;
+}
+
+.borderAuthorComments {
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    padding: 1px;
+    display: inline-block;
+    margin-top: 1%;
+}
+
+.enterComments {
+    display: flex;
+    align-items: baseline;
+}
+
+.positionAuthor {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+span.authorComments {
+    align-self: flex-end;
+    text-decoration: underline;
+}
+
+.button input {
+    background: #fff;
+}
+
+.deletBlock {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deletBlockBorder {
+    padding: 4px;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    background: #f0f0f0;
+}
+
+.deletBlockBorder input {
+    border: 0px;
+}
+
+.updateBlock {
+    padding: 4px;
+    border: 2mm ridge rgb(211 220 50 / 30%);
+    background: #f0f0f0;
+}
+
+.updateBlock input {
+    border: 0px;
 }

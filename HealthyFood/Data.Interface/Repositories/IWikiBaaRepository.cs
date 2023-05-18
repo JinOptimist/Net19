@@ -1,9 +1,14 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.DataModels;
+using Data.Sql.Models;
 
 namespace Data.Interface.Repositories
 {
-    public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock> 
+    public interface IWikiBaaRepository : IBaseRepository<PageWikiBlock>
     {
-		IEnumerable<PageWikiBlock> GetBlocksWithAuthor();
+        IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents();
+
+        BlockPageBaaData GetBLockPageBaaViewModel(int id);
+
+        void UpdateBlock(int id, string title, string text);
     }
 }

@@ -1,6 +1,6 @@
-﻿using Data.Interface.Repositories;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Repositories;
 using Data.Sql.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -8,28 +8,51 @@ namespace Data.Sql.Repositories
     {
         public WikiBaaRepository(WebContext webContext) : base(webContext) { }
 
-        public void Add(PageWikiBlock model)
+        public IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents()
         {
-            _dbSet.Add((PageWikiBlock)model);
+            return _dbSet.Select(
+                x => new BlockPageBaaData
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Author = x.Author.Name,
+                    CommentAndAuthor = x
+                        .Comment
+                        .Select(c => new CommentAndAuthorData
+                        {
+                            Comment = c.Text,
+                            Author = c.Author,
+                            CommentId = c.Id
+                        })
+                        .ToList(),
+                })
+                .ToList();
+        }
+
+        public void Remove(int blockId)
+        {
+            var block = _dbSet.FirstOrDefault(_x => _x.Id == blockId);
+            _dbSet.Remove(block);
             _webContext.SaveChanges();
         }
 
-        public IEnumerable<PageWikiBlock> GetAll()
+        public BlockPageBaaData GetBLockPageBaaViewModel(int id)
         {
-            return _dbSet.ToList();
+            var block = _dbSet.SingleOrDefault(x => x.Id == id);
+            return new BlockPageBaaData
+            {
+                Id = block.Id,
+                Title = block.Title,
+                Text = block.Text,
+            };
         }
 
-        public IEnumerable<PageWikiBlock> GetBlocksWithAuthor()
+        public void UpdateBlock(int id, string title, string text)
         {
-            return _dbSet
-           .Include(x => x.Author)
-           .ThenInclude(x => x.Comments);
-        }
-
-        public void Remove(int id)
-        {
-            var block = _dbSet.FirstOrDefault(_x => _x.Id == id);
-            _dbSet.Remove(block);
+            var block = Get(id);
+            block.Title = title;
+            block.Text = text;
             _webContext.SaveChanges();
         }
     }
