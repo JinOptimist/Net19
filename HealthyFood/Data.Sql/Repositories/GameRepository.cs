@@ -72,5 +72,12 @@ namespace Data.Sql.Repositories
             var initialSource = _dbSet.Include(x => x.Genres);
             return base.GetPaginator(initialSource, page, perPage);
         }
+
+        public List<Game> GetAllGames()
+        {
+           return _dbSet
+                .Include(x => x.Genres)
+                .ToList();
+        }
     }
 }

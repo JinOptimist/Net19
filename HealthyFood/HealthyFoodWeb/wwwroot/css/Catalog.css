@@ -13,7 +13,6 @@
 .left-menu {
     display: flex;
     flex-direction: column; /* размещаем элементы к колонку */
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
     min-width: 0px;
     min-height: 0vh;
 }

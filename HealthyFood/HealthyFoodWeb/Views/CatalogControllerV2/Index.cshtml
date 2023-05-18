@@ -1,4 +1,4 @@
-﻿@model List<GameViewModel>
+﻿@model PagginatorViewModel<GameViewModel>
 @{
     Layout = "_Layout_GameCatalog";
 }
@@ -33,7 +33,7 @@
     </div>
 
     <div class="centre">
-        @foreach (var games in Model)
+        @foreach (var games in Model.Items)
         {
             <div class="allgame">
                 @games.Name

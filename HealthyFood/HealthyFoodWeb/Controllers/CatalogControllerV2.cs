@@ -13,13 +13,18 @@ namespace HealthyFoodWeb.Controllers
         {
             _gameService = gameService;
         }
-        public IActionResult Index()
-        {
-            var viewModels = _gameService
-                .AllGames()
-                .ToList();
+        //public IActionResult Index()
+        //{
+        //    var viewModels = _gameService
+        //        .AllGames()
+        //        .ToList();
 
-            return View(viewModels);
+        //    return View(viewModels);
+        //}
+        public IActionResult Index(int page = 1, int perPage = 9)
+        {
+            var viewModel = _gameService.GetGamesForPaginator(page, perPage);
+            return View(viewModel);
         }
     }
 }
