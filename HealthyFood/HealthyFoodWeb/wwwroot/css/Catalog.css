@@ -170,3 +170,6 @@
     width: 150px;
     height: 200px;
 }
+.centre {
+    columns: auto 3;
+}
