@@ -19,7 +19,9 @@
             }
             Дата: @text.Date
         </div>
-        <div>@text.TextReview </div>
+        <div>
+            <pre>@text.TextReview</pre>
+            </div>
     </div>
 }
 
@@ -29,17 +31,20 @@
 
     @if (User.Identity.IsAuthenticated)
     {
+        <div class = "new-review">
+            Ваш отзыв: <pre><span class="user-review"></span></pre>
+        </div>
         <div>
             @Html.TextAreaFor(x => x.NewReview, new { @class = "Creat-review" })
-             @*   //@Model.NewReview, new { @class = "Creat-review" })*@
+          
 
         </div>
         <div>
             <input type="submit" value="Написать отзыв" /> 
-            <span class = "Error">@Model.TextError 
+          @*  <span class = "Error">@Model.TextError 
              
             </span>
-          
+          *@
         </div>
         <div>
             
@@ -53,7 +58,9 @@
     }
 </form>
 
-
+@section Scripts{
+    <script src="~/js/review/creat.js"></script>
+}
 
 @section Styles{
 <link rel="stylesheet" href="~/css/Review.css" />

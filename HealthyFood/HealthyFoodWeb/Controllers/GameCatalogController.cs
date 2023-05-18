@@ -90,7 +90,7 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult Review()
         {
-         
+
             var viewModels = _reviewService
               .GetAllReviews()
               .Select(dbModel =>
@@ -118,7 +118,6 @@ namespace HealthyFoodWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //return RedirectToAction("Review", new { errorMessage  = "Текст отзыва не может быть пустым"});
                 return RedirectToAction("Review");
             }
 
