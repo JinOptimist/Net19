@@ -3,6 +3,7 @@ using Data.Interface.Models;
 using Data.Interface.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Games;
+using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -13,14 +14,17 @@ namespace HealthyFoodWeb.Services
         private IGameRepository _gameRepository;
         private IGameCategoryRepository _gameCategoryRepository;
         private IAuthService _authService;
+        private IPagginatorService _pagginatorService;
 
         public GameService(IGameRepository gameRepository,
             IAuthService authService,
-            IGameCategoryRepository gameCategoryRepository)
+            IGameCategoryRepository gameCategoryRepository,
+            IPagginatorService pagginatorService)
         {
             _gameRepository = gameRepository;
             _authService = authService;
             _gameCategoryRepository = gameCategoryRepository;
+            _pagginatorService = pagginatorService;
         }
 
         public void CreateGame(GameViewModel viewModel)
@@ -70,10 +74,16 @@ namespace HealthyFoodWeb.Services
             _gameRepository.RemoveByName(name);
         }
 
-        public GameAndPaginatorData GetGamesForPaginator(int page, int perPage)
+        public PagginatorViewModel<GameViewModel> GetGamesForPaginator(int page, int perPage)
         {
-            return _gameRepository
-                .GetGamesForPaginator(page, perPage);
+            var viewModel = _pagginatorService
+                .GetPaginatorViewModel(
+                    page, 
+                    perPage,
+                    BuildViewModelFromDbModel,
+                    _gameRepository);
+            
+            return viewModel;
         }
 
         public GameViewModel GetGameViewModel(int id)
@@ -128,6 +138,17 @@ namespace HealthyFoodWeb.Services
             {
                 TotalGamesCount = dataModel.Count,
                 RandomGamesNames = dataModel.TopNames
+            };
+        }
+
+        private GameViewModel BuildViewModelFromDbModel(Game x)
+        {
+            return new GameViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CoverUrl = x.CoverUrl,
+                Genres = x.Genres?.Select(x => x.Name).ToList() ?? new List<string>()
             };
         }
     }
