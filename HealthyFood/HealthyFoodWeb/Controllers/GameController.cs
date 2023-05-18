@@ -41,23 +41,7 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult Games(int page = 1, int perPage = 10)
         {
-            var viewModel = new GameAndPagginatorViewModel();
-            var dataModel = _gameService.GetGamesForPaginator(page, perPage);
-            viewModel.Games = dataModel
-                .Games
-                //.Select(dbModel => BuildViewModelFromDbModel(dbModel))
-                .Select(BuildViewModelFromDbModel)
-                .ToList();
-
-            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
-            var totalPageCount =
-                (dataModel.TotalCount / perPage)
-                + (doWeNeedOneMorePage ? 1 : 0);
-
-            viewModel.PageList = Enumerable
-                .Range(1, totalPageCount)
-                .ToList();
-            viewModel.ActivePageNumber = page;
+            var viewModel = _gameService.GetGamesForPaginator(page, perPage);
             return View(viewModel);
         }
 

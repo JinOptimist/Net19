@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
+using HealthyFoodWeb.Services.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,9 @@ builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(
         diContainer.GetService<IGameRepository>(), 
         diContainer.GetService<IAuthService>(),
-        diContainer.GetService<IGameCategoryRepository>()));
+        diContainer.GetService<IGameCategoryRepository>(),
+        diContainer.GetService<IPagginatorService>()));
+builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(

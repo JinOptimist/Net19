@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 
 namespace Data.Interface.Repositories
 {
@@ -15,5 +16,7 @@ namespace Data.Interface.Repositories
         /// DANGEROUS. Try to not use it
         /// </summary>
         void Update(T model);
+
+        PaginatorData<T> GetPaginator(int page, int perPage);
     }
 }

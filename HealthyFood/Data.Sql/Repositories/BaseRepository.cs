@@ -1,29 +1,30 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
-    public abstract class BaseRepository<SomeModel> 
-        : IBaseRepository<SomeModel> where SomeModel : BaseModel
+    public abstract class BaseRepository<DbModelType> 
+        : IBaseRepository<DbModelType> where DbModelType : BaseModel
     {
         protected WebContext _webContext;
-        protected DbSet<SomeModel> _dbSet;
+        protected DbSet<DbModelType> _dbSet;
 
         public BaseRepository(WebContext webContext)
         {
             _webContext = webContext;
-            _dbSet = webContext.Set<SomeModel>();
+            _dbSet = webContext.Set<DbModelType>();
         }
 
-        public SomeModel Add(SomeModel model)
+        public DbModelType Add(DbModelType model)
         {
             _dbSet.Add(model);
             _webContext.SaveChanges();
             return model;
         }
 
-        public void Update(SomeModel model)
+        public void Update(DbModelType model)
         {
             _dbSet.Update(model);
             _webContext.SaveChanges();
@@ -35,12 +36,12 @@ namespace Data.Sql.Repositories
         public int Count()
             => _dbSet.Count();
 
-        public SomeModel Get(int id)
+        public DbModelType Get(int id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<SomeModel> GetAll()
+        public IEnumerable<DbModelType> GetAll()
         {
             return _dbSet.ToList();
         }
@@ -48,6 +49,24 @@ namespace Data.Sql.Repositories
         public void Remove(int id)
         {
             _dbSet.Remove(Get(id));
+        }
+
+        public virtual PaginatorData<DbModelType> GetPaginator(int page, int perPage)
+        {
+            return GetPaginator(_dbSet, page, perPage);
+        }
+
+        public virtual PaginatorData<DbModelType> GetPaginator(IQueryable<DbModelType> initialSource, int page, int perPage)
+        {
+            var dataModel = new PaginatorData<DbModelType>();
+
+            var games = initialSource
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .ToList();
+            dataModel.Items = games;
+            dataModel.TotalCount = _dbSet.Count();
+            return dataModel;
         }
     }
 
