@@ -7,7 +7,8 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface IReviewService
     {
-       List<ReviewAndInfoAboutTheirGames> GetAllReviews();
+        List<ReviewViewModel> GetAllReviews();
         void AddReview(GeneralReviewViewModel model);
     }
+
 }

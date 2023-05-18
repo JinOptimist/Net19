@@ -14,12 +14,21 @@ namespace HealthyFoodWeb.Services
         public ReviewService(IReviewRepository reviewRepository, IAuthService authService)
         {
             _reviewRepository = reviewRepository;
-            _authService = authService; 
+            _authService = authService;
         }
 
-        public List<ReviewAndInfoAboutTheirGames> GetAllReviews()
+        public List<ReviewViewModel> GetAllReviews()
         {
-            return _reviewRepository.GetReviews().ToList();
+            var dbReviews =  _reviewRepository.GetReviews().ToList();
+            return dbReviews.Select(dbModel =>
+                  new ReviewViewModel
+                  {
+                      TextReview = dbModel.TextReview,
+                      Date = dbModel.Date,
+                      Author = dbModel.UserName,
+                      CreatedGame = dbModel.GamesName.ToList(),                     
+                  })
+              .ToList();
         }
         public void AddReview(GeneralReviewViewModel model)
         {
@@ -32,5 +41,6 @@ namespace HealthyFoodWeb.Services
             };
             _reviewRepository.Add(dbModel);
         }
+
     }
 }

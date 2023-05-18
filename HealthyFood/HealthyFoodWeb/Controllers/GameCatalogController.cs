@@ -90,23 +90,11 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult Review()
         {
-         
-            var viewModels = _reviewService
-              .GetAllReviews()
-              .Select(dbModel =>
-                  new ReviewViewModel
-                  {
-                      TextReview = dbModel.TextReview,
-                      Date = dbModel.Date,
-                      Author = dbModel.UserName,
-                      CreatedGame = dbModel.GamesName.ToList(),
-                      //E/*rrorMessage = errorMessage*/
-                  })
-              .ToList();
+
+            var viewModels = _reviewService.GetAllReviews();
             var generalReviewViewModel = new GeneralReviewViewModel
             {
-                ReviewViewModels = viewModels,
-                //TextError = errorMessage
+                ReviewViewModels = viewModels,               
             };
 
             return View(generalReviewViewModel);
@@ -116,11 +104,11 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult AddReview(GeneralReviewViewModel viewMdoel)
         {
-            if (!ModelState.IsValid)
-            {
-                //return RedirectToAction("Review", new { errorMessage  = "Текст отзыва не может быть пустым"});
-                return RedirectToAction("Review");
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    //return RedirectToAction("Review", new { errorMessage  = "Текст отзыва не может быть пустым"});
+            //    return RedirectToAction("Review");
+            //}
 
             _reviewService.AddReview(viewMdoel);
             return RedirectToAction("Review");

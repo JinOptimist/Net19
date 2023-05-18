@@ -10,11 +10,10 @@
             @text.Author
             @if (text.CreatedGame.Count > 0)
             {
-                @foreach (var gameName in text.CreatedGame)
+                <text>cоздатель игр: @string.Join(", ", text.CreatedGame.Take(5))</text>
+                if (text.CreatedGame.Count > 5)
                 {
-                    <text>
-                        (cоздатель игр: @gameName)
-                    </text>
+                    <text> и др.</text>
                 }
             }
             Дата: @text.Date
@@ -31,18 +30,18 @@
     {
         <div>
             @Html.TextAreaFor(x => x.NewReview, new { @class = "Creat-review" })
-             @*   //@Model.NewReview, new { @class = "Creat-review" })*@
+            @*   //@Model.NewReview, new { @class = "Creat-review" })*@
 
         </div>
         <div>
-            <input type="submit" value="Написать отзыв" /> 
-            <span class = "Error">@Model.TextError 
-             
+            <input type="submit" value="Написать отзыв" />
+            <span class="Error">
+                @Model.TextError
+
             </span>
-          
+
         </div>
         <div>
-            
         </div>
     }
     else
@@ -56,5 +55,5 @@
 
 
 @section Styles{
-<link rel="stylesheet" href="~/css/Review.css" />
+    <link rel="stylesheet" href="~/css/Review.css" />
 }
