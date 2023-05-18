@@ -1,33 +1,54 @@
 ﻿@using Data.Interface.Models;
 @model WikiMcViewModel
 
-@{
-    Layout = "_LayoutWiki";
-    <link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
+<div class="add-image">
+	<div class="add-parameters">
+		<form method="post">
+			<div>
+				Type <br />
+				@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
+			</div>
+			<div>
+				Year <br />
+				@Html.TextBoxFor(x=>x.Year)
+			</div>
+			<div>
+				ImgUrl <br />
+				@Html.TextBoxFor(x => x.ImgPath)
+				@Html.ValidationMessageFor(x=>x.ImgPath)
+			</div>
+			<div>
+				Tags <br />
+				@Html.TextBoxFor(x => x.EnteredTags, new { @placeholder = "sport,life,food..."})
+			</div>
+			<div>
+				<input type="submit" value="Add" />
+			</div>
+		</form>
+	</div>
+	<div class="image-preview">
+		<div class="preview-container">
+			<img />
+		</div>
+		<div>
+			Image type: <span class="type">Proteins</span>
+		</div>
+		<div>
+			Image year: <span class="year"></span>
+		</div>
+		<div>
+			Image tags: <span class="tags"></span>
+		</div>
+	</div>
+</div>
+<div>
+	<a href="/Wiki/ShowUploadedImages">My Images</a>
+</div>
+
+@section Scripts{
+	<script src="~/js/addImage.js"></script>
 }
 
-<div>
-    <form method="post">
-        <div class="type">
-            Type: @Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
-        </div>
-        <div class="year">
-            Year: @Html.TextBoxFor(x=>x.Year)
-        </div>
-        <div class="url">
-            ImgUrl: 
-            @Html.TextBoxFor(x => x.ImgPath)
-            @Html.ValidationMessageFor(x=>x.ImgPath)
-        </div>
-        <div class="tags">
-            Tags:
-            @Html.TextBoxFor(x => x.EnteredTags)  (enter the tags without spaces separated by commas)
-        </div>
-        <div>
-            <input type="submit" value="Add"/>
-        </div>
-    </form>
-</div>
-<div>
-    <a href="/Wiki/ShowUploadedImages">My Images</a>
-</div>
+@section Styles{
+	<link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css/" />
+}
