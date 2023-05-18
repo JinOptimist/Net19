@@ -16,7 +16,7 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult Index()
         {
             var viewModels = _gameService
-                .GetAllGames()
+                .AllGames()
                 .ToList();
 
             return View(viewModels);
