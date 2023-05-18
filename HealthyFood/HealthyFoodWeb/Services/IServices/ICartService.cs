@@ -10,6 +10,9 @@ namespace HealthyFoodWeb.Services.IServices
 
         void DeleteFromCart(string name);
         void AddProductInBase(CartViewModel viewModel);
-        
+
+        PagginatorViewModel<CartViewModel> GetCartsForPaginator(int page, int perPage);
+
+
     }
 }

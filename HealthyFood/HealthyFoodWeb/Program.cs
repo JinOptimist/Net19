@@ -30,7 +30,10 @@ builder.Services.AddScoped<IGameService>(
         diContainer.GetService<IPagginatorService>()));
 builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
-    diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
+    diContainer => new CartService(
+        diContainer.GetService<ICartRepository>(), 
+        diContainer.GetService<IAuthService>(), 
+        diContainer.GetService<IPagginatorService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 builder.Services.AddScoped<IWikiMcService>(

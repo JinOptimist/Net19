@@ -46,18 +46,9 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
-        public IActionResult CartPage()
+        public IActionResult CartPage(int page = 1, int perPage = 4)
         {
-            var viewModel = new CartPagginatorViewModel();
-
-            viewModel.Product = _cartService.
-                GetCustomerProduct().
-                Select(x => new CartViewModel
-                {
-                    Name = x.Name,
-                    Price = x.Price
-                }).ToList();
-
+            var viewModel = _cartService.GetCartsForPaginator(page, perPage);
             return View(viewModel);
         }
 
