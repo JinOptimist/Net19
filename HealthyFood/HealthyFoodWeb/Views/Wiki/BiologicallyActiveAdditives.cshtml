@@ -2,11 +2,13 @@
 @using Data.Interface.Models;
 @using Data.Interface.Repositories;
 @using HealthyFoodWeb.Models.ModelsWikiBAA;
+@using HealthyFoodWeb.Services.IServices;
 @{
     Layout = "_LayoutWiki";
     <link rel="stylesheet" href="~/css/Style_Slava_BAA.css" />
 }
 @model IEnumerable<BLockPageBaaViewModel>
+@inject IAuthService authService
 
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
@@ -33,8 +35,16 @@
                     <span class="deletBlock">
                         <div class="deletBlockBorder">
                             <form action="/Wiki/Remove">
-                                <input type="hidden" value="@pageViewModel.Id" name="id">
+                                <input type="hidden" value="@pageViewModel.Id" name="blockId">
                                 <input type="submit" value="Delet Block">
+                            </form>
+                        </div>
+                    </span>
+                    <span class="borderUpdateBlock">
+                        <div class="updateBlock">
+                            <form action="/Wiki/UpdateBlock">
+                                <input type="hidden" value="@pageViewModel.Id" name="id">
+                                <input type="submit" value="Update Block">
                             </form>
                         </div>
                     </span>
@@ -49,6 +59,7 @@
                     <div>
                         @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
                         {
+
                             <div>
                                 <div class="comments">
                                     <span>
@@ -59,6 +70,17 @@
                                     </span>
                                 </div>
                             </div>
+                            @if (authService.GetUser()?.Id == CommentAndAuthor.AuthorId)
+                            {
+                                <form action="/Wiki/RemoveComment">
+                                    <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                    <input type="submit" value="Delet Comment">
+                                </form>
+                                <form action="/Wiki/UpdateComment">
+                                    <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                    <input type="submit" value="Update Comment">
+                                </form>
+                            }
                         }
                     </div>
                     @if (User.Identity.IsAuthenticated)
