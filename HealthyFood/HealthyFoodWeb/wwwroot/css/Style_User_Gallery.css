@@ -25,3 +25,8 @@
 .paginator a.active {
     color: dimgrey;
 }
+
+.loader {
+    height: 40px;
+    display: none;
+}

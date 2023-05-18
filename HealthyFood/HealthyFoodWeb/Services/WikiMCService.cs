@@ -3,6 +3,7 @@ using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -129,6 +130,16 @@ namespace HealthyFoodWeb.Services
 
             _wikiMCRepository.Update(image);
         }
-    }
+
+		public WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type)
+		{
+			var dataModel = _wikiMCRepository.GetDataForImagesCount(year, tag, type);
+			return new WikiMcImagesCountViewModel
+			{
+				TotalImagesCount = dataModel.Count,
+				ImagesUrl = dataModel.ImagesUrl
+			};
+		}
+	}
 }
 
