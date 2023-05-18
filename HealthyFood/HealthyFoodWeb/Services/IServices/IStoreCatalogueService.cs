@@ -8,6 +8,6 @@ namespace HealthyFoodWeb.Services.IServices
         List<StoreItem> GetAllItems();
         List<Manufacturer> GetAllManufacturers();
         void AddStoreItem(StoreItemViewModel viewModel);
-        StoreCatalogueViewModel CreateStoreViewModel();
+        StoreCatalogueViewModel CreateStoreViewModel(int page, int perPage);
     }
 }

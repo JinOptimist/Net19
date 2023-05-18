@@ -24,9 +24,9 @@ namespace HealthyFoodWeb.Controllers
             _storeCatalogueService = storeCatalogueService;
         }
 
-        public IActionResult storePageCatalogue()
+        public IActionResult storePageCatalogue(int page = 1, int perPage = 10)
         {
-            var viewModel = _storeCatalogueService.CreateStoreViewModel();
+            var viewModel = _storeCatalogueService.CreateStoreViewModel(page, perPage);
 
             return View(viewModel);
         }

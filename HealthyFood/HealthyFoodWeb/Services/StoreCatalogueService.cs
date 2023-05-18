@@ -3,6 +3,7 @@ using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Store;
+using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
@@ -11,11 +12,13 @@ namespace HealthyFoodWeb.Services
     {
         private IStoreCatalogueRepository _catalogueRepository;
         private IManufacturerRepository _manufacturerRepository;
+        private IPagginatorService _pagginatorService;
 
-        public StoreCatalogueService(IStoreCatalogueRepository catalogueRepositories, IManufacturerRepository manufacturerRepository)
+        public StoreCatalogueService(IStoreCatalogueRepository catalogueRepositories, IManufacturerRepository manufacturerRepository, IPagginatorService pagginatorService)
         {
             _catalogueRepository = catalogueRepositories;
             _manufacturerRepository = manufacturerRepository;
+            _pagginatorService = pagginatorService;
         }
 
         public List<StoreItem> GetAllItems()
@@ -42,18 +45,10 @@ namespace HealthyFoodWeb.Services
             _catalogueRepository.Add(dbCartModel);
         }
 
-        public StoreCatalogueViewModel CreateStoreViewModel()
+        public StoreCatalogueViewModel CreateStoreViewModel(int page, int perPage)
         {
             var viewModel = new StoreCatalogueViewModel();
-            viewModel.Items = GetAllItems()
-                .Select(x => new StoreItemViewModel
-                {
-                    Name = x.Name,
-                    Price = x.Price,
-                    Img = x.ImageUrl,
-                    Manufacturer = x.Manufacturer.Name,
-
-                }).ToList();
+            viewModel.ItemsPagginator = GetStoreItemsForPaginator(page, perPage);
             viewModel.Manufacturer = GetAllManufacturers()
                 .Select(x => new ManufacturerViewModel
                 {
@@ -63,6 +58,30 @@ namespace HealthyFoodWeb.Services
             return viewModel;
 
         }
+
+        public PagginatorViewModel<StoreItemViewModel> GetStoreItemsForPaginator(int page, int perPage)
+        {
+            var viewModel = _pagginatorService
+                .GetPaginatorViewModel(
+                    page,
+                    perPage,
+                    BuildViewModelFromDbModel,
+                    _catalogueRepository);
+
+            return viewModel;
+        }
+
+        private StoreItemViewModel BuildViewModelFromDbModel(StoreItem item)
+        {
+            return new StoreItemViewModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Img = item.ImageUrl,
+                Manufacturer = item.Manufacturer.Name
+            };
+        }
+
     }
 }
 

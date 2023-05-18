@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,12 @@ namespace Data.Sql.Repositories
             item.ImageUrl = img;
             item.Manufacturer = manufacturer;
             _webContext.SaveChanges();
+        }
+
+        public override PaginatorData<StoreItem> GetPaginator(int page, int perPage)
+        {
+            var initialSource = _dbSet.Include(x => x.Manufacturer);
+            return base.GetPaginator(initialSource, page, perPage);
         }
     }
 }
