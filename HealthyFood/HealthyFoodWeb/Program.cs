@@ -44,7 +44,10 @@ builder.Services.AddScoped<IAuthService>(
             diContainer.GetService<IUserService>(), 
             diContainer.GetService<IHttpContextAccessor>()));
 builder.Services.AddScoped<IReviewService>(
-    diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));
+    diContainer => new ReviewService(
+        diContainer.GetService<IReviewRepository>(), 
+        diContainer.GetService<IAuthService>(),
+        diContainer.GetService<IPagginatorService>()));
 builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
     diContainer.GetService<IAuthService>(),
     diContainer.GetService<WikiBaaCommentRepository>()));

@@ -3,7 +3,7 @@
 
 <h1>Отзывы пользователей</h1>
 
-@foreach (var text in Model.ReviewViewModels)
+@foreach (var text in Model.PagginatorViewModel.Items)
 {
     <div class="one-review">
         <div class="info-user">

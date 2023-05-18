@@ -1,6 +1,7 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
-
+using HealthyFoodWeb.Services;
+using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,18 @@ namespace HealthyFoodWeb.Controllers
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
         private IReviewService _reviewService;
+        private IPagginatorService _pagginatorService;
 
         public GameCatalogController(
-            IGameCatalogService gameCatalog, IGameFruitConnectTwoService gameFruitConnectTwoService, IReviewService reviewService)
+            IGameCatalogService gameCatalog, 
+            IGameFruitConnectTwoService gameFruitConnectTwoService, 
+            IReviewService reviewService,
+            IPagginatorService pagginatorService)
         {
             _gameCatalogService = gameCatalog;
             _gameFruitConnectTwoService = gameFruitConnectTwoService;
             _reviewService = reviewService;
+            _pagginatorService = pagginatorService;
         }
 
         public IActionResult GetCatalog()
@@ -88,13 +94,13 @@ namespace HealthyFoodWeb.Controllers
         }
 
 
-        public IActionResult Review()
+        public IActionResult Review(int page = 1, int perPage = 10)
         {
-
-            var viewModels = _reviewService.GetAllReviews();
+            var viewModel = _reviewService.GetGamesForPaginator(page, perPage);
+            //var viewModels = _reviewService.GetAllReviews();
             var generalReviewViewModel = new GeneralReviewViewModel
             {
-                ReviewViewModels = viewModels,               
+                PagginatorViewModel = viewModel,               
             };
 
             return View(generalReviewViewModel);

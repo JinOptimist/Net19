@@ -4,7 +4,7 @@ namespace HealthyFoodWeb.Models
 {
     public class GeneralReviewViewModel
     {
-        public List<ReviewViewModel> ReviewViewModels { get; set; } = new List<ReviewViewModel>();
+        public PagginatorViewModel<ReviewViewModel> PagginatorViewModel { get; set; } 
         public string TextError { get; set; }
 
         [Required (ErrorMessage = "Текст отзыва не может быть пустым")]

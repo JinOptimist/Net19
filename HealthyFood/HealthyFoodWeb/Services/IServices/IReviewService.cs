@@ -7,8 +7,9 @@ namespace HealthyFoodWeb.Services.IServices
 {
     public interface IReviewService
     {
-        List<ReviewViewModel> GetAllReviews();
+        //List<ReviewViewModel> GetAllReviews();
         void AddReview(GeneralReviewViewModel model);
+        PagginatorViewModel<ReviewViewModel> GetGamesForPaginator(int page, int perPage);
     }
 
 }

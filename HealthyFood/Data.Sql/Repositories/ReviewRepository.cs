@@ -1,4 +1,5 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,13 @@ namespace Data.Sql.Repositories
                    
                 }).ToList();
 
+        }
+        public override PaginatorData<Review> GetPaginator(int page, int perPage)
+        {
+            var initialSource = _dbSet
+                .Include(x => x.User)
+                .ThenInclude(x => x.CreatedGames);
+            return base.GetPaginator(initialSource, page, perPage);
         }
     }
 }
