@@ -1,5 +1,5 @@
 ﻿using Data.Interface.Models;
-using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Store;
 
 namespace HealthyFoodWeb.Services.IServices
 {
@@ -8,7 +8,6 @@ namespace HealthyFoodWeb.Services.IServices
         List<StoreItem> GetAllItems();
         List<Manufacturer> GetAllManufacturers();
         void AddStoreItem(StoreItemViewModel viewModel);
-        StoreItemViewModel GetStoreViewModel(int id);
-        void UpdateItem(StoreItemViewModel storeItemViewModel);
+        StoreCatalogueViewModel CreateStoreViewModel();
     }
 }

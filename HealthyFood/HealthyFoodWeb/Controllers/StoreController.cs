@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Store;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -25,24 +26,7 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult storePageCatalogue()
         {
-            var viewModel = new StoreCatalogueViewModel();
-            viewModel.Items = _storeCatalogueService
-                .GetAllItems()
-                .Select(x => new StoreItemViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Price = x.Price,
-                    Img = x.ImageUrl,
-                    Manufacturer = x.Manufacturer.Name,
-
-                }).ToList();
-            viewModel.Manufacturer = _storeCatalogueService
-                .GetAllManufacturers()
-                .Select(x => new ManufacturerViewModel
-                {
-                    Name = x.Name,
-                }).ToList();
+            var viewModel = _storeCatalogueService.CreateStoreViewModel();
 
             return View(viewModel);
         }
@@ -68,19 +52,6 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("CartPage");
         }
 
-        public IActionResult UpdateStoreCatalogue(int id)
-        {
-            var viewModel = _storeCatalogueService.GetStoreViewModel(id);
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult UpdateStoreCatalogue(StoreItemViewModel storeItemViewModel)
-        {
-            _storeCatalogueService.UpdateItem(storeItemViewModel);
-
-            return RedirectToAction("storePageCatalogue", "Store");
-        }
 
         [HttpGet]
         public IActionResult AddProductInBase()

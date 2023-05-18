@@ -2,8 +2,8 @@
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Store;
 using HealthyFoodWeb.Services.IServices;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HealthyFoodWeb.Services
 {
@@ -42,40 +42,26 @@ namespace HealthyFoodWeb.Services
             _catalogueRepository.Add(dbCartModel);
         }
 
-        public StoreItemViewModel GetStoreViewModel(int id)
+        public StoreCatalogueViewModel CreateStoreViewModel()
         {
-            var storeDb = _catalogueRepository.GetItemWithManufacturer(id);
-            var manufacturers = _manufacturerRepository
-                .GetAll()
-                .Select(x => x.Name)
-                .Select(x => new SelectListItem
-                 {
-                   Text = x,
-                   Value = x
-                 })
-                 .ToList();
+            var viewModel = new StoreCatalogueViewModel();
+            viewModel.Items = GetAllItems()
+                .Select(x => new StoreItemViewModel
+                {
+                    Name = x.Name,
+                    Price = x.Price,
+                    Img = x.ImageUrl,
+                    Manufacturer = x.Manufacturer.Name,
 
-            return new StoreItemViewModel
-            {
-                Id = storeDb.Id,
-                Name = storeDb.Name,
-                Img = storeDb.ImageUrl,
-                Price = storeDb.Price,
-                AllManufacturers = manufacturers,
-                Manufacturer = storeDb.Manufacturer.Name   
-            };
+                }).ToList();
+            viewModel.Manufacturer = GetAllManufacturers()
+                .Select(x => new ManufacturerViewModel
+                {
+                    Name = x.Name,
+                }).ToList();
 
-        }
+            return viewModel;
 
-        public void UpdateItem(StoreItemViewModel storeItemViewModel)
-        {
-            var manufacturer = _manufacturerRepository.GetByName(storeItemViewModel.Manufacturer);
-            _catalogueRepository.UpdateItem(storeItemViewModel.Id,
-                storeItemViewModel.Name,
-                storeItemViewModel.Price,
-                storeItemViewModel.Img,
-                manufacturer
-                );
         }
     }
 }
