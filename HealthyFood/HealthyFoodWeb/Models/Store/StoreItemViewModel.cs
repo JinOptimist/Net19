@@ -3,12 +3,12 @@ using HealthyFoodWeb.Models.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthyFoodWeb.Models
+namespace HealthyFoodWeb.Models.Store
 {
     public class StoreItemViewModel
     {
         public int Id { get; set; }
-        [Required] 
+        [Required]
         public string Name { get; set; }
         [Positive]
         public decimal Price { get; set; }
