@@ -33,13 +33,15 @@
     </div>
 
     <div class="centre">
-        @foreach(var games in Model)
+        @foreach (var games in Model)
         {
             <div class="allgame">
                 @games.Name
                 @games.Price
-                @games.Genres
-                <img src="@games.CoverUrl" />
+                @string.Join(" ", games.Genres)
+                <div class="game-image">
+                    <img src="@games.CoverUrl" />
+                </div>
             </div>
         }
     </div>
