@@ -10,6 +10,8 @@
 
         public string Author { get; set; }
 
+        public List<WikiBlockImgData> Img { get; set; }
+
         public List<CommentAndAuthorData> CommentAndAuthor { get; set; }
     }
 }
