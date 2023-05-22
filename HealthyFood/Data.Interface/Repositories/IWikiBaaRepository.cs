@@ -7,7 +7,7 @@ namespace Data.Interface.Repositories
     {
         IEnumerable<BlockPageBaaData> GetBlocksWithAuthorComMents();
 
-        BlockPageBaaData GetBLockPageBaaViewModel(int id);
+        BlockPageBaaData GetBLockPageBaa(int id);
 
         void UpdateBlock(int id, string title, string text);
     }

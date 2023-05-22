@@ -15,20 +15,47 @@
     </div>
     <div class="content">
         <div>
-            <form method="post">
-                <div class="title">
-                   Enter Title: @Html.TextBoxFor(x => x.Title)
-                </div>
-                <div class="text">
-                   Enter Text: @Html.TextAreaFor(x => x.Text)
-                </div>
-                <div class="button">
-                    <input type="submit" value="Create block" />
-                </div>
-            </form>
+            @if (Model.CountImg == 0)
+            {
+                <form action="/Wiki/CountImg">
+                    <div class="countImg">
+                        How many pictures do you want to Enter in Block?
+                        <input type="number" name="countImg" />
+                        <div class="button">
+                            <input type="submit" value="Ok" />
+                        </div>
+                    </div>
+                </form>
+            }
+            @if (Model.CountImg != 0)
+            {
+                <form method="post">
+                    <div class="title">
+                        Enter Title: @Html.TextBoxFor(x => x.Title)
+                        @Html.ValidationMessageFor(x=>x.Title)
+                    </div>
+                    <div class="text">
+                        Enter Text: @Html.TextAreaFor(x => x.Text)
+                        @Html.ValidationMessageFor(x=>x.Text)
+                    </div>
+                    <div class="blockImg">
+                        <span>
+                            Enter Url Image:
+                            @for (int i = 0; i < Model.CountImg; i++)
+                            {
+                                <input type="url" name="Img[@i].Url" />
+                            }
+                        </span>
+                    </div>
+
+                    <div class="button">
+                        <input type="submit" value="Create block" />
+                    </div>
+                </form>
+            }
         </div>
     </div>
-    
+
     <div class="footer">&copy; Крылов Вячеслав</div>
 </div>
 

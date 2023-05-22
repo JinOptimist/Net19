@@ -17,6 +17,14 @@ namespace Data.Sql.Repositories
                     Title = x.Title,
                     Text = x.Text,
                     Author = x.Author.Name,
+                    Img = x
+                    .UrlImg
+                    .Select(z => new WikiBlockImgData
+                    {
+                        Id=z.Id,
+                        Url = z.Url,
+                    })
+                    .ToList(),
                     CommentAndAuthor = x
                         .Comment
                         .Select(c => new CommentAndAuthorData
@@ -37,7 +45,7 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-        public BlockPageBaaData GetBLockPageBaaViewModel(int id)
+        public BlockPageBaaData GetBLockPageBaa(int id)
         {
             var block = _dbSet.SingleOrDefault(x => x.Id == id);
             return new BlockPageBaaData

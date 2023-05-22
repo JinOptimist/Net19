@@ -57,9 +57,11 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateBlockInformatoin()
+        public IActionResult CreateBlockInformatoin(int countImg)
         {
-            return View();
+            BLockPageBaaViewModel block= new BLockPageBaaViewModel();
+            block.CountImg = countImg;
+            return View(block);
         }
 
         [HttpPost]
@@ -67,6 +69,11 @@ namespace HealthyFoodWeb.Controllers
         {
             _blockInformationServices.CreateBlock(block);
             return RedirectToAction("BiologicallyActiveAdditives");
+        }
+
+        public IActionResult CountImg(int countImg)
+        {            
+            return RedirectToAction("CreateBlockInformatoin",new {countImg});
         }
 
         [HttpPost]

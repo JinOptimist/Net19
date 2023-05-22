@@ -3,6 +3,7 @@ using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
+using Data.Interface.Models;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -27,9 +28,16 @@ namespace HealthyFoodWeb.Services.WikiServices
             var dbBlockBAA = new PageWikiBlock()
             {
                 Id = block.Id,
-                Title = block.Title,
-                Text = block.Text,
-                Author = user
+                Title = block.Title ?? new string("<blank>"),
+                Text = block.Text ?? new string(""),
+                Author = user,
+                UrlImg = block.Img?
+                .Select(x => new WikiBlockImg
+                {
+                    Id = x.Id,
+                    Url = x.Url ?? new string(""),
+                })
+                .ToList() ?? new List<WikiBlockImg>()
             };
             _wikiBaaRepository.Add(dbBlockBAA);
         }
@@ -52,6 +60,13 @@ namespace HealthyFoodWeb.Services.WikiServices
                     Title = x.Title,
                     Text = x.Text,
                     Author = x.Author,
+                    Img = x.Img?
+                    .Select(Img => new WikiBlockImgViewModel
+                    {
+                        Id = Img.Id,
+                        Url = Img.Url,
+                    })
+                    .ToList() ?? new List<WikiBlockImgViewModel>(),
                     CommentAndAuthor = x.CommentAndAuthor?
                     .Select
                     (c => new CommentAndAuthorViewModel
@@ -77,7 +92,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public BLockPageBaaViewModel GetBLockPageBaaViewModel(int id)
         {
-            var blockPage = _wikiBaaRepository.GetBLockPageBaaViewModel(id);
+            var blockPage = _wikiBaaRepository.GetBLockPageBaa(id);
             return new BLockPageBaaViewModel
             {
                 Id = blockPage.Id,

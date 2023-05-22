@@ -1,5 +1,4 @@
-﻿@using HealthyFoodWeb.Models.ModelsWiki;
-@using Data.Interface.Models;
+﻿@using Data.Interface.Models;
 @using Data.Interface.Repositories;
 @using HealthyFoodWeb.Models.ModelsWikiBAA;
 @using HealthyFoodWeb.Services.IServices;
@@ -30,6 +29,10 @@
                 </div>
                 <div class="textBlock">
                     @pageViewModel.Text
+                    @foreach(var img in pageViewModel.Img)
+                    {
+                    <img src="@img.Url" />
+                    }
                 </div>
                 <div class="positionAuthor">
                     <span class="deletBlock">

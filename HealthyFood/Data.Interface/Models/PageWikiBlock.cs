@@ -11,5 +11,7 @@ namespace Data.Sql.Models
 		public virtual User Author { get; set; }
 
         public virtual List<WikiBlockComment> Comment { get; set; }
+
+		public virtual List<WikiBlockImg> UrlImg { get; set; }
     }
 }
