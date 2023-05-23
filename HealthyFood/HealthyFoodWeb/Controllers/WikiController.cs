@@ -177,20 +177,20 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
-        {
-            _wikiMCImgService.UpdateAllExñeptTags(
-                wikiMcViewModel.Id,
-                wikiMcViewModel.ImgType,
-                wikiMcViewModel.ImgPath,
-                wikiMcViewModel.Year);
+        //[HttpPost]
+        //public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
+        //{
+        //    _wikiMCImgService.UpdateAllExceptTags(
+        //        wikiMcViewModel.Id,
+        //        wikiMcViewModel.ImgType,
+        //        wikiMcViewModel.ImgPath,
+        //        wikiMcViewModel.Year);
 
-            _wikiMCImgService.UpdateTags(
-                wikiMcViewModel.Id,
-                wikiMcViewModel.UserTags);
+        //    _wikiMCImgService.UpdateTags(
+        //        wikiMcViewModel.Id,
+        //        wikiMcViewModel.UserTags);
 
-            return RedirectToAction("ShowUploadedImages", "Wiki");
-        }
+        //    return RedirectToAction("ShowUploadedImages", "Wiki");
+        //}
     }
 }
