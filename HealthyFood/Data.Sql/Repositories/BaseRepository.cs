@@ -49,6 +49,7 @@ namespace Data.Sql.Repositories
         public void Remove(int id)
         {
             _dbSet.Remove(Get(id));
+            _webContext.SaveChanges();
         }
 
         public virtual PaginatorData<DbModelType> GetPaginator(int page, int perPage)

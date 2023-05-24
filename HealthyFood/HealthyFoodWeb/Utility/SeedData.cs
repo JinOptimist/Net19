@@ -9,7 +9,7 @@ namespace HealthyFoodWeb.Utility
     {
         private const int MIN_GAME_COUNT = 20;
         private const int MIN_STORE_COUNT = 20;
-        private const int MIN_CART_COUNT = 100;
+        private const int MIN_CART_COUNT = 20;
         private static Random _random = new Random();
 
         public static void Seed(this WebApplication webApplication)
@@ -38,8 +38,8 @@ namespace HealthyFoodWeb.Utility
 
                 var productdefault = new Cart
                 {
-                    Name = "Sup",
-                    Price = 10,
+                    Name = "Salat",
+                    Price = 3,
                     Customer = user
                 };
                 cartRepository.Add(productdefault);
@@ -54,7 +54,7 @@ namespace HealthyFoodWeb.Utility
                     var product = new Cart
                     {
                         Name = $"Sup {i}",
-                        Price = 10,
+                        Price = 10 +i,
                         Customer = randomUser
 
                     };

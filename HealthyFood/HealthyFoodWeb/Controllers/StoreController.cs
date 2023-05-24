@@ -52,9 +52,9 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
-        public IActionResult DeleteFromCart(string name)
+        public IActionResult DeleteFromCart(int id)
         {
-            _cartService.DeleteFromCart(name);
+            _cartService.DeleteFromCart(id);
             return RedirectToAction("CartPage");
         }
 

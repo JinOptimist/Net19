@@ -21,9 +21,9 @@ namespace HealthyFoodWeb.Services
             _pagginatorService = pagginatorService;
         }
 
-        public void DeleteFromCart(string name)
+        public void DeleteFromCart(int id)
         {
-            _cartRepository.RemoveByName(name);
+            _cartRepository.Remove(id);
         }
 
         public List<Cart> GetAllProduct()
