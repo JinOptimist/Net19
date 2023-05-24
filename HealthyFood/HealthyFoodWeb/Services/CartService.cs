@@ -73,5 +73,27 @@ namespace HealthyFoodWeb.Services
                 Price = x.Price
             };
         }
+
+
+        private CartViewModel BuildViewModelCustomerProduct (Cart x)
+        {
+            var product = GetCustomerProduct();
+            
+
+            foreach (var item in product) { }
+
+
+
+            var cartviewmodel = new CartViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price
+            };
+
+
+            return(cartviewmodel);
+        }
+
     }
 }
