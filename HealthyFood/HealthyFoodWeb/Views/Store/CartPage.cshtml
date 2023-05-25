@@ -49,8 +49,12 @@
         Total:
     </div>
     <div class="total-price">
-        20$ 
+        20$
         
+        @foreach (var cartViewModel in Model.Items)
+        {
+            @cartViewModel.TotalPrice
+        }
     </div>
 </div>
 

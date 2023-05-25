@@ -4,6 +4,7 @@ using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HealthyFoodWeb.Services
 {
@@ -75,25 +76,20 @@ namespace HealthyFoodWeb.Services
         }
 
 
-        private CartViewModel BuildViewModelCustomerProduct (Cart x)
-        {
-            var product = GetCustomerProduct();
-            
+        //private CartIndexViewModel BuildViewModelCustomerProduct(Cart x)
+        //{
+        //    var cartviewmodel = new CartIndexViewModel();
 
-            foreach (var item in product) { }
-
-
-
-            var cartviewmodel = new CartViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Price = x.Price
-            };
+        //    cartviewmodel.Products = GetCustomerProduct().Select(x=> new CartViewModel
+        //    {
+        //        Id = x.Id,
+        //        Name = x.Name,
+        //        Price = x.Price
+        //    }).ToList();
 
 
-            return(cartviewmodel);
-        }
+        //    return cartviewmodel;
+        //}
 
     }
 }
