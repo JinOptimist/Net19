@@ -96,7 +96,7 @@ app.UseAuthorization(); // Можно ли сюда?
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}/{name?}");
 
 app.Run();
 

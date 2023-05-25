@@ -74,10 +74,7 @@
                                 <input type="button" value="Delet Comment" 
                                     class="delete-comment-button">
                             </form>
-                            <form action="/Wiki/UpdateComment">
-                                <input type="hidden" value="" name="commentId">
-                                <input type="submit" value="Update Comment">
-                            </form>
+                            <a class="update-link" href="/wiki/UpdateComment/">update</a>
                         </div>
                         @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
                         {
@@ -96,10 +93,11 @@
                                         <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
                                         <input type="submit" value="Delet Comment">
                                     </form>
-                                    <form action="/Wiki/UpdateComment">
+                                   @* <form action="/Wiki/UpdateComment">
                                         <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
                                         <input type="submit" value="Update Comment">
-                                    </form>
+                                    </form>*@
+                                    <a class="update-link" href="/wiki/UpdateComment/@CommentAndAuthor.CommentId">update</a>
                                 }
                             </div>
                         }

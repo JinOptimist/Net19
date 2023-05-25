@@ -17,6 +17,10 @@
                     .find('.remove-form [name=commentId]')
                     .val(commentId);
 
+                copyOfCommentBlock
+                    .find('.update-link')
+                    .attr("href", "/wiki/UpdateComment/" + commentId);
+
                 $('.comments-container').append(copyOfCommentBlock);
             });
 

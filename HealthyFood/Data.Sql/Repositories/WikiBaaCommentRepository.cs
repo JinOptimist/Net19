@@ -34,9 +34,9 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int commentId)
+        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int id)
         {
-            var blockComment= _dbSet.SingleOrDefault(x => x.Id == commentId);
+            var blockComment= _dbSet.SingleOrDefault(x => x.Id == id);
             return new CommentAndAuthorData
             {
                 CommentId = blockComment.Id,
