@@ -79,7 +79,7 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult BiologicallyActiveAdditives(string newComment, int blockId, int commentId)
         {
-            _blockInformationServices.CreateComment(blockId, newComment, commentId);
+            _blockInformationServices.CreateComment(blockId, newComment);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 

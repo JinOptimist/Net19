@@ -13,16 +13,18 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-       public void CreateComment(User Author, PageWikiBlock Block, string Text, int CommentId)
+       public int CreateComment(User Author, PageWikiBlock Block, string Text)
         {
-            _dbSet.Add(new WikiBlockComment
+            var comment = new WikiBlockComment
             {
                 Text = Text,
                 Block = Block,
-                Author = Author,
-                Id = CommentId
-            });
+                Author = Author
+            };
+            _dbSet.Add(comment);
             _webContext.SaveChanges();
+
+            return comment.Id;
         }
 
         public void RemoveComment(int idComment)

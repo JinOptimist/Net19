@@ -9,6 +9,10 @@
 @model IEnumerable<BLockPageBaaViewModel>
 @inject IAuthService authService
 
+@section Scripts{
+    <script src="~/js/wiki/addComment.js"></script>
+}
+
 <div class="container">
     <div class="header"><h1>Биологически активные добавки(БАД)</h1></div>
     <div class="sidebar">
@@ -29,9 +33,9 @@
                 </div>
                 <div class="textBlock">
                     @pageViewModel.Text
-                    @foreach(var img in pageViewModel.Img)
+                    @foreach (var img in pageViewModel.Img)
                     {
-                    <img src="@img.Url" />
+                        <img src="@img.Url" />
                     }
                 </div>
                 <div class="positionAuthor">
@@ -59,31 +63,45 @@
 
                 </div>
                 <div>
-                    <div>
+                    <div class="comments-container">
+                        <div class="comment-block template">
+                            <div class="comments">
+                                <span class="comment-text"></span>
+                                <span class="authorComments"></span>
+                            </div>
+                            <form action="/Wiki/RemoveComment" class="remove-form">
+                                <input type="hidden" value="" name="commentId">
+                                <input type="button" value="Delet Comment" 
+                                    class="delete-comment-button">
+                            </form>
+                            <form action="/Wiki/UpdateComment">
+                                <input type="hidden" value="" name="commentId">
+                                <input type="submit" value="Update Comment">
+                            </form>
+                        </div>
                         @foreach (var CommentAndAuthor in pageViewModel.CommentAndAuthor)
                         {
-
-                            <div>
+                            <div class="comment-block">
                                 <div class="comments">
-                                    <span>
+                                    <span class="comment-text">
                                         @CommentAndAuthor.Comment
                                     </span>
                                     <span class="authorComments">
                                         @CommentAndAuthor.Author
                                     </span>
                                 </div>
+                                @if (authService.GetUser()?.Id == CommentAndAuthor.AuthorId)
+                                {
+                                    <form action="/Wiki/RemoveComment">
+                                        <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                        <input type="submit" value="Delet Comment">
+                                    </form>
+                                    <form action="/Wiki/UpdateComment">
+                                        <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                        <input type="submit" value="Update Comment">
+                                    </form>
+                                }
                             </div>
-                            @if (authService.GetUser()?.Id == CommentAndAuthor.AuthorId)
-                            {
-                                <form action="/Wiki/RemoveComment">
-                                    <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
-                                    <input type="submit" value="Delet Comment">
-                                </form>
-                                <form action="/Wiki/UpdateComment">
-                                    <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
-                                    <input type="submit" value="Update Comment">
-                                </form>
-                            }
                         }
                     </div>
                     @if (User.Identity.IsAuthenticated)
@@ -98,7 +116,7 @@
                                 </div>
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
                                 <div class="button">
-                                    <input type="submit" value="Add comment">
+                                    <input class="add-comment" type="button" value="Add comment">
                                     <input type="reset" value=" Очистить">
                                 </div>
                             </div>

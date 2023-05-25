@@ -169,3 +169,8 @@ span.authorComments {
 .updateBlock input {
     border: 0px;
 }
+
+
+.template{
+    display: none;
+}
