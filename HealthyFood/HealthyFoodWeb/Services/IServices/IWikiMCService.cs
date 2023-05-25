@@ -2,10 +2,11 @@
 using Data.Interface.Models;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Games;
+using HealthyFoodWeb.Models.WikiMcModels;
 
 namespace HealthyFoodWeb.Services
 {
-	public interface IWikiMcService
+    public interface IWikiMcService
 	{
 		void AddImg(WikiMcViewModel viewModel);
 
@@ -14,8 +15,6 @@ namespace HealthyFoodWeb.Services
 		IEnumerable<WikiMcImage> GetAllImgByType();
 
 		IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages();
-
-        ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage);
 
         WikiMcViewModel GetImageViewModel(int id);
 
@@ -28,5 +27,7 @@ namespace HealthyFoodWeb.Services
         void UpdateTags(int id, List<string> tags);
 
 		WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type);
+
+		PagginatorViewModel<WikiMcViewModel> GetImagesForPaginator(int page, int perPage);
 	}
 }

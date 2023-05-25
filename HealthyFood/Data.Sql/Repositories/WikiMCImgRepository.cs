@@ -28,19 +28,6 @@ namespace Data.Sql.Repositories
             return GetUserImagesIQueryable().ToList();
         }
 
-        public ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage)
-        {
-            var dataModel = new ImagesAndPaginatorData();
-            var images =
-                GetUserImagesIQueryable()
-                .Skip((page - 1) * perPage)
-                .Take(perPage)
-                .ToList();
-            dataModel.Images = images;
-            dataModel.TotalCount = _dbSet.Count();
-            return dataModel;
-        }
-
         public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
         {
             return _dbSet.Where(x => x.ImgType == type);
@@ -114,6 +101,12 @@ namespace Data.Sql.Repositories
 				Count = count,
 				ImagesUrl = urls
 			};
+		}
+
+		public override PaginatorData<WikiMcImage> GetPaginator(int page, int perPage)
+		{
+			var initialSource = _dbSet.Include(x => x.Tags);
+			return base.GetPaginator(initialSource, page, perPage);
 		}
 	}
 }

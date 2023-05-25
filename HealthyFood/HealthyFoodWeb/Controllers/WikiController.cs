@@ -4,6 +4,8 @@ using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Data.Interface.Models;
+using HealthyFoodWeb.Models.WikiMcModels;
 
 namespace HealthyFoodWeb.Controllers
 {
@@ -38,19 +40,12 @@ namespace HealthyFoodWeb.Controllers
             var viewModel = new WikiMcImgViewModel();
             viewModel.AllImgByType = _wikiMCImgService
                 .GetAllImgByType()
-                .Select(x => new WikiMcViewModel
-                {
-                    ImgPath = x.ImgUrl,
-                })
+                .Select(BuildWikiMcViewModelFromDbModel)
                 .ToList();
 
             viewModel.AllImgByYear = _wikiMCImgService
                 .GetAllImgByYear()
-                .Select(x => new WikiMcViewModel
-                {
-                    ImgPath = x.ImgUrl,
-                    UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
-                })
+                .Select(BuildWikiMcViewModelFromDbModel)
                 .ToList();
 
             return View(viewModel);
@@ -72,7 +67,7 @@ namespace HealthyFoodWeb.Controllers
         }
 
         public IActionResult CountImg(int countImg)
-        {            
+        {
             return RedirectToAction("CreateBlockInformatoin",new {countImg});
         }
 
@@ -108,7 +103,7 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult UpdateComment(BLockPageBaaViewModel blockViewModel)
         {
-            
+
             _blockInformationServices.UpdateBlockComment(blockViewModel.Id,blockViewModel.Text);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
@@ -152,29 +147,7 @@ namespace HealthyFoodWeb.Controllers
         [Authorize]
         public IActionResult ShowUploadedImages(int page = 1, int perPage = 2)
         {
-            var viewModel = new WikiUserImagesViewModel();
-            var dataModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
-            viewModel.UserImages = dataModel
-                .Images
-                .Select(x => new WikiMcViewModel
-                {
-                    Id = x.Id,
-                    Year = x.Year,
-                    ImgPath = x.ImgUrl,
-                    ImgType = x.ImgType,
-                    UserTags = x.Tags,
-                })
-                .ToList();
-
-            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
-            var totalPageCount =
-                (dataModel.TotalCount / perPage)
-                + (doWeNeedOneMorePage ? 1 : 0);
-
-            viewModel.PageList = Enumerable
-                .Range(1, totalPageCount)
-                .ToList();
-            viewModel.ActivePageNumber = page;
+            var viewModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
             return View(viewModel);
         }
 
@@ -198,6 +171,18 @@ namespace HealthyFoodWeb.Controllers
                 wikiMcViewModel.UserTags);
 
             return RedirectToAction("ShowUploadedImages", "Wiki");
+        }
+
+        private WikiMcViewModel BuildWikiMcViewModelFromDbModel(WikiMcImage x)
+        {
+            return new WikiMcViewModel
+            {
+                Id = x.Id,
+                Year = x.Year,
+                ImgPath = x.ImgUrl,
+                ImgType = x.ImgType,
+                UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
+            };
         }
     }
 }

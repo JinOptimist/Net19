@@ -1,11 +1,11 @@
 ﻿using Data.Interface.Models;
-using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.WikiMcModels;
 using HealthyFoodWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyFoodWeb.Controllers.API
 {
-	[ApiController]
+    [ApiController]
 	[Route("/api/wiki")]
 	public class WikiApiController : Controller
 	{

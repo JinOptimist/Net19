@@ -2,7 +2,7 @@
 using HealthyFoodWeb.Models.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthyFoodWeb.Models
+namespace HealthyFoodWeb.Models.WikiMcModels
 {
     public class WikiMcViewModel
     {
@@ -16,5 +16,5 @@ namespace HealthyFoodWeb.Models
         public int Year { get; set; }
         public string EnteredTags { get; set; }
         public List<string> UserTags { get; set; } = new List<string>();
-	}
+    }
 }

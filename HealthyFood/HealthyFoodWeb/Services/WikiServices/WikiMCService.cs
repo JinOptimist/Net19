@@ -3,24 +3,27 @@ using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
-using HealthyFoodWeb.Models.Games;
+using HealthyFoodWeb.Models.WikiMcModels;
+using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
 
-namespace HealthyFoodWeb.Services
+namespace HealthyFoodWeb.Services.WikiServices
 {
     public class WikiMCService : IWikiMcService
     {
         public const int CURRENT_YEAR = 2023;
 
-        private IWikiMcRepository _wikiMCRepository;
+        private IWikiMcRepository _wikiMcRepository;
         private IWikiTagRepository _tagRepository;
         private IAuthService _authService;
+        private IPagginatorService _paginatorService;
 
-        public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
+        public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService, IPagginatorService paginatorService)
         {
-            _wikiMCRepository = wikiMCRepository;
+            _wikiMcRepository = wikiMCRepository;
             _authService = authService;
             _tagRepository = tagService;
+            _paginatorService = paginatorService;
         }
 
         public void AddImg(WikiMcViewModel viewModel)
@@ -40,20 +43,20 @@ namespace HealthyFoodWeb.Services
             foreach (var tag in tags)
             {
                 var dbTag = _tagRepository.Get(tag);
-                if (dbTag == null) 
+                if (dbTag == null)
                 {
-					dbTag = _tagRepository.Add(new WikiTags { TagName = tag });
-				}
+                    dbTag = _tagRepository.Add(new WikiTags { TagName = tag });
+                }
 
-				WikiMc.Tags.Add(dbTag);
-			}
+                WikiMc.Tags.Add(dbTag);
+            }
 
-            _wikiMCRepository.Add(WikiMc);
+            _wikiMcRepository.Add(WikiMc);
         }
 
         public IEnumerable<WikiMcImage> GetAllImgByYear()
         {
-            return _wikiMCRepository
+            return _wikiMcRepository
                 .GetAll()
                 .Where(x => x.Year == CURRENT_YEAR)
                 .ToList();
@@ -61,7 +64,7 @@ namespace HealthyFoodWeb.Services
 
         public IEnumerable<WikiMcImage> GetAllImgByType()
         {
-            return _wikiMCRepository
+            return _wikiMcRepository
                 .GetAll()
                 .Where(x => x.ImgType == ImgTypeEnum.Proteins)
                 .ToList();
@@ -69,28 +72,22 @@ namespace HealthyFoodWeb.Services
 
         public void RemoveByType(ImgTypeEnum type)
         {
-            _wikiMCRepository.RemoveAllImgByType(type);
+            _wikiMcRepository.RemoveAllImgByType(type);
         }
 
         public void RemoveByYear(int year)
         {
-            _wikiMCRepository.RemoveAllImgByYear(year);
+            _wikiMcRepository.RemoveAllImgByYear(year);
         }
 
         public IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
         {
-            return _wikiMCRepository.GetUserImages();
-        }
-
-        public ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage)
-        {
-            return _wikiMCRepository
-                .GetImagesForPaginator(page, perPage);
+            return _wikiMcRepository.GetUserImages();
         }
 
         public WikiMcViewModel GetImageViewModel(int id)
         {
-            var imageDb = _wikiMCRepository.GetImageAndTags(id);
+            var imageDb = _wikiMcRepository.GetImageAndTags(id);
             var tags = _tagRepository
                 .GetAll()
                 .Select(x => x.TagName)
@@ -108,12 +105,12 @@ namespace HealthyFoodWeb.Services
 
         public void UpdateAllExсeptTags(int id, ImgTypeEnum type, string imgUrl, int year)
         {
-            _wikiMCRepository.UpdateAllExeptTags(id, type, imgUrl, year);
+            _wikiMcRepository.UpdateAllExeptTags(id, type, imgUrl, year);
         }
 
         public void UpdateTags(int id, List<string> newTagsNames)
         {
-            var image = _wikiMCRepository.GetImageAndTags(id);
+            var image = _wikiMcRepository.GetImageAndTags(id);
             if (image.Tags == null)
             {
                 image.Tags = new List<WikiTags>();
@@ -128,16 +125,40 @@ namespace HealthyFoodWeb.Services
 
             newTags.ForEach(tag => image.Tags.Add(tag));
 
-            _wikiMCRepository.Update(image);
+            _wikiMcRepository.Update(image);
         }
 
-		public WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type)
+        public WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type)
+        {
+            var dataModel = _wikiMcRepository.GetDataForImagesCount(year, tag, type);
+            return new WikiMcImagesCountViewModel
+            {
+                TotalImagesCount = dataModel.Count,
+                ImagesUrl = dataModel.ImagesUrl
+            };
+        }
+
+		public PagginatorViewModel<WikiMcViewModel> GetImagesForPaginator(int page, int perPage)
+        {
+            var viewModel = _paginatorService
+                .GetPaginatorViewModel(
+                    page,
+                    perPage,
+                    BuildWikiMcViewModelFromDbModel,
+                    _wikiMcRepository);
+
+            return viewModel;
+        }
+
+		private WikiMcViewModel BuildWikiMcViewModelFromDbModel(WikiMcImage x)
 		{
-			var dataModel = _wikiMCRepository.GetDataForImagesCount(year, tag, type);
-			return new WikiMcImagesCountViewModel
+			return new WikiMcViewModel
 			{
-				TotalImagesCount = dataModel.Count,
-				ImagesUrl = dataModel.ImagesUrl
+				Id = x.Id,
+				Year = x.Year,
+				ImgPath = x.ImgUrl,
+				ImgType = x.ImgType,
+				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};
 		}
 	}

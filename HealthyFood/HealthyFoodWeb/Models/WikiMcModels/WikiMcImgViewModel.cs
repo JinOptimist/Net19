@@ -1,4 +1,4 @@
-﻿namespace HealthyFoodWeb.Models
+﻿namespace HealthyFoodWeb.Models.WikiMcModels
 {
     public class WikiMcImgViewModel
     {
