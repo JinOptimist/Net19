@@ -161,6 +161,20 @@ namespace HealthyFoodWeb.Services.WikiServices
 				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};
 		}
+
+		public ShowUploadedImagesViewModel GetShowUploadedImagesViewModel(int page, int perPage)
+		{
+            var viewModel = new ShowUploadedImagesViewModel();
+
+			viewModel.PaginatorViewModel = _paginatorService
+				.GetPaginatorViewModel(
+					page,
+					perPage,
+					BuildWikiMcViewModelFromDbModel,
+					_wikiMcRepository);
+
+			return viewModel;
+		}
 	}
 }
 

@@ -1,6 +1,6 @@
 ﻿@using Data.Interface.Models;
 @using HealthyFoodWeb.Models.WikiMcModels;
-@model PagginatorViewModel<WikiMcViewModel>
+@model ShowUploadedImagesViewModel
 
 <div class="filter-and-images">
 	<h3>Filter</h3>
@@ -9,8 +9,8 @@
 		<input type="number" class="img-year have-to-block" />
 		Tag:
 		<input type="text" class="img-tag have-to-block" />
-		@*Type:
-		@Html.DropDownListFor(x=>x.Items, Html.GetEnumSelectList(typeof(ImgTypeEnum)))*@
+		Type:
+		@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
 		<button class="get-img-count have-to-block">Get</button>
 		<img class="loader" src="~/images/icons/loader.gif" />
 		<div class="filter-output">
@@ -24,14 +24,14 @@
 	
 	<div>
 		<div class="paginator">
-			@foreach (var pageNumber in Model.PageList)
+			@foreach (var pageNumber in Model.PaginatorViewModel.PageList)
 			{
 				<a href="/Wiki/ShowUploadedImages?page=@pageNumber"
-				   class=" @(Model.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+				   class=" @(Model.PaginatorViewModel.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
 			}
 		</div>
 
-		@foreach (var imageViewModel in Model.Items)
+		@foreach (var imageViewModel in Model.PaginatorViewModel.Items)
 		{
 			<div class="gallery">
 				<div class="cover">

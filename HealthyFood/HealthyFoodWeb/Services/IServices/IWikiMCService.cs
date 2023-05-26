@@ -29,5 +29,7 @@ namespace HealthyFoodWeb.Services
 		WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type);
 
 		PagginatorViewModel<WikiMcViewModel> GetImagesForPaginator(int page, int perPage);
+
+		ShowUploadedImagesViewModel GetShowUploadedImagesViewModel(int page, int perPage);
 	}
 }

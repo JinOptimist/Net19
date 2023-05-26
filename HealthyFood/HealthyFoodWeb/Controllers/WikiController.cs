@@ -147,8 +147,8 @@ namespace HealthyFoodWeb.Controllers
         [Authorize]
         public IActionResult ShowUploadedImages(int page = 1, int perPage = 2)
         {
-            var viewModel = _wikiMCImgService.GetImagesForPaginator(page, perPage);
-            return View(viewModel);
+            var viewModel = _wikiMCImgService.GetShowUploadedImagesViewModel(page, perPage);
+			return View(viewModel);
         }
 
         public IActionResult UpdateImage(int id)
