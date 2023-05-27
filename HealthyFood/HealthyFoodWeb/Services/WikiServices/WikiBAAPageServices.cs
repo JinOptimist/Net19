@@ -3,6 +3,7 @@ using Data.Interface.Repositories;
 using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
+using Data.Interface.Models;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -27,18 +28,25 @@ namespace HealthyFoodWeb.Services.WikiServices
             var dbBlockBAA = new PageWikiBlock()
             {
                 Id = block.Id,
-                Title = block.Title,
-                Text = block.Text,
-                Author = user
+                Title = block.Title ?? new string("<blank>"),
+                Text = block.Text ?? new string(""),
+                Author = user,
+                UrlImg = block.Img?
+                .Select(x => new WikiBlockImg
+                {
+                    Id = x.Id,
+                    Url = x.Url ?? new string(""),
+                })
+                .ToList() ?? new List<WikiBlockImg>()
             };
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockId, string comment, int commentId)
+        public int CreateComment(int blockId, string comment)
         {
             var blockDb = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            _wikiBaaCommentRepository.CreateComment(user, blockDb, comment, commentId);
+            return _wikiBaaCommentRepository.CreateComment(user, blockDb, comment);
         }
 
         public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
@@ -52,6 +60,13 @@ namespace HealthyFoodWeb.Services.WikiServices
                     Title = x.Title,
                     Text = x.Text,
                     Author = x.Author,
+                    Img = x.Img?
+                    .Select(Img => new WikiBlockImgViewModel
+                    {
+                        Id = Img.Id,
+                        Url = Img.Url,
+                    })
+                    .ToList() ?? new List<WikiBlockImgViewModel>(),
                     CommentAndAuthor = x.CommentAndAuthor?
                     .Select
                     (c => new CommentAndAuthorViewModel
@@ -77,7 +92,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         public BLockPageBaaViewModel GetBLockPageBaaViewModel(int id)
         {
-            var blockPage = _wikiBaaRepository.GetBLockPageBaaViewModel(id);
+            var blockPage = _wikiBaaRepository.GetBLockPageBaa(id);
             return new BLockPageBaaViewModel
             {
                 Id = blockPage.Id,
@@ -91,9 +106,9 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.UpdateBlock(id, title, text);
         }
 
-        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int Id)
         {
-            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(Id);
             return new BLockPageBaaViewModel
             {
                 Id = blockCommentPage.CommentId,
