@@ -1,21 +1,17 @@
-﻿.header {
+﻿.title {
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    color: black;
 }
 
-.center-block {
+.main {
     display: flex;
 }
 
-.start-text {
+.intro {
+    display: flex;
     margin-inline: 30pt;
-}
-
-.gallery {
     margin-inline: 30px;
+    margin-inline: 30pt;
 }
 
 .gallery img {
@@ -30,12 +26,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-.calculations {
-    margin-inline: 30pt;
+.center-block {
+    display: flex;
 }
 
-.data1 {
+.user-data {
     display: flex;
     align-items: center;
 }
@@ -59,9 +54,5 @@
 
 .suggestions {
     margin-inline: 30pt;
-}
-
-.add-image{
-    display:flex!important;
 }
 
