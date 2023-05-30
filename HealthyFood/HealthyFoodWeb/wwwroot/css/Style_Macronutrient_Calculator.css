@@ -5,13 +5,26 @@
 
 .main {
     display: flex;
+    text-align: justify;
 }
 
-.intro {
-    display: flex;
-    margin-inline: 30pt;
-    margin-inline: 30px;
-    margin-inline: 30pt;
+.navigation {
+    background-color: #F5F5F5;
+    border: 1px;
+    padding: 15px;
+    border-radius: 5px;
+    width: 135px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 2px 1px 0;
+    color: #212529;
+}
+
+.navigation a{
+    display:flex;
 }
 
 .gallery img {
@@ -19,12 +32,11 @@
     max-height: 225px;
     min-height: 225px;
     min-width: 350px;
-    margin: 10px;
 }
 .new-img {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .center-block {
     display: flex;
@@ -33,6 +45,7 @@
 .user-data {
     display: flex;
     align-items: center;
+    text-align:left;
 }
 
 .input-parameters {

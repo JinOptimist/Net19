@@ -1,7 +1,27 @@
-﻿
-.gallery {
-    margin-inline: 30px;
+﻿.filter-and-images {
     display: flex;
+}
+
+.filter-input {
+    margin-right: 40px;
+}
+
+.filter-output img {
+    max-width: 188px;
+    padding-top: 10px;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-container {
+    display: flex;
+}
+
+.images{
+    flex-wrap:wrap;
 }
 
 .gallery img {
@@ -22,11 +42,39 @@
     text-decoration: none;
 }
 
-.paginator a.active {
-    color: dimgrey;
-}
+    .paginator a.active {
+        color: dimgrey;
+    }
 
 .loader {
     height: 40px;
     display: none;
+}
+
+.prop {
+    margin: 7px;
+}
+
+.update{
+    color: cornflowerblue;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+.delete {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.filter {
+    max-inline-size: 25px;
+}
+
+.add-img {
+    max-inline-size: 25px;
+}
+
+.add-img-input{
+    margin-right: 40px;
 }
