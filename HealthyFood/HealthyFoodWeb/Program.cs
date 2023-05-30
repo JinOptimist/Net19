@@ -6,6 +6,7 @@ using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
+using HealthyFoodWeb.Services.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,9 @@ builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(
         diContainer.GetService<IGameRepository>(), 
         diContainer.GetService<IAuthService>(),
-        diContainer.GetService<IGameCategoryRepository>()));
+        diContainer.GetService<IGameCategoryRepository>(),
+        diContainer.GetService<IPagginatorService>()));
+builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
@@ -66,6 +69,7 @@ builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IWikiTagRepository>(x => new WikiTagRepository(x.GetService<WebContext>()));
 
 builder.Services.AddHttpContextAccessor();
 
@@ -92,7 +96,7 @@ app.UseAuthorization(); // Можно ли сюда?
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}/{name?}");
 
 app.Run();
 

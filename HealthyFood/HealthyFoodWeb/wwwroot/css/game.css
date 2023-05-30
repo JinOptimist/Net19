@@ -44,3 +44,8 @@
 .create-game{
     display: flex;
 }
+
+.loader {
+    height: 40px;
+    display: none;
+}
