@@ -2,9 +2,9 @@
 
 namespace Data.Interface.DataModels
 {
-    public class GameAndPaginatorData
+    public class ImagesAndPaginatorData
     {
-        public List<Game> Games { get; set; }
+        public List<ImagesAndInfoAboutTheirUploaderData> Images { get; set; }
         public int TotalCount { get; set; }
     }
 }

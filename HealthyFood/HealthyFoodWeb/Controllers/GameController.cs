@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace HealthyFoodWeb.Controllers
 {
-    
+
     public class GameController : Controller
     {
         private IGameService _gameService;
@@ -20,7 +20,7 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [Authorize]
-       public IActionResult Index()
+        public IActionResult Index()
         {
             var viewModel = new GameIndexViewModel();
 
@@ -39,26 +39,9 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
-        
         public IActionResult Games(int page = 1, int perPage = 10)
         {
-            var viewModel = new GameAndPagginatorViewModel();
-            var dataModel = _gameService.GetGamesForPaginator(page, perPage);
-            viewModel.Games = dataModel
-                .Games
-                //.Select(dbModel => BuildViewModelFromDbModel(dbModel))
-                .Select(BuildViewModelFromDbModel)
-                .ToList();
-
-            var doWeNeedOneMorePage = dataModel.TotalCount % perPage != 0;
-            var totalPageCount =
-                (dataModel.TotalCount / perPage)
-                + (doWeNeedOneMorePage ? 1 : 0);
-
-            viewModel.PageList = Enumerable
-                .Range(1, totalPageCount)
-                .ToList();
-            viewModel.ActivePageNumber = page;
+            var viewModel = _gameService.GetGamesForPaginator(page, perPage);
             return View(viewModel);
         }
 
@@ -109,8 +92,8 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult Update(GameViewModel gameViewModel)
         {
-            _gameService.UpdateNameAndCover(gameViewModel.Id, 
-                gameViewModel.Name, 
+            _gameService.UpdateNameAndCover(gameViewModel.Id,
+                gameViewModel.Name,
                 gameViewModel.CoverUrl);
 
             _gameService.UpdateGenres(gameViewModel.Id,

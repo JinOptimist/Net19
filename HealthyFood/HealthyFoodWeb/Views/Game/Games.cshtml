@@ -1,5 +1,5 @@
 ﻿@using HealthyFoodWeb.Models.Games
-@model GameAndPagginatorViewModel
+@model PagginatorViewModel<GameViewModel>
 
 <div class="pagginator">
     @foreach(var pageNumber in Model.PageList)
@@ -11,7 +11,7 @@
 </div>
 
 <div>
-    @foreach (var gameViewModel in Model.Games)
+    @foreach (var gameViewModel in Model.Items)
     {
         <div class="game">
             <div class="cover">

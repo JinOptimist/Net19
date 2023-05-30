@@ -1,6 +1,7 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 
 namespace HealthyFoodWeb.Services.IServices
 {
@@ -18,11 +19,13 @@ namespace HealthyFoodWeb.Services.IServices
 
         void Remove(string name);
 
-        GameAndPaginatorData GetGamesForPaginator(int page, int perPage);
+        PagginatorViewModel<GameViewModel> GetGamesForPaginator(int page, int perPage);
         
         GameViewModel GetGameViewModel(int id);
         
         void UpdateNameAndCover(int id, string name, string coverUrl);
         void UpdateGenres(int id, List<string> genres);
+
+        GamesCountViewModel GetViewModelForGamesCount(int budget);
     }
 }

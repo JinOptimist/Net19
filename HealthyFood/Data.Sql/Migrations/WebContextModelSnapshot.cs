@@ -244,6 +244,28 @@ namespace Data.Sql.Migrations
                     b.ToTable("WikiBlockComments");
                 });
 
+            modelBuilder.Entity("Data.Interface.Models.WikiBlockImg", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WikiBlockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WikiBlockId");
+
+                    b.ToTable("WikiBlockImg");
+                });
+
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
                 {
                     b.Property<int>("Id")
@@ -434,6 +456,17 @@ namespace Data.Sql.Migrations
                     b.Navigation("Block");
                 });
 
+            modelBuilder.Entity("Data.Interface.Models.WikiBlockImg", b =>
+                {
+                    b.HasOne("Data.Sql.Models.PageWikiBlock", "WikiBlock")
+                        .WithMany("UrlImg")
+                        .HasForeignKey("WikiBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WikiBlock");
+                });
+
             modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
                 {
                     b.HasOne("Data.Interface.Models.User", "ImageUploader")
@@ -539,6 +572,8 @@ namespace Data.Sql.Migrations
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
                 {
                     b.Navigation("Comment");
+
+                    b.Navigation("UrlImg");
                 });
 #pragma warning restore 612, 618
         }

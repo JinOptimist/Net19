@@ -1,5 +1,6 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models;
+using Data.Sql.Models;
 
 namespace Data.Sql.Repositories
 {
@@ -12,20 +13,41 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-        public void Add(WikiBlockComment model)
+       public int CreateComment(User Author, PageWikiBlock Block, string Text)
         {
-            _dbSet.Add((WikiBlockComment)model);
+            var comment = new WikiBlockComment
+            {
+                Text = Text,
+                Block = Block,
+                Author = Author
+            };
+            _dbSet.Add(comment);
+            _webContext.SaveChanges();
+
+            return comment.Id;
+        }
+
+        public void RemoveComment(int idComment)
+        {
+            var comment = _dbSet.FirstOrDefault(_x => _x.Id == idComment);
+            _dbSet.Remove(comment);
             _webContext.SaveChanges();
         }
 
-        public void CreateComment(CommentAndAuthorData comment)
+        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int id)
         {
-            _dbSet.Add(new WikiBlockComment
+            var blockComment= _dbSet.SingleOrDefault(x => x.Id == id);
+            return new CommentAndAuthorData
             {
-                Text = comment.Comment,
-                Block = comment.Block,
-                Author = comment.Author
-            });
+                CommentId = blockComment.Id,
+                Comment= blockComment.Text
+            };
+        }
+
+        public void UpdateBlockComment(int Id, string Text)
+        {
+            var blockComment = Get(Id);
+            blockComment.Text = Text;
             _webContext.SaveChanges();
         }
     }
