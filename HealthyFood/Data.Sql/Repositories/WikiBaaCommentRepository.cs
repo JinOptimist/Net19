@@ -13,16 +13,18 @@ namespace Data.Sql.Repositories
             return _dbSet.ToList();
         }
 
-       public void CreateComment(User Author, PageWikiBlock Block, string Text, int CommentId)
+       public int CreateComment(User Author, PageWikiBlock Block, string Text)
         {
-            _dbSet.Add(new WikiBlockComment
+            var comment = new WikiBlockComment
             {
                 Text = Text,
                 Block = Block,
-                Author = Author,
-                Id = CommentId
-            });
+                Author = Author
+            };
+            _dbSet.Add(comment);
             _webContext.SaveChanges();
+
+            return comment.Id;
         }
 
         public void RemoveComment(int idComment)
@@ -32,9 +34,9 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int commentId)
+        public CommentAndAuthorData GetBlockCommentPageBaaViewModel(int id)
         {
-            var blockComment= _dbSet.SingleOrDefault(x => x.Id == commentId);
+            var blockComment= _dbSet.SingleOrDefault(x => x.Id == id);
             return new CommentAndAuthorData
             {
                 CommentId = blockComment.Id,

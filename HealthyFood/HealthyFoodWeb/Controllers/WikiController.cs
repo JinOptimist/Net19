@@ -74,7 +74,7 @@ namespace HealthyFoodWeb.Controllers
         [HttpPost]
         public IActionResult BiologicallyActiveAdditives(string newComment, int blockId, int commentId)
         {
-            _blockInformationServices.CreateComment(blockId, newComment, commentId);
+            _blockInformationServices.CreateComment(blockId, newComment);
             return RedirectToAction("BiologicallyActiveAdditives");
         }
 
@@ -94,9 +94,9 @@ namespace HealthyFoodWeb.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult UpdateComment(int commentId)
+        public IActionResult UpdateComment(int Id)
         {
-            var viewModel = _blockInformationServices.GetBlockCommentPageBaaViewModel(commentId);
+            var viewModel = _blockInformationServices.GetBlockCommentPageBaaViewModel(Id);
             return View(viewModel);
         }
 

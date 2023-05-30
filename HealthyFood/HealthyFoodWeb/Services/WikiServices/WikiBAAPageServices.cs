@@ -42,11 +42,11 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.Add(dbBlockBAA);
         }
 
-        public void CreateComment(int blockId, string comment, int commentId)
+        public int CreateComment(int blockId, string comment)
         {
             var blockDb = _wikiBaaRepository.Get(blockId);
             var user = _authService.GetUser();
-            _wikiBaaCommentRepository.CreateComment(user, blockDb, comment, commentId);
+            return _wikiBaaCommentRepository.CreateComment(user, blockDb, comment);
         }
 
         public IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments()
@@ -106,9 +106,9 @@ namespace HealthyFoodWeb.Services.WikiServices
             _wikiBaaRepository.UpdateBlock(id, title, text);
         }
 
-        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int commentId)
+        public BLockPageBaaViewModel GetBlockCommentPageBaaViewModel(int Id)
         {
-            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(commentId);
+            var blockCommentPage = _wikiBaaCommentRepository.GetBlockCommentPageBaaViewModel(Id);
             return new BLockPageBaaViewModel
             {
                 Id = blockCommentPage.CommentId,

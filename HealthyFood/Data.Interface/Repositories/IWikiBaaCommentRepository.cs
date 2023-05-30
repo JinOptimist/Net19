@@ -7,7 +7,7 @@ namespace Data.Sql.Repositories
 {
     public interface IWikiBaaCommentRepository : IBaseRepository<WikiBlockComment>
     {
-        void CreateComment(User Author, PageWikiBlock Block, string Comment, int CommentId);
+        int CreateComment(User Author, PageWikiBlock Block, string Comment);
 
         void RemoveComment(int idComment);
 
