@@ -47,7 +47,7 @@ builder.Services.AddScoped<IReviewService>(
     diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
     diContainer.GetService<IAuthService>(),
-    diContainer.GetService<WikiBaaCommentRepository>()));
+    diContainer.GetService<IWikiBaaCommentRepository>()));
 
 builder.Services.AddScoped<IGameFruitConnectTwoService>(
      diContainer => new GameFruitConnectTwoService(diContainer.GetService<ISimilarGameRepository>()));

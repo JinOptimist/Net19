@@ -89,9 +89,9 @@
                                 </div>
                                 @if (authService.GetUser()?.Id == CommentAndAuthor.AuthorId)
                                 {
-                                    <form action="/Wiki/RemoveComment">
+                                    <form action="/Wiki/RemoveComment" class="remove-form">
                                         <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
-                                        <input type="submit" value="Delet Comment">
+                                        <input type="submit" value="Delet Comment" class="delete-comment-button">
                                     </form>
                                    @* <form action="/Wiki/UpdateComment">
                                         <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
