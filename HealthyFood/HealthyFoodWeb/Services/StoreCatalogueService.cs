@@ -8,14 +8,16 @@ using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    [ScopedRegistration]
+    public class ScopedRegistrationAttribute : Attribute { }
+
     public class StoreCatalogueService : IStoreCatalogueService
     {
-        public class ScopedRegistrationAttribute : Attribute { }
+        
         private IStoreCatalogueRepository _catalogueRepository;
         private IManufacturerRepository _manufacturerRepository;
         private IPagginatorService _pagginatorService;
 
+        [ScopedRegistration]
         public StoreCatalogueService(IStoreCatalogueRepository catalogueRepositories, IManufacturerRepository manufacturerRepository, IPagginatorService pagginatorService)
         {
             _catalogueRepository = catalogueRepositories;

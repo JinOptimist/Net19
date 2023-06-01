@@ -58,10 +58,26 @@ namespace HealthyFoodWeb.Services.Helpers
             foreach (var t in allInterfaceSrvice)
             {
                 var service = a.GetTypes()
-                    .FirstOrDefault(classType =>
+                    .First(classType =>
                                     classType.IsClass
                                     && classType.GetInterfaces().Any(i => i == t));
-                services.AddScoped(t, service);
+                services.AddScoped(t, serviceProvider =>
+                {
+                    var constructorOfRepository =
+                        service
+                            .GetConstructors()
+                            .FirstOrDefault(x => x.GetCustomAttributes().Any(i => i.GetType() == typeof(ScopedRegistrationAttribute)));
+                    if(constructorOfRepository == null)
+                    {
+                        constructorOfRepository = service.GetConstructors().First();
+                    }
+
+                    return constructorOfRepository
+                        .Invoke(constructorOfRepository
+                            .GetParameters()
+                            .Select(param => serviceProvider.GetService(param.ParameterType))
+                            .ToArray());
+                });
                 //builder.Services.AddScoped<IPagginatorService, PagginatorService>();
             }
             
