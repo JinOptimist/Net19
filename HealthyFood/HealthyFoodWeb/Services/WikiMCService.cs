@@ -1,16 +1,12 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
-using HealthyFoodWeb.Models.Games;
+using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-	public class ScopedRegistrationAttribute : Attribute { }
-
-    [ScopedRegistration]
 	public class WikiMcService : IWikiMcService
     {
         public const int CURRENT_YEAR = 2023;
@@ -19,7 +15,8 @@ namespace HealthyFoodWeb.Services
         private IWikiTagRepository _tagRepository;
         private IAuthService _authService;
 
-        public WikiMcService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
+		[ScopedRegistration]
+		public WikiMcService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
         {
             _wikiMCRepository = wikiMCRepository;
             _authService = authService;
