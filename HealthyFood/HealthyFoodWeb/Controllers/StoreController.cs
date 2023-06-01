@@ -52,6 +52,14 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
+        public IActionResult GetTotalPrice()
+        {
+            var viewModel = new CartViewModel();
+            var totalPrice = _cartService.GetTotalPrice();
+            viewModel.TotalPrice = totalPrice;
+            return View(viewModel);
+        }
+
         public IActionResult DeleteFromCart(int id)
         {
             _cartService.DeleteFromCart(id);

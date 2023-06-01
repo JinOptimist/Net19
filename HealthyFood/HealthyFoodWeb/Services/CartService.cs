@@ -40,6 +40,16 @@ namespace HealthyFoodWeb.Services
             return product;
         }
 
+        public decimal GetTotalPrice()
+        {
+            decimal TotalPrice = 0;
+            foreach (var product in _cartRepository.GetAll())
+            {
+                TotalPrice += product.Price;
+            }
+            return TotalPrice;
+        }
+
         public void AddProductInBase(CartViewModel viewModel)
         {
             var user = _authService.GetUser();
@@ -67,11 +77,13 @@ namespace HealthyFoodWeb.Services
 
         private CartViewModel BuildViewModelFromDbModel(Cart x)
         {
+            var total = GetTotalPrice();
             return new CartViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
-                Price = x.Price
+                Price = x.Price,
+                TotalPrice= total,
             };
         }
 
