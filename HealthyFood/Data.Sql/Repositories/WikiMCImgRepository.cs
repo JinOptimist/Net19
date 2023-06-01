@@ -88,5 +88,32 @@ namespace Data.Sql.Repositories
             image.Year = year;
             _webContext.SaveChanges();
         }
-    }
+
+		public ImagesCountData GetDataForImagesCount(int? year, string? tag, ImgTypeEnum type)
+		{
+            IQueryable<WikiMcImage> availableImages = _dbSet;
+            if (year != null)
+            {
+				availableImages = availableImages.Where(x => x.Year == year);
+            }
+            if (tag != null)
+            {
+				availableImages = availableImages.Where(dbImage => dbImage.Tags.Any(dbTag => dbTag.TagName == tag));
+            }
+            if(type != ImgTypeEnum.Null)
+            {
+				availableImages = availableImages.Where(x => x.ImgType == type);
+			}
+            var count = availableImages.Count();
+            var urls = availableImages
+                .Select(x => x.ImgUrl)
+                .ToList();
+
+            return new ImagesCountData
+			{
+				Count = count,
+				ImagesUrl = urls
+			};
+		}
+	}
 }

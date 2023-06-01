@@ -10,7 +10,7 @@ namespace HealthyFoodWeb.Services.IServices
 
         IEnumerable<BLockPageBaaViewModel> GetBlocksWithAuthorAndComments();
        
-        void CreateComment(int blockId, string comment, int CommentId);
+        int CreateComment(int blockId, string comment);
 
         void RemoveComment(int commentId);
 
