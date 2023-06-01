@@ -3,6 +3,7 @@ using Data.Sql.Repositories;
 using Data.Sql;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using static HealthyFoodWeb.Services.StoreCatalogueService;
 
 namespace HealthyFoodWeb.Services.Helpers
 {
@@ -46,5 +47,27 @@ namespace HealthyFoodWeb.Services.Helpers
                     });
                 });
         }
+        public void RegisterAllServices(IServiceCollection services)
+        {
+            var a = Assembly.GetAssembly(typeof(AuthService));
+            var allInterfaceSrvice = a
+                .GetTypes()
+                .Where(t => t.Name.Contains("Service"))
+                .Where(t => t.IsInterface);
+
+            foreach (var t in allInterfaceSrvice)
+            {
+                var service = a.GetTypes()
+                    .FirstOrDefault(classType =>
+                                    classType.IsClass
+                                    && classType.GetInterfaces().Any(i => i == t));
+                services.AddScoped(t, service);
+                //builder.Services.AddScoped<IPagginatorService, PagginatorService>();
+            }
+            
+        }
+
+
     }
+
 }
