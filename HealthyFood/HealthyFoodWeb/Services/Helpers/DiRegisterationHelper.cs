@@ -46,5 +46,25 @@ namespace HealthyFoodWeb.Services.Helpers
                     });
                 });
         }
-    }
+
+		public void RegisterAllServices(IServiceCollection services)
+		{
+			var scopedRegistration = typeof(ScopedRegistrationAttribute);
+
+			var types = AppDomain.CurrentDomain.GetAssemblies()
+			.SelectMany(s => s.GetTypes())
+			.Where(p => p.IsDefined(scopedRegistration, false) && !p.IsInterface)
+			.Select(impl => new
+			{
+				Service = impl.GetInterface($"I{impl.Name}"),
+				Implementation = impl
+			})
+			.Where(x => x.Service != null);
+
+			foreach (var type in types)
+			{
+				services.AddScoped(type.Service, type.Implementation);
+			}
+		}
+	}
 }

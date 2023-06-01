@@ -8,7 +8,10 @@ using HealthyFoodWeb.Services.IServices;
 
 namespace HealthyFoodWeb.Services
 {
-    public class WikiMCService : IWikiMcService
+	public class ScopedRegistrationAttribute : Attribute { }
+
+    [ScopedRegistration]
+	public class WikiMcService : IWikiMcService
     {
         public const int CURRENT_YEAR = 2023;
 
@@ -16,7 +19,7 @@ namespace HealthyFoodWeb.Services
         private IWikiTagRepository _tagRepository;
         private IAuthService _authService;
 
-        public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
+        public WikiMcService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService)
         {
             _wikiMCRepository = wikiMCRepository;
             _authService = authService;
