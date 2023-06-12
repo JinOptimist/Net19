@@ -151,14 +151,24 @@ namespace HealthyFoodWeb.Controllers
 			return View(viewModel);
         }
 
-        public IActionResult UpdateImage(int id)
+		[Authorize]
+		public IActionResult DeleteImage(int imgId)
+		{
+			_wikiMCImgService.DeleteImage(imgId);
+			return RedirectToAction("ShowUploadedImages");
+		}
+
+		[HttpGet]
+		[Authorize]
+		public IActionResult UpdateImage(int id)
         {
             var viewModel = _wikiMCImgService.GetImageViewModel(id);
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
+		[Authorize]
+		public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
         {
             _wikiMCImgService.UpdateAllExñeptTags(
                 wikiMcViewModel.Id,

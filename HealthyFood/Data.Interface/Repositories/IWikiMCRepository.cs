@@ -9,9 +9,10 @@ namespace Data.Interface.Repositories
 		IEnumerable<WikiMcImage> GetAllImgByYear(int year);
         IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type);
         List<ImagesAndInfoAboutTheirUploaderData> GetUserImages();
-        void RemoveAllImgByYear(int year);
-        void RemoveAllImgByType(ImgTypeEnum type);
-        WikiMcImage GetImageAndTags(int id);
+        void DeleteImgByYear(int year);
+        void DeleteImgByType(ImgTypeEnum type);
+		void DeleteImage(int idImg);
+		WikiMcImage GetImageAndTags(int id);
         void UpdateAllExeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
         IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable();
 		ImagesCountData GetDataForImagesCount(int? year, string? tag, ImgTypeEnum type);

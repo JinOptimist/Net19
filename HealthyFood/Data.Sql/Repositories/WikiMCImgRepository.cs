@@ -46,21 +46,28 @@ namespace Data.Sql.Repositories
                 .ToList();
         }
 
-        public void RemoveAllImgByType(ImgTypeEnum type)
+        public void DeleteImgByType(ImgTypeEnum type)
         {
             var removedType = _dbSet.Where(x => x.ImgType == type).ToList();
             removedType.ForEach(x => _dbSet.Remove(x));
             _webContext.SaveChanges();
         }
 
-        public void RemoveAllImgByYear(int year)
+        public void DeleteImgByYear(int year)
         {
             var removedYear = _dbSet.Where(x => x.Year == year).ToList();
             removedYear.ForEach(x => _dbSet.Remove(x));
             _webContext.SaveChanges();
         }
 
-        public WikiMcImage GetImageAndTags(int id)
+		public void DeleteImage(int imgId)
+		{
+            var image = _dbSet.Single(x => x.Id == imgId);
+            _dbSet.Remove(image);
+			_webContext.SaveChanges();
+		}
+
+		public WikiMcImage GetImageAndTags(int id)
         {
             return _dbSet
                 .Include(x => x.Tags)

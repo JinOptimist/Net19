@@ -18,11 +18,13 @@ namespace HealthyFoodWeb.Services
 
         WikiMcViewModel GetImageViewModel(int id);
 
-        void RemoveByType(ImgTypeEnum type);
+        void DeleteImageByType(ImgTypeEnum type);
 
-		void RemoveByYear(int year);
+		void DeleteImageByYear(int year);
 
-        void UpdateAllExсeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
+		void DeleteImage(int imgId);
+
+		void UpdateAllExсeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
 
         void UpdateTags(int id, List<string> tags);
 

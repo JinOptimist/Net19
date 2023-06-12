@@ -70,17 +70,22 @@ namespace HealthyFoodWeb.Services.WikiServices
                 .ToList();
         }
 
-        public void RemoveByType(ImgTypeEnum type)
+        public void DeleteImageByType(ImgTypeEnum type)
         {
-            _wikiMcRepository.RemoveAllImgByType(type);
+            _wikiMcRepository.DeleteImgByType(type);
         }
 
-        public void RemoveByYear(int year)
+        public void DeleteImageByYear(int year)
         {
-            _wikiMcRepository.RemoveAllImgByYear(year);
+            _wikiMcRepository.DeleteImgByYear(year);
         }
 
-        public IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
+		public void DeleteImage(int imgId)
+		{
+			_wikiMcRepository.DeleteImage(imgId);
+		}
+
+		public IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages()
         {
             return _wikiMcRepository.GetUserImages();
         }
