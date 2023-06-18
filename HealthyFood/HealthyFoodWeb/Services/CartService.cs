@@ -34,8 +34,8 @@ namespace HealthyFoodWeb.Services
 
         public List<Cart> GetCustomerProduct()
         {
-            var user = _authService.GetUser();
-            var product = _cartRepository.GetAll().Where(x => x.Customer == user).ToList();
+            var userId = _authService.GetUser().Id;
+            var product = _cartRepository.GetAll().Where(x => x.Customer != null && x.Customer.Id == userId).ToList();
 
             return product;
         }
@@ -43,14 +43,14 @@ namespace HealthyFoodWeb.Services
         public decimal GetTotalPrice()
         {
             decimal TotalPrice = 0;
-            foreach (var product in _cartRepository.GetAll())
+            foreach (var product in GetCustomerProduct())
             {
                 TotalPrice += product.Price;
             }
             return TotalPrice;
         }
 
-        public void AddProductInBase(CartViewModel viewModel)
+        public void AddProductInBase(CartItemViewModel viewModel)
         {
             var user = _authService.GetUser();
             var dbCartModel = new Cart()
@@ -63,45 +63,27 @@ namespace HealthyFoodWeb.Services
             _cartRepository.Add(dbCartModel);
         }
 
-        public PagginatorViewModel<CartViewModel> GetCartsForPaginator(int page, int perPage)
+        public PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage)
         {
             var viewModel = _pagginatorService
                             .GetPaginatorViewModel(
                                 page,
                                 perPage,
+                                GetCustomerProduct,
                                 BuildViewModelFromDbModel,
                                 _cartRepository);
 
             return viewModel;
         }
 
-        private CartViewModel BuildViewModelFromDbModel(Cart x)
+        private CartItemViewModel BuildViewModelFromDbModel(Cart x)
         {
-            var total = GetTotalPrice();
-            return new CartViewModel
+            return new CartItemViewModel
             {
                 Id = x.Id,
                 Name = x.Name,
                 Price = x.Price,
-                TotalPrice= total,
             };
         }
-
-
-        //private CartIndexViewModel BuildViewModelCustomerProduct(Cart x)
-        //{
-        //    var cartviewmodel = new CartIndexViewModel();
-
-        //    cartviewmodel.Products = GetCustomerProduct().Select(x=> new CartViewModel
-        //    {
-        //        Id = x.Id,
-        //        Name = x.Name,
-        //        Price = x.Price
-        //    }).ToList();
-
-
-        //    return cartviewmodel;
-        //}
-
     }
 }

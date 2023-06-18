@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
-    public abstract class BaseRepository<DbModelType> 
+    public abstract class BaseRepository<DbModelType>
         : IBaseRepository<DbModelType> where DbModelType : BaseModel
     {
         protected WebContext _webContext;
@@ -68,6 +68,11 @@ namespace Data.Sql.Repositories
             dataModel.Items = games;
             dataModel.TotalCount = _dbSet.Count();
             return dataModel;
+        }
+
+        public virtual PaginatorData<DbModelType> GetPaginator(int page, int perPage, Func<List<DbModelType>> filteredDataFunc)
+        {
+            throw new NotImplementedException();
         }
     }
 

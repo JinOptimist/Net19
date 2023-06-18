@@ -2,7 +2,7 @@
 {
     public class CartIndexViewModel
     {
-        public List<CartViewModel> Products { get; set; }
+        public List<CartItemViewModel> Products { get; set; }
 
     }
 }

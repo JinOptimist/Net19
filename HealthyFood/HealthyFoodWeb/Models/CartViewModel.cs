@@ -1,16 +1,14 @@
 ﻿namespace HealthyFoodWeb.Models
 {
-    public class CartViewModel
+    public class CartViewModel 
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Img { get; set; }
+        public CartViewModel(PagginatorViewModel<CartItemViewModel> pagginatorViewModel) 
+        { 
+            PagginatorViewModel = pagginatorViewModel;
+        }
 
-        public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
 
-        public int Quantity { get; set; }
-        public int TotalQuantity { get; set; }
-        
+        public PagginatorViewModel<CartItemViewModel> PagginatorViewModel { get; set; }
     }
 }

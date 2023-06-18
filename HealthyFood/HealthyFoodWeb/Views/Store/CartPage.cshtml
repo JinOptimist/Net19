@@ -2,8 +2,7 @@
     Layout = "_layoutStore";
 }
 
-@model PagginatorViewModel<CartViewModel>
-
+@model CartViewModel
 
 <div class="text">
     Ordering
@@ -11,7 +10,7 @@
 </div>
 
 <div>
-    @foreach (var cartViewModel in Model.Items)
+    @foreach (var cartViewModel in Model.PagginatorViewModel.Items)
     {
         <div class="order-list">
             <div class="image-order">
@@ -49,10 +48,7 @@
         Total:
     </div>
     <div class="total-price">
-        @foreach (var cartViewModel in Model.Items)
-        {
-            @cartViewModel.TotalPrice
-        }
+        @Model.TotalPrice
     </div>
 </div>
 
@@ -63,10 +59,10 @@
 </div>
 
 <div class="pagginator">
-    @foreach (var pageNumber in Model.PageList)
+    @foreach (var pageNumber in Model.PagginatorViewModel.PageList)
     {
         <a href="/Store/CartPage/CartPage?page=@pageNumber"
-       class=" @(Model.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+       class=" @(Model.PagginatorViewModel.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
     }
 </div>
 

@@ -18,5 +18,6 @@ namespace Data.Interface.Repositories
         void Update(T model);
 
         PaginatorData<T> GetPaginator(int page, int perPage);
+        PaginatorData<T> GetPaginator(int page, int perPage, Func<List<T>> filteredDataFunc);
     }
 }

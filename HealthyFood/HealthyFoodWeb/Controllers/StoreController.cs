@@ -2,6 +2,7 @@
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -46,20 +47,24 @@ namespace HealthyFoodWeb.Controllers
             return View(viewModel);
         }
 
-        public IActionResult CartPage(int page = 1, int perPage = 4)
+        [Authorize]
+        public IActionResult CartPage(int page = 1, int perPage = 4, bool initialize = false)
         {
-            var viewModel = _cartService.GetCartsForPaginator(page, perPage);
-            return View(viewModel);
+            var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
+            
+                var cartViewModel = new CartViewModel(paginatorViewModel);
+                cartViewModel.TotalPrice = _cartService.GetTotalPrice();
+           
+            return View(cartViewModel);
         }
 
-        public IActionResult GetTotalPrice()
+        public IActionResult Carts(int page = 1, int perPage = 4)
         {
-            var viewModel = new CartViewModel();
-            var totalPrice = _cartService.GetTotalPrice();
-            viewModel.TotalPrice = totalPrice;
-            return View(viewModel);
-        }
+            var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
+            var cartViewModel = new CartViewModel(paginatorViewModel);
 
+            return View(cartViewModel);
+        }
         public IActionResult DeleteFromCart(int id)
         {
             _cartService.DeleteFromCart(id);
@@ -74,7 +79,7 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProductInBase(CartViewModel viewModel)
+        public IActionResult AddProductInBase(CartItemViewModel viewModel)
         {
             _cartService.AddProductInBase(viewModel);
             return RedirectToAction("CartPage");
