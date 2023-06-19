@@ -2,6 +2,7 @@
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Net.WebRequestMethods;
 
 namespace HealthyFoodWeb.Utility
 {
@@ -40,7 +41,8 @@ namespace HealthyFoodWeb.Utility
                 {
                     Name = "Salat",
                     Price = 3,
-                    Customer = user
+                    Customer = user,
+                    ImgUrl = "https://podacha-blud.com/uploads/posts/2022-12/1670444503_60-podacha-blud-com-p-legkii-salat-foto-63.jpg"
                 };
                 cartRepository.Add(productdefault);
             }
@@ -55,8 +57,8 @@ namespace HealthyFoodWeb.Utility
                     {
                         Name = $"Sup {i}",
                         Price = 10 +i,
-                        Customer = randomUser
-
+                        Customer = randomUser,
+                        ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/1945957/pub_5d887e5fa06eaf00ad1d7740_5d887e691d656a00ad33d1e0/scale_1200"
                     };
                     cartRepository.Add(product);
                 }

@@ -48,7 +48,7 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [Authorize]
-        public IActionResult CartPage(int page = 1, int perPage = 4, bool initialize = false)
+        public IActionResult CartPage(int page = 1, int perPage = 4)
         {
             var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
             

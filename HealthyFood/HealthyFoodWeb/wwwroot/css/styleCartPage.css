@@ -1,25 +1,30 @@
 ﻿.text {
     font-size: large;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .order-list {
     display: flex;
-    width: 100px;
+    min-width: 220px;
     height: 140px;
-    margin: 10px;
+    margin: 30px;
+    justify-content: center;
 }
 
 .image-order {
-    display: contents;
-    max-width: 100px;
+    display: flex;
+    max-width: 150px;
     max-height: 200px;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .order-description {
     display: table-cell;
     min-width: 300px;
-    margin-left: 5px;
+    margin-left: 50px;
 }
 
 .details {

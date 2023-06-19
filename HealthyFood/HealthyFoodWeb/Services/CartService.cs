@@ -58,6 +58,7 @@ namespace HealthyFoodWeb.Services
                 Name = viewModel.Name,
                 Price = viewModel.Price,
                 Customer = user,
+                ImgUrl = viewModel.ImgUrl,
             };
 
             _cartRepository.Add(dbCartModel);
@@ -83,6 +84,7 @@ namespace HealthyFoodWeb.Services
                 Id = x.Id,
                 Name = x.Name,
                 Price = x.Price,
+                ImgUrl= x.ImgUrl,
             };
         }
     }
