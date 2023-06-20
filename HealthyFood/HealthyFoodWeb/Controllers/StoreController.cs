@@ -51,20 +51,12 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult CartPage(int page = 1, int perPage = 4)
         {
             var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
-            
-                var cartViewModel = new CartViewModel(paginatorViewModel);
-                cartViewModel.TotalPrice = _cartService.GetTotalPrice();
-           
-            return View(cartViewModel);
-        }
-
-        public IActionResult Carts(int page = 1, int perPage = 4)
-        {
-            var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
             var cartViewModel = new CartViewModel(paginatorViewModel);
+            cartViewModel.TotalPrice = _cartService.GetTotalPrice();
 
             return View(cartViewModel);
         }
+
         public IActionResult DeleteFromCart(int id)
         {
             _cartService.DeleteFromCart(id);

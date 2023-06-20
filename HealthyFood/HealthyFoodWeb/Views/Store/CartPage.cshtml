@@ -1,11 +1,13 @@
-﻿@{
+﻿@using HealthyFoodWeb.Services.IServices;
+@{
     Layout = "_layoutStore";
 }
 
 @model CartViewModel
+@inject IAuthService authService
 
 <div class="text">
-    Ordering
+    Ordering @authService.GetUser().Name
     <a href="/Store/AddProductInBase">+</a>
 </div>
 
