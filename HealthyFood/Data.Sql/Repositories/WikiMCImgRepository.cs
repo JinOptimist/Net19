@@ -1,5 +1,5 @@
 ﻿using Data.Interface.DataModels;
-using Data.Interface.Models;
+using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
@@ -94,7 +94,7 @@ namespace Data.Sql.Repositories
             {
 				availableImages = availableImages.Where(dbImage => dbImage.Tags.Any(dbTag => dbTag.TagName == tag));
             }
-            if(type != ImgTypeEnum.Null)
+            if(type != ImgTypeEnum.None)
             {
 				availableImages = availableImages.Where(x => x.ImgType == type);
 			}

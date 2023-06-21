@@ -1,4 +1,5 @@
-﻿using Data.Sql.Models;
+﻿using Data.Interface.Models.WikiMc;
+using Data.Sql.Models;
 namespace Data.Interface.Models
 {
     public class User : BaseModel

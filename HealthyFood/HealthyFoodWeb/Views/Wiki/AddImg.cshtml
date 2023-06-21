@@ -1,38 +1,44 @@
-﻿@using Data.Interface.Models;
+﻿@using Data.Interface.Models.WikiMc;
 @using HealthyFoodWeb.Models.WikiMcModels;
 @model WikiMcViewModel
 
-<div class="add-image">
-	<div class="add-parameters">
-		<form method="post">
+@{
+	Layout = "_LayoutWiki";
+	<link rel="stylesheet" href="~/css/Style_User_Gallery.css" />
+}
+
+<div class="add-parameters">
+	<form id="basic-form" method="post">
+		<div class="user-input">
 			<div>
-				Type <br />
+				@Html.LabelFor(x => x.ImgType, "Type") <br />
 				@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
 			</div>
 			<div>
-				Year <br />
+				@Html.LabelFor(x => x.Year, "Year") <br />
 				@Html.TextBoxFor(x=>x.Year)
 			</div>
 			<div>
-				ImgUrl <br />
+				@Html.LabelFor(x => x.ImgPath, "Url") <br />
 				@Html.TextBoxFor(x => x.ImgPath)
 				@Html.ValidationMessageFor(x=>x.ImgPath)
 			</div>
 			<div>
-				Tags <br />
+				@Html.LabelFor(x => x.EnteredTags, "Tags") <br />
 				@Html.TextBoxFor(x => x.EnteredTags, new { @placeholder = "sport,life,food..."})
 			</div>
 			<div>
-				<input type="submit" value="Add" />
+				<button class="add-img have-to-block">Add</button>
+				<img class="loader" src="~/images/icons/loader.gif" />
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 	<div class="image-preview">
 		<div class="preview-container">
 			<img />
 		</div>
 		<div>
-			Image type: <span class="type">Proteins</span>
+			Image type: <span class="type"></span>
 		</div>
 		<div>
 			Image year: <span class="year"></span>
@@ -42,14 +48,8 @@
 		</div>
 	</div>
 </div>
-<div>
-	<a href="/Wiki/ShowUploadedImages">My Images</a>
-</div>
+
 
 @section Scripts{
-	<script src="~/js/wiki/addImageWikiMc.js"></script>
-}
-
-@section Styles{
-	<link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css/" />
-}
+	<script src="~/js/wiki/addImage.js"></script>
+}*

@@ -1,4 +1,4 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.Models.WikiMc;
 
 namespace HealthyFoodWeb.Models.WikiMcModels
 {

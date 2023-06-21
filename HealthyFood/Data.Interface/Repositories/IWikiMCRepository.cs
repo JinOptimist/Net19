@@ -1,5 +1,5 @@
 ﻿using Data.Interface.DataModels;
-using Data.Interface.Models;
+using Data.Interface.Models.WikiMc;
 
 namespace Data.Interface.Repositories
 {

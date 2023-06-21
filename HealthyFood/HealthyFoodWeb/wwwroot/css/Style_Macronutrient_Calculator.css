@@ -11,9 +11,9 @@
 .navigation {
     background-color: #F5F5F5;
     border: 1px;
-    padding: 15px;
+    padding: 1em;
     border-radius: 5px;
-    width: 135px;
+    width: 9em;
 }
 
 a {
@@ -44,18 +44,29 @@ a {
 
 .user-data {
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    text-align:left;
+    text-align: left;
 }
 
 .input-parameters {
-    height: auto;
-    background-color: yellowgreen;
+    height: 37.5em;
+    background-color: #D3D3D3;
     border: 1px;
-    margin-inline: 30pt;
-    padding: 15px;
+    margin-inline: 1em;
+    padding: 1em;
     border-radius: 5px;
-    width: auto;
+    width: 20em;
+}
+
+.calculations-results {
+    border: 5px solid yellowgreen;
+    height: 19em;
+    margin-inline: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    width: 20em;
 }
 
 .comments {
@@ -69,3 +80,8 @@ a {
     margin-inline: 30pt;
 }
 
+.press {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: center;
+}
