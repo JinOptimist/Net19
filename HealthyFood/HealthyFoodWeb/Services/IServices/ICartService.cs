@@ -14,5 +14,9 @@ namespace HealthyFoodWeb.Services.IServices
         PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage);
 
         decimal GetTotalPrice();
+
+        CartItemViewModel GetCartViewModel(int id);
+
+        void UpdateTag(int id, List<string> newTagsNames);
     }
 }

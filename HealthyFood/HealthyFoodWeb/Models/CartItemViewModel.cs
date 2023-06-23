@@ -10,6 +10,10 @@
 
         public int Quantity { get; set; }
         public int TotalQuantity { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
+        public List<string> AvailableTags { get; set; } = new List<string>();
+
         
+
     }
 }

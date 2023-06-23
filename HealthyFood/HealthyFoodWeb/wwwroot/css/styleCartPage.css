@@ -20,6 +20,13 @@
     flex-direction: column;
     justify-content: center;
 }
+.image {
+    display: flex;
+    max-width: 150px;
+    max-height: 200px;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .order-description {
     display: table-cell;
@@ -28,7 +35,9 @@
 }
 
 .details {
-    margin-top: 10px;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #009688;
 }
 
 .order-quantity {
@@ -87,3 +96,9 @@
         .pagginator a.active {
             background: #ed79b4;
         }
+
+
+.coverImg {
+    max-width: 150px;
+    max-height: 200px;
+}

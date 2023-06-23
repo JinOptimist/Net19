@@ -16,14 +16,20 @@
     {
         <div class="order-list">
             <div class="image-order">
-                <img src="@cartViewModel.ImgUrl" />
+                <a href="/Store/Update/@cartViewModel.Id">
+                    <img src="@cartViewModel.ImgUrl" class="image" />
+                </a>
             </div>
             <div class="order-description">
                 <div class="title-of-dishes">
                     Name of dish: @cartViewModel.Name
                 </div>
                 <div class="details">
-                    Ditails
+
+                    @foreach (var tag in cartViewModel.Tags)
+                    {
+                        <span class="tag">#@tag</span>
+                    }
                 </div>
             </div>
             <div class="order-quantity">
@@ -34,7 +40,7 @@
                     1
                 </div>
                 <button class="quantity-controller">
-                    <a>+</a> 
+                    <a>+</a>
                 </button>
             </div>
 

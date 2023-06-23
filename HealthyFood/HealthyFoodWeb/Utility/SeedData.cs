@@ -24,6 +24,7 @@ namespace HealthyFoodWeb.Utility
                 SeedGame(scope);
                 SeedReview(scope);
                 SeedCart(scope);
+                SeedCartTags(scope);
             }
         }
 
@@ -31,18 +32,20 @@ namespace HealthyFoodWeb.Utility
         {
             var cartRepository = scope.ServiceProvider.GetRequiredService<ICartRepository>();
             var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+            var cartTagRepository = scope.ServiceProvider.GetRequiredService<ICartTagRepository>();
 
 
             if (!cartRepository.Any())
             {
                 var user = userRepository.GetFirst();
-
+                var tags = cartTagRepository.GetAll();
                 var productdefault = new Cart
                 {
                     Name = "Salat",
                     Price = 3,
                     Customer = user,
-                    ImgUrl = "https://podacha-blud.com/uploads/posts/2022-12/1670444503_60-podacha-blud-com-p-legkii-salat-foto-63.jpg"
+                    ImgUrl = "https://podacha-blud.com/uploads/posts/2022-12/1670444503_60-podacha-blud-com-p-legkii-salat-foto-63.jpg",
+                    Tags = new List<CartTags> { tags.Random() }
                 };
                 cartRepository.Add(productdefault);
             }
@@ -61,6 +64,26 @@ namespace HealthyFoodWeb.Utility
                         ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/1945957/pub_5d887e5fa06eaf00ad1d7740_5d887e691d656a00ad33d1e0/scale_1200"
                     };
                     cartRepository.Add(product);
+                }
+            }
+        }
+
+        private static void SeedCartTags(IServiceScope scope)
+        {
+            var defaultTags = new List<string> { "Vegetarian", "Vegan", "Lactose-free", "Low-calorie", "Sugar-free" };
+
+            var cartTagsRepository = scope.ServiceProvider
+                .GetRequiredService<ICartTagRepository>();
+
+            foreach (var tag in defaultTags)
+            {
+                if (cartTagsRepository.Get(tag) == null)
+                {
+                    var cartTagCatalog = new CartTags
+                    {
+                        Name = tag
+                    };
+                    cartTagsRepository.Add(cartTagCatalog);
                 }
             }
         }

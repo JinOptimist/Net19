@@ -6,5 +6,6 @@
         public decimal Price { get; set; }
         public string ImgUrl { get; set; }
         public virtual User Customer { get; set; }
+        public virtual List<CartTags> Tags { get; set; }
     }
 }

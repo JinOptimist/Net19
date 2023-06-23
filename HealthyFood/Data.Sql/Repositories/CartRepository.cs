@@ -2,7 +2,6 @@
 using Data.Interface.Models;
 using Data.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Net.WebSockets;
 
 namespace Data.Sql.Repositories
 {
@@ -26,12 +25,20 @@ namespace Data.Sql.Repositories
             var dataModel = new PaginatorData<Cart>();
 
             var items = initialSource
+                .Include(x => x.Tags)
                 .Skip((page - 1) * perPage)
                 .Take(perPage)
                 .ToList();
             dataModel.Items = items;
             dataModel.TotalCount = initialSource.Count();
             return dataModel;
+        }
+
+        public Cart GetCartAndTags(int id)
+        {
+            return _dbSet
+                .Include(x => x.Tags)
+                .SingleOrDefault(x => x.Id == id);
         }
 
     }
