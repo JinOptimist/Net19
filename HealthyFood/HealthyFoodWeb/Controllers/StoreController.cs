@@ -64,15 +64,19 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddProductInBase()
+        public IActionResult AddProductInCart()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddProductInBase(CartItemViewModel viewModel)
+        public IActionResult AddProductInCart(CartItemViewModel viewModel)
         {
-            _cartService.AddProductInBase(viewModel);
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            _cartService.AddProductInCart(viewModel);
             return RedirectToAction("CartPage");
         }
 

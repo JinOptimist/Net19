@@ -69,7 +69,7 @@ namespace HealthyFoodWeb.Services
             return TotalPrice;
         }
 
-        public void AddProductInBase(CartItemViewModel viewModel)
+        public void AddProductInCart(CartItemViewModel viewModel)
         {
             var user = _authService.GetUser();
             var dbCartModel = new Cart()

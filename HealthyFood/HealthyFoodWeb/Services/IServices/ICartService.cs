@@ -9,7 +9,7 @@ namespace HealthyFoodWeb.Services.IServices
         List<Cart> GetCustomerProduct();
 
         void DeleteFromCart(int id);
-        void AddProductInBase(CartItemViewModel viewModel);
+        void AddProductInCart(CartItemViewModel viewModel);
 
         PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage);
 
