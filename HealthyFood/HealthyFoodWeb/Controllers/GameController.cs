@@ -17,7 +17,7 @@ namespace HealthyFoodWeb.Controllers
         public GameController(IGameService gameService)
         {
             _gameService = gameService;
-        }
+        } 
 
         [Authorize]
         public IActionResult Index()
