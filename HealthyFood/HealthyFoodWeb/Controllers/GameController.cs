@@ -28,7 +28,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetAllCheapGames()
                 .Select(BuildViewModelFromDbModel)
                 .ToList();
-
+            
             viewModel.RichGames = _gameService
                 .GetAllRichGames()
                 .Select(BuildViewModelFromDbModel)
