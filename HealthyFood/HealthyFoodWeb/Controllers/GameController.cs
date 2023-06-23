@@ -38,7 +38,7 @@ namespace HealthyFoodWeb.Controllers
 
             return View(viewModel);
         }
-
+        
         public IActionResult Games(int page = 1, int perPage = 10)
         {
             var viewModel = _gameService.GetGamesForPaginator(page, perPage);
