@@ -20,6 +20,7 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .image {
     display: flex;
     max-width: 150px;
@@ -81,7 +82,10 @@
 
 .pagginator {
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
+
 
     .pagginator a {
         border: 1px solid #196cbe;
@@ -101,4 +105,10 @@
 .coverImg {
     max-width: 150px;
     max-height: 200px;
+}
+
+
+.preview {
+    margin: 30px;
+    border: 2px #009688 dotted;
 }

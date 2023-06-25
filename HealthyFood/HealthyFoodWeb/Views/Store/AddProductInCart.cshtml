@@ -23,15 +23,29 @@
     </div>
 
     <div class="preview">
-        <div>
-            Product name: <span class="name">Salat</span> <span class="price">0</span>$
-        </div>
-        <div class="preview-container">
-            <img />
+        <div class="order-list">
+            <div class="image-order">
+                <img src="https://www.heavymart.com/youritem.png" />
+            </div>
+            <div class="order-description">
+                <div class="title-of-dishes">
+                    Name of dish: <span class="name"> </span>
+                </div>
+            </div>
+            <div class="order-quantity">
+                <button class="quantity-controller">-</button>
+                <div class="quantity-number">1</div>
+                <button class="quantity-controller">+</button>
+            </div>
+            <div class="order-price">
+                <span class="price">0</span>$
+            </div>
         </div>
     </div>
 
-
+    @section Styles{
+        <link rel="stylesheet" href="~/css/styleCartPage.css">
+    }
     @section Scripts{
-        <script src="~/js/addproductinbase.js"></script>
+        <script src="~/js/addproductincart.js"></script>
     }
