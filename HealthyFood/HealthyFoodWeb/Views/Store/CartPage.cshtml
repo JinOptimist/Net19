@@ -11,6 +11,17 @@
     <a href="/Store/AddProductInCart">+</a>
 </div>
 
+<div class="filter-block">
+    Tags
+    <input type="text" class="user-tag have-to-block" />
+    <button class="get-products-count have-to-block">ok</button>
+    <img class="loader" src="~/images/icons/loader.gif" />
+</div>
+<div>
+    Product count <span class="product-count">0</span>
+</div>
+
+
 <div>
     @foreach (var cartViewModel in Model.PagginatorViewModel.Items)
     {
@@ -78,3 +89,6 @@
     <link rel="stylesheet" href="~/css/styleCartPage.css">
     }
 
+@section Scripts{
+    <script src="~/js/cartpage.js"></script>
+    }

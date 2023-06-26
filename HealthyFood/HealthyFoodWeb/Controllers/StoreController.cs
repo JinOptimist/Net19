@@ -130,6 +130,5 @@ namespace HealthyFoodWeb.Controllers
             _storeCatalogueService.AddStoreItem(viewModel);
             return RedirectToAction("storePageCatalogue");
         }
-
     }
 }

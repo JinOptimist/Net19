@@ -1,8 +1,11 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
+using System.Linq;
 
 namespace HealthyFoodWeb.Services
 {
@@ -54,9 +57,22 @@ namespace HealthyFoodWeb.Services
         public List<Cart> GetCustomerProduct()
         {
             var userId = _authService.GetUser().Id;
-            var product = _cartRepository.GetAll().Where(x => x.Customer != null && x.Customer.Id == userId).ToList();
+            var product = _cartRepository.GetAllWithTags().Where(x => x.Customer != null && x.Customer.Id == userId).ToList();
 
             return product;
+        }
+
+        public ProductCountViewModel GetViewModelForProductCount(string userTag)
+        {
+            var dataModel = GetCustomerProduct()
+                .Where(x => x.Tags != null && x.Tags.Any(x => x.Name == userTag))
+                .ToList();
+
+            return new ProductCountViewModel
+            {
+                TotalProductCount = dataModel.Count,
+                ProductNames = dataModel.Select(x => x.Name).ToList(),
+            };
         }
 
         public decimal GetTotalPrice()
@@ -121,7 +137,7 @@ namespace HealthyFoodWeb.Services
                 Name = cartDb.Name,
                 Price = cartDb.Price,
                 ImgUrl = cartDb.ImgUrl,
-                AvailableTags =tags,
+                AvailableTags = tags,
                 Tags = cartDb.Tags.Select(x => x.Name).ToList()
             };
         }

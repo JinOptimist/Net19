@@ -6,5 +6,8 @@ namespace Data.Interface.Repositories
     {
         Cart GetByName(string name);
         Cart GetCartAndTags(int id);
+
+        IEnumerable<Cart> GetAllWithTags();
+
     }
 }

@@ -41,5 +41,10 @@ namespace Data.Sql.Repositories
                 .SingleOrDefault(x => x.Id == id);
         }
 
+        public IEnumerable<Cart> GetAllWithTags()
+        {
+            return _dbSet
+               .Include(x => x.Tags);
+        }
     }
 }

@@ -112,3 +112,9 @@
     margin: 30px;
     border: 2px #009688 dotted;
 }
+
+
+.loader {
+    height: 40px;
+    display: none;
+}
