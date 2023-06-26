@@ -1,11 +1,8 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
-using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
-using System.Linq;
 
 namespace HealthyFoodWeb.Services
 {
