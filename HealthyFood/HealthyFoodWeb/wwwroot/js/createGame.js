@@ -10,14 +10,14 @@
         $('.preview span.price').text(price);
     });
 
-    $('#Price').on("keydown", function (e) {
-        if (e.which == 8) {
-            return;
-        }
+    //$('#Price').on("keydown", function (e) {
+    //    if (e.which == 8) {
+    //        return;
+    //    }
 
-        e.preventDefault();
-        e.stopPropagation();
-    });
+    //    e.preventDefault();
+    //    e.stopPropagation();
+    //});
 
     $('#CoverUrl').on("keyup", function () {
         const coverUrl = $('#CoverUrl').val();

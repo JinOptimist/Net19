@@ -15,16 +15,19 @@ namespace HealthyFoodWeb.Services
         private IGameCategoryRepository _gameCategoryRepository;
         private IAuthService _authService;
         private IPagginatorService _pagginatorService;
+        private IWebHostEnvironment _webHostEnvironment;
 
         public GameService(IGameRepository gameRepository,
             IAuthService authService,
             IGameCategoryRepository gameCategoryRepository,
-            IPagginatorService pagginatorService)
+            IPagginatorService pagginatorService,
+            IWebHostEnvironment webHostEnvironment)
         {
             _gameRepository = gameRepository;
             _authService = authService;
             _gameCategoryRepository = gameCategoryRepository;
             _pagginatorService = pagginatorService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public void CreateGame(GameViewModel viewModel)
@@ -34,11 +37,28 @@ namespace HealthyFoodWeb.Services
             {
                 Name = viewModel.Name,
                 Price = viewModel.Price,
-                CoverUrl = viewModel.CoverUrl,
+                CoverUrl = "TEMP",
                 Creater = user
             };
 
             _gameRepository.Add(dbGameModel);
+            
+            var ext = Path.GetExtension(viewModel.CoverFile.FileName);
+            var fileName = $"game-{dbGameModel.Id}{ext}";
+            var path = Path.Combine(
+                _webHostEnvironment.WebRootPath,
+                "images",
+                "games",
+                fileName);
+
+            using (var fs = File.Create(path))
+            {
+                viewModel.CoverFile.CopyTo(fs);
+            }
+
+            dbGameModel.CoverUrl = $"/images/games/{fileName}";
+            _gameRepository.Update(dbGameModel);
+
         }
 
         public Game GetTheBestGameWithGenres()
