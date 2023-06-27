@@ -73,16 +73,17 @@
                             </div>
                         </a>
                     </div>
+
+                </div>
+                <div class="pagginator">
+                    @foreach (var pageNumber in Model.ItemsPagginator.PageList)
+                    {
+                        <a href="/Store/StorePageCatalogue?page=@pageNumber"
+                       class=" @(Model.ItemsPagginator.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-    <div class="pagginator">
-        @foreach (var pageNumber in Model.ItemsPagginator.PageList)
-        {
-            <a href="/Store/StorePageCatalogue?page=@pageNumber"
-           class=" @(Model.ItemsPagginator.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
-        }
     </div>
     <div class="footer">
         <div class="container"></div>
