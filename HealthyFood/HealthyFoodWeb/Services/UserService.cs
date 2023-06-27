@@ -54,22 +54,28 @@ namespace HealthyFoodWeb.Services
                 users.CopyTo(fs);
             }
 
-            var lines = File.ReadAllLines(tempPath);
-            foreach (var line in lines)
+            using(var fs = File.OpenRead(tempPath))
             {
-                var data = line.Split(',');
-                var userName = data[0].Trim();
-                var password = data[1].Trim();
-
-                var user = new User
+                using (var sr = new StreamReader(fs))
                 {
-                    Name = userName,
-                    Password = password,
-                    AvatarUrl = "NoAvatar",
-                    Role = MyRole.User
-                };
+                    while(!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine();
+                        var data = line.Split(',');
+                        var userName = data[0].Trim();
+                        var password = data[1].Trim();
 
-                _userRepository.Add(user);
+                        var user = new User
+                        {
+                            Name = userName,
+                            Password = password,
+                            AvatarUrl = "NoAvatar",
+                            Role = MyRole.User
+                        };
+
+                        _userRepository.Add(user);
+                    }
+                }
             }
         }
     }
