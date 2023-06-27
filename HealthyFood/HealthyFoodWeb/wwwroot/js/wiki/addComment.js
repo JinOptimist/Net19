@@ -21,13 +21,20 @@
                     .find('.update-link')
                     .attr("href", "/wiki/UpdateComment/" + commentId);
 
+                copyOfCommentBlock
+                    .find('.delete-comment-button')
+                    .click(DeletComment);
+
                 $('.comments-container').append(copyOfCommentBlock);
             });
 
         $("[name=newComment]").val('');
     });
 
-    $('.remove-form .delete-comment-button').click(function () {
+    $('.delete-comment-button').click(DeletComment);
+
+    function DeletComment()
+    {
         const commentId = $(this)
             .closest('.remove-form')
             .find('[name=commentId]')
@@ -36,5 +43,5 @@
         $.get(`/api/wiki/removeComment?id=${commentId}`);
 
         $(this).closest('.comment-block').remove();
-    });
+    }
 });

@@ -50,9 +50,7 @@ builder.Services.AddScoped<IReviewService>(
     diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
     diContainer.GetService<IAuthService>(),
-    diContainer.GetService<WikiBaaCommentRepository>()));
-
-
+    diContainer.GetService<IWikiBaaCommentRepository>()));
 
 builder.Services.AddScoped<IGameFruitConnectTwoService>(
      diContainer => new GameFruitConnectTwoService(diContainer.GetService<ISimilarGameRepository>()));
@@ -60,19 +58,9 @@ builder.Services.AddScoped<IGameFruitConnectTwoService>(
 var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
-
-builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IManufacturerRepository>(x => new ManufacturerRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IStoreCatalogueRepository>(x => new StoreCatalogueRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IGameCategoryRepository>(x => new GameCategoryRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<ISimilarGameRepository>(x => new SimilarGameRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IGameRepository>(x => new GameRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IWikiMcRepository>(x => new WikiMCImgRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
-builder.Services.AddScoped<IWikiTagRepository>(x => new WikiTagRepository(x.GetService<WebContext>()));
+var diRegisterationHelper = new DiRegisterationHelper();
+diRegisterationHelper.RegisterAllRepositories(builder.Services);
+diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
 

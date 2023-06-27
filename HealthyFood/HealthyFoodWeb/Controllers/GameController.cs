@@ -17,7 +17,7 @@ namespace HealthyFoodWeb.Controllers
         public GameController(IGameService gameService)
         {
             _gameService = gameService;
-        }
+        } 
 
         [Authorize]
         public IActionResult Index()
@@ -28,7 +28,7 @@ namespace HealthyFoodWeb.Controllers
                 .GetAllCheapGames()
                 .Select(BuildViewModelFromDbModel)
                 .ToList();
-
+            
             viewModel.RichGames = _gameService
                 .GetAllRichGames()
                 .Select(BuildViewModelFromDbModel)
@@ -38,7 +38,7 @@ namespace HealthyFoodWeb.Controllers
 
             return View(viewModel);
         }
-
+        
         public IActionResult Games(int page = 1, int perPage = 10)
         {
             var viewModel = _gameService.GetGamesForPaginator(page, perPage);
