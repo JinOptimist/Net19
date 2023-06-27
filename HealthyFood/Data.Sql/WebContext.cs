@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Data.Interface.Models.WikiMc;
 using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
 

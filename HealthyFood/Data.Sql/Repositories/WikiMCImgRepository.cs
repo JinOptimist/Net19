@@ -1,5 +1,5 @@
 ﻿using Data.Interface.DataModels;
-using Data.Interface.Models;
+using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
 using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
@@ -28,19 +28,6 @@ namespace Data.Sql.Repositories
             return GetUserImagesIQueryable().ToList();
         }
 
-        public ImagesAndPaginatorData GetImagesForPaginator(int page, int perPage)
-        {
-            var dataModel = new ImagesAndPaginatorData();
-            var images =
-                GetUserImagesIQueryable()
-                .Skip((page - 1) * perPage)
-                .Take(perPage)
-                .ToList();
-            dataModel.Images = images;
-            dataModel.TotalCount = _dbSet.Count();
-            return dataModel;
-        }
-
         public IEnumerable<WikiMcImage> GetAllImgByType(ImgTypeEnum type)
         {
             return _dbSet.Where(x => x.ImgType == type);
@@ -59,21 +46,28 @@ namespace Data.Sql.Repositories
                 .ToList();
         }
 
-        public void RemoveAllImgByType(ImgTypeEnum type)
+        public void DeleteImgByType(ImgTypeEnum type)
         {
             var removedType = _dbSet.Where(x => x.ImgType == type).ToList();
             removedType.ForEach(x => _dbSet.Remove(x));
             _webContext.SaveChanges();
         }
 
-        public void RemoveAllImgByYear(int year)
+        public void DeleteImgByYear(int year)
         {
             var removedYear = _dbSet.Where(x => x.Year == year).ToList();
             removedYear.ForEach(x => _dbSet.Remove(x));
             _webContext.SaveChanges();
         }
 
-        public WikiMcImage GetImageAndTags(int id)
+		public void DeleteImage(int imgId)
+		{
+            var image = _dbSet.Single(x => x.Id == imgId);
+            _dbSet.Remove(image);
+			_webContext.SaveChanges();
+		}
+
+		public WikiMcImage GetImageAndTags(int id)
         {
             return _dbSet
                 .Include(x => x.Tags)
@@ -100,7 +94,7 @@ namespace Data.Sql.Repositories
             {
 				availableImages = availableImages.Where(dbImage => dbImage.Tags.Any(dbTag => dbTag.TagName == tag));
             }
-            if(type != ImgTypeEnum.Null)
+            if(type != ImgTypeEnum.None)
             {
 				availableImages = availableImages.Where(x => x.ImgType == type);
 			}
@@ -114,6 +108,12 @@ namespace Data.Sql.Repositories
 				Count = count,
 				ImagesUrl = urls
 			};
+		}
+
+		public override PaginatorData<WikiMcImage> GetPaginator(int page, int perPage)
+		{
+			var initialSource = _dbSet.Include(x => x.Tags);
+			return base.GetPaginator(initialSource, page, perPage);
 		}
 	}
 }

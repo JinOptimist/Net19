@@ -1,5 +1,5 @@
-﻿using Data.Interface.Models;
-using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models.WikiMc;
+using HealthyFoodWeb.Models.WikiMcModels;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,6 @@ namespace HealthyFoodWeb.Controllers.API
         public WikiMcImagesCountViewModel GetImagesCount(int? year, string? tag, ImgTypeEnum type)
         {
             var viewModel = _wikiMcService.GetViewModelForImagesCount(year, tag, type);
-            //Thread.Sleep(5 * 1000);
             return viewModel;
         }
 

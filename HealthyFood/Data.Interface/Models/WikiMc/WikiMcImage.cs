@@ -1,4 +1,4 @@
-﻿namespace Data.Interface.Models
+﻿namespace Data.Interface.Models.WikiMc
 {
     public class WikiMcImage : BaseModel
     {
