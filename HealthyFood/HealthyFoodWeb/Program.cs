@@ -28,6 +28,7 @@ var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
 diRegisterationHelper.RegisterAllRepositories(builder.Services);
+diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
 
