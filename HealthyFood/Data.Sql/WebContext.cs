@@ -17,6 +17,8 @@ namespace Data.Sql
 
         public DbSet<SimilarGame> SimilarGames { get; set; }
 
+        public DbSet<Manufacturer> Manufacturer { get; set; }
+
         public DbSet<WikiMcImage> WikiMcImages { get; set; }
 
         public DbSet<WikiTags> WikiTags { get; set; }

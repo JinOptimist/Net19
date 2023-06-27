@@ -1,6 +1,8 @@
 ﻿using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using static HealthyFoodWeb.Services.StoreCatalogueService;
 
 namespace HealthyFoodWeb.Services.Helpers
 {
@@ -36,50 +38,51 @@ namespace HealthyFoodWeb.Services.Helpers
 								.OrderByDescending(x => x.GetParameters().Length)
 								.First();
 
-						return constructorOfRepository
-							.Invoke(constructorOfRepository
-								.GetParameters()
-								.Select(param => serviceProvider.GetService(param.ParameterType))
-								.ToArray());
-					});
-				});
-		}
+                        return constructorOfRepository
+                            .Invoke(constructorOfRepository
+                                .GetParameters()
+                                .Select(param => serviceProvider.GetService(param.ParameterType))
+                                .ToArray());
+                    });
+                });
+        }
+        public void RegisterAllServices(IServiceCollection services)
+        {
+            var a = Assembly.GetAssembly(typeof(AuthService));
+            var allInterfaceSrvice = a
+                .GetTypes()
+                .Where(t => t.Name.Contains("Service"))
+                .Where(t => t.IsInterface);
 
-		public void RegisterAllServices(IServiceCollection services)
-		{
-			var scopedRegistration = typeof(ScopedRegistrationAttribute);
+            foreach (var t in allInterfaceSrvice)
+            {
+                var service = a.GetTypes()
+                    .First(classType =>
+                                    classType.IsClass
+                                    && classType.GetInterfaces().Any(i => i == t));
+                services.AddScoped(t, serviceProvider =>
+                {
+                    var constructorOfRepository =
+                        service
+                            .GetConstructors()
+                            .FirstOrDefault(x => x.GetCustomAttributes().Any(i => i.GetType() == typeof(ScopedRegistrationAttribute)));
+                    if(constructorOfRepository == null)
+                    {
+                        constructorOfRepository = service.GetConstructors().First();
+                    }
 
-			var firstList = AppDomain.CurrentDomain.GetAssemblies()
-				.SelectMany(s => s.GetTypes())
-				.Where(p => p.IsDefined(scopedRegistration, false) && p.IsClass)
-				.ToList();
+                    return constructorOfRepository
+                        .Invoke(constructorOfRepository
+                            .GetParameters()
+                            .Select(param => serviceProvider.GetService(param.ParameterType))
+                            .ToArray());
+                });
+                //builder.Services.AddScoped<IPagginatorService, PagginatorService>();
+            }
+            
+        }
 
-			var secondList = AppDomain.CurrentDomain.GetAssemblies()
-				.SelectMany(s => s.GetTypes())
-				.Where(t => t.GetConstructors().Any(c => c.IsDefined(scopedRegistration, false)))
-				.ToList();
 
-			firstList.Concat(secondList).Distinct().ToList()
-				.ForEach(realize =>
-				{
-					var inte = realize.GetInterface($"I{realize.Name}");
-					services.AddScoped(inte, x =>
-					{
-						var constructorOfService = realize.GetConstructors()
-						.FirstOrDefault(c => c.IsDefined(scopedRegistration, false));
+    }
 
-						if (constructorOfService == null)
-						{
-						constructorOfService = realize.GetConstructors().First();
-						}
-
-						return constructorOfService
-							.Invoke(constructorOfService
-								.GetParameters()
-								.Select(param => x.GetService(param.ParameterType))
-								.ToArray());
-					});
-				});
-		}
-	}
 }
