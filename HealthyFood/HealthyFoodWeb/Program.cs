@@ -27,7 +27,9 @@ builder.Services.AddScoped<IGameService>(
         diContainer.GetService<IGameRepository>(), 
         diContainer.GetService<IAuthService>(),
         diContainer.GetService<IGameCategoryRepository>(),
-        diContainer.GetService<IPagginatorService>()));
+        diContainer.GetService<IPagginatorService>(),
+        diContainer.GetService<IWebHostEnvironment>()
+        ));
 builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(

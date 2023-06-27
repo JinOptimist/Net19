@@ -10,6 +10,7 @@ namespace HealthyFoodWeb.Models
         [Required]
         public string Name { get; set; }
         public string CoverUrl { get; set; }
+        public IFormFile CoverFile { get; set; }
 
         //[Positive(ErrorMessage = "Everybody have to pay for the game")]
         [Positive]

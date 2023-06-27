@@ -3,23 +3,25 @@
 
 <div class="create-game">
     <div class="data">
-        <form method="post">
-        <div>
-            Name: @Html.TextBoxFor(x => x.Name)
-            @Html.ValidationMessageFor(x=>x.Name)
-        </div>
-        <div>
-            Price: @Html.TextBoxFor(x => x.Price)
-            @Html.ValidationMessageFor(x=>x.Price)
-        </div>
-        <div>
-            CoverUrl: @Html.TextBoxFor(x => x.CoverUrl)
-            @Html.ValidationMessageFor(x=>x.CoverUrl)
-        </div>
-        <div>
-            <input type="submit" value="Create game" />
-        </div>
-    </form>
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                Name: @Html.TextBoxFor(x => x.Name)
+                @Html.ValidationMessageFor(x=>x.Name)
+            </div>
+            <div>
+                Price: @Html.TextBoxFor(x => x.Price)
+                @Html.ValidationMessageFor(x=>x.Price)
+            </div>
+            <div>
+                CoverUrl:
+                @*@Html.TextBoxFor(x => x.CoverUrl)*@
+                <input type="file" name="@(nameof(GameViewModel.CoverFile))" />
+                @Html.ValidationMessageFor(x=>x.CoverUrl)
+            </div>
+            <div>
+                <input type="submit" value="Create game" />
+            </div>
+        </form>
     </div>
     <div class="preview">
         <div>
