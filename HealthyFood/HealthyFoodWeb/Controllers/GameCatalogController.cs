@@ -91,27 +91,16 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult Review()
         {
 
-            var viewModels = _reviewService
-              .GetAllReviews()
-              .Select(dbModel =>
-                  new ReviewViewModel
-                  {
-                      TextReview = dbModel.TextReview,
-                      Date = dbModel.Date,
-                      Author = dbModel.UserName,
-                      CreatedGame = dbModel.GamesName.ToList(),
-                      //E/*rrorMessage = errorMessage*/
-                  })
-              .ToList();
-            var generalReviewViewModel = new GeneralReviewViewModel
-            {
-                ReviewViewModels = viewModels,
-                //TextError = errorMessage
-            };
+            var viewModels = _reviewService.BuildViewModelFromDbModel();
 
-            return View(generalReviewViewModel);
+            return View(viewModels);
         }
 
+        //public IActionResult Games(int page = 1, int perPage = 10)
+        //{
+        //    var viewModel = _gameService.GetGamesForPaginator(page, perPage);
+        //    return View(viewModel);
+        //}
 
         [HttpPost]
         public IActionResult AddReview(GeneralReviewViewModel viewMdoel)
