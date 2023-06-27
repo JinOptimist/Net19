@@ -43,5 +43,34 @@ namespace HealthyFoodWeb.Services
         {
             return _userRepository.GetByNameAndPassword(login, password);
         }
+
+        public void UploadUsers(IFormFile users)
+        {
+            var tempDirectory = Path.GetTempPath();
+            var tempName = Path.GetTempFileName();
+            var tempPath = Path.Combine(tempDirectory, tempName);
+            using (var fs = File.Create(tempPath))
+            {
+                users.CopyTo(fs);
+            }
+
+            var lines = File.ReadAllLines(tempPath);
+            foreach (var line in lines)
+            {
+                var data = line.Split(',');
+                var userName = data[0].Trim();
+                var password = data[1].Trim();
+
+                var user = new User
+                {
+                    Name = userName,
+                    Password = password,
+                    AvatarUrl = "NoAvatar",
+                    Role = MyRole.User
+                };
+
+                _userRepository.Add(user);
+            }
+        }
     }
 }

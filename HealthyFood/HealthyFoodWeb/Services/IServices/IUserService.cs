@@ -9,5 +9,6 @@ namespace HealthyFoodWeb.Services.IServices
         User GetById(int currentUserId);
         List<User> GetUserModels();
         User Login(string login, string password);
+        void UploadUsers(IFormFile users);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data.Sql;
+﻿using Data.Interface.Models;
+using Data.Sql;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
@@ -86,6 +87,15 @@ namespace HealthyFoodWeb.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Upload(IFormFile users)
+        {
+            _userService.UploadUsers(users);
+
+
+
             return RedirectToAction("Index");
         }
     }
