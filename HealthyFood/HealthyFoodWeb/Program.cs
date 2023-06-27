@@ -35,8 +35,11 @@ builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-//builder.Services.AddScoped<IWikiMcService>(
-//    diContainer => new WikiMcService(diContainer.GetService<IWikiMcRepository>(), diContainer.GetService<IAuthService>(), diContainer.GetService<IWikiTagRepository>()));
+builder.Services.AddScoped<IWikiMcService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), 
+    diContainer.GetService<IAuthService>(), 
+    diContainer.GetService<IWikiTagRepository>(),
+	diContainer.GetService<IPagginatorService>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(

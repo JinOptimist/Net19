@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
 using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;

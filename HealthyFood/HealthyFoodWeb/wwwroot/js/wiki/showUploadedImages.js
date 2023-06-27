@@ -12,7 +12,7 @@
                 for (let i = 0; i < dataObj.imagesUrl.length; i++) {
                     const imageUrl = dataObj.imagesUrl[i];
                     const copyImg = $('.filter-output .template').clone();
-                    copyImg.removeClass('template');
+                    copyImg.removeClass('template');                   
                     copyImg.attr('src', imageUrl);
                     $('.parent').append(copyImg);
                 }
@@ -20,16 +20,14 @@
                 $('.have-to-block').removeAttr('disabled');
                 $('.loader').hide();
             });
-
         $('.have-to-block').attr('disabled', 'disabled');
         $('.loader').show();
     });
 
-    $('.filter-and-images h3').click(function () {
+    $('.filter-and-images img').click(function () {
         $(this)
-            .closest('.filter-and-images')
+            .closest('.filter-input')
             .find('.filter-block')
             .toggle(1000);
     });
-
 });
