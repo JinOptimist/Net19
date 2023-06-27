@@ -19,6 +19,4 @@ namespace Data.Interface.Models.WikiMc
 		[Display(Name = "1,90 – очень высокая активность")]
 		VeryHigh = 7,
 	}
-
-
 }

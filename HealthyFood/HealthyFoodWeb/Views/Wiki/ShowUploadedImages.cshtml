@@ -4,51 +4,44 @@
 @model ShowUploadedImagesViewModel
 
 <div class="filter-and-images">
-	<section class="add-img-input">
-		<a href="/Wiki/AddImg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI6x6HkQEXiHR7MRx419BSCXnr_pYAFjiz1Q&usqp=CAU" class="add-img" alt="Add image" /></a>
-	</section>
-	<section class="filter-input">
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFNtI92oTTZ4jgSeqnL-4wo29HG5-YcUDyJQ&usqp=CAU" class="filter" alt="Filter" />
-		<div class="filter-block">
-			<div class="year">
-				Year:<br />
-				<input type="number" class="img-year have-to-block" />
-			</div>
-			<div class="tag">
-				Tag:<br />
-				<input type="text" class="img-tag have-to-block" />
-			</div>
-			<div class="type">
-				Type:<br />
-				@Html.DropDownListFor(x=>x.Image.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
-			</div>
-			<div>
-				<button class="get-img-count have-to-block">Get</button>
-				<img class="loader" src="~/images/icons/loader.gif" />
-			</div>
-			<div class="filter-output">
-				Images count: <span class="img-count">...</span>
-				<div class="parent"></div>
-				<img src="" class="template" />
+	<section class="options">
+		<div class="add-img-input">
+			<a href="/Wiki/AddImg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI6x6HkQEXiHR7MRx419BSCXnr_pYAFjiz1Q&usqp=CAU" class="add-img" alt="Add image" /></a>
+		</div>
+		<div class="filter-input">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFNtI92oTTZ4jgSeqnL-4wo29HG5-YcUDyJQ&usqp=CAU" class="filter" alt="Filter" />
+			<div class="filter-block">
+				<div class="type">
+					Type:<br />
+					@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
+				</div>
+				<div class="tag">
+					Tag:<br />
+					<input type="text" class="img-tag have-to-block" />
+				</div>
+				<div class="year">
+					Year:<br />
+					<input type="number" class="img-year have-to-block" />
+				</div>
+				<div>
+					<button class="get-img-count have-to-block">Get</button>
+					<img class="loader" src="~/images/icons/loader.gif" />
+				</div>
+				<div class="filter-output">
+					Images count: <span class="img-count">...</span>
+					<div class="parent"></div>
+					<img src="" class="template" />
+				</div>
 			</div>
 		</div>
 	</section>
 	<section class="gallery">
-		<div class="paginator">
-			@foreach (var pageNumber in Model.PaginatorViewModel.PageList)
-			{
-				<a href="/Wiki/ShowUploadedImages?page=@pageNumber"
-				   class=" @(Model.PaginatorViewModel.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
-			}
-		</div>
 		<div class="images">
 			@foreach (var imageViewModel in Model.PaginatorViewModel.Items)
 			{
 				<div class="img-container">
 					<div class="cover">
-						<a href="/Wiki/UpdateImage/@imageViewModel.Id">
-							<img src="@imageViewModel.ImgPath" />
-						</a>
+						<img src="@imageViewModel.ImgPath" />
 					</div>
 					<div class="prop">
 						<div class="year">Year : @imageViewModel.Year </div>
@@ -67,11 +60,18 @@
 				</div>
 			}
 		</div>
+		<div class="paginator">
+			@foreach (var pageNumber in Model.PaginatorViewModel.PageList)
+			{
+				<a href="/Wiki/ShowUploadedImages?page=@pageNumber"
+				   class=" @(Model.PaginatorViewModel.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+			}
+		</div>
 	</section>
 </div>
 
 @section Styles{
-	<link rel="stylesheet" href="~/css/Style_User_Gallery.css" />
+	<link rel="stylesheet" href="~/css/styleUserGallery.css" />
 }
 
 @section Scripts{

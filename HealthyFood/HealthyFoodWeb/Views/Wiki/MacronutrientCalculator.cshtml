@@ -4,7 +4,7 @@
 @model WikiMcImgViewModel
 
 @{
-		Layout = "_LayoutWiki";
+	Layout = "_LayoutWiki";
 	<link rel="stylesheet" href="~/css/Style_Macronutrient_Calculator.css" />
 }
 
@@ -43,7 +43,7 @@
 				</p>
 				<div class="gallery">
 					<div class="new-img">
-						@foreach (var wikiMCImgViewModel in Model.AllImgByYear)
+						@foreach (var wikiMCImgViewModel in Model.ImgByYear)
 						{
 							<div class="img-container">
 								<img src="@wikiMCImgViewModel.ImgPath">
@@ -71,67 +71,67 @@
 						<div class="input-parameters">
 							<div class="sex">
 								<b>@Html.LabelFor(model => model.Sex, "Выберите пол:")</b><Br>
-								@Html.RadioButtonFor(model=>model.Sex, SexEnum.Male, new{@checked = "true"}) @Html.Label("Мужской")
+								@Html.RadioButtonFor(model=>model.Sex, SexEnum.Male) @Html.Label("Мужской")
 								@Html.RadioButtonFor(model=>model.Sex, SexEnum.Female) @Html.Label("Женский")
 							</div>
 							<div class="goal">
 								<b>@Html.LabelFor(model => model.Goal, "Выберите цель:")</b><Br>
-								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_loss, new { @checked = "checked" }) @Html.Label("Похудение")<Br>
+								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_loss) @Html.Label("Похудение")<Br>
 								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_gain) @Html.Label("Набор массы")<Br>
 								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_maintenance) @Html.Label("Поддержание веса")<Br>
 							</div>
 							<div class="age">
 								<b>@Html.LabelFor(model => model.Age, "Введите возраст")</b><Br>
-								@Html.TextBoxFor(model=>model.Age) лет
-								@Html.ValidationMessageFor(model=>model.Age)
+								@Html.TextBoxFor(model=>model.Age) лет<Br>
+								<i> @Html.ValidationMessageFor(model=>model.Age)</i>
 							</div>
 							<div class="weight">
 								<b>@Html.LabelFor(model => model.Weight, "Введите вес")</b><Br>
-								@Html.TextBoxFor(model=>model.Weight) кг
-								@Html.ValidationMessageFor(model=>model.Weight)
+								@Html.TextBoxFor(model=>model.Weight) кг<Br>
+								<i> @Html.ValidationMessageFor(model=>model.Weight)</i>
 							</div>
 							<div class="height">
 								<b>@Html.LabelFor(model => model.Height, "Введите рост")</b><Br>
-								@Html.TextBoxFor(model=>model.Height) см
-								@Html.ValidationMessageFor(model=>model.Height)
+								@Html.TextBoxFor(model=>model.Height) см<Br>
+								<i> @Html.ValidationMessageFor(model=>model.Height)</i>
 							</div>
 							<div class="percentage-of-deficit-or-surplus">
 								<b>@Html.LabelFor(model => model.Percent, "Введите % дефицита/профицита")</b><Br>
-								@Html.TextBoxFor(model=>model.Percent) %
-								@Html.ValidationMessageFor(model=>model.Percent)
+								@Html.TextBoxFor(model=>model.Percent) %<Br>
+								<i> @Html.ValidationMessageFor(model=>model.Percent)</i>
 							</div>
 							<div class="activity-ratio">
 								<b>@Html.LabelFor(model => model.ActivityRatio, "Выберите коэффициент активности:")</b><Br>
-								@Html.DropDownListFor(model=>model.ActivityRatio, Html.GetEnumSelectList(typeof(ActivityRatioEnum)), htmlAttributes: new {placeholder = Model.ActivityRatio})
+								@Html.DropDownListFor(model=>model.ActivityRatio, Html.GetEnumSelectList(typeof(ActivityRatioEnum)))
 							</div>
 							<div class="nutrients-percent">
 								<b>@Html.LabelFor(model => model.PercentOfProteins, "белка")</b><Br>
-								@Html.TextBoxFor(model => model.PercentOfProteins, htmlAttributes : new {@placeholder = "30", @Value = "30"}) %<Br>
-								@Html.ValidationMessageFor(model=>model.GramsOfProteins)
+								@Html.TextBoxFor(model => model.PercentOfProteins) %<Br>
+								<i> @Html.ValidationMessageFor(model=>model.PercentOfProteins)</i>
 
 								<b>@Html.LabelFor(model => model.PercentOfFats, "жира")</b><Br>
-								@Html.TextBoxFor(model => model.PercentOfFats,  htmlAttributes : new {@placeholder = "30", @Value = "30"}) %<Br>
-								@Html.ValidationMessageFor(model=>model.GramsOfFats)
+								@Html.TextBoxFor(model => model.PercentOfFats) %<Br>
+								<i> @Html.ValidationMessageFor(model=>model.PercentOfFats)</i>
 
 								<b>@Html.LabelFor(model => model.PercentOfCarbs, "углеводов")</b><Br>
-								@Html.TextBoxFor(model => model.PercentOfCarbs,  htmlAttributes : new {@placeholder = "40", @Value = "40"}) %<Br>
-								@Html.ValidationMessageFor(model=>model.GramsOfCarbs)
+								@Html.TextBoxFor(model => model.PercentOfCarbs) %<Br>
+								<i> @Html.ValidationMessageFor(model=>model.PercentOfCarbs)</i>
 							</div>
 						</div>
 						<div class="press">
-							<input class="castom-btn btn" type="submit" value="Рассчитать" />
+							<button class="calc" type="submit">Рассчитать</button>
 						</div>
 					</form>
 					<div class="calculations-results">
 						<b>@Html.LabelFor(model => model.HarrisBenedictAns, "Формула Харриса-Бенедикта:")</b><Br>
-						@Model.HarrisBenedictAns, ккал<Br>
+						@Model.HarrisBenedictAns ккал<Br>
 						<b>@Html.LabelFor(model => model.MifflinStJeorAns, "Формула Миффлина-Сан-Жеора:")</b><Br>
-						@Model.MifflinStJeorAns, ккал<Br>
+						@Model.MifflinStJeorAns ккал<Br>
 						<b>@Html.LabelFor(model => model.WhoAns, "Формула ВОЗ:")</b><Br>
-						@Model.WhoAns, ккал<Br>
+						@Model.WhoAns ккал<Br>
 						<div class="average-calories">
 							<b>@Html.LabelFor(model => model.AverageAns, "Среднее значние:")</b><Br>
-							@Model.AverageAns, ккал<Br>
+							@Model.AverageAns ккал<Br>
 						</div>
 						@Model.GramsOfProteins г белка<Br>
 						@Model.GramsOfFats г жиров<Br>
@@ -173,7 +173,7 @@
 							</ul>
 						</div>
 						<div class=" sport-ratio">
-							@*<p>БЖУ 30/30/40 – это классический вариант распределения БЖУ, который рекомендуется использовать, если вы не тренируетесь или тренируетесь для общего похудения и тонуса тела (в домашних условиях, на групповых занятиях или в тренажерном зале с небольшим весом отягощений). Другие варианты распределения БЖУ лучше использовать, если вы уже подкованный человек в вопросах строительства тела или после консультации с тренером.</p>*@
+							<p>БЖУ 30/30/40 – это классический вариант распределения БЖУ, который рекомендуется использовать, если вы не тренируетесь или тренируетесь для общего похудения и тонуса тела (в домашних условиях, на групповых занятиях или в тренажерном зале с небольшим весом отягощений). Другие варианты распределения БЖУ лучше использовать, если вы уже подкованный человек в вопросах строительства тела или после консультации с тренером.</p>
 							<p> <b>Вариант БЖУ для занимающихся спортом и работающих на рельеф:</b></p>
 							<ul>
 								<li>Белки: 40%;</li>

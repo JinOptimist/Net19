@@ -1,0 +1,107 @@
+﻿.filter-and-images {
+    display: flex;
+}
+
+.options {
+    display: flex;
+}
+
+.filter-input {
+    margin-right: 3em;
+}
+
+.filter-output img {
+    max-width: 188px;
+    padding-top: 10px;
+}
+
+.filter {
+    max-inline-size: 25px;
+}
+
+.add-img {
+    max-inline-size: 25px;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-container {
+    display: flex;
+}
+
+.images {
+    flex-wrap: wrap;
+}
+
+.gallery img {
+    max-width: 350px;
+    max-height: 225px;
+    min-height: 225px;
+    min-width: 350px;
+    margin: 10px;
+}
+
+.paginator a {
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background: #ffffff;
+    color: black;
+    text-decoration: none;
+}
+
+    .paginator a.active {
+        color: dimgrey;
+    }
+
+.loader {
+    height: 40px;
+    display: none;
+}
+
+.prop {
+    margin: 7px;
+}
+
+.update {
+    color: cornflowerblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.delete {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.add-img-input {
+    margin-right: 1em;
+}
+
+.get-img-count {
+    display: flex;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.25em 82px;
+    border-radius: 0.25em;
+    border: none;
+    color: #fff;
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    background-origin: border-box;
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+    .get-img-count:focus {
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
+    }

@@ -39,7 +39,7 @@ namespace HealthyFoodWeb.Controllers
 		{
 			var viewModel = new WikiMcImgViewModel();
 
-			viewModel.AllImgByYear = _wikiMCImgService
+			viewModel.ImgByYear = _wikiMCImgService
 				.GetAllImgByYear()
 				.Select(BuildWikiMcViewModelFromDbModel)
 				.ToList();
@@ -47,20 +47,27 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult MacronutrientCalculator(int age, float weight, float height, int percent, SexEnum sex, GoalEnum goal, ActivityRatioEnum activityRatio, int percentOfProteins, int percentOfFats, int percentOfCarbs)
+		public IActionResult MacronutrientCalculator(WikiMcImgViewModel viewModel)
 		{
-			var viewModel = new WikiMcImgViewModel();
-			viewModel.AllImgByYear = _wikiMCImgService
+			if (!ModelState.IsValid)
+			{
+				viewModel.ImgByYear = _wikiMCImgService
 				.GetAllImgByYear()
 				.Select(BuildWikiMcViewModelFromDbModel)
 				.ToList();
-			viewModel.HarrisBenedictAns = (int)_wikiMCImgService.CalculateCaloriesViaHarrisBenedict(age, weight, height, percent, sex, goal, activityRatio);
-			viewModel.MifflinStJeorAns = (int)_wikiMCImgService.CalculateCaloriesViaMifflinStJeor(age, weight, height, percent, sex, goal, activityRatio);
-			viewModel.WhoAns = (int)_wikiMCImgService.CalculateCaloriesViaWho(age, weight, percent, sex, goal, activityRatio);
+				return View(viewModel);
+			}
+			viewModel.ImgByYear = _wikiMCImgService
+				.GetAllImgByYear()
+				.Select(BuildWikiMcViewModelFromDbModel)
+				.ToList();
+			viewModel.HarrisBenedictAns = (int)_wikiMCImgService.CalculateCaloriesViaHarrisBenedict(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Height.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
+			viewModel.MifflinStJeorAns = (int)_wikiMCImgService.CalculateCaloriesViaMifflinStJeor(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Height.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
+			viewModel.WhoAns = (int)_wikiMCImgService.CalculateCaloriesViaWho(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
 			viewModel.AverageAns = (int)_wikiMCImgService.CalculateAverageCalories(viewModel.HarrisBenedictAns, viewModel.MifflinStJeorAns, viewModel.WhoAns);
-			viewModel.GramsOfProteins = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, percentOfProteins, percentOfFats, percentOfCarbs).gramsOfProteins;
-			viewModel.GramsOfFats = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, percentOfProteins, percentOfFats, percentOfCarbs).gramsOfFats;
-			viewModel.GramsOfCarbs = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, percentOfProteins, percentOfFats, percentOfCarbs).gramsOfCarbs;
+			viewModel.GramsOfProteins = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfProteins;
+			viewModel.GramsOfFats = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfFats;
+			viewModel.GramsOfCarbs = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfCarbs;
 			return View(viewModel);
 		}
 

@@ -4,7 +4,7 @@
 
 @{
 	Layout = "_LayoutWiki";
-	<link rel="stylesheet" href="~/css/Style_User_Gallery.css" />
+	<link rel="stylesheet" href="~/css/styleAddImg.css" />
 }
 
 <div class="add-parameters">
@@ -20,7 +20,7 @@
 			</div>
 			<div>
 				@Html.LabelFor(x => x.ImgPath, "Url") <br />
-				@Html.TextBoxFor(x => x.ImgPath)
+				@Html.TextBoxFor(x => x.ImgPath)<br />
 				@Html.ValidationMessageFor(x=>x.ImgPath)
 			</div>
 			<div>
@@ -35,16 +35,18 @@
 	</form>
 	<div class="image-preview">
 		<div class="preview-container">
-			<img />
+			<img class="new"/>
 		</div>
-		<div>
-			Image type: <span class="type"></span>
-		</div>
-		<div>
-			Image year: <span class="year"></span>
-		</div>
-		<div>
-			Image tags: <span class="tags"></span>
+		<div class="params">
+			<div>
+				Image type: <span class="type"></span>
+			</div>
+			<div>
+				Image year: <span class="year"></span>
+			</div>
+			<div>
+				Image tags: <span class="tags"></span>
+			</div>
 		</div>
 	</div>
 </div>
@@ -52,4 +54,4 @@
 
 @section Scripts{
 	<script src="~/js/wiki/addImage.js"></script>
-}*
+}

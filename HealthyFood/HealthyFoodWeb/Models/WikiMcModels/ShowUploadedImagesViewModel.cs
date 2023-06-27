@@ -5,6 +5,6 @@ namespace HealthyFoodWeb.Models.WikiMcModels
     public class ShowUploadedImagesViewModel
 	{
 		public PagginatorViewModel<WikiMcViewModel> PaginatorViewModel { get; set; }
-		public WikiMcViewModel Image { get; set; }
+		public ImgTypeEnum ImgType { get; set; }
 	}
 }
