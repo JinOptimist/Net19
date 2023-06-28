@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HealthyFoodWeb.Models.Store
+
+@{
     Layout = "_layoutStore";
 }
 
@@ -46,7 +48,7 @@
                         Сортировка: по популярности
                     </button>
                     <div class="catalogue--products">
-                        @foreach (var item in Model.Items)
+                        @foreach (var item in Model.ItemsPagginator.Items)
                         {
                          <div>
                             <div class="catalogue--product">
@@ -60,7 +62,8 @@
                                     <div class="product--price">@item.Price руб.</div>
                                 </a>
                                 <button class="product--add-to-cart">В корзину</button>
-                                    <button class="product--add-to-cart">В избранное</button>
+                                <button class="product--add-to-cart">В избранное</button>
+                                <a class="product--add-to-cart" href="UpdateStoreCatalogue/@item.Id">Редактировать</a>
                             </div>
                         </div>
                         }
@@ -70,11 +73,18 @@
                             </div>
                         </a>
                     </div>
+
+                </div>
+                <div class="pagginator">
+                    @foreach (var pageNumber in Model.ItemsPagginator.PageList)
+                    {
+                        <a href="/Store/StorePageCatalogue?page=@pageNumber"
+                       class=" @(Model.ItemsPagginator.ActivePageNumber == pageNumber ? "active" : "")">@pageNumber</a>
+                    }
                 </div>
             </div>
         </div>
     </div>
-
     <div class="footer">
         <div class="container"></div>
     </div>

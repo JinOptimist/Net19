@@ -1,10 +1,8 @@
-﻿using Data.Interface.Models;
-
-namespace HealthyFoodWeb.Models
+﻿namespace HealthyFoodWeb.Models.Store
 {
     public class StoreCatalogueViewModel
     {
-        public List<StoreItemViewModel> Items { get; set; }
+        public PagginatorViewModel<StoreItemViewModel> ItemsPagginator { get; set; }
         public List<ManufacturerViewModel> Manufacturer { get; set; }
 
     }

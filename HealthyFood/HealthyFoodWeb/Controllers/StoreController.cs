@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Store;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -24,25 +25,9 @@ namespace HealthyFoodWeb.Controllers
             _storeCatalogueService = storeCatalogueService;
         }
 
-        public IActionResult storePageCatalogue()
+        public IActionResult storePageCatalogue(int page = 1, int perPage = 10)
         {
-            var viewModel = new StoreCatalogueViewModel();
-            viewModel.Items = _storeCatalogueService
-                .GetAllItems()
-                .Select(x => new StoreItemViewModel
-                {
-                    Name = x.Name,
-                    Price = x.Price,
-                    Img = x.ImageUrl,
-                    Manufacturer = x.Manufacturer.Name,
-
-                }).ToList();
-            viewModel.Manufacturer = _storeCatalogueService
-                .GetAllManufacturers()
-                .Select(x => new ManufacturerViewModel
-                {
-                    Name = x.Name,
-                }).ToList();
+            var viewModel = _storeCatalogueService.CreateStoreViewModel(page, perPage);
 
             return View(viewModel);
         }

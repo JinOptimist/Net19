@@ -13,9 +13,10 @@
     }
 </div>
 
-<div class="ratio">
-
-</div>
+<form method="post" action="/User/Upload" enctype="multipart/form-data">
+    <input type="file" name="users" accept=".csv" />
+    <input type="submit" value="upload" />
+</form>
 
 @section Styles{
     <link rel="stylesheet" href="~/css/user.css" />
