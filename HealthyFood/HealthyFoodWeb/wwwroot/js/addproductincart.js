@@ -14,6 +14,4 @@
         const imgurl = $('#ImgUrl').val();
         $('.preview img').attr('src', imgurl);
     }); 
-       
 });
-

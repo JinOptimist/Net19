@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services
     .AddAuthentication(AuthService.AUTH_NAME)
-    .AddCookie(AuthService.AUTH_NAME, x=>
+    .AddCookie(AuthService.AUTH_NAME, x =>
     {
         x.LoginPath = "/User/Login";
         x.AccessDeniedPath = "/User/AccessDenied";
@@ -24,7 +24,7 @@ builder.Services
 
 builder.Services.AddScoped<IGameService>(
     diContainer => new GameService(
-        diContainer.GetService<IGameRepository>(), 
+        diContainer.GetService<IGameRepository>(),
         diContainer.GetService<IAuthService>(),
         diContainer.GetService<IGameCategoryRepository>(),
         diContainer.GetService<IPagginatorService>(),
@@ -34,23 +34,24 @@ builder.Services.AddScoped<IPagginatorService, PagginatorService>();
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(
         diContainer.GetService<ICartRepository>(),
-        diContainer.GetService<IAuthService>(), 
+        diContainer.GetService<IAuthService>(),
         diContainer.GetService<IPagginatorService>(),
-        diContainer.GetService<ICartTagRepository>()));
+        diContainer.GetService<ICartTagRepository>(),
+        diContainer.GetService<IWebHostEnvironment>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
 builder.Services.AddScoped<IWikiMcService>(
-    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), 
-    diContainer.GetService<IAuthService>(), 
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(),
+    diContainer.GetService<IAuthService>(),
     diContainer.GetService<IWikiTagRepository>(),
-	diContainer.GetService<IPagginatorService>()));
+    diContainer.GetService<IPagginatorService>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(
     diContainer => new StoreCatalogueService(diContainer.GetService<IStoreCatalogueRepository>(), diContainer.GetService<IManufacturerRepository>()));
 builder.Services.AddScoped<IAuthService>(
      diContainer => new AuthService(
-            diContainer.GetService<IUserService>(), 
+            diContainer.GetService<IUserService>(),
             diContainer.GetService<IHttpContextAccessor>()));
 builder.Services.AddScoped<IReviewService>(
     diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));

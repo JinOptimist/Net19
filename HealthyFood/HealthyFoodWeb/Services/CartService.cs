@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
@@ -12,15 +13,17 @@ namespace HealthyFoodWeb.Services
         private IAuthService _authService;
         private IPagginatorService _pagginatorService;
         private ICartTagRepository _cartTagRepository;
+        private IWebHostEnvironment _webHostEnvironment;
 
 
         public CartService(ICartRepository cartRepository,
-            IAuthService authService, IPagginatorService pagginatorService, ICartTagRepository cartTagRepository)
+            IAuthService authService, IPagginatorService pagginatorService, ICartTagRepository cartTagRepository, IWebHostEnvironment webHostEnvironment)
         {
             _cartRepository = cartRepository;
             _authService = authService;
             _pagginatorService = pagginatorService;
             _cartTagRepository = cartTagRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public void DeleteFromCart(int id)
@@ -90,10 +93,26 @@ namespace HealthyFoodWeb.Services
                 Name = viewModel.Name,
                 Price = viewModel.Price,
                 Customer = user,
-                ImgUrl = viewModel.ImgUrl,
+                ImgUrl = "Temp",
+                Tags = new List<CartTags> { },
             };
 
             _cartRepository.Add(dbCartModel);
+            var ext = Path.GetExtension(viewModel.ImgUrlFile.FileName);
+            var fileName = $"product-{dbCartModel.Id}{ext}";
+            var path = Path.Combine(
+                _webHostEnvironment.WebRootPath,
+                "images",
+                "products",
+                fileName);
+
+            using (var fs = File.Create(path))
+            {
+                viewModel.ImgUrlFile.CopyTo(fs);
+            }
+
+            dbCartModel.ImgUrl = $"/images/products/{fileName}";
+            _cartRepository.Update(dbCartModel);
         }
 
         public PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage)

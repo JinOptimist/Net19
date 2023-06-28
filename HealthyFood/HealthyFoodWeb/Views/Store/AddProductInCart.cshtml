@@ -2,7 +2,7 @@
 
 <div class="create-product">
     <div class="data">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div>
                 Name: @Html.TextBoxFor(x => x.Name)
                 @Html.ValidationMessageFor(x=>x.Name)
@@ -12,8 +12,7 @@
                 @Html.ValidationMessageFor(x=>x.Price)
             </div>
             <div>
-                Image: @Html.TextBoxFor(x => x.ImgUrl)
-                @Html.ValidationMessageFor(x=>x.ImgUrl)
+                Image: <input type="file" name="@(nameof(CartItemViewModel.ImgUrlFile))" />
             </div>
 
             <div>

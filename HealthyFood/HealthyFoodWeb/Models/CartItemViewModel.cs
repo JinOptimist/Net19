@@ -12,10 +12,10 @@ namespace HealthyFoodWeb.Models
 
         [Positive]
         public decimal Price { get; set; }
+       
+        public string? ImgUrl { get; set; }
 
-        [MyUrlAttribute]        
-        public string ImgUrl { get; set; }
-
+        public IFormFile ImgUrlFile { get; set; }
         public int Quantity { get; set; }
         public int TotalQuantity { get; set; }
         public List<string> Tags { get; set; } = new List<string>();
