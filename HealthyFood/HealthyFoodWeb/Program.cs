@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services
     .AddAuthentication(AuthService.AUTH_NAME)
-    .AddCookie(AuthService.AUTH_NAME, x=>
+    .AddCookie(AuthService.AUTH_NAME, x =>
     {
         x.LoginPath = "/User/Login";
         x.AccessDeniedPath = "/User/AccessDenied";
@@ -30,6 +30,15 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSignalR();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+                      {
+                          builder.WithOrigins("*");
+                      });
+});
+
+
 var app = builder.Build();
 
 app.Seed();
@@ -46,6 +55,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCors();
+
 app.UseRouting();
 
 app.UseAuthentication(); // Кто я?
@@ -54,7 +65,9 @@ app.UseAuthorization(); // Можно ли сюда?
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<ChatHub>("/userChat");
+    endpoints.MapHub<AlertHub>("/alert");
 });
+
 
 app.MapControllerRoute(
     name: "default",
