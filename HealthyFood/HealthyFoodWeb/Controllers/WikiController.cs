@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HealthyFoodWeb.Models.ModelsWikiBAA;
 using HealthyFoodWeb.Services.IServices;
 using HealthyFoodWeb.Services;
@@ -187,7 +187,7 @@ namespace HealthyFoodWeb.Controllers
 		[HttpPost]
 		public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
 		{
-			_wikiMCImgService.UpdateAllEx�eptTags(
+			_wikiMCImgService.UpdateAllExсeptTags(
 				wikiMcViewModel.Id,
 				wikiMcViewModel.ImgType,
 				wikiMcViewModel.ImgPath,

@@ -7,6 +7,8 @@ using HealthyFoodWeb.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
 using HealthyFoodWeb.Services.Helpers;
+using HealthyFoodWeb.SignalRHubs;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,8 @@ builder.Services
         x.AccessDeniedPath = "/User/AccessDenied";
     });
 
+builder.Services
+    .AddSingleton<IUserIdProvider, SmileUserIdProvider>();
 var diRegisterationHelper = new DiRegisterationHelper();
 diRegisterationHelper.RegisterAllServices(builder.Services);
 
@@ -28,9 +32,10 @@ var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
 diRegisterationHelper.RegisterAllRepositories(builder.Services);
-diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -52,6 +57,8 @@ app.UseRouting();
 
 app.UseAuthentication(); // Кто я?
 app.UseAuthorization(); // Можно ли сюда?
+
+app.MapHub<ChatHub>("/chat");
 
 app.MapControllerRoute(
     name: "default",
