@@ -27,7 +27,7 @@
     {
         <div class="order-list">
             <div class="image-order">
-                <a href="/Store/Update/@cartViewModel.Id">
+                <a href="/Store/UpdateTagInCart/@cartViewModel.Id">
                     <img src="@cartViewModel.ImgUrl" class="image" />
                 </a>
             </div>
@@ -44,14 +44,14 @@
                 </div>
             </div>
             <div class="order-quantity">
-                <button class="quantity-controller">
-                    <a href="/Store/DeleteFromCart?id=@cartViewModel.Id">-</a>
+                <button class="quantity-controller-minus">
+                    <a href="/Store/UpdateQuantityCartDown/@cartViewModel.Id">-</a>
                 </button>
                 <div class="quantity-number">
-                    1
+                    @cartViewModel.Quantity
                 </div>
-                <button class="quantity-controller">
-                    <a>+</a>
+                <button class="quantity-controller-plus">
+                    <a href="/Store/UpdateQuantityCartUp/@cartViewModel.Id">+</a>
                 </button>
             </div>
 
@@ -91,4 +91,6 @@
 
 @section Scripts{
     <script src="~/js/cartpage.js"></script>
+@*    <script src="~/js/updatequantityincart.js"></script>*@
     }
+

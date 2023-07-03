@@ -38,7 +38,6 @@ namespace HealthyFoodWeb.Controllers
             var paginatorViewModel = _cartService.GetCartsForPaginator(page, perPage);
             var cartViewModel = new CartViewModel(paginatorViewModel);
             cartViewModel.TotalPrice = _cartService.GetTotalPrice();
-
             return View(cartViewModel);
         }
 
@@ -65,19 +64,30 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("CartPage");
         }
 
-        public IActionResult Update(int id)
+        public IActionResult UpdateTagInCart(int id)
         {
             var viewModel = _cartService.GetCartViewModel(id);
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Update(CartItemViewModel cartViewModel)
+        public IActionResult UpdateTagInCart(CartItemViewModel cartViewModel)
         {
             _cartService.UpdateTag(cartViewModel.Id, cartViewModel.Tags);
-            return RedirectToAction("CartPage");
+           return RedirectToAction("CartPage");
         }
 
+
+        public IActionResult UpdateQuantityCartUp(int id)
+        {
+            _cartService.UpdateQuantityOfProductsUp(id);
+            return RedirectToAction("CartPage");
+        }
+        public IActionResult UpdateQuantityCartDown(int id)
+        {
+            _cartService.UpdateQuantityOfProductsDown(id);
+            return RedirectToAction("CartPage");
+        }
 
         [HttpGet]
         public IActionResult AddProductInCatalogue()

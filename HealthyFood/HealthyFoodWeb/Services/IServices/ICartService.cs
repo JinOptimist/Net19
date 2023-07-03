@@ -20,5 +20,8 @@ namespace HealthyFoodWeb.Services.IServices
         void UpdateTag(int id, List<string> newTagsNames);
 
         ProductCountViewModel GetViewModelForProductCount(string userTag);
+        void UpdateQuantityOfProductsUp(int id);
+        void UpdateQuantityOfProductsDown(int id);
+
     }
 }

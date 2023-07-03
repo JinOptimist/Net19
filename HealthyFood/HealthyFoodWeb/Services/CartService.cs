@@ -4,6 +4,7 @@ using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HealthyFoodWeb.Services
 {
@@ -80,11 +81,30 @@ namespace HealthyFoodWeb.Services
             decimal TotalPrice = 0;
             foreach (var product in GetCustomerProduct())
             {
-                TotalPrice += product.Price;
+                TotalPrice += product.Price * product.Quantity;
             }
             return TotalPrice;
         }
 
+        public void UpdateQuantityOfProductsUp(int id)
+        {
+            var cartItem = _cartRepository.GetCartAndTags(id);
+            cartItem.Quantity += 1;
+            _cartRepository.Update(cartItem);
+        }
+        public void UpdateQuantityOfProductsDown(int id)
+        {
+            var cartItem = _cartRepository.GetCartAndTags(id);
+            if (cartItem.Quantity > 1)
+            {
+                cartItem.Quantity -= 1;
+                _cartRepository.Update(cartItem);
+            }
+            if (cartItem.Quantity <= 1)
+            {
+                DeleteFromCart(id);
+            }
+        }
         public void AddProductInCart(CartItemViewModel viewModel)
         {
             var user = _authService.GetUser();
@@ -136,10 +156,11 @@ namespace HealthyFoodWeb.Services
             {
                 Id = x.Id,
                 Name = x.Name,
-                Price = x.Price,
+                Price = x.Price * x.Quantity,
                 ImgUrl = x.ImgUrl,
                 AvailableTags = tags,
-                Tags = cartDb.Tags.Select(x => x.Name).ToList()
+                Tags = cartDb.Tags.Select(x => x.Name).ToList(),
+                Quantity= x.Quantity,
             };
         }
 
@@ -154,7 +175,8 @@ namespace HealthyFoodWeb.Services
                 Price = cartDb.Price,
                 ImgUrl = cartDb.ImgUrl,
                 AvailableTags = tags,
-                Tags = cartDb.Tags.Select(x => x.Name).ToList()
+                Tags = cartDb.Tags.Select(x => x.Name).ToList(),
+                Quantity = cartDb.Quantity,
             };
         }
 
