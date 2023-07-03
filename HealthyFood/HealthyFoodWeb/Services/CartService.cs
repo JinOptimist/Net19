@@ -1,10 +1,8 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
-using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HealthyFoodWeb.Services
 {
@@ -160,7 +158,7 @@ namespace HealthyFoodWeb.Services
                 ImgUrl = x.ImgUrl,
                 AvailableTags = tags,
                 Tags = cartDb.Tags.Select(x => x.Name).ToList(),
-                Quantity= x.Quantity,
+                Quantity = x.Quantity,
             };
         }
 
@@ -172,7 +170,7 @@ namespace HealthyFoodWeb.Services
             {
                 Id = cartDb.Id,
                 Name = cartDb.Name,
-                Price = cartDb.Price,
+                Price = cartDb.Price * cartDb.Quantity,
                 ImgUrl = cartDb.ImgUrl,
                 AvailableTags = tags,
                 Tags = cartDb.Tags.Select(x => x.Name).ToList(),

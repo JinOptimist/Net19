@@ -1,10 +1,7 @@
-﻿using Data.Interface.Models;
-using HealthyFoodWeb.Models;
+﻿using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Store;
-using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -41,12 +38,6 @@ namespace HealthyFoodWeb.Controllers
             return View(cartViewModel);
         }
 
-        public IActionResult DeleteFromCart(int id)
-        {
-            _cartService.DeleteFromCart(id);
-            return RedirectToAction("CartPage");
-        }
-
         [HttpGet]
         public IActionResult AddProductInCart()
         {
@@ -76,8 +67,6 @@ namespace HealthyFoodWeb.Controllers
             _cartService.UpdateTag(cartViewModel.Id, cartViewModel.Tags);
            return RedirectToAction("CartPage");
         }
-
-
         public IActionResult UpdateQuantityCartUp(int id)
         {
             _cartService.UpdateQuantityOfProductsUp(id);
