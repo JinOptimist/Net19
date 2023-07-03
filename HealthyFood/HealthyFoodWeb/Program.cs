@@ -1,12 +1,8 @@
-using Data.Interface.Repositories;
 using Data.Sql;
-using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
-using HealthyFoodWeb.Services.WikiServices;
-using HealthyFoodWeb.Services.IServices;
-using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
 using HealthyFoodWeb.Services.Helpers;
+using HealthyFoodWeb.SIgnalrRHubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +28,17 @@ diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+                      {
+                          builder.WithOrigins("*");
+                      });
+});
+
+
 var app = builder.Build();
 
 app.Seed();
@@ -48,10 +55,19 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCors();
+
 app.UseRouting();
 
 app.UseAuthentication(); // Кто я?
 app.UseAuthorization(); // Можно ли сюда?
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/userChat");
+    endpoints.MapHub<AlertHub>("/alert");
+});
+
 
 app.MapControllerRoute(
     name: "default",
