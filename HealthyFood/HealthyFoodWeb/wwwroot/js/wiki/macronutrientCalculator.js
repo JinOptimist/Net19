@@ -29,77 +29,81 @@
         $('.have-to-block').attr('disabled', 'disabled');
     });
 
-    //const button_disabled = $('.calculate').attr('disabled', 'disabled');
-    //const button_active = $('.calculate').removeAttr('disabled');
+    const disableCalc = () => { $('.calculate').attr('disabled', 'disabled'); };
+    const activeCalc = () => { $('.calculate').removeAttr('disabled'); };
     $('#Age').on("change", function () {
         const age = $('#Age').val() - 0;
-        if (age == null || age == NaN) {
-            $('.age div.error-message').text("*Введите количество полных лет.");
-            $('.age div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        const ageErrorMessage = $('.age div.error-message');
+        if (age == null || isNaN(age)) {
+            ageErrorMessage.text("*Введите количество полных лет.");
+            ageErrorMessage.show();
+            disableCalc();
         }
-        if (age <= 0 || age > 100) {
-            $('.age div.error-message').text("*Недопустимый возраст.");
-            $('.age div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (age <= 0 || age > 100) {
+            ageErrorMessage.text("*Недопустимый возраст.");
+            ageErrorMessage.show();
+            disableCalc();
         }
         else {
-            $('.age div.error-message').hide();
-            $('.calculate').removeAttr('disabled');
+            ageErrorMessage.hide();
+            activeCalc();
         }
     });
 
     $('#Weight').on("change", function () {
         const weight = $('#Weight').val() - 0;
-        if (weight == null || weight == NaN) {
-            $('.weight div.error-message').text("*Введите вес в кг.");
-            $('.weight div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        const weightErrorMessage = $('.weight div.error-message');
+        if (weight == null || isNaN(weight)) {
+            weightErrorMessage.text("*Введите вес в кг.");
+            weightErrorMessage.show();
+            disableCalc();
         }
-        if (weight <= 0) {
-            $('.weight div.error-message').text("*Недопустимый вес.");
-            $('.weight div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (weight <= 0) {
+            weightErrorMessage.text("*Недопустимый вес.");
+            weightErrorMessage.show();
+            disableCalc();
         }
         else {
-            $('.weight div.error-message').hide();
-            $('.calculate').removeAttr('disabled');
+            weightErrorMessage.hide();
+            activeCalc();
         }
     });
 
     $('#Height').on("change", function () {
         const height = $('#Height').val() - 0;
-        if (height == null || height == NaN) {
-            $('.height div.error-message').text("*Введите рост в см.");
-            $('.height div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        const heightErrorMessage = $('.height div.error-message');
+        if (height == null || isNaN(height)) {
+            heightErrorMessage.text("*Введите рост в см.");
+            heightErrorMessage.show();
+            disableCalc();
         }
-        if (height <= 3 || height > 250) {
-            $('.height div.error-message').text("*Укажите рост в см, чтобы воспользоваться калькулятором КБЖУ.");
-            $('.height div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (height <= 3 || height > 250) {
+            heightErrorMessage.text("*Укажите рост в см, чтобы воспользоваться калькулятором КБЖУ.");
+            heightErrorMessage.show();
+            disableCalc();
         }
         else {
-            $('.height div.error-message').hide();
-            $('.calculate').removeAttr('disabled');
+            heightErrorMessage.hide();
+            activeCalc();
         }
     });
 
     $('#Percent').on("change", function () {
         const percent = $('#Percent').val() - 0;
-        if (percent == null || percent == NaN) {
-            $('.percent div.error-message').text("*Введите желаемый процент дефицита/профицита.");
-            $('.percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        const percentErrorMessage = $('.percent div.error-message');
+        if (percent == null || isNaN(percent)) {
+            percentErrorMessage.text("*Введите желаемый процент дефицита/профицита.");
+            percentErrorMessage.show();
+            disableCalc();
         }
-        if (percent < 0 || percent > 30) {
-            $('.percent div.error-message').text("*С целью сохранения здоровья, процент дефицита/профицита не должен превышать 30.");
-            $('.percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (percent < 0 || percent > 30) {
+            percentErrorMessage.text("*С целью сохранения здоровья, процент дефицита/профицита не должен превышать 30.");
+            percentErrorMessage.show();
+            disableCalc();
         }
         else {
-            $('.percent div.error-message').hide();
-            $('.calculate').removeAttr('disabled');
+            percentErrorMessage.hide();
+            activeCalc();
         }
     });
 
@@ -107,30 +111,33 @@
         const proteinsPercent = $('#PercentOfProteins').val() - 0;
         const fatsPercent = $('#PercentOfFats').val() - 0;
         const carbsPercent = $('#PercentOfCarbs').val() - 0;
+        const proteinsErrorMessage = $('.protein-percent div.error-message');
+        const fatsErrorMessage = $('.fat-percent div.error-message');
+        const carbsErrorMessage = $('.carb-percent div.error-message');
         const sum = proteinsPercent + fatsPercent + carbsPercent;
-        if (proteinsPercent == null || proteinsPercent == NaN || proteinsPercent < 0) {
-            $('.protein-percent div.error-message').text("*Введите желаемый процент белка в рационе.");
-            $('.protein-percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        if (proteinsPercent == null || isNaN(proteinsPercent) || proteinsPercent < 0) {
+            proteinsErrorMessage.text("*Введите желаемый процент белка в рационе.");
+            proteinsErrorMessage.show();
+            disableCalc();
         }
-        if (fatsPercent == null || fatsPercent == NaN || fatsPercent < 0) {
-            $('.fat-percent div.error-message').text("*Введите желаемый процент жира в рационе.");
-            $('.fat-percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (fatsPercent == null || isNaN(fatsPercent) || fatsPercent < 0) {
+            fatsErrorMessage.text("*Введите желаемый процент жира в рационе.");
+            fatsErrorMessage.show();
+            disableCalc();
         }
-        if (carbsPercent == null || carbsPercent == NaN || carbsPercent < 0) {
-            $('.carb-percent div.error-message').text("*Введите желаемый процент углеводов в рационе.");
-            $('.carb-percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+        else if (carbsPercent == null || isNaN(carbsPercent) || carbsPercent < 0) {
+            carbsErrorMessage.text("*Введите желаемый процент углеводов в рационе.");
+            carbsErrorMessage.show();
+            disableCalc();
         }
-        if (sum > 100) {
-            $('.protein-percent div.error-message,.fat-percent div.error-message,.carb-percent div.error-message').text("*Сумма нутриентов в рациона не должна превышать 100%.");
+        else if (sum != 100) {
+            $('.protein-percent div.error-message,.fat-percent div.error-message,.carb-percent div.error-message').text("*Сумма нутриентов в рациона должна равняться 100%.");
             $('.protein-percent div.error-message,.fat-percent div.error-message,.carb-percent div.error-message').show();
-            $('.calculate').attr('disabled', 'disabled');
+            disableCalc();
         }
         else {
             $('.protein-percent div.error-message,.fat-percent div.error-message,.carb-percent div.error-message').hide();
-            $('.calculate').removeAttr('disabled');
+            activeCalc();
         }
     });
 });
