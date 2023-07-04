@@ -25,9 +25,9 @@ namespace HealthyFoodWeb.Controllers.API
         }
 
         [Route("GetGames")]
-        public List<GameViewModel> GetGames()
+        public List<GameViewModel> GetGames(int page, int perPage)
         {
-            var viewModels = _gameService.GetGamesForPaginator(1, 5).Items;
+            var viewModels = _gameService.GetGamesForPaginator(page, perPage).Items;
             return viewModels;
         }
     }
