@@ -5,6 +5,7 @@ import Games from './components/games';
 import axios from 'axios';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/home';
+import Login from './components/login';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/games" element={<Games />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
