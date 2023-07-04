@@ -1,28 +1,27 @@
 import './App.css';
 import Header from './Header';
-import React, { useEffect, useState } from 'react';
-import Game from './components/gameComponent/Game';
+import React from 'react';
+import Games from './components/games';
+import axios from 'axios';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './components/home';
 
 function App() {
-  const [games, setGames] = useState([]);
 
-  useEffect(function () {
-    const url = 'https://localhost:7103/api/game/GetGames'
-    fetch(url)
-      .then(response => response.json())
-      .then(data => setGames(data));
-  }, [])
+  axios.interceptors.request.use(function (config) {
+    config.headers['Smile'] = localStorage.getItem('userId');
+    return config;
+  });
+
   return (
     <div>
-      <Header></Header>
-      <div>
-        Games:
-      </div>
-      {
-        games.map(game => {
-          return (<Game model={game}></Game>)
-        })
-      }
+      <BrowserRouter>
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/games" element={<Games />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

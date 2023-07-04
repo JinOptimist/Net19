@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom'
+
 function Header() {
   return (
     <div>
-      I'm a header
+      <Link to={'/'}>home</Link>
+      <Link to={'/games'}>games</Link>
     </div>
   );
 }
