@@ -1,12 +1,8 @@
-using Data.Interface.Repositories;
 using Data.Sql;
-using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
-using HealthyFoodWeb.Services.WikiServices;
-using HealthyFoodWeb.Services.IServices;
-using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
 using HealthyFoodWeb.Services.Helpers;
+using HealthyFoodWeb.SIgnalrRHubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,58 +11,33 @@ builder.Services.AddControllersWithViews();
 
 builder.Services
     .AddAuthentication(AuthService.AUTH_NAME)
-    .AddCookie(AuthService.AUTH_NAME, x=>
+    .AddCookie(AuthService.AUTH_NAME, x =>
     {
         x.LoginPath = "/User/Login";
         x.AccessDeniedPath = "/User/AccessDenied";
     });
 
-
-builder.Services.AddScoped<IGameService>(
-    diContainer => new GameService(
-        diContainer.GetService<IGameRepository>(), 
-        diContainer.GetService<IAuthService>(),
-        diContainer.GetService<IGameCategoryRepository>(),
-        diContainer.GetService<IPagginatorService>(),
-        diContainer.GetService<IWebHostEnvironment>()
-        ));
-builder.Services.AddScoped<IPagginatorService, PagginatorService>();
-builder.Services.AddScoped<ICartService>(
-    diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
-builder.Services.AddScoped<IUserService>(
-    diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-builder.Services.AddScoped<IWikiMcService>(
-    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), 
-    diContainer.GetService<IAuthService>(), 
-    diContainer.GetService<IWikiTagRepository>(),
-	diContainer.GetService<IPagginatorService>(),
-	diContainer.GetService<IWebHostEnvironment>()
-    ));
-builder.Services.AddScoped<IGameCatalogService>(
-     diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
-builder.Services.AddScoped<IStoreCatalogueService>(
-    diContainer => new StoreCatalogueService(diContainer.GetService<IStoreCatalogueRepository>(), diContainer.GetService<IManufacturerRepository>()));
-builder.Services.AddScoped<IAuthService>(
-     diContainer => new AuthService(
-            diContainer.GetService<IUserService>(), 
-            diContainer.GetService<IHttpContextAccessor>()));
-builder.Services.AddScoped<IReviewService>(
-    diContainer => new ReviewService(diContainer.GetService<IReviewRepository>(), diContainer.GetService<IAuthService>()));
-builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
-    diContainer.GetService<IAuthService>(),
-    diContainer.GetService<IWikiBaaCommentRepository>()));
-
-builder.Services.AddScoped<IGameFruitConnectTwoService>(
-     diContainer => new GameFruitConnectTwoService(diContainer.GetService<ISimilarGameRepository>()));
+var diRegisterationHelper = new DiRegisterationHelper();
+diRegisterationHelper.RegisterAllServices(builder.Services);
 
 var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
-var diRegisterationHelper = new DiRegisterationHelper();
 diRegisterationHelper.RegisterAllRepositories(builder.Services);
 diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+                      {
+                          builder.WithOrigins("*");
+                      });
+});
+
 
 var app = builder.Build();
 
@@ -84,10 +55,19 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCors();
+
 app.UseRouting();
 
 app.UseAuthentication(); // Кто я?
 app.UseAuthorization(); // Можно ли сюда?
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/userChat");
+    endpoints.MapHub<AlertHub>("/alert");
+});
+
 
 app.MapControllerRoute(
     name: "default",
