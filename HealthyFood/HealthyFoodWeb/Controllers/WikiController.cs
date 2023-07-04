@@ -190,7 +190,7 @@ namespace HealthyFoodWeb.Controllers
 			_wikiMCImgService.UpdateAllExñeptTags(
 				wikiMcViewModel.Id,
 				wikiMcViewModel.ImgType,
-				wikiMcViewModel.ImgPath,
+				wikiMcViewModel.ImgUrl,
 				wikiMcViewModel.Year);
 
 			_wikiMCImgService.UpdateTags(
@@ -206,7 +206,7 @@ namespace HealthyFoodWeb.Controllers
 			{
 				Id = x.Id,
 				Year = x.Year,
-				ImgPath = x.ImgUrl,
+				ImgUrl = x.ImgUrl,
 				ImgType = x.ImgType,
 				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};

@@ -1,6 +1,7 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.WikiMcModels;
 using HealthyFoodWeb.Services.Helpers;
@@ -34,23 +35,25 @@ namespace HealthyFoodWeb.Services.WikiServices
 		private IWikiTagRepository _tagRepository;
 		private IAuthService _authService;
 		private IPagginatorService _paginatorService;
+		private IWebHostEnvironment _webHostEnvironment;
 
-		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService, IPagginatorService paginatorService)
+		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService, IPagginatorService paginatorService, IWebHostEnvironment webHostEnvironment)
 		{
 			_wikiMcRepository = wikiMCRepository;
 			_authService = authService;
 			_tagRepository = tagService;
 			_paginatorService = paginatorService;
+			_webHostEnvironment = webHostEnvironment;
 		}
 
 		public void AddImg(WikiMcViewModel viewModel)
 		{
 
 			var user = _authService.GetUser();
-			var WikiMc = new WikiMcImage()
+			var dbWikiMcModel = new WikiMcImage()
 			{
 				ImgType = viewModel.ImgType,
-				ImgUrl = viewModel.ImgPath,
+				ImgUrl = "temp",
 				Year = viewModel.Year,
 				ImageUploader = user,
 				Tags = new List<WikiTags>()
@@ -65,10 +68,26 @@ namespace HealthyFoodWeb.Services.WikiServices
 					dbTag = _tagRepository.Add(new WikiTags { TagName = tag });
 				}
 
-				WikiMc.Tags.Add(dbTag);
+				dbWikiMcModel.Tags.Add(dbTag);
 			}
 
-			_wikiMcRepository.Add(WikiMc);
+			_wikiMcRepository.Add(dbWikiMcModel);
+
+			var ext = Path.GetExtension(viewModel.ImageCover.FileName);
+			var fileName = $"image-{dbWikiMcModel.Id}{ext}";
+			var path = Path.Combine(
+				_webHostEnvironment.WebRootPath,
+				"images",
+				"wiki",
+				fileName);
+
+			using (var fs = File.Create(path))
+			{
+				viewModel.ImageCover.CopyTo(fs);
+			}
+
+			dbWikiMcModel.ImgUrl = $"/images/wiki/{fileName}";
+			_wikiMcRepository.Update(dbWikiMcModel);
 		}
 
 		public IEnumerable<WikiMcImage> GetAllImgByYear()
@@ -119,7 +138,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 			{
 				Id = imageDb.Id,
 				ImgType = imageDb.ImgType,
-				ImgPath = imageDb.ImgUrl,
+				ImgUrl = imageDb.ImgUrl,
 				Year = imageDb.Year,
 				UserTags = imageDb.Tags.Select(x => x.TagName).ToList()
 			};
@@ -178,7 +197,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 			{
 				Id = x.Id,
 				Year = x.Year,
-				ImgPath = x.ImgUrl,
+				ImgUrl = x.ImgUrl,
 				ImgType = x.ImgType,
 				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};
@@ -260,12 +279,12 @@ namespace HealthyFoodWeb.Services.WikiServices
 						}
 						if (age > 30 && age <= 60)
 						{
-							weightConst = 0.484f;
+							weightConst = 0.0484f;
 							secondConst = 3.653f;
 						}
 						if (age > 60)
 						{
-							weightConst = 0.491f;
+							weightConst = 0.0491f;
 							secondConst = 2.459f;
 						}
 						break;
@@ -342,6 +361,19 @@ namespace HealthyFoodWeb.Services.WikiServices
 			var gramsOfCarbs = (calories * carbsPercent / 100f) / CALORIES_PER_G_CARB;
 
 			return new Nutrients { gramsOfProteins = gramsOfProteins, gramsOfFats = gramsOfFats, gramsOfCarbs = gramsOfCarbs };
+		}
+
+		public WikiCalculationResultViewModel GetViewModelForCaloriesCalculation(int? age, float? weight, float? height, int? percent, SexEnum sex, GoalEnum goal, ActivityRatioEnum activityRatio, int? proteinsPercent, int? fatsPercent, int? carbsPercent)
+		{
+			var viewModel = new WikiCalculationResultViewModel();
+			viewModel.HarrisBenedictAns = (int)CalculateCaloriesViaHarrisBenedict(age.Value, weight.Value, height.Value, percent.Value, sex, goal, activityRatio);
+			viewModel.MifflinStJeorAns = (int)CalculateCaloriesViaMifflinStJeor(age.Value, weight.Value, height.Value, percent.Value, sex, goal, activityRatio);
+			viewModel.WhoAns = (int)CalculateCaloriesViaWho(age.Value, weight.Value, percent.Value, sex, goal, activityRatio);
+			viewModel.AverageAns = (int)CalculateAverageCalories(viewModel.HarrisBenedictAns, viewModel.MifflinStJeorAns, viewModel.WhoAns);
+			viewModel.GramsOfProteins = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfProteins;
+			viewModel.GramsOfFats = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfFats;
+			viewModel.GramsOfCarbs = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfCarbs;
+			return viewModel;
 		}
 	}
 }
