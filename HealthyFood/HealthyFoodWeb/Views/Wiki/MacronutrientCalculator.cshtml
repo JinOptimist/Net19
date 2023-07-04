@@ -46,7 +46,7 @@
 						@foreach (var wikiMCImgViewModel in Model.ImgByYear)
 						{
 							<div class="img-container">
-								<img src="@wikiMCImgViewModel.ImgPath">
+								<img src="@wikiMCImgViewModel.ImgUrl">
 							</div>
 						}
 					</div>
@@ -69,73 +69,86 @@
 				<section class=" user-data">
 					<form id="basic-form" method="post">
 						<div class="input-parameters">
-							<div class="sex">
+							<div class="sex have-to-block">
 								<b>@Html.LabelFor(model => model.Sex, "Выберите пол:")</b><Br>
 								@Html.RadioButtonFor(model=>model.Sex, SexEnum.Male) @Html.Label("Мужской")
 								@Html.RadioButtonFor(model=>model.Sex, SexEnum.Female) @Html.Label("Женский")
 							</div>
-							<div class="goal">
+							<div class="goal have-to-block">
 								<b>@Html.LabelFor(model => model.Goal, "Выберите цель:")</b><Br>
 								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_loss) @Html.Label("Похудение")<Br>
 								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_gain) @Html.Label("Набор массы")<Br>
 								@Html.RadioButtonFor(model=>model.Goal, GoalEnum.Weight_maintenance) @Html.Label("Поддержание веса")<Br>
 							</div>
-							<div class="age">
+							<div class="age have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.Age)</div>
 								<b>@Html.LabelFor(model => model.Age, "Введите возраст")</b><Br>
 								@Html.TextBoxFor(model=>model.Age) лет<Br>
-								<i> @Html.ValidationMessageFor(model=>model.Age)</i>
 							</div>
-							<div class="weight">
+							<div class="weight have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.Weight)</div>
 								<b>@Html.LabelFor(model => model.Weight, "Введите вес")</b><Br>
 								@Html.TextBoxFor(model=>model.Weight) кг<Br>
-								<i> @Html.ValidationMessageFor(model=>model.Weight)</i>
 							</div>
-							<div class="height">
+							<div class="height have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.Height)</div>
 								<b>@Html.LabelFor(model => model.Height, "Введите рост")</b><Br>
 								@Html.TextBoxFor(model=>model.Height) см<Br>
-								<i> @Html.ValidationMessageFor(model=>model.Height)</i>
 							</div>
-							<div class="percentage-of-deficit-or-surplus">
+							<div class="percent have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.Percent)</div>
 								<b>@Html.LabelFor(model => model.Percent, "Введите % дефицита/профицита")</b><Br>
 								@Html.TextBoxFor(model=>model.Percent) %<Br>
-								<i> @Html.ValidationMessageFor(model=>model.Percent)</i>
 							</div>
-							<div class="activity-ratio">
+							<div class="activity-ratio have-to-block">
 								<b>@Html.LabelFor(model => model.ActivityRatio, "Выберите коэффициент активности:")</b><Br>
 								@Html.DropDownListFor(model=>model.ActivityRatio, Html.GetEnumSelectList(typeof(ActivityRatioEnum)))
 							</div>
-							<div class="nutrients-percent">
+							<div class="protein-percent have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.PercentOfProteins)</div>
 								<b>@Html.LabelFor(model => model.PercentOfProteins, "белка")</b><Br>
 								@Html.TextBoxFor(model => model.PercentOfProteins) %<Br>
-								<i> @Html.ValidationMessageFor(model=>model.PercentOfProteins)</i>
-
+							</div>
+							<div class="fat-percent have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.PercentOfFats)</div>
 								<b>@Html.LabelFor(model => model.PercentOfFats, "жира")</b><Br>
 								@Html.TextBoxFor(model => model.PercentOfFats) %<Br>
-								<i> @Html.ValidationMessageFor(model=>model.PercentOfFats)</i>
-
+							</div>
+							<div class="carb-percent have-to-block">
+								<div class="error-message">@Html.ValidationMessageFor(model=>model.PercentOfCarbs)</div>
 								<b>@Html.LabelFor(model => model.PercentOfCarbs, "углеводов")</b><Br>
 								@Html.TextBoxFor(model => model.PercentOfCarbs) %<Br>
-								<i> @Html.ValidationMessageFor(model=>model.PercentOfCarbs)</i>
 							</div>
 						</div>
 						<div class="press">
-							<button class="calc" type="submit">Рассчитать</button>
+							<button class="calculate have-to-block" type="submit">Рассчитать</button>
 						</div>
 					</form>
-					<div class="calculations-results">
+					<div class="calculations-results preview">
 						<b>@Html.LabelFor(model => model.HarrisBenedictAns, "Формула Харриса-Бенедикта:")</b><Br>
 						@Model.HarrisBenedictAns ккал<Br>
 						<b>@Html.LabelFor(model => model.MifflinStJeorAns, "Формула Миффлина-Сан-Жеора:")</b><Br>
 						@Model.MifflinStJeorAns ккал<Br>
 						<b>@Html.LabelFor(model => model.WhoAns, "Формула ВОЗ:")</b><Br>
 						@Model.WhoAns ккал<Br>
-						<div class="average-calories">
-							<b>@Html.LabelFor(model => model.AverageAns, "Среднее значние:")</b><Br>
-							@Model.AverageAns ккал<Br>
-						</div>
+						<b>@Html.LabelFor(model => model.AverageAns, "Среднее значние:")</b><Br>
+						@Model.AverageAns ккал<Br>
 						@Model.GramsOfProteins г белка<Br>
 						@Model.GramsOfFats г жиров<Br>
 						@Model.GramsOfCarbs г углеводов<Br>
+					</div>
+					<div class="parent calculations-results" style="display:none;">
+						<b>Формула Харриса-Бенедикта:</b><Br>
+						<span class="ansHB"></span> ккал<Br>
+						<b>Формула Миффлина-Сан-Жеора:</b><Br>
+						<span class="ansMSJ"></span> ккал<Br>
+						<b>Формула ВОЗ:</b><Br>
+						<span class="ansWHO"></span> ккал<Br>
+						<b>Среднее значние:</b><Br>
+						<span class="ansAverage"></span> ккал<Br>
+						<span class="ansProteins"></span> г белка<Br>
+						<span class="ansFats"></span> г жиров<Br>
+						<span class="ansCarbs"></span> г углеводов<Br>
 					</div>
 				</section>
 				<section class="comments">
@@ -209,6 +222,9 @@
 <div class="footer">
 </div>
 
+@section Scripts{
+	<script src="~/js/wiki/macronutrientCalculator.js"></script>
+}
 
 
 

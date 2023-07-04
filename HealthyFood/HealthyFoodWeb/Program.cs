@@ -39,7 +39,9 @@ builder.Services.AddScoped<IWikiMcService>(
     diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), 
     diContainer.GetService<IAuthService>(), 
     diContainer.GetService<IWikiTagRepository>(),
-	diContainer.GetService<IPagginatorService>()));
+	diContainer.GetService<IPagginatorService>(),
+	diContainer.GetService<IWebHostEnvironment>()
+    ));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(

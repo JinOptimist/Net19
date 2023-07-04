@@ -10,7 +10,7 @@
 		</div>
 		<div class="filter-input">
 			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFNtI92oTTZ4jgSeqnL-4wo29HG5-YcUDyJQ&usqp=CAU" class="filter" alt="Filter" />
-			<div class="filter-block">
+			<div class="filter-block" style="display:none;">
 				<div class="type">
 					Type:<br />
 					@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)))
@@ -41,7 +41,7 @@
 			{
 				<div class="img-container">
 					<div class="cover">
-						<img src="@imageViewModel.ImgPath" />
+						<img src="@imageViewModel.ImgUrl" />
 					</div>
 					<div class="prop">
 						<div class="year">Year : @imageViewModel.Year </div>

@@ -30,6 +30,8 @@ namespace HealthyFoodWeb.Services
 
 		WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type);
 
+		WikiCalculationResultViewModel GetViewModelForCaloriesCalculation(int? age, float? weight, float? height, int? percent, SexEnum sex, GoalEnum goal, ActivityRatioEnum activityRatio, int? proteinsPercent, int? fatsPercent, int? carbsPercent);
+
 		PagginatorViewModel<WikiMcViewModel> GetImagesForPaginator(int page, int perPage);
 
 		ShowUploadedImagesViewModel GetShowUploadedImagesViewModel(int page, int perPage);
