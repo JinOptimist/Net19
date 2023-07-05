@@ -4,7 +4,7 @@ import { loginApi } from '../services/loginApi'
 function Login() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!(localStorage.getItem("userId")))
     const [name, setName] = useState()
-    const [userId, setUserId] = useState(0)
+    const [userId, setUserId] = useState(localStorage.getItem("userId"))
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const {GetUserId, GetUser} = loginApi;
