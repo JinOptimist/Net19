@@ -15,9 +15,10 @@
         $('.image-preview span.tags').text(enteredTags);
     });
 
-    $('#ImgPath').on("keyup", function () {
-        const imgPath = $('#ImgPath').val();
-        $('.image-preview .preview-container img').attr('src', imgPath);
-    });
-
+    ImgCover.onchange = evt => {
+        const [file] = ImgCover.files
+        if (file) {
+            newImg.src = URL.createObjectURL(file)
+        }
+    }
 });

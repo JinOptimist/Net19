@@ -11,7 +11,7 @@
 		<div class="img-container">
 			@Html.HiddenFor(x=>x.Id)
 			<input type="hidden" value="@Model.Id" />
-			<img src="@Model.ImgPath" />
+			<img src="@Model.ImgUrl" />
 		</div>
 		<div class="params">
 			<div class="type">
@@ -19,8 +19,8 @@
 				@Html.DropDownListFor(x=>x.ImgType, Html.GetEnumSelectList(typeof(ImgTypeEnum)), htmlAttributes: new {placeholder = Model.ImgType})
 			</div>
 			<div>
-				@Html.LabelFor(x => x.ImgPath, "Url") <br />
-				@Html.TextBoxFor(x=>x.ImgPath)
+				@Html.LabelFor(x => x.ImgUrl, "Url") <br />
+				@Html.TextBoxFor(x=>x.ImgUrl)
 			</div>
 			<div>
 				@Html.LabelFor(x => x.Year, "Year") <br />
