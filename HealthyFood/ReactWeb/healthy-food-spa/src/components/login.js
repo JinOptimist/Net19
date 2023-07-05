@@ -15,7 +15,8 @@ function Login() {
 
     const SubmitHandler=(e)=>{
         e.preventDefault();
-        GetUserId(login, password).then(response => {
+        GetUserId(login, password)
+        .then(response => {
             setUserId(response.data)
             localStorage.setItem("userId", userId)
             setIsLoggedIn(true)
