@@ -8,8 +8,6 @@
 
         public string CoverUrl { get; set; }
 
-        public string DoesNotExist { get; set; }
-
         public virtual User Creater { get; set; }
 
         public virtual List<GameCategory> Genres { get; set; }
