@@ -7,6 +7,7 @@
         public decimal Price { get; set; }
 
         public string CoverUrl { get; set; }
+
        
         public virtual User Creater { get; set; }
 
