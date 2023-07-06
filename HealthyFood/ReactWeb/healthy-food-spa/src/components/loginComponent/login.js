@@ -3,7 +3,7 @@ import { loginApi } from '../../services/loginApi'
 import './login.css';
 
 function Login() {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!(localStorage.getItem("userId")))
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("userId"))
     const [name, setName] = useState()
     const [userId, setUserId] = useState(localStorage.getItem("userId") ? localStorage.getItem("userId") : 0)
     const [login, setLogin] = useState('');

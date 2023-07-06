@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Game from './gameComponent/Game';
+import Game from './gameComponent/game';
 import { gamesApi } from '../services/gamesApi'
 
 function Games() {
