@@ -5,6 +5,7 @@ function Header() {
     <div>
       <Link to={'/'}>home</Link>
       <Link to={'/games'}>games</Link>
+      <Link to={'/login'}>Login</Link>
     </div>
   );
 }
