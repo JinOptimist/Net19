@@ -5,7 +5,7 @@ import Games from './components/games';
 import axios from 'axios';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/home';
-import Login from './components/login';
+import Login from './components/loginComponent/login';
 
 function App() {
 
