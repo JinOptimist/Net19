@@ -49,33 +49,31 @@ namespace HealthyFoodWeb.Services.WikiServices
 
             _wikiBaaRepository.Add(dbBlockBAA);
 
-            //foreach (var img in block.CoverFiles)
-            //{
-            //    var ext = Path.GetExtension(img.FileName);
-            //    var fileName = $"game-{"Temp"}{ext}";
-            //    var path = Path.Combine(
-            //        _webHostEnvironment.WebRootPath,
-            //        "images",
-            //        "games",
-            //        fileName);
+            foreach (var img in block.CoverFiles)
+            {
+                var ext = Path.GetExtension(img.FileName);
+                var fileName = $"game-{"Temp"}{ext}";
+                var path = Path.Combine(
+                    _webHostEnvironment.WebRootPath,
+                    "images",
+                    "games",
+                    fileName);
 
-            //    using (var fs = File.Create(path))
-            //    {
-            //        block.CoverFiles[0].CopyTo(fs);
-            //    }
+                using (var fs = File.Create(path))
+                {
+                    block.CoverFiles[0].CopyTo(fs);
+                }
 
-            //    var url = $"/images/games/{fileName}";
+                var url = $"/images/games/{fileName}";
 
-            //    dbBlockBAA.UrlImg = block.Img?
-            //    .Select(x => new WikiBlockImg
-            //    {
-            //        Id = x.Id,
-            //        Url = x.Url ?? new string(""),
-            //    })
-            //    .ToList() ?? new List<WikiBlockImg>();
+                dbBlockBAA.UrlImg.Add(new WikiBlockImg
+                {
+                    Url = url 
+                });
+                
 
-            //    _wikiBaaRepository.Update(dbBlockBAA);
-            //}
+                _wikiBaaRepository.Update(dbBlockBAA);
+            }
         }
 
         public int CreateComment(int blockId, string comment)

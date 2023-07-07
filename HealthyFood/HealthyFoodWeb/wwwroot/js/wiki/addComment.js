@@ -25,25 +25,6 @@
                                     <a class="update-link" href="/wiki/UpdateComment/${commentId}">update</a>
                             </div>
                 `;  
-
-                //copyOfCommentBlock.removeClass('template');
-
-                //copyOfCommentBlock  
-                //    .find('.comment-text')
-                //    .text(userText);
-
-                //copyOfCommentBlock
-                //    .find('.remove-form [name=commentId]')
-                //    .val(commentId);
-
-                //copyOfCommentBlock
-                //    .find('.update-link')
-                //    .attr("href", "/wiki/UpdateComment/" + commentId);
-
-                //copyOfCommentBlock
-                //    .find('.delete-comment-button')
-                //    .click(DeletComment);
-
                 const containerComment = $(e.target).parent().parent().parent().prev()
                 
                 containerComment.append(commentDiv);
