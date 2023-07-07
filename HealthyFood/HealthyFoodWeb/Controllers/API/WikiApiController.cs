@@ -33,13 +33,18 @@ namespace HealthyFoodWeb.Controllers.API
         {
             var commentId = _wikiBAAPageServices.CreateComment(blockId, comment);
             return commentId;
-
         }
 
         [Route("RemoveComment")]
         public void RemoveComment(int id)
         {
             _wikiBAAPageServices.RemoveComment(id);
+        }
+
+        [Route("Remove")]
+        public void Remove(int blockId)
+        {
+            _wikiBAAPageServices.RemoveBlock(blockId);
         }
     }
 }
