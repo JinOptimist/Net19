@@ -8,7 +8,7 @@
 }
 
 <div class="add-parameters">
-	<form id="basic-form" method="post">
+	<form id="basic-form" method="post" enctype="multipart/form-data">
 		<div class="user-input">
 			<div>
 				@Html.LabelFor(x => x.ImgType, "Type") <br />
@@ -19,9 +19,8 @@
 				@Html.TextBoxFor(x=>x.Year)
 			</div>
 			<div>
-				@Html.LabelFor(x => x.ImgPath, "Url") <br />
-				@Html.TextBoxFor(x => x.ImgPath)<br />
-				@Html.ValidationMessageFor(x=>x.ImgPath)
+				@Html.LabelFor(x => x.ImageCover, "Upload image") <br />
+				<input type="file" id="ImgCover" name="@(nameof(WikiMcViewModel.ImageCover))" />
 			</div>
 			<div>
 				@Html.LabelFor(x => x.EnteredTags, "Tags") <br />
@@ -35,7 +34,7 @@
 	</form>
 	<div class="image-preview">
 		<div class="preview-container">
-			<img class="new"/>
+			<img id="newImg" src=""/>
 		</div>
 		<div class="params">
 			<div>
