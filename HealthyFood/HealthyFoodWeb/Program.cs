@@ -3,6 +3,7 @@ using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Utility;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.SIgnalrRHubs;
+using HealthyFoodWeb.Services.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +25,11 @@ var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
 diRegisterationHelper.RegisterAllRepositories(builder.Services);
-diRegisterationHelper.RegisterAllServices(builder.Services);
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSignalR();
+
 
 builder.Services.AddCors(options =>
 {
@@ -44,6 +45,8 @@ var app = builder.Build();
 
 app.Seed();
 //SeedData.Seed(app);
+
+app.UseMiddleware<CheckUpdateDatabaseMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -68,7 +71,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<ChatHub>("/userChat");
     endpoints.MapHub<AlertHub>("/alert");
 });
-
 
 app.MapControllerRoute(
     name: "default",
