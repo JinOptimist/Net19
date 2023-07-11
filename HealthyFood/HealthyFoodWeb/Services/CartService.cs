@@ -98,7 +98,7 @@ namespace HealthyFoodWeb.Services
                 cartItem.Quantity -= 1;
                 _cartRepository.Update(cartItem);
             }
-            if (cartItem.Quantity <= 1)
+           else
             {
                 DeleteFromCart(id);
             }
