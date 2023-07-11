@@ -11,6 +11,8 @@ namespace HealthyFoodWeb.Controllers
     {
         private IGameCatalogService _gameCatalogService;
         private IGameFruitConnectTwoService _gameFruitConnectTwoService;
+
+
         private IReviewService _reviewService;
 
         public GameCatalogController(
@@ -88,12 +90,12 @@ namespace HealthyFoodWeb.Controllers
         }
 
 
-        public IActionResult Review()
+        public IActionResult Review(int page = 1, int perPage = 10)
         {
 
-            var viewModels = _reviewService.BuildViewModelFromDbModel();
-
-            return View(viewModels);
+            //var viewModels = _reviewService.BuildViewModelFromDbModel();
+            var viewModel = _reviewService.GetReviewsForPuginator(page, perPage);
+            return View(viewModel);
         }
 
         //public IActionResult Games(int page = 1, int perPage = 10)
