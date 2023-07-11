@@ -11,7 +11,7 @@ namespace HealthyFoodWeb.Utility
     {
         private const int MIN_GAME_COUNT = 20;
         private const int MIN_STORE_COUNT = 20;
-        private const int MIN_CART_COUNT = 20;
+        private const int MIN_CART_COUNT = 5;
         private static Random _random = new Random();
 
         public static void Seed(this WebApplication webApplication)
@@ -42,10 +42,10 @@ namespace HealthyFoodWeb.Utility
                 var tags = cartTagRepository.GetAll();
                 var productdefault = new Cart
                 {
-                    Name = "Salat",
-                    Price = 3,
+                    Name = "Greek salad",
+                    Price = 13,
                     Customer = user,
-                    ImgUrl = "https://podacha-blud.com/uploads/posts/2022-12/1670444503_60-podacha-blud-com-p-legkii-salat-foto-63.jpg",
+                    ImgUrl = "https://zira.uz/wp-content/uploads/2018/05/grecheskiy-salat-2.jpg",
                     Tags = new List<CartTags> { tags.Random() }
                 };
                 cartRepository.Add(productdefault);
@@ -53,16 +53,18 @@ namespace HealthyFoodWeb.Utility
 
             if (cartRepository.Count() < MIN_CART_COUNT)
             {
-                var randomUser = userRepository.GetFirst();
+                var user = userRepository.GetFirst();
+                var tags = cartTagRepository.GetAll();
 
                 for (int i = 0; i < MIN_CART_COUNT; i++)
                 {
                     var product = new Cart
                     {
                         Name = $"Sup {i}",
-                        Price = 10 +i,
-                        Customer = randomUser,
-                        ImgUrl = "https://avatars.dzeninfra.ru/get-zen_doc/1945957/pub_5d887e5fa06eaf00ad1d7740_5d887e691d656a00ad33d1e0/scale_1200"
+                        Price = 10 + i,
+                        Customer = user,
+                        ImgUrl = "https://korshop.ru/upload/medialibrary/c01/c01f2dae23228a2d4d42eed20544ae2b.jpg",
+                        Tags = new List<CartTags> { tags.Random() }
                     };
                     cartRepository.Add(product);
                 }
