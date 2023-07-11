@@ -12,7 +12,23 @@
            Укажите ссылку на картинку @Html.TextBoxFor(x => x.LinkForPicture)
         </div>
         <div>
-            <input type="submit" value="Create game" />
+           укажите жанр игры @Html.TextBoxFor(x =>x.Genre)
+        </div>
+        <div>
+            <input type="submit" value="Add game" />
         </div>
     </form>
 </div>
+<div>
+    Game name: <span class="name"></span>$
+</div>
+<div class="preview-container">
+    <img />
+</div>
+@section Scripts{
+    <script src="~/js/gameCatigory.js"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Catalog.css" />
+}

@@ -3,6 +3,5 @@
     public class CartIndexViewModel
     {
         public List<CartViewModel> Product { get; set; }
-
     }
 }

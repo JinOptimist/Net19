@@ -58,7 +58,8 @@ namespace HealthyFoodWeb.Controllers
                     NameOfSimilarGame = dbModel.Name,
                     Url = dbModel.Url,
                     LinkForPicture = dbModel.LinkForPicture,
-                    Id = dbModel.Id
+                    Id = dbModel.Id,
+                    Genre = dbModel.Genre
                 })
                 .ToList();
 
@@ -83,7 +84,6 @@ namespace HealthyFoodWeb.Controllers
 
         public IActionResult Donate()
         {
-
             return View();
         }
 
