@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Sql", "Data.Sql\Data.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionExample", "ReflectionExample\ReflectionExample.csproj", "{603FEA0E-F155-498B-A0C1-AD412FAF5096}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskExample", "TaskExample\TaskExample.csproj", "{ADCC923D-4A38-407D-857A-C8CDC0BF18F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{603FEA0E-F155-498B-A0C1-AD412FAF5096}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{603FEA0E-F155-498B-A0C1-AD412FAF5096}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{603FEA0E-F155-498B-A0C1-AD412FAF5096}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCC923D-4A38-407D-857A-C8CDC0BF18F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCC923D-4A38-407D-857A-C8CDC0BF18F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCC923D-4A38-407D-857A-C8CDC0BF18F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCC923D-4A38-407D-857A-C8CDC0BF18F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
