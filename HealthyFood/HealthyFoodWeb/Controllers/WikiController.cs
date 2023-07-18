@@ -14,10 +14,13 @@ namespace HealthyFoodWeb.Controllers
 
 		private IWikiMcService _wikiMCImgService;
 
-		public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMcService wikiMCImgService)
+		private IAuthService _authService;
+
+		public WikiController(IWikiBAAPageServices blockInformationServices, IWikiMcService wikiMCImgService, IAuthService authService)
 		{
 			_blockInformationServices = blockInformationServices;
 			_wikiMCImgService = wikiMCImgService;
+			_authService = authService;
 		}
 
 		public IActionResult Main()
@@ -61,13 +64,8 @@ namespace HealthyFoodWeb.Controllers
 				.GetAllImgByYear()
 				.Select(BuildWikiMcViewModelFromDbModel)
 				.ToList();
-			viewModel.HarrisBenedictAns = (int)_wikiMCImgService.CalculateCaloriesViaHarrisBenedict(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Height.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
-			viewModel.MifflinStJeorAns = (int)_wikiMCImgService.CalculateCaloriesViaMifflinStJeor(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Height.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
-			viewModel.WhoAns = (int)_wikiMCImgService.CalculateCaloriesViaWho(viewModel.Age.Value, viewModel.Weight.Value, viewModel.Percent.Value, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio);
-			viewModel.AverageAns = (int)_wikiMCImgService.CalculateAverageCalories(viewModel.HarrisBenedictAns, viewModel.MifflinStJeorAns, viewModel.WhoAns);
-			viewModel.GramsOfProteins = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfProteins;
-			viewModel.GramsOfFats = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfFats;
-			viewModel.GramsOfCarbs = (int)_wikiMCImgService.CalculateGramsOfNutrients(viewModel.AverageAns, viewModel.PercentOfProteins.Value, viewModel.PercentOfFats.Value, viewModel.PercentOfCarbs.Value).gramsOfCarbs;
+
+			viewModel.CalculationResults = _wikiMCImgService.GetViewModelForCaloriesCalculation(viewModel.Age, viewModel.Weight, viewModel.Height, viewModel.Percent, viewModel.Sex, viewModel.Goal, viewModel.ActivityRatio, viewModel.PercentOfProteins, viewModel.PercentOfFats, viewModel.PercentOfCarbs);	
 			return View(viewModel);
 		}
 
@@ -208,7 +206,7 @@ namespace HealthyFoodWeb.Controllers
 				Year = x.Year,
 				ImgUrl = x.ImgUrl,
 				ImgType = x.ImgType,
-				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
+				UserTagsForImage = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};
 		}
 	}

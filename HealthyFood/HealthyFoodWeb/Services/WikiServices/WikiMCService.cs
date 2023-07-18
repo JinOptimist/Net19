@@ -32,18 +32,22 @@ namespace HealthyFoodWeb.Services.WikiServices
 		};
 
 		private IWikiMcRepository _wikiMcRepository;
+		private IWikiMcService _wikiMCImgService;
 		private IWikiTagRepository _tagRepository;
 		private IAuthService _authService;
 		private IPagginatorService _paginatorService;
 		private IWebHostEnvironment _webHostEnvironment;
+		private IWikiCalculationResultRepository _wikiCalculationResultRepository;
 
-		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService, IPagginatorService paginatorService, IWebHostEnvironment webHostEnvironment)
+		public WikiMCService(IWikiMcRepository wikiMCRepository, IAuthService authService, IWikiTagRepository tagService, IPagginatorService paginatorService, IWebHostEnvironment webHostEnvironment, IWikiCalculationResultRepository wikiCalculationResultRepository, IWikiMcService wikiMcService)
 		{
 			_wikiMcRepository = wikiMCRepository;
 			_authService = authService;
 			_tagRepository = tagService;
 			_paginatorService = paginatorService;
 			_webHostEnvironment = webHostEnvironment;
+			_wikiCalculationResultRepository = wikiCalculationResultRepository;
+			_wikiMCImgService = wikiMcService;
 		}
 
 		public void AddImg(WikiMcViewModel viewModel)
@@ -126,6 +130,11 @@ namespace HealthyFoodWeb.Services.WikiServices
 			return _wikiMcRepository.GetUserImages();
 		}
 
+		public IEnumerable<WikiTags> GetAllUserTags(int userId)
+		{
+			return _tagRepository.GetAllUserTags(userId);
+		}
+
 		public WikiMcViewModel GetImageViewModel(int id)
 		{
 			var imageDb = _wikiMcRepository.GetImageAndTags(id);
@@ -140,7 +149,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 				ImgType = imageDb.ImgType,
 				ImgUrl = imageDb.ImgUrl,
 				Year = imageDb.Year,
-				UserTags = imageDb.Tags.Select(x => x.TagName).ToList()
+				UserTagsForImage = imageDb.Tags.Select(x => x.TagName).ToList()
 			};
 		}
 
@@ -199,7 +208,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 				Year = x.Year,
 				ImgUrl = x.ImgUrl,
 				ImgType = x.ImgType,
-				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
+				UserTagsForImage = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};
 		}
 
@@ -207,12 +216,14 @@ namespace HealthyFoodWeb.Services.WikiServices
 		{
 			var viewModel = new ShowUploadedImagesViewModel();
 
+			var user = _authService.GetUser();
 			viewModel.PaginatorViewModel = _paginatorService
 				.GetPaginatorViewModel(
 					page,
 					perPage,
 					BuildWikiMcViewModelFromDbModel,
 					_wikiMcRepository);
+			viewModel.AllUserTags = _tagRepository.GetAllUserTags(user.Id).ToList();
 
 			return viewModel;
 		}
@@ -373,7 +384,47 @@ namespace HealthyFoodWeb.Services.WikiServices
 			viewModel.GramsOfProteins = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfProteins;
 			viewModel.GramsOfFats = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfFats;
 			viewModel.GramsOfCarbs = (int)CalculateGramsOfNutrients(viewModel.AverageAns, proteinsPercent.Value, fatsPercent.Value, carbsPercent.Value).gramsOfCarbs;
+			var user = _authService.GetUser();
+			if (user == null)
+			{
+				return viewModel;
+			}
+			if (user.UserNutrients == null)
+			{
+				_wikiMCImgService.AddUserCalcultionResult(viewModel.AverageAns, viewModel.GramsOfProteins, viewModel.GramsOfFats, viewModel.GramsOfCarbs);
+			}
+			else
+			{
+				_wikiMCImgService.UpdateUserCalcultionResult(viewModel.AverageAns, viewModel.GramsOfProteins, viewModel.GramsOfFats, viewModel.GramsOfCarbs);
+			}
 			return viewModel;
+		}
+
+		public void AddUserCalcultionResult(int averageAns, int gramsOfProteins, int gramsOfCarbs, int gramsOfFats)
+		{
+			var user = _authService.GetUser();
+			var dbWikiMcModel = new WikiCalculationResults()
+			{
+				AverageCalculatedCalories = averageAns,
+				GramsProtein = gramsOfProteins,
+				GramsCarb = gramsOfCarbs,
+				GramsFat = gramsOfFats,
+				CalculatorUser = user,
+			};
+			_wikiCalculationResultRepository.Add(dbWikiMcModel);
+		}
+
+		public void UpdateUserCalcultionResult(int averageAns, int gramsOfProteins, int gramsOfCarbs, int gramsOfFats)
+		{
+			var user = _authService.GetUser();
+			var dbModel = user.UserNutrients;
+			{
+				dbModel.AverageCalculatedCalories = averageAns;
+				dbModel.GramsProtein = gramsOfProteins;
+				dbModel.GramsCarb = gramsOfCarbs;
+				dbModel.GramsFat = gramsOfFats;
+			};
+			_wikiCalculationResultRepository.Update(dbModel);
 		}
 	}
 }

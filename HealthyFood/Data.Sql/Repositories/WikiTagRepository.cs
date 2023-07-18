@@ -1,5 +1,6 @@
 ﻿using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sql.Repositories
 {
@@ -10,6 +11,14 @@ namespace Data.Sql.Repositories
         public WikiTags Get(string tag)
         {
             return _dbSet.SingleOrDefault(x => x.TagName == tag);
+        }
+
+        public IEnumerable<WikiTags> GetAllUserTags(int userId)
+        {
+            return _dbSet
+               .Where(x => x.Images.Any(i => i.ImageUploader.Id == userId))
+               .Distinct()
+               .ToList();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Data.Interface.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Data.Interface.Models
 {
     public abstract class BaseModel
     {
