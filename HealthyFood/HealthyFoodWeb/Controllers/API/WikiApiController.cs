@@ -22,7 +22,7 @@ namespace HealthyFoodWeb.Controllers.API
 		}
 
 		[Route("ImagesCount")]
-		public WikiMcImagesCountViewModel GetImagesCount(int? year, string? tag, ImgTypeEnum type)
+		public WikiMcImagesCountViewModel GetImagesCount(int? year, string tag, ImgTypeEnum type)
 		{
 			var viewModel = _wikiMcService.GetViewModelForImagesCount(year, tag, type);
 			return viewModel;

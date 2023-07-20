@@ -11,5 +11,13 @@ namespace Data.Sql.Repositories
         {
             return _dbSet.SingleOrDefault(x => x.TagName == tag);
         }
-    }
+
+		public IEnumerable<WikiTags> GetAllUserTags(int userId)
+		{
+			return _dbSet
+			   .Where(x => x.Images.Any(i => i.ImageUploader.Id == userId))
+			   .Distinct()
+			   .ToList();
+		}
+	}
 }

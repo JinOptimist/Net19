@@ -125,17 +125,17 @@
 						</div>
 					</form>
 					<div class="calculations-results preview">
-						<b>@Html.LabelFor(model => model.HarrisBenedictAns, "Формула Харриса-Бенедикта:")</b><Br>
-						@Model.HarrisBenedictAns ккал<Br>
-						<b>@Html.LabelFor(model => model.MifflinStJeorAns, "Формула Миффлина-Сан-Жеора:")</b><Br>
-						@Model.MifflinStJeorAns ккал<Br>
-						<b>@Html.LabelFor(model => model.WhoAns, "Формула ВОЗ:")</b><Br>
-						@Model.WhoAns ккал<Br>
-						<b>@Html.LabelFor(model => model.AverageAns, "Среднее значние:")</b><Br>
-						@Model.AverageAns ккал<Br>
-						@Model.GramsOfProteins г белка<Br>
-						@Model.GramsOfFats г жиров<Br>
-						@Model.GramsOfCarbs г углеводов<Br>
+						<b>@Html.LabelFor(model => model.CalculationResult.HarrisBenedictAns, "Формула Харриса-Бенедикта:")</b><Br>
+						@Model.CalculationResult.HarrisBenedictAns ккал<Br>
+						<b>@Html.LabelFor(model => model.CalculationResult.MifflinStJeorAns, "Формула Миффлина-Сан-Жеора:")</b><Br>
+						@Model.CalculationResult.MifflinStJeorAns ккал<Br>
+						<b>@Html.LabelFor(model => model.CalculationResult.WhoAns, "Формула ВОЗ:")</b><Br>
+						@Model.CalculationResult.WhoAns ккал<Br>
+						<b>@Html.LabelFor(model => model.CalculationResult.AverageAns, "Среднее значние:")</b><Br>
+						@Model.CalculationResult.AverageAns ккал<Br>
+						@Model.CalculationResult.GramsOfProteins г белка<Br>
+						@Model.CalculationResult.GramsOfFats г жиров<Br>
+						@Model.CalculationResult.GramsOfCarbs г углеводов<Br>
 					</div>
 					<div class="parent calculations-results" style="display:none;">
 						<b>Формула Харриса-Бенедикта:</b><Br>
