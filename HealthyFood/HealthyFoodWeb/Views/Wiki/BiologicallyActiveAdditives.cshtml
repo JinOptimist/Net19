@@ -20,6 +20,10 @@
         <p><a href="https://gamma.by/sportpit/zdorovie/">Gamma.by</a></p>
         <p><a href="https://kakvapteke.by/catalog/bady/">Kakvapteke.by</a></p>
         <p><a href="https://sofishop.by/catalog/bady/">Sofishop.by</a></p>
+        <p>Навигация: </p>
+        <p><a href="/Home/Index">Главная</a></p>
+        <p><a href="/Store/storePageCatalogue">Магазин</a></p>
+        <p><a href="/GameCatalog/GetCatalog">Каталог игр</a></p>
     </div>
 
     @foreach (var pageViewModel in Model)
@@ -41,9 +45,10 @@
                 <div class="positionAuthor">
                     <span class="deletBlock">
                         <div class="deletBlockBorder">
-                            <form action="/Wiki/Remove">
+                            <form action="/Wiki/Remove" class="removeBlock">
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
-                                <input type="submit" value="Delet Block">
+                                <input type="hidden" value="@pageViewModel.Author" name="author">
+                                <input type="submit" value="Delete Block" class="delete-block-btn">
                             </form>
                         </div>
                     </span>

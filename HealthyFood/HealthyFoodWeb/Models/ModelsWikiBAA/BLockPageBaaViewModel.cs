@@ -12,6 +12,8 @@
 
         public int CountImg { get; set; }
 
+        public List<IFormFile> CoverFiles { get; set; }
+
         public List<WikiBlockImgViewModel> Img { get; set; }
 
         public List<CommentAndAuthorViewModel> CommentAndAuthor { get; set; }
