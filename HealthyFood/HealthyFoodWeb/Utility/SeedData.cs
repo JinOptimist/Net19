@@ -237,7 +237,7 @@ namespace HealthyFoodWeb.Utility
             {
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
                 var author = userRepository.GetByName("Admin");
-                
+
 
                 var defaultblocks = new List<PageWikiBlock>
                 {
@@ -246,6 +246,13 @@ namespace HealthyFoodWeb.Utility
                         Author = author,
                         Title = "Here you can write the name of your blog.",
                         Text = "This is where general information about your blog will be.",
+                        UrlImg= new List<WikiBlockImg>
+                        {
+                            new WikiBlockImg
+                            {
+                                Url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA7eZE7l82FVMP-wq95iuPGxxlxjI5boFTLg&usqp=CAU"
+                            }
+                        },
                         Comment = new List<WikiBlockComment>
                         {
                             new WikiBlockComment
@@ -254,6 +261,7 @@ namespace HealthyFoodWeb.Utility
                                 Author= author,
                             }
                         }
+
                     }
                 };
 
