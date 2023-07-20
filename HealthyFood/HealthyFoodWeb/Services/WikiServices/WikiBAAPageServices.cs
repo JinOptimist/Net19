@@ -5,6 +5,7 @@ using Data.Sql.Models;
 using Data.Sql.Repositories;
 using Data.Interface.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -49,30 +50,34 @@ namespace HealthyFoodWeb.Services.WikiServices
 
             _wikiBaaRepository.Add(dbBlockBAA);
 
-            foreach (var img in block.CoverFiles)
+
+            if (block.CoverFiles is not null)
             {
-                var ext = Path.GetExtension(img.FileName);
-                var fileName = $"game-{"Temp"}{ext}";
-                var path = Path.Combine(
-                    _webHostEnvironment.WebRootPath,
-                    "images",
-                    "games",
-                    fileName);
-
-                using (var fs = File.Create(path))
+                foreach (var img in block.CoverFiles)
                 {
-                    block.CoverFiles[0].CopyTo(fs);
+                    var ext = Path.GetExtension(img.FileName);
+                    var fileName = $"game-{"Temp"}{ext}";
+                    var path = Path.Combine(
+                        _webHostEnvironment.WebRootPath,
+                        "images",
+                        "games",
+                        fileName);
+
+                    using (var fs = File.Create(path))
+                    {
+                        block.CoverFiles[0].CopyTo(fs);
+                    }
+
+                    var url = $"/images/games/{fileName}";
+
+                    dbBlockBAA.UrlImg.Add(new WikiBlockImg
+                    {
+                        Url = url
+                    });
+
+
+                    _wikiBaaRepository.Update(dbBlockBAA);
                 }
-
-                var url = $"/images/games/{fileName}";
-
-                dbBlockBAA.UrlImg.Add(new WikiBlockImg
-                {
-                    Url = url 
-                });
-                
-
-                _wikiBaaRepository.Update(dbBlockBAA);
             }
         }
 
