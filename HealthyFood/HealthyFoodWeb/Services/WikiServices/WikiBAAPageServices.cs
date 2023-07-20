@@ -4,6 +4,8 @@ using HealthyFoodWeb.Services.IServices;
 using Data.Sql.Models;
 using Data.Sql.Repositories;
 using Data.Interface.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthyFoodWeb.Services.WikiServices
 {
@@ -15,11 +17,17 @@ namespace HealthyFoodWeb.Services.WikiServices
 
         private IAuthService _authService;
 
-        public WikiBAAPageServices(IWikiBaaRepository wikiBaaRepository, IAuthService authService, IWikiBaaCommentRepository wikiBaaCommentRepository)
+        private IWebHostEnvironment _webHostEnvironment;
+
+        public WikiBAAPageServices(IWikiBaaRepository wikiBaaRepository,
+            IAuthService authService,
+            IWikiBaaCommentRepository wikiBaaCommentRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _wikiBaaRepository = wikiBaaRepository;
             _authService = authService;
             _wikiBaaCommentRepository = wikiBaaCommentRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public void CreateBlock(BLockPageBaaViewModel block)
@@ -39,7 +47,38 @@ namespace HealthyFoodWeb.Services.WikiServices
                 })
                 .ToList() ?? new List<WikiBlockImg>()
             };
+
             _wikiBaaRepository.Add(dbBlockBAA);
+
+
+            if (block.CoverFiles is not null)
+            {
+                foreach (var img in block.CoverFiles)
+                {
+                    var ext = Path.GetExtension(img.FileName);
+                    var fileName = $"game-{"Temp"}{ext}";
+                    var path = Path.Combine(
+                        _webHostEnvironment.WebRootPath,
+                        "images",
+                        "games",
+                        fileName);
+
+                    using (var fs = File.Create(path))
+                    {
+                        block.CoverFiles[0].CopyTo(fs);
+                    }
+
+                    var url = $"/images/games/{fileName}";
+
+                    dbBlockBAA.UrlImg.Add(new WikiBlockImg
+                    {
+                        Url = url
+                    });
+
+
+                    _wikiBaaRepository.Update(dbBlockBAA);
+                }
+            }
         }
 
         public int CreateComment(int blockId, string comment)

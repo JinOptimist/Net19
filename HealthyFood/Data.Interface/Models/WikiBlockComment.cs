@@ -8,6 +8,6 @@ namespace Data.Interface.Models
 
         public virtual User Author { get; set; }
 
-        public virtual PageWikiBlock Block { get; set;}
+        public virtual PageWikiBlock Block { get; set; }
     }
 }
