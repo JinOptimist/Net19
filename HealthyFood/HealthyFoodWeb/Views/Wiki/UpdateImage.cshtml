@@ -28,16 +28,16 @@
 			</div>
 			<div class="tag-container">
 				Change existing tags<br />
-				@foreach (var tag in Model.UserTags)
+				@foreach (var tag in Model.UserTagsForImage)
 				{
 					<span class="tag">
 						<label>
-							<input @(Model.UserTags.Contains(tag)
+							<input @(Model.UserTagsForImage.Contains(tag)
 								? "checked='checked'"
 								: "")
 								   type="checkbox"
 								   value="@tag"
-								   name="@nameof(WikiMcViewModel.UserTags)" />
+								   name="@nameof(WikiMcViewModel.UserTagsForImage)" />
 							@tag
 						</label>
 					</span>

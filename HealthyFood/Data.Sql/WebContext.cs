@@ -93,7 +93,13 @@ namespace Data.Sql
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.Images);
 
-            base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<User>()
+				.HasOne(u => u.UserNutrients)
+				.WithOne(p => p.CalculatorUser)
+				.HasForeignKey<WikiCalculationResults>(up => up.CalculatorUserId)
+				.IsRequired(false);
+
+			base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -6,5 +6,6 @@ namespace HealthyFoodWeb.Models.WikiMcModels
 	{
 		public PagginatorViewModel<WikiMcViewModel> PaginatorViewModel { get; set; }
 		public ImgTypeEnum ImgType { get; set; }
+		public List<WikiTags> AllUserTags { get; set; }
 	}
 }

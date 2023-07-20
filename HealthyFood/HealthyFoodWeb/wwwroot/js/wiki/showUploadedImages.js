@@ -2,7 +2,7 @@
 
     $('.get-img-count').click(function () {
         const year = $('.img-year').val();
-        const tag = $('.img-tag').val();
+        const tag = $('#WikiTags').find(":selected").val();
         const type = $("#ImgType option:selected").val();
         const url = `/api/wiki/ImagesCount?year=${year}&tag=${tag}&type=${type}`;
         $.get(url)
