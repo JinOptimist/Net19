@@ -1,4 +1,5 @@
-﻿using HealthyFoodWeb.Models.Games;
+﻿using HealthyFoodWeb.Models;
+using HealthyFoodWeb.Models.Games;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,13 @@ namespace HealthyFoodWeb.Controllers.API
             var viewModel = _gameService.GetViewModelForGamesCount(budget);
             Thread.Sleep(5 * 1000);
             return viewModel;
+        }
+
+        [Route("GetGames")]
+        public List<GameViewModel> GetGames(int page, int perPage)
+        {
+            var viewModels = _gameService.GetGamesForPaginator(page, perPage).Items;
+            return viewModels;
         }
     }
 }

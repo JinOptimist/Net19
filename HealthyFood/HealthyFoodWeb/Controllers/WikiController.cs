@@ -185,20 +185,20 @@ namespace HealthyFoodWeb.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
-		{
-			_wikiMCImgService.UpdateAllExñeptTags(
-				wikiMcViewModel.Id,
-				wikiMcViewModel.ImgType,
-				wikiMcViewModel.ImgPath,
-				wikiMcViewModel.Year);
+		//public IActionResult UpdateImage(WikiMcViewModel wikiMcViewModel)
+		//{
+		//	_wikiMCImgService.UpdateAllExceptTags(
+		//		wikiMcViewModel.Id,
+		//		wikiMcViewModel.ImgType,
+		//		wikiMcViewModel.ImgUrl,
+		//		wikiMcViewModel.Year);
 
-			_wikiMCImgService.UpdateTags(
-				wikiMcViewModel.Id,
-				wikiMcViewModel.UserTags);
+		//	_wikiMCImgService.UpdateTags(
+		//		wikiMcViewModel.Id,
+		//		wikiMcViewModel.UserTags);
 
-			return RedirectToAction("ShowUploadedImages", "Wiki");
-		}
+		//	return RedirectToAction("ShowUploadedImages", "Wiki");
+		//}
 
 		private WikiMcViewModel BuildWikiMcViewModelFromDbModel(WikiMcImage x)
 		{
@@ -206,7 +206,7 @@ namespace HealthyFoodWeb.Controllers
 			{
 				Id = x.Id,
 				Year = x.Year,
-				ImgPath = x.ImgUrl,
+				ImgUrl = x.ImgUrl,
 				ImgType = x.ImgType,
 				UserTags = x.Tags?.Select(x => x.TagName).ToList() ?? new List<string>()
 			};

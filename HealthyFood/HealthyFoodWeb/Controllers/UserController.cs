@@ -3,8 +3,10 @@ using Data.Sql;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.IServices;
+using HealthyFoodWeb.SIgnalrRHubs;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 
 namespace HealthyFoodWeb.Controllers
@@ -13,9 +15,13 @@ namespace HealthyFoodWeb.Controllers
     {
         private IUserService _userService;
 
-        public UserController(IUserService userService)
+        private IHubContext<AlertHub> _hubAlertContext;
+
+        public UserController(IUserService userService, 
+            IHubContext<AlertHub> hubContext)
         {
             _userService = userService;
+            _hubAlertContext = hubContext;
         }
 
         public IActionResult Index()
@@ -93,10 +99,26 @@ namespace HealthyFoodWeb.Controllers
         public IActionResult Upload(IFormFile users)
         {
             _userService.UploadUsers(users);
-
-
-
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AlertAllUsers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AlertAllUsers(string message)
+        { 
+            //_hubContext.Clients.All
+            //    .SendAsync("ImportantEvent", message)
+            //    .Wait();
+
+            await _hubAlertContext.Clients.All
+                .SendAsync("ImportantEvent", message);
+
+            return View();
         }
     }
 }

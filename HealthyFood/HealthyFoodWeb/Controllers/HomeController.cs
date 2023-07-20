@@ -34,7 +34,7 @@ namespace HealthyFoodWeb.Controllers
                 Name = name,
                 Operator = MathOperationEnum.Plus
             };
-            
+
             if (name == "admin")
             {
                 model.Coins = 1000;
@@ -53,6 +53,15 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("Profile", new { name = model.ActualName });
         }
         public IActionResult Privacy()
+        {
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            {
+                throw new Exception("I don't want to work on Sunday");
+            }
+            return View();
+        }
+
+        public IActionResult RemindUpdateDatabase()
         {
             return View();
         }
