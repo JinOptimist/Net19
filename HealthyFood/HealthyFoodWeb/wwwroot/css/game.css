@@ -12,11 +12,6 @@
     max-height: 100px;
 }
 
-.genre{
-    border: 1px solid red;
-    border-radius: 10px;
-}
-
 .pagginator {
     padding: 10px;
 }
@@ -34,3 +29,14 @@
     .pagginator a.active {
         background: #c8cc5e;
     }
+
+.genre-container{
+    margin: 15px;
+}
+
+.genre {
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 10px;
+}

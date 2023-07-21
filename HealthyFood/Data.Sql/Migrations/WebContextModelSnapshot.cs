@@ -249,6 +249,9 @@ namespace Data.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ImageUploaderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ImgType")
                         .HasColumnType("int");
 
@@ -261,7 +264,26 @@ namespace Data.Sql.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageUploaderId");
+
                     b.ToTable("WikiMcImages");
+                });
+
+            modelBuilder.Entity("Data.Interface.Models.WikiTags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("TagName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WikiTags");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -288,6 +310,29 @@ namespace Data.Sql.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("PageWikiBlocks");
+                });
+
+            modelBuilder.Entity("Data.Sql.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("GameGameCategory", b =>
@@ -333,6 +378,21 @@ namespace Data.Sql.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("StoreItemUser");
+                });
+
+            modelBuilder.Entity("WikiMcImageWikiTags", b =>
+                {
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImagesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("WikiMcImageWikiTags");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Cart", b =>
@@ -386,12 +446,23 @@ namespace Data.Sql.Migrations
                     b.HasOne("Data.Sql.Models.PageWikiBlock", "Block")
                         .WithMany("Comment")
                         .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
 
                     b.Navigation("Block");
+                });
+
+            modelBuilder.Entity("Data.Interface.Models.WikiMcImage", b =>
+                {
+                    b.HasOne("Data.Interface.Models.User", "ImageUploader")
+                        .WithMany("UploadedImages")
+                        .HasForeignKey("ImageUploaderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ImageUploader");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>
@@ -450,6 +521,21 @@ namespace Data.Sql.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WikiMcImageWikiTags", b =>
+                {
+                    b.HasOne("Data.Interface.Models.WikiMcImage", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Interface.Models.WikiTags", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Data.Interface.Models.Manufacturer", b =>
                 {
                     b.Navigation("StoreItems");
@@ -466,6 +552,8 @@ namespace Data.Sql.Migrations
                     b.Navigation("Products");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("UploadedImages");
                 });
 
             modelBuilder.Entity("Data.Sql.Models.PageWikiBlock", b =>

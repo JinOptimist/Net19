@@ -22,6 +22,12 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
+        public void Update(SomeModel model)
+        {
+            _dbSet.Update(model);
+            _webContext.SaveChanges();
+        }
+
         public bool Any()
             => _dbSet.Any();
 

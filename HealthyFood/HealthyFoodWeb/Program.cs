@@ -5,7 +5,6 @@ using Data.Sql.Repositories;
 using HealthyFoodWeb.Services;
 using HealthyFoodWeb.Services.WikiServices;
 using HealthyFoodWeb.Services.IServices;
-using Microsoft.Extensions.DependencyInjection;
 using HealthyFoodWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,13 +22,16 @@ builder.Services
 
 
 builder.Services.AddScoped<IGameService>(
-    diContainer => new GameService(diContainer.GetService<IGameRepository>(), diContainer.GetService<IAuthService>()));
+    diContainer => new GameService(
+        diContainer.GetService<IGameRepository>(), 
+        diContainer.GetService<IAuthService>(),
+        diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<ICartService>(
     diContainer => new CartService(diContainer.GetService<ICartRepository>(), diContainer.GetService<IAuthService>()));
 builder.Services.AddScoped<IUserService>(
     diContainer => new UserService(diContainer.GetService<IUserRepository>()));
-builder.Services.AddScoped<IWikiMCService>(
-    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>()));
+builder.Services.AddScoped<IWikiMcService>(
+    diContainer => new WikiMCService(diContainer.GetService<IWikiMcRepository>(), diContainer.GetService<IAuthService>(), diContainer.GetService<IWikiTagRepository>()));
 builder.Services.AddScoped<IGameCatalogService>(
      diContainer => new GameCatalogService(diContainer.GetService<IGameCategoryRepository>()));
 builder.Services.AddScoped<IStoreCatalogueService>(
@@ -43,6 +45,9 @@ builder.Services.AddScoped<IReviewService>(
 builder.Services.AddScoped<IWikiBAAPageServices>(diContainer => new WikiBAAPageServices(diContainer.GetService<IWikiBaaRepository>(),
     diContainer.GetService<IAuthService>(),
     diContainer.GetService<WikiBaaCommentRepository>()));
+builder.Services.AddScoped<IProductService>(
+diContainer => new ProductService(diContainer.GetService<IProductRepository>(), diContainer.GetService<IAuthService>()));
+
 
 
 
@@ -53,9 +58,6 @@ var dataSqlStartup = new Startup();
 dataSqlStartup.RegisterDbContext(builder.Services);
 
 
-//builder.Services.AddSingleton<ICartRepository>(x => new CartRepositoryFake());
-builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
-//builder.Services.AddSingleton<IUserRepository>(x => new UserRepositoryFake());
 
 builder.Services.AddScoped<IUserRepository>(x => new UserRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IManufacturerRepository>(x => new ManufacturerRepository(x.GetService<WebContext>()));
@@ -68,6 +70,8 @@ builder.Services.AddScoped<ICartRepository>(x => new CartRepository(x.GetService
 builder.Services.AddScoped<IWikiBaaRepository>(x =>new WikiBaaRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<WikiBaaCommentRepository>(x => new WikiBaaCommentRepository(x.GetService<WebContext>()));
 builder.Services.AddScoped<IReviewRepository>(x => new ReviewRepository(x.GetService<WebContext>()));
+builder.Services.AddScoped<IProductRepository>(x => new ProductRepository(x.GetService<WebContext>()));
+
 
 builder.Services.AddHttpContextAccessor();
 
