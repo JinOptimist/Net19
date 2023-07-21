@@ -2,6 +2,7 @@
 {
     public class QuizViewModel
     {
-        public string Name { get; set; }
+        public List<string> Name { get; set; }
+      
     }
 }

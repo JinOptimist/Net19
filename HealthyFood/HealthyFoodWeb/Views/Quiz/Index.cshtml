@@ -1,3 +1,17 @@
 ﻿@using HealthyFoodWeb.Models.Quiz
 @model QuizViewModel
 
+<div>
+    @foreach (var name in Model.Name)
+    {
+        <div>
+            <a href="#" class="myButton">@name</a>
+            <input type="submit" value="@name" name = "fff" class="myButton">
+        </div>
+    }
+
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/css/Quiz.css" />
+}
