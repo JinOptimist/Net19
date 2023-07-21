@@ -1,6 +1,8 @@
 ﻿using Data.Interface.Models;
+using Data.Interface.Models.Quizes;
 using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
+using Data.Interface.Repositories.Quiz;
 using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -24,6 +26,7 @@ namespace HealthyFoodWeb.Utility
                 SeedReview(scope);
                 SeedWikiTag(scope);
                 SeedWikiMcImage(scope);
+                SeedQuiz(scope);
             }
         }
 
@@ -102,7 +105,7 @@ namespace HealthyFoodWeb.Utility
                 }
             }
         }
-       
+
         private static void SeedGame(IServiceScope scope)
         {
             var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
@@ -129,7 +132,7 @@ namespace HealthyFoodWeb.Utility
             }
 
         }
-        
+
         private static void SeedReview(IServiceScope scope)
         {
             var reviewRepository = scope.ServiceProvider.GetRequiredService<IReviewRepository>();
@@ -142,7 +145,98 @@ namespace HealthyFoodWeb.Utility
                 };
             }
         }
+        private static void SeedQuiz(IServiceScope scope)
+        {
+            var quizRepository = scope.ServiceProvider.GetRequiredService<IGamesQuizRepository>();
+            if (!quizRepository.Any())
+            {
+                var quiz = new GamesQuiz
+                {
+                    NameQuiz = "Правда или миф?",
+                    Questions = new List<Question>
+                    {
+                        new Question
+                        {
+                            QuestionText = "Жиры вредны, их не надо есть ни в коем случае.",
+                            Answers = new List<Answer>
+                            {
+                                new Answer
+                                {
+                                    NumberAnswer = 1,
+                                    IsItTrueAnswer = false,
+                                    OneAnswer = "Вредны только животные жиры"
+                                },
+                                new Answer
+                                {
+                                    NumberAnswer = 2,
+                                    IsItTrueAnswer = false,
+                                    OneAnswer = "Вредны только растительные жиры"
+                                },
+                                new Answer
+                                {
+                                    NumberAnswer = 3,
+                                    IsItTrueAnswer = true,
+                                    OneAnswer = "Наоборот, без жиров невозможен здоровый метаболизм"
+                                }
+                            }
+                        },
+                        new Question
+                        {
+                            QuestionText = "В сауне можно избавиться от лишних килограммов.",
+                            Answers = new List<Answer>
+                            {
+                                new Answer
+                                {
+                                    NumberAnswer = 1,
+                                    IsItTrueAnswer = false,
+                                    OneAnswer = "Можно, если париться при температуре 100 градусов"
+                                },
+                                new Answer
+                                {
+                                    NumberAnswer = 2,
+                                    IsItTrueAnswer = true,
+                                    OneAnswer = "Нельзя. В сауне мы обильно теряем жидкость, но при питье вес сразу восстанавливается."
+                                },
+                                new Answer
+                                {
+                                    NumberAnswer = 3,
+                                    IsItTrueAnswer = false,
+                                    OneAnswer = "Можно, если париться не менее 5 часов"
+                                }
+                            }
+                        },
+                       new Question
+                       {
+                           QuestionText = "Рюмка алкоголя согревает.",
+                           Answers = new List<Answer>
+                           {
+                               new Answer
+                               {
+                                   NumberAnswer = 1,
+                                   IsItTrueAnswer = false,
+                                   OneAnswer = "Рюмки мало, а вот бутылка согреет"
+                               },
+                               new Answer
+                               {
+                                   NumberAnswer = 2,
+                                   IsItTrueAnswer = false,
+                                   OneAnswer = "Да и это оптимальная доза"
+                               },
+                               new Answer
+                               {
+                                   NumberAnswer = 3,
+                                   IsItTrueAnswer = true,
+                                   OneAnswer = "Это впечатление обманчиво. А на самом деле алкоголь охлаждает тело."
+                               }
+                           }
+                       }
+                    }
+                };
 
+                quizRepository.Add(quiz);
+
+            }
+        }
         private static void SeedGameCategory(IServiceScope scope)
         {
             var defaultGenres = new List<string> { "Action", "Fight", "RPG", "Horror", "Hentai" };

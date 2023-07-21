@@ -4,6 +4,7 @@ using Data.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Sql.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20230713175128_newTables")]
+    partial class newTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,34 +111,6 @@ namespace Data.Sql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturer");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Quizes.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsItTrueAnswer")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("NumberAnswer")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OneAnswer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.Quizes.GamesQuiz", b =>
@@ -485,17 +460,6 @@ namespace Data.Sql.Migrations
                     b.Navigation("Creater");
                 });
 
-            modelBuilder.Entity("Data.Interface.Models.Quizes.Answer", b =>
-                {
-                    b.HasOne("Data.Interface.Models.Quizes.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
             modelBuilder.Entity("Data.Interface.Models.Quizes.Question", b =>
                 {
                     b.HasOne("Data.Interface.Models.Quizes.GamesQuiz", "Quiz")
@@ -649,11 +613,6 @@ namespace Data.Sql.Migrations
             modelBuilder.Entity("Data.Interface.Models.Quizes.GamesQuiz", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Data.Interface.Models.Quizes.Question", b =>
-                {
-                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("Data.Interface.Models.User", b =>

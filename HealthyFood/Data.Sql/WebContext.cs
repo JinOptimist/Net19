@@ -1,4 +1,5 @@
 ﻿using Data.Interface.Models;
+using Data.Interface.Models.Quizes;
 using Data.Interface.Models.WikiMc;
 using Data.Sql.Models;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,9 @@ namespace Data.Sql
         public DbSet<WikiBlockComment> WikiBlockComments { get; set; }
 
         public DbSet<StoreItem> StoreItems { get; set; }
-
+        public DbSet<GamesQuiz> GamesQuiz { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         public WebContext() { }
 
         public WebContext(DbContextOptions<WebContext> options)
@@ -92,6 +95,14 @@ namespace Data.Sql
             modelBuilder.Entity<WikiMcImage>()
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.Images);
+
+            modelBuilder.Entity<GamesQuiz>()
+                .HasMany(x => x.Questions)
+                .WithOne(x => x.Quiz);
+
+            modelBuilder.Entity<Question>()
+               .HasMany(x => x.Answers)
+               .WithOne(x => x.Question);
 
             base.OnModelCreating(modelBuilder);
         }
