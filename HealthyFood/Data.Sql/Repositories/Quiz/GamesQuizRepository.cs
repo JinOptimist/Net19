@@ -14,12 +14,11 @@ namespace Data.Sql.Repositories.Quiz
 
         public PlayingQuiz GetAllQuestion()
         {
-            var thisQuiz = _dbSet.Where(x => x.Id == 2);
-            var a = thisQuiz.FirstOrDefault();
-            var c = a.Questions.Select(x => x.QuestionText).ToList();
-           return new PlayingQuiz
+            var thisQuiz = _dbSet.First();
+
+            return new PlayingQuiz
             {
-                QuestionsText = a.Questions.Select(x => x.QuestionText).ToList()                     
+                QuestionsText = thisQuiz.Questions.Select(x => x.QuestionText).ToList()
             };
         }
     }
