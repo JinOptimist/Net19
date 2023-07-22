@@ -22,5 +22,27 @@ namespace HealthyFoodWeb.Services.Quiz
 
             return viewmodel;
         }
+
+        public StartQuizViewModel GetQuestion()
+        {
+            var a = _gamesQuizRepository.GetAllQuestion();
+            return new StartQuizViewModel
+            {
+                ques = a.QuestionsText
+            };
+           
+        }
     }
 }
+//var viewModels = _reviewService
+//             .GetAllReviews()
+//             .Select(dbModel =>
+//                 new ReviewViewModel
+//                 {
+//                     TextReview = dbModel.TextReview,
+//                     Date = dbModel.Date,
+//                     Author = dbModel.UserName,
+//                     CreatedGame = dbModel.GamesName.ToList(),
+//                      //E/*rrorMessage = errorMessage*/
+//                  })
+//             .ToList();

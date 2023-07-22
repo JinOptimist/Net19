@@ -17,5 +17,12 @@ namespace HealthyFoodWeb.Controllers.Quiz
            var viewModel = _quizServices.GetAllQuiz();
             return View(viewModel);
         }
+        [HttpPost]
+        public IActionResult StartQuiz(int id = 2)
+        {
+            var viewModel = _quizServices.GetQuestion();
+            return View(viewModel);
+        }
+
     }
 }

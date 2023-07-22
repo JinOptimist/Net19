@@ -1,0 +1,9 @@
+﻿@using HealthyFoodWeb.Models.Quiz
+@model StartQuizViewModel
+
+@foreach (var question in Model.ques)
+{
+    <div>
+       @question
+    </div>
+}

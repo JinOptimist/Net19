@@ -2,11 +2,16 @@
 @model QuizViewModel
 
 <div>
+
     @foreach (var name in Model.Name)
     {
         <div>
-            <a href="#" class="myButton">@name</a>
-            <input type="submit" value="@name" name = "fff" class="myButton">
+            <form method="post" action="/Quiz/StartQuiz/">
+
+                @*   <input type = "hidden" id =   >*@
+                @Html.HiddenFor(x=>x.Id)
+                <input type="submit" value="@name" class="myButton">
+            </form>
         </div>
     }
 
