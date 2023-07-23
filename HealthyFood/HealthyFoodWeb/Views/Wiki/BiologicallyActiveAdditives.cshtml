@@ -98,11 +98,7 @@
                                         <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
                                         <input type="submit" value="Delet Comment" class="delete-comment-button">
                                     </form>
-                                   @* <form action="/Wiki/UpdateComment">
-                                        <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
-                                        <input type="submit" value="Update Comment">
-                                    </form>*@
-                                    <a class="update-link" href="/wiki/UpdateComment/@CommentAndAuthor.CommentId">update</a>
+                                   <a class="update-link" href="/wiki/UpdateComment/@CommentAndAuthor.CommentId">update</a>
                                 }
                             </div>
                         }
@@ -118,6 +114,7 @@
                                     <textarea name="newComment"></textarea>
                                 </div>
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
+                                <input type="hidden" value="@pageViewModel.Author" name="author">
                                 <div class="button">
                                     <input class="add-comment" type="button" value="Add comment">
                                     <input type="reset" value=" Очистить">

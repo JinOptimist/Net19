@@ -4,7 +4,7 @@
         const userText = $(e.target).parent().parent().find('[name=newComment]').val();
         const blockId = $(e.target).parent().parent().find('[name=blockId]').val();
         const user = $(e.target).parent().parent().find('[name=author]').val();
-
+        
         $.get(`/api/wiki/AddComment?comment=${userText}&blockId=${blockId}`)
             .then(function (commentId) {
                 const commentDiv = `
