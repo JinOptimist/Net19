@@ -6,5 +6,7 @@
         public List<string> Answers { get; set; }
         public int Number { get; set; }
         public List<bool> IsItTrueAnswer { get; set; }
+        public bool IsRightThisAnswer { get; set; }
+        public int CountOfTrueAnswers { get; set; } = 0;
     }
 }

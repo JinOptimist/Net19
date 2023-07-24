@@ -19,9 +19,9 @@ namespace HealthyFoodWeb.Controllers.Quiz
             return View(viewModel);
         }
         
-        public IActionResult StartQuiz(int numberOfQuestion = 0)
+        public IActionResult StartQuiz(int numberOfQuestion = 0, int countRightAnswer = 0)
         {
-            var viewModel = _quizServices.GetQuestion(numberOfQuestion);
+            var viewModel = _quizServices.GetQuestion(numberOfQuestion, countRightAnswer);
             return View(viewModel);
         }
         //[HttpPost]
@@ -34,17 +34,20 @@ namespace HealthyFoodWeb.Controllers.Quiz
         [HttpPost]
         public IActionResult NextStep(StartQuizViewModel model)
         {
-            //var routeValues = new RouteValueDictionary
-            //{
-            //      { "numberOgQuestion", model.Number }
-            //};
+            var count = model.CountOfTrueAnswers;
+            if (model.IsRightThisAnswer)
+            {
+                count++;
+            }
             var a = new StartQuizViewModel
             {
                 //IsItTrueAnswer = model.IsItTrueAnswer,
-                Number = model.Number
+                Number = model.Number,
+                CountOfTrueAnswers = count
+                
             };
-            //return View(a);
-            return RedirectToAction("StartQuiz", "Quiz", new { numberOfQuestion = model.Number });
+            
+            return RedirectToAction("StartQuiz", "Quiz", new { numberOfQuestion = model.Number, countRightAnswer = count });
             //return RedirectToAction("StartQuiz", new {numberOfQuestion = model.Number });
         }
     }

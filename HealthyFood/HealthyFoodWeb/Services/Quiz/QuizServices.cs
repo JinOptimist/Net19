@@ -23,7 +23,7 @@ namespace HealthyFoodWeb.Services.Quiz
             return viewmodel;
         }
 
-        public StartQuizViewModel GetQuestion(int numberOfQuestion)
+        public StartQuizViewModel GetQuestion(int numberOfQuestion, int countRightAnswer)
         {
             var infoAboutQuiz = _gamesQuizRepository.GetDbQuiz();
             if (numberOfQuestion <= infoAboutQuiz.Count)
@@ -35,7 +35,8 @@ namespace HealthyFoodWeb.Services.Quiz
                         Ques = infoAboutQuiz[numberOfQuestion].QuestionsText,
                         Answers = infoAboutQuiz[numberOfQuestion].Answers,
                         Number = numberOfQuestion + 1,
-                        IsItTrueAnswer = infoAboutQuiz[numberOfQuestion].IsItTrue
+                        IsItTrueAnswer = infoAboutQuiz[numberOfQuestion].IsItTrue,
+                        CountOfTrueAnswers = countRightAnswer
                     };
                 }
             }
