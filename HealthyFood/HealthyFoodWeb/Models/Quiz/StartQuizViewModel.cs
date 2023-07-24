@@ -8,5 +8,6 @@
         public List<bool> IsItTrueAnswer { get; set; }
         public bool IsRightThisAnswer { get; set; }
         public int CountOfTrueAnswers { get; set; } = 0;
+        public int CountAllQuestions { get; set; }
     }
 }

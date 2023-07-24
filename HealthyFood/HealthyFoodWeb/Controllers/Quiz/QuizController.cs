@@ -19,36 +19,34 @@ namespace HealthyFoodWeb.Controllers.Quiz
             return View(viewModel);
         }
         
-        public IActionResult StartQuiz(int numberOfQuestion = 0, int countRightAnswer = 0)
+        public IActionResult StartQuiz(int numberOfQuestion = 0, bool IsRightThisAnswer = false, int conutRight = 0)
         {
-            var viewModel = _quizServices.GetQuestion(numberOfQuestion, countRightAnswer);
-            return View(viewModel);
+            var viewModel = _quizServices.GetQuestion(numberOfQuestion, IsRightThisAnswer, conutRight);
+            if (viewModel.Ques != null)
+            {
+                return View(viewModel);
+            }
+            else return RedirectToAction("EndQuiz", "Quiz", new { allCount = viewModel.CountAllQuestions, rightCount  = viewModel.CountOfTrueAnswers});
         }
-        //[HttpPost]
-        //public IActionResult StartQuiz(RouteValueDictionary numberOfQuestion)
-        //{
-
-        //    var viewModel = _quizServices.GetQuestion(Convert.ToInt32(numberOfQuestion));
-        //    return View(viewModel);
-        //}
+       
         [HttpPost]
         public IActionResult NextStep(StartQuizViewModel model)
         {
-            var count = model.CountOfTrueAnswers;
-            if (model.IsRightThisAnswer)
+            return RedirectToAction("StartQuiz", "Quiz", new { 
+                numberOfQuestion = model.Number, 
+                IsRightThisAnswer = model.IsRightThisAnswer ,
+                conutRight = model.CountOfTrueAnswers
+            });
+         
+        }
+        public IActionResult EndQuiz(int allCount, int rightCount)
+        {
+            var viewModel = new EndQuizVIewModel
             {
-                count++;
-            }
-            var a = new StartQuizViewModel
-            {
-                //IsItTrueAnswer = model.IsItTrueAnswer,
-                Number = model.Number,
-                CountOfTrueAnswers = count
-                
+                CountAllQuestion = allCount,
+                CountRightAnswer = rightCount
             };
-            
-            return RedirectToAction("StartQuiz", "Quiz", new { numberOfQuestion = model.Number, countRightAnswer = count });
-            //return RedirectToAction("StartQuiz", new {numberOfQuestion = model.Number });
+            return View(viewModel);
         }
     }
 }

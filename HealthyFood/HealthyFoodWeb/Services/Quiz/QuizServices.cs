@@ -23,10 +23,15 @@ namespace HealthyFoodWeb.Services.Quiz
             return viewmodel;
         }
 
-        public StartQuizViewModel GetQuestion(int numberOfQuestion, int countRightAnswer)
+        public StartQuizViewModel GetQuestion(int numberOfQuestion, bool IsRightThisAnswer, int conutRight)
         {
             var infoAboutQuiz = _gamesQuizRepository.GetDbQuiz();
-            if (numberOfQuestion <= infoAboutQuiz.Count)
+            int helperCount = conutRight;
+            if (IsRightThisAnswer)
+            {
+                helperCount++;
+            }
+            if (numberOfQuestion < infoAboutQuiz.Count)
             {
                 for (int i = numberOfQuestion; ;)
                 {
@@ -36,25 +41,19 @@ namespace HealthyFoodWeb.Services.Quiz
                         Answers = infoAboutQuiz[numberOfQuestion].Answers,
                         Number = numberOfQuestion + 1,
                         IsItTrueAnswer = infoAboutQuiz[numberOfQuestion].IsItTrue,
-                        CountOfTrueAnswers = countRightAnswer
+                        CountOfTrueAnswers = helperCount
                     };
                 }
             }
-            else throw new Exception();
-
-
+            else
+            {
+                return new StartQuizViewModel
+                {
+                    CountOfTrueAnswers = helperCount,
+                    CountAllQuestions = infoAboutQuiz.Count
+                };
+            }
         }
+        
     }
 }
-//var viewModels = _reviewService
-//             .GetAllReviews()
-//             .Select(dbModel =>
-//                 new ReviewViewModel
-//                 {
-//                     TextReview = dbModel.TextReview,
-//                     Date = dbModel.Date,
-//                     Author = dbModel.UserName,
-//                     CreatedGame = dbModel.GamesName.ToList(),
-//                      //E/*rrorMessage = errorMessage*/
-//                  })
-//             .ToList();
