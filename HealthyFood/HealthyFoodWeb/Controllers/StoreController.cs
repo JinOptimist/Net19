@@ -55,6 +55,13 @@ namespace HealthyFoodWeb.Controllers
             return RedirectToAction("CartPage");
         }
 
+        [Authorize]
+        public IActionResult AddProductInCartFromCatalog(int id)
+        {
+            _cartService.AddProductInCartFromCatalog(id);
+            return RedirectToAction("storePageCatalogue");
+        }
+
         public IActionResult UpdateTagInCart(int id)
         {
             var viewModel = _cartService.GetCartViewModel(id);

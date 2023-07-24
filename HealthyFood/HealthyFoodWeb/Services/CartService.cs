@@ -1,8 +1,10 @@
 ﻿using Data.Interface.Models;
 using Data.Interface.Repositories;
+using Data.Sql.Repositories;
 using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Services.Helpers;
 using HealthyFoodWeb.Services.IServices;
+using System;
 
 namespace HealthyFoodWeb.Services
 {
@@ -13,16 +15,18 @@ namespace HealthyFoodWeb.Services
         private IPagginatorService _pagginatorService;
         private ICartTagRepository _cartTagRepository;
         private IWebHostEnvironment _webHostEnvironment;
+        private IStoreCatalogueRepository _storeCatalogueRepository;
 
 
         public CartService(ICartRepository cartRepository,
-            IAuthService authService, IPagginatorService pagginatorService, ICartTagRepository cartTagRepository, IWebHostEnvironment webHostEnvironment)
+            IAuthService authService, IPagginatorService pagginatorService, ICartTagRepository cartTagRepository, IWebHostEnvironment webHostEnvironment, IStoreCatalogueRepository storeCatalogueRepository)
         {
             _cartRepository = cartRepository;
             _authService = authService;
             _pagginatorService = pagginatorService;
             _cartTagRepository = cartTagRepository;
             _webHostEnvironment = webHostEnvironment;
+            _storeCatalogueRepository = storeCatalogueRepository;
         }
 
         public void DeleteFromCart(int id)
@@ -98,7 +102,7 @@ namespace HealthyFoodWeb.Services
                 cartItem.Quantity -= 1;
                 _cartRepository.Update(cartItem);
             }
-           else
+            else
             {
                 DeleteFromCart(id);
             }
@@ -131,6 +135,32 @@ namespace HealthyFoodWeb.Services
 
             dbCartModel.ImgUrl = $"/images/products/{fileName}";
             _cartRepository.Update(dbCartModel);
+        }
+        public void AddProductInCartFromCatalog(int id)
+        {
+            var user = _authService.GetUser();
+            var productFromCatalogDB = _storeCatalogueRepository.Get(id);
+
+            var cartItemsNames = GetCustomerProduct().Select(x => x.Name).ToList();
+            var cartItems = GetCustomerProduct().ToList();
+
+            if (cartItemsNames.Contains(productFromCatalogDB.Name))
+            {
+                var cartItemId = cartItems.Where(x => productFromCatalogDB.Name == x.Name)
+                    .FirstOrDefault().Id;
+                UpdateQuantityOfProductsUp(cartItemId);
+            }
+            else
+            {
+                var dbCartModel = new Cart()
+                {
+                    Name = productFromCatalogDB.Name,
+                    Price = productFromCatalogDB.Price,
+                    Customer = user,
+                    ImgUrl = productFromCatalogDB.ImageUrl
+                };
+                _cartRepository.Add(dbCartModel);
+            }
         }
 
         public PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage)
