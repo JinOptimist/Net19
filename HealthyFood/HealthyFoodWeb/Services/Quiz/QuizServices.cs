@@ -23,13 +23,21 @@ namespace HealthyFoodWeb.Services.Quiz
             return viewmodel;
         }
 
-        public StartQuizViewModel GetQuestion()
+        public List<StartQuizViewModel> GetQuestion()
         {
-            var a = _gamesQuizRepository.GetAllQuestion();
-            return new StartQuizViewModel
+            var infoAboutQuiz = _gamesQuizRepository.GetDbQuiz();
+            //var allQuestions = a.Questions.Select(x=>x.QuestionText).ToList();
+            var newList = new List<StartQuizViewModel>();
+            for (int i =1; i<infoAboutQuiz.Count; i++)
             {
-                ques = a.QuestionsText
-            };
+                var model = new StartQuizViewModel
+                {
+                    Ques = infoAboutQuiz[i].QuestionsText,
+                    Answers = infoAboutQuiz[i].Answers
+                };
+                newList.Add(model);
+            }
+            return newList;
            
         }
     }

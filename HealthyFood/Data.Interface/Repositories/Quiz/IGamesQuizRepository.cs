@@ -5,6 +5,6 @@ namespace Data.Interface.Repositories.Quiz
 {
     public interface IGamesQuizRepository : IBaseRepository<GamesQuiz>
     {
-        PlayingQuiz GetAllQuestion();
+        List<PlayingQuiz> GetDbQuiz();
     }
 }
