@@ -6,10 +6,10 @@
     @foreach (var name in Model.Name)
     {
         <div>
-            <form method="post" action="/Quiz/StartQuiz/">
+            <form method="get" action="/Quiz/StartQuiz/">
 
                 @*   <input type = "hidden" id =   >*@
-                @Html.HiddenFor(x=>x.Id)
+                @*@Html.HiddenFor(x=>x.Id)*@
                 <input type="submit" value="@name" class="myButton">
             </form>
         </div>

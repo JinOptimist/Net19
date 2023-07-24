@@ -23,12 +23,13 @@ namespace Data.Sql.Repositories.Quiz
 
             var newList = new List<PlayingQuiz>();
 
-            for (int i = 1; i < thisQuiz.Questions.Count; i++)
+            for (int i = 0; i < thisQuiz.Questions.Count; i++)
             {
                 var dataModel = new PlayingQuiz
                 {
                     QuestionsText = thisQuiz.Questions[i].QuestionText,
-                    Answers = thisQuiz.Questions[i].Answers.Select(x=>x.OneAnswer).ToList()
+                    Answers = thisQuiz.Questions[i].Answers.Select(x=>x.OneAnswer).ToList(),
+                    IsItTrue = thisQuiz.Questions[i].Answers.Select(x=>x.IsItTrueAnswer).ToList()
                 };
                 newList.Add(dataModel);
             }

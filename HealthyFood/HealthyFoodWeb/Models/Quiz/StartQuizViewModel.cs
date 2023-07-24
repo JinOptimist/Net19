@@ -4,5 +4,7 @@
     {
         public string Ques { get; set; }
         public List<string> Answers { get; set; }
+        public int Number { get; set; }
+        public List<bool> IsItTrueAnswer { get; set; }
     }
 }
