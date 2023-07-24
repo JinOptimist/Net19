@@ -14,6 +14,10 @@ namespace HealthyFoodWeb.Services
 
 		IEnumerable<WikiMcImage> GetAllImgByType();
 
+		//void AddUserCalcultionResult(int averageAns, int gramsOfProteins, int gramsOfCarbs, int gramsOfFats);
+
+		//void UpdateUserCalcultionResult(int averageAns, int gramsOfProteins, int gramsOfCarbs, int gramsOfFats);
+
 		IEnumerable<ImagesAndInfoAboutTheirUploaderData> GetUserImages();
 
 		WikiMcViewModel GetImageViewModel(int id);
@@ -28,7 +32,9 @@ namespace HealthyFoodWeb.Services
 
 		void UpdateTags(int id, List<string> tags);
 
-		WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type);
+		IEnumerable<WikiTags> GetAllUserTags(int userId);
+
+		WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string tag, ImgTypeEnum type);
 
 		WikiCalculationResultViewModel GetViewModelForCaloriesCalculation(int? age, float? weight, float? height, int? percent, SexEnum sex, GoalEnum goal, ActivityRatioEnum activityRatio, int? proteinsPercent, int? fatsPercent, int? carbsPercent);
 

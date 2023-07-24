@@ -25,5 +25,7 @@ namespace Data.Interface.Models
         public virtual List<Review> Reviews { get; set; }
 
         public virtual List<WikiMcImage> UploadedImages { get; set; }
-    }
+
+		public virtual WikiCalculationResults UserNutrients { get; set; }
+	}
 }

@@ -1,6 +1,8 @@
-﻿using Data.Interface.Models;
+﻿using Data.Interface.DataModels;
+using Data.Interface.Models;
 using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
+using Data.Sql.Models;
 using Data.Sql.Repositories;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Net.WebRequestMethods;
@@ -166,7 +168,7 @@ namespace HealthyFoodWeb.Utility
                 }
             }
         }
-       
+
         private static void SeedGame(IServiceScope scope)
         {
             var gameRepository = scope.ServiceProvider.GetRequiredService<IGameRepository>();
@@ -193,7 +195,7 @@ namespace HealthyFoodWeb.Utility
             }
 
         }
-        
+
         private static void SeedReview(IServiceScope scope)
         {
             var reviewRepository = scope.ServiceProvider.GetRequiredService<IReviewRepository>();
@@ -287,6 +289,51 @@ namespace HealthyFoodWeb.Utility
                 };
                 wikiMcImagesRepository.Add(image3);
             }
+        }
+
+        private static void SeedWikiBlock(IServiceScope scope)
+        {
+            var iWikiBaaRepository = scope.ServiceProvider.GetRequiredService<IWikiBaaRepository>();
+            var blocks = iWikiBaaRepository.GetBlocksWithAuthorComMents().ToList();
+
+            if (!blocks.Any())
+            {
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                var author = userRepository.GetByName("Admin");
+
+
+                var defaultblocks = new List<PageWikiBlock>
+                {
+                    new PageWikiBlock
+                    {
+                        Author = author,
+                        Title = "Here you can write the name of your blog.",
+                        Text = "This is where general information about your blog will be.",
+                        UrlImg= new List<WikiBlockImg>
+                        {
+                            new WikiBlockImg
+                            {
+                                Url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA7eZE7l82FVMP-wq95iuPGxxlxjI5boFTLg&usqp=CAU"
+                            }
+                        },
+                        Comment = new List<WikiBlockComment>
+                        {
+                            new WikiBlockComment
+                            {
+                                Text="Here you can write any comment",
+                                Author= author,
+                            }
+                        }
+
+                    }
+                };
+
+                foreach (var block in defaultblocks)
+                {
+                    iWikiBaaRepository.Add(block);
+                }
+            }
+
         }
     }
 }

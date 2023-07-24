@@ -22,7 +22,7 @@ namespace HealthyFoodWeb.Controllers.API
 		}
 
 		[Route("ImagesCount")]
-		public WikiMcImagesCountViewModel GetImagesCount(int? year, string? tag, ImgTypeEnum type)
+		public WikiMcImagesCountViewModel GetImagesCount(int? year, string tag, ImgTypeEnum type)
 		{
 			var viewModel = _wikiMcService.GetViewModelForImagesCount(year, tag, type);
 			return viewModel;
@@ -43,10 +43,16 @@ namespace HealthyFoodWeb.Controllers.API
 
 		}
 
-		[Route("RemoveComment")]
-		public void RemoveComment(int id)
-		{
-			_wikiBAAPageServices.RemoveComment(id);
-		}
-	}
+        [Route("RemoveComment")]
+        public void RemoveComment(int id)
+        {
+            _wikiBAAPageServices.RemoveComment(id);
+        }
+
+        [Route("Remove")]
+        public void Remove(int blockId)
+        {
+            _wikiBAAPageServices.RemoveBlock(blockId);
+        }
+    }
 }

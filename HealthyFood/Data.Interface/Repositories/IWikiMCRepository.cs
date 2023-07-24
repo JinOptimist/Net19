@@ -14,7 +14,7 @@ namespace Data.Interface.Repositories
 		void DeleteImage(int idImg);
 		WikiMcImage GetImageAndTags(int id);
         void UpdateAllExeptTags(int id, ImgTypeEnum type, string imgUrl, int year);
-        IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable();
-		ImagesCountData GetDataForImagesCount(int? year, string? tag, ImgTypeEnum type);
+        //IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable();
+		ImagesCountData GetDataForImagesCount(int? year, string tag, ImgTypeEnum type);
 	}
 }

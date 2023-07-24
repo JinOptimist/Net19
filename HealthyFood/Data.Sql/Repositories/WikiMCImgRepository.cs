@@ -1,9 +1,7 @@
 ﻿using Data.Interface.DataModels;
 using Data.Interface.Models.WikiMc;
 using Data.Interface.Repositories;
-using Data.Sql.DataModels;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Data.Sql.Repositories
 {
@@ -11,7 +9,7 @@ namespace Data.Sql.Repositories
     {
         public WikiMCImgRepository(WebContext webContext) : base(webContext) { }
 
-        public IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable()
+        private IQueryable<ImagesAndInfoAboutTheirUploaderData> GetUserImagesIQueryable()
             => _dbSet
                 .Select(image => new ImagesAndInfoAboutTheirUploaderData
                 {
@@ -83,7 +81,7 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-		public ImagesCountData GetDataForImagesCount(int? year, string? tag, ImgTypeEnum type)
+		public ImagesCountData GetDataForImagesCount(int? year, string tag, ImgTypeEnum type)
 		{
             IQueryable<WikiMcImage> availableImages = _dbSet;
             if (year != null)

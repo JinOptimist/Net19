@@ -17,7 +17,16 @@
 				</div>
 				<div class="tag">
 					Tag:<br />
-					<input type="text" class="img-tag have-to-block" />
+					<select name="WikiTags" id="WikiTags">
+						@{
+							foreach (var item in Model.AllUserTags)
+							{
+								<option value="@item.TagName">
+									@item.TagName
+								</option>
+							}
+						}
+					</select>
 				</div>
 				<div class="year">
 					Year:<br />
@@ -47,7 +56,7 @@
 						<div class="year">Year : @imageViewModel.Year </div>
 						<div class="type">Type : @imageViewModel.ImgType</div>
 						<div class="tags">
-							Tags : @foreach (var tag in imageViewModel.UserTags)
+							Tags : @foreach (var tag in imageViewModel.UserTagsForImage)
 							{
 								<span class="tag">@tag</span>
 							}
