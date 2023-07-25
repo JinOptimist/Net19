@@ -1,4 +1,6 @@
-﻿using HealthyFoodWeb.Models;
+﻿using Data.Interface.Models;
+using HealthyFoodWeb.Controllers.CustomAuthorizeAttributes;
+using HealthyFoodWeb.Models;
 using HealthyFoodWeb.Models.Store;
 using HealthyFoodWeb.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -39,12 +41,16 @@ namespace HealthyFoodWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+        [IsHasRole(MyRole.Admin)]
         public IActionResult AddProductInCart()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
+        [IsHasRole(MyRole.Admin)]
         public IActionResult AddProductInCart(CartItemViewModel viewModel)
         {
             if (!ModelState.IsValid)

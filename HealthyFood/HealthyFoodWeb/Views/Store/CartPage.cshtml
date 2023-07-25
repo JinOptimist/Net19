@@ -1,4 +1,5 @@
-﻿@using HealthyFoodWeb.Services.IServices;
+﻿@using Data.Interface.Models;
+@using HealthyFoodWeb.Services.IServices;
 @{
     Layout = "_layoutStore";
 }
@@ -8,7 +9,10 @@
 
 <div class="text">
     Ordering @authService.GetUser().Name
-    <a href="/Store/AddProductInCart">+</a>
+    @if (authService.GetUser().Name == "admin")
+    {
+        <a href="/Store/AddProductInCart">+</a>
+    }
 </div>
 
 <div class="filter-block">
