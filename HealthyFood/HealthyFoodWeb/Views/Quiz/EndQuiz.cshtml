@@ -1,6 +1,10 @@
 ﻿@using HealthyFoodWeb.Models.Quiz
 @model EndQuizVIewModel
 
-<div>
+<div class ="Result">
     Вы прошли викторину. Вы правильно ответили на @Model.CountRightAnswer из @Model.CountAllQuestion
 </div>
+
+@section Styles{
+<link rel="stylesheet" href="~/css/QuizEnd.css" />
+}
