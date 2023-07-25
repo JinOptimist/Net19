@@ -1,12 +1,12 @@
 ﻿@using HealthyFoodWeb.Models.Quiz
 @model QuizViewModel
 
-<div>
+<div class="nameQuiz">
 
     @foreach (var name in Model.Name)
     {
-        <div>
-            <form method="get" action="/Quiz/StartQuiz/">
+        <div class = "nameQuiz">
+            <form method="get" action="/Quiz/StartQuiz/" class = "nameQuiz">
 
                 @*   <input type = "hidden" id =   >*@
                 @*@Html.HiddenFor(x=>x.Id)*@
