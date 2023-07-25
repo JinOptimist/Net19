@@ -19,7 +19,7 @@
                                 </div>
                                     <form action="/Wiki/RemoveComment" class="remove-form">
                                         <input type="hidden" value="${commentId}" name="commentId">
-                                        <input type="submit" value="Delet Comment" class="delete-comment-button">
+                                        <input type="submit" value="Delete Comment" class="delete-comment-button">
                                     </form>
                                     <a class="update-link" href="/wiki/UpdateComment/${commentId}">update</a>
                             </div>
@@ -35,8 +35,6 @@
     $('.delete-block-btn').on('click', function (e) {
         e.preventDefault();
 
-        e.stopPropagation()
-
         const block = $(this).closest('.block');
 
         const blockId = $(this)
@@ -50,9 +48,11 @@
         block.remove();
     });
 
-    $('.delete-comment-button').click(DeletComment);
+    $(document).on('click', '.delete-comment-button', DeletComment);
 
-    function DeletComment() {
+    function DeletComment(e) {
+        e.preventDefault();
+
         const commentId = $(this)
             .closest('.remove-form')
             .find('[name=commentId]')

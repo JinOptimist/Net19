@@ -114,7 +114,7 @@
                                     <textarea name="newComment"></textarea>
                                 </div>
                                 <input type="hidden" value="@pageViewModel.Id" name="blockId">
-                                <input type="hidden" value="@pageViewModel.Author" name="author">
+                                <input type="hidden" value="@authService.GetUser().Name" name="author">
                                 <div class="button">
                                     <input class="add-comment" type="button" value="Add comment">
                                     <input type="reset" value=" Очистить">

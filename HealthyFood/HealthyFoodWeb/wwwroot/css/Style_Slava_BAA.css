@@ -99,6 +99,18 @@ h2 {
     border: 2mm ridge rgb(211 220 50 / 30%);
     padding: 7px;
     background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: space-around;
+}
+
+.textBlock img {
+    width: 50%;
+}
+
+a.update-link {
+
 }
 
 .comments {

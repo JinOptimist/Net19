@@ -251,6 +251,7 @@ namespace HealthyFoodWeb.Utility
                             new WikiBlockImg
                             {
                                 Url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA7eZE7l82FVMP-wq95iuPGxxlxjI5boFTLg&usqp=CAU"
+                           
                             }
                         },
                         Comment = new List<WikiBlockComment>
