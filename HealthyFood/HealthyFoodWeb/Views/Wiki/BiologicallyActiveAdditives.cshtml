@@ -44,28 +44,30 @@
                 </div>
                 <div class="positionAuthor">
                     <span class="deletBlock">
-                        <div class="deletBlockBorder">
-                            @if (authService.GetUser()?.Name == pageViewModel.Author)
-                            {
+                        @if (authService.GetUser()?.Name == pageViewModel.Author)
+                        {
+                            <div class="deletBlockBorder">
+
                                 <form action="/Wiki/Remove" class="removeBlock">
                                     <input type="hidden" value="@pageViewModel.Id" name="blockId">
                                     <input type="hidden" value="@pageViewModel.Author" name="author">
                                     <input type="submit" value="Delete Block" class="delete-block-btn">
                                 </form>
-                            }
-                        </div>
+                            </div>
+                        }
                     </span>
-                    <span class="borderUpdateBlock">
-                        <div class="updateBlock">
-                            @if (authService.GetUser()?.Name == pageViewModel.Author)
-                            {
+                    @if (authService.GetUser()?.Name == pageViewModel.Author)
+                    {
+                        <span class="borderUpdateBlock">
+                            <div class="updateBlock">
+
                                 <form action="/Wiki/UpdateBlock">
                                     <input type="hidden" value="@pageViewModel.Id" name="id">
                                     <input type="submit" value="Update Block">
                                 </form>
-                            }
-                        </div>
-                    </span>
+                            </div>
+                        </span>
+                    }
                     <div class="author">
                         <span>
                             Автор Текста: @pageViewModel.Author
