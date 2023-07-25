@@ -176,7 +176,7 @@ namespace HealthyFoodWeb.Services.WikiServices
 			_wikiMcRepository.Update(image);
 		}
 
-		public WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string tag, ImgTypeEnum type)
+		public WikiMcImagesCountViewModel GetViewModelForImagesCount(int? year, string? tag, ImgTypeEnum type)
 		{
 			var dataModel = _wikiMcRepository.GetDataForImagesCount(year, tag, type);
 			return new WikiMcImagesCountViewModel
