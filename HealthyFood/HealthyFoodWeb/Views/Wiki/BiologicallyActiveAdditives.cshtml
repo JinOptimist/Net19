@@ -82,8 +82,8 @@
                             </div>
                             <form action="/Wiki/RemoveComment" class="remove-form">
                                 <input type="hidden" value="" name="commentId">
-                                <input type="button" value="Delet Comment" 
-                                    class="delete-comment-button">
+                                <input type="button" value="Delet Comment"
+                                       class="delete-comment-button">
                             </form>
                             <a class="update-link" href="/wiki/UpdateComment/">update</a>
                         </div>
@@ -100,11 +100,15 @@
                                 </div>
                                 @if (authService.GetUser()?.Id == CommentAndAuthor.AuthorId)
                                 {
-                                    <form action="/Wiki/RemoveComment" class="remove-form">
-                                        <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
-                                        <input type="submit" value="Delet Comment" class="delete-comment-button">
-                                    </form>
-                                   <a class="update-link" href="/wiki/UpdateComment/@CommentAndAuthor.CommentId">update</a>
+                                    <div class="RB">
+                                        <form action="/Wiki/RemoveComment" class="remove-form">
+                                            <input type="hidden" value="@CommentAndAuthor.CommentId" name="commentId">
+                                            <input type="submit" value="Delet Comment" class="delete-comment-button">
+                                        </form>
+                                    </div>
+                                    <div class="UC">
+                                        <a class="update-link" href="/wiki/UpdateComment/@CommentAndAuthor.CommentId">Update</a>
+                                    </div>
                                 }
                             </div>
                         }
@@ -123,7 +127,7 @@
                                 <input type="hidden" value="@authService.GetUser().Name" name="author">
                                 <div class="button">
                                     <input class="add-comment" type="button" value="Add comment">
-                                    <input type="reset" value=" Очистить">
+                                    <input class="clean" type="reset" value=" Очистить">
                                 </div>
                             </div>
                         </form>
