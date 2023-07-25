@@ -81,7 +81,7 @@ namespace Data.Sql.Repositories
             _webContext.SaveChanges();
         }
 
-		public ImagesCountData GetDataForImagesCount(int? year, string tag, ImgTypeEnum type)
+		public ImagesCountData GetDataForImagesCount(int? year, string? tag, ImgTypeEnum type)
 		{
             IQueryable<WikiMcImage> availableImages = _dbSet;
             if (year != null)

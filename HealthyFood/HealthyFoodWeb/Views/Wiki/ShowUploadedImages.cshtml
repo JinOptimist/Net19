@@ -18,9 +18,10 @@
 				<div class="tag">
 					Tag:<br />
 					<select name="WikiTags" id="WikiTags">
+						<option></option>
 						@{
 							foreach (var item in Model.AllUserTags)
-							{
+							{								
 								<option value="@item.TagName">
 									@item.TagName
 								</option>
