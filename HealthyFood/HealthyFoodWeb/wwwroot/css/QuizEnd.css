@@ -1,0 +1,11 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    width: 100%;
+    background: url(https://phonoteka.org/uploads/posts/2021-05/1621628788_21-phonoteka_org-p-krasivii-fon-dlya-viktorini-24.jpg);
+    background-size: 100%;
+}

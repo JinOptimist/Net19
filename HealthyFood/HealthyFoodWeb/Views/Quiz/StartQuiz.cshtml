@@ -10,14 +10,14 @@
 
             @for (int i = 0; i < Model.Answers.Count; i++)
             {
-                <div>
+                <div class="QuizAnswer">
 
 
                     @Html.RadioButtonFor(x=>x.IsRightThisAnswer, Model.IsItTrueAnswer[i], new { @checked = false })
 
-                    @Model.Answers[i]                   
+                    @Model.Answers[i]
                     <input type="hidden" name="Number" value="@Model.Number" />
-                    <input type="hidden" name="CountOfTrueAnswers" value="@Model.CountOfTrueAnswers" />
+                    <input type="hidden" name="CountOfTrueAnswers" value="@Model.CountOfTrueAnswers" class="myButton"/>
                 </div>
 
             }
