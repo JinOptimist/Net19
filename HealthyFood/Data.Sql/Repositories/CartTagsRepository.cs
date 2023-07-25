@@ -13,6 +13,5 @@ namespace Data.Sql.Repositories
         {
             return _dbSet.SingleOrDefault(x => x.Name == name);
         }
-
     }
 }

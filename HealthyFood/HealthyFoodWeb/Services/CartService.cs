@@ -33,7 +33,6 @@ namespace HealthyFoodWeb.Services
         {
             _cartRepository.Remove(id);
         }
-
         public void UpdateTag(int id, List<string> newTagsNames)
         {
             var cartItem = _cartRepository.GetCartAndTags(id);
@@ -51,12 +50,10 @@ namespace HealthyFoodWeb.Services
             newTags.ForEach(x => cartItem.Tags.Add(x));
             _cartRepository.Update(cartItem);
         }
-
         public List<Cart> GetAllProduct()
         {
             return _cartRepository.GetAll().ToList();
         }
-
         public List<Cart> GetCustomerProduct()
         {
             var userId = _authService.GetUser().Id;
@@ -64,7 +61,6 @@ namespace HealthyFoodWeb.Services
 
             return product;
         }
-
         public ProductCountViewModel GetViewModelForProductCount(string userTag)
         {
             var dataModel = GetCustomerProduct()
@@ -77,7 +73,6 @@ namespace HealthyFoodWeb.Services
                 ProductNames = dataModel.Select(x => x.Name).ToList(),
             };
         }
-
         public decimal GetTotalPrice()
         {
             decimal TotalPrice = 0;
@@ -87,7 +82,6 @@ namespace HealthyFoodWeb.Services
             }
             return TotalPrice;
         }
-
         public void UpdateQuantityOfProductsUp(int id)
         {
             var cartItem = _cartRepository.GetCartAndTags(id);
@@ -162,7 +156,6 @@ namespace HealthyFoodWeb.Services
                 _cartRepository.Add(dbCartModel);
             }
         }
-
         public PagginatorViewModel<CartItemViewModel> GetCartsForPaginator(int page, int perPage)
         {
             var viewModel = _pagginatorService
@@ -175,7 +168,6 @@ namespace HealthyFoodWeb.Services
 
             return viewModel;
         }
-
         private CartItemViewModel BuildViewModelFromDbModel(Cart x)
         {
             var cartDb = _cartRepository.GetCartAndTags(x.Id);
@@ -191,7 +183,6 @@ namespace HealthyFoodWeb.Services
                 Quantity = x.Quantity,
             };
         }
-
         public CartItemViewModel GetCartViewModel(int id)
         {
             var cartDb = _cartRepository.GetCartAndTags(id);
@@ -207,7 +198,6 @@ namespace HealthyFoodWeb.Services
                 Quantity = cartDb.Quantity,
             };
         }
-
     }
 }
 
